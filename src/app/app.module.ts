@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TryFreeComponent } from './components/try-free/try-free.component';
 import { ClientsComponent } from './components/clients/clients.component';
@@ -13,16 +13,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './components/shared/shared.module';
+import { AdminLayoutModule } from './components/logged-pages/admin-layout.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/logged-pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    HeaderComponent,
     FooterComponent,
     TryFreeComponent,
     ClientsComponent,
     CreateAccountComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +34,13 @@ import { SharedModule } from './components/shared/shared.module';
     AngularMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    AdminLayoutModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
