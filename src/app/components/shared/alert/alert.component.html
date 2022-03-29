@@ -1,0 +1,15 @@
+  <div id="alert" class="container">
+    <div class="col-md-6 position-fixed">
+      <div *ngFor="let alert of alerts" class="{{cssClass(alert)}} alert">
+        <div class="toast-header text-dark" style="background-color: transparent;">
+          <img src="assets/img/icon.png" style="max-height:50px;" class="rounded mr-2" alt="Logo">
+          <h2>Opportunity</h2>
+        </div>
+        <div class="toast-body pt-5 pb-5">
+          <h2 class="{{titleCss(alert)}}">{{ title }} <span class="text-yellow"></span></h2>
+          <p class=""> {{ description }}</p>
+          <a class="btn btn-custom" (click)="removeAlert(alert)">Fechar</a>
+        </div>
+      </div>
+    </div>
+  </div>

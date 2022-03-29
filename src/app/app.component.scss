@@ -1,0 +1,10 @@
+.transparencia-alert {
+  padding: 0px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  /*       color: red;*/
+  overflow: hidden;
+  position: absolute;
+  cursor: default;
+  z-index: 999999!important;
+}

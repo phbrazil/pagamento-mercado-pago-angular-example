@@ -11,6 +11,9 @@ import { LoginComponent } from '../login/login.component';
 })
 export class CreateAccountComponent implements OnInit {
 
+  message: string = '';
+  messageType: string = '';
+
   formRegister = this.fb.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
@@ -43,7 +46,11 @@ export class CreateAccountComponent implements OnInit {
     console.log('to aqui')
     this.isRegistering = true;
 
-    this.alertService.success('TEXTO 1', 'SUBTEXTO', { keepAfterRouteChange: true });
+    this.message = 'Aguarde enquanto nossos servidores iniciem';
+    this.messageType = 'success';
+
+
+    //this.alertService.success('TEXTO 1', 'SUBTEXTO', { keepAfterRouteChange: true });
 
 
   }

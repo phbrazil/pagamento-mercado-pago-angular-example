@@ -1,9 +1,11 @@
-<div class="modal-position" id="modalAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-position col-md-12" id="modalAccount" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
 
-        <h5 class="modal-title font-title"><img src="assets/img/icon.png" class="logo" alt="logo"> Inicie seus 7 dias grátis</h5>
+        <h5 class="modal-title font-title"><img src="assets/img/icon.png" class="logo" alt="logo"> Inicie seus 7 dias
+          grátis</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -48,22 +50,25 @@
                 </ng-container>
               </div>
               <div class="form-group">
-                <span class="txt-terms">Ao criar uma conta, você concorda com nossos <a routerLink="/terms">termos</a> e <a
-                    routerLink="/privacy">política de privacidade</a></span>
+                <span class="txt-terms">Ao criar uma conta, você concorda com nossos <a routerLink="/terms">termos</a> e
+                  <a routerLink="/privacy">política de privacidade</a></span>
               </div>
-              <span>Já tem uma <a data-toggle="modal" (click)="login()"
-                  class="text-yellow">conta?</a></span>
+              <span>Já tem uma <a data-toggle="modal" (click)="login()" class="text-yellow">conta?</a></span>
+              <div class="alert col-md-12" [ngStyle]="{'color': messageType == 'success' ? 'green' : 'red'}"
+                role="alert">
+                {{message}}
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="!formRegister.valid || isRegistering">
+                  <span *ngIf="isRegistering" class="spinner-border spinner-border-sm mr-1"></span>
+                  Criar Conta</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Fechar</button>
+              </div>
             </form>
           </div>
         </div>
+      </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="!formRegister.valid || isRegistering">
-          <span *ngIf="isRegistering" class="spinner-border spinner-border-sm mr-1"></span>
-          Criar Conta</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Fechar</button>
-      </div>
     </div>
   </div>
 </div>

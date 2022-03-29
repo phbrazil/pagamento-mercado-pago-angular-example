@@ -39,6 +39,10 @@ export class LoginComponent implements OnInit {
 
   postLogin(formLogin: FormGroup) {
 
+    this.isLoading = true;
+
+    console.log(formLogin.value)
+
   }
 
   close() {
