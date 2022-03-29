@@ -1,0 +1,40 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.logo{
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+.logo-linkedin{
+  max-width: 50px;
+  margin-top: 10px;
+}
+
+.position-fixed{
+  position: fixed;
+  z-index: 1;
+}
+
+
+
+@media only screen and (max-device-width: 1600px) {
+a{
+  font-size: 20px;
+  font-family: 'Gilroy-Bold', sans-serif;
+}
+}
+
+@media only screen and (min-device-width: 1600px) {
+  a{
+    font-size: 22px;
+    font-family: 'Gilroy-Bold', sans-serif;
+  }
+  }
+
+  .end-position{
+    display: flex;
+    justify-content: flex-end
+  }
+
+
+
