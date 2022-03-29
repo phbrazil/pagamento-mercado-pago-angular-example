@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { AlertService } from 'src/app/_services/alert.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-create-account',
@@ -22,7 +24,7 @@ export class CreateAccountComponent implements OnInit {
     }),*/
   });
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private alertService: AlertService) { }
 
   isRegistering: boolean = false;
 
@@ -33,18 +35,25 @@ export class CreateAccountComponent implements OnInit {
 
   close() {
     this.dialog.closeAll();
-   }
-
-   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.formRegister.value);
   }
 
-    enviar() {
 
+  send() {
+
+    console.log('to aqui')
     this.isRegistering = true;
 
-    }
+    this.alertService.success('TEXTO 1', 'SUBTEXTO', { keepAfterRouteChange: true });
 
+
+  }
+
+  login(){
+
+    this.close();
+
+    this.dialog.open(LoginComponent);
+
+  }
 
 }

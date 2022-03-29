@@ -11,6 +11,7 @@ import { CreateAccountComponent } from './components/create-account/create-accou
 import { AngularMaterialModule } from './components/shared/angular-material/angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     TryFreeComponent,
     ClientsComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

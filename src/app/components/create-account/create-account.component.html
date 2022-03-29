@@ -11,7 +11,7 @@
       <div class="modal-body">
         <div class="col-md-12">
           <div class="row">
-            <form class="mt-4" [formGroup]="formRegister" (ngSubmit)="enviar()">
+            <form class="mt-4" [formGroup]="formRegister" (ngSubmit)="send()">
               <div class="form-group">
                 <label for="email">Email Corporativo*</label>
                 <input type="email" class="form-control" id="email" aria-describedby="email" formControlName="email"
@@ -51,7 +51,7 @@
                 <span class="txt-terms">Ao criar uma conta, você concorda com nossos <a routerLink="/terms">termos</a> e <a
                     routerLink="/privacy">política de privacidade</a></span>
               </div>
-              <span>Já tem uma <a data-toggle="modal" data-target="#modalLogin"
+              <span>Já tem uma <a data-toggle="modal" (click)="login()"
                   class="text-yellow">conta?</a></span>
             </form>
           </div>
@@ -59,7 +59,9 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="!formRegister.valid">Criar Conta</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!formRegister.valid || isRegistering">
+          <span *ngIf="isRegistering" class="spinner-border spinner-border-sm mr-1"></span>
+          Criar Conta</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Fechar</button>
       </div>
     </div>
