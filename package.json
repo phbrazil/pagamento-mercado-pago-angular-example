@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "githubPages": "ng build --prod --output-path docs --base-href /Opportunity-Angular-Front/"
   },
   "private": true,
   "dependencies": {
