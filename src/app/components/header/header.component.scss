@@ -47,7 +47,7 @@ a{
   margin-top: 20px;
 }
 #title-subheader{
-  font-size:20px;
+  font-size:15px;
 }
 #top-title{
   text-transform:capitalize;
@@ -64,5 +64,12 @@ a{
   max-width:200px;
   text-align:right;
    float: left;
+}
+
+.end{
+
+  position: absolute;
+  right: 0;
+  top: 5px
 }
 

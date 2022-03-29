@@ -8,7 +8,7 @@ import { AccountService } from './_services/account.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Opportunity-Angular';
+  title = 'Opportunity';
   user: User;
 
   constructor(private accountService: AccountService){

@@ -16,6 +16,10 @@ import { SharedModule } from './components/shared/shared.module';
 import { AdminLayoutModule } from './components/logged-pages/admin-layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/logged-pages/home/home.component';
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+
+registerLocaleData(localePT);
 
 @NgModule({
   declarations: [

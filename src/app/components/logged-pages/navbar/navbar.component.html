@@ -4,16 +4,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Início <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/dash">Início <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Tempo</a>
+        <a class="nav-link" routerLink="/time">Tempo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Adiantamento</a>
+        <a class="nav-link" routerLink="/advance">Adiantamento</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Reembolso</a>
+        <a class="nav-link" routerLink="/refund">Reembolso</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/manage">Gerenciar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile">Meu Perfil</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="logout()">Sair</a>
@@ -21,3 +27,8 @@
     </ul>
   </div>
 </nav>
+
+<router-outlet></router-outlet>
+
+
+
