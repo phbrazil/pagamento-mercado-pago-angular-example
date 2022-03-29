@@ -1,0 +1,67 @@
+<div class="modal-position" id="modalAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h5 class="modal-title font-title"><img src="assets/img/icon.png" class="logo" alt="logo"> Inicie seus 7 dias grátis</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div class="row">
+            <form class="mt-4" [formGroup]="formRegister" (ngSubmit)="enviar()">
+              <div class="form-group">
+                <label for="email">Email Corporativo*</label>
+                <input type="email" class="form-control" id="email" aria-describedby="email" formControlName="email"
+                  name="email">
+                <ng-container *ngIf="formRegister.controls.email.touched">
+                  <span *ngIf="formRegister.controls.email.errors?.required">
+                    Campo obrigatório
+                  </span>
+                  <span *ngIf="formRegister.controls.email.errors?.email">
+                    E-mail inválido
+                  </span>
+                </ng-container>
+              </div>
+              <div class="form-group">
+                <label for="name">Nome Completo*</label>
+                <input type="text" class="form-control" id="name" aria-describedby="name" formControlName="name"
+                  name="name">
+                <ng-container *ngIf="formRegister.controls.name.touched">
+                  <span *ngIf="formRegister.controls.name.errors?.required">
+                    Campo obrigatório
+                  </span>
+                  <span *ngIf="formRegister.controls.name.errors?.name">
+                    Nome inválido
+                  </span>
+                </ng-container>
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefone*</label>
+                <input type="text" class="form-control" id="phone" formControlName="phone" name="phone">
+                <ng-container *ngIf="formRegister.controls.phone.touched">
+                  <span *ngIf="formRegister.controls.phone.errors?.required">
+                    Campo obrigatório
+                  </span>
+                </ng-container>
+              </div>
+              <div class="form-group">
+                <span class="txt-terms">Ao criar uma conta, você concorda com nossos <a routerLink="/terms">termos</a> e <a
+                    routerLink="/privacy">política de privacidade</a></span>
+              </div>
+              <span>Já tem uma <a data-toggle="modal" data-target="#modalLogin"
+                  class="text-yellow">conta?</a></span>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!formRegister.valid">Criar Conta</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
