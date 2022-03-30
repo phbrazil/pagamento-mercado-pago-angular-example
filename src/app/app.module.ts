@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/logged-pages/home/home.component';
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 registerLocaleData(localePT);
 
@@ -30,7 +31,8 @@ registerLocaleData(localePT);
     ClientsComponent,
     CreateAccountComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

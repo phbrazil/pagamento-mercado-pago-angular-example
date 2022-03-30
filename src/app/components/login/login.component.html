@@ -1,9 +1,11 @@
-<div class="modal-position col-md-12" id="modalAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-position col-md-12" id="modalAccount" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
 
-        <h5 class="modal-title font-title"><img src="assets/img/icon.png" class="logo default-font" alt="logo"> Inicie sua sessão</h5>
+        <h5 class="modal-title font-title"><img src="assets/img/icon.png" class="logo default-font" alt="logo"> Inicie
+          sua sessão</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -14,32 +16,39 @@
             <form class="mt-4 mb-4 pt-3 pb-3 col-12" [formGroup]="formLogin" (ngSubmit)="enviar()">
               <div class="form-group">
                 <label for="emailLogin">Email*</label>
-                <input type="email" class="form-control" aria-describedby="emailLogin" formControlName="emailLogin" name="emailLogin">
+                <input type="email" class="form-control" aria-describedby="emailLogin" formControlName="emailLogin"
+                  name="emailLogin">
                 <ng-container *ngIf="formLogin.controls.emailLogin.touched">
                   <span *ngIf="formLogin.controls.emailLogin.errors?.required">
-                      Campo obrigatório
+                    Campo obrigatório
                   </span>
                   <span *ngIf="formLogin.controls.emailLogin.errors?.emailLogin">
                     E-mail inválido
-                </span>
-              </ng-container>
+                  </span>
+                </ng-container>
               </div>
               <div class="form-group">
                 <label for="passwordLogin">Senha*</label>
-                <input type="password" class="form-control" id="passwordLogin" formControlName="passwordLogin" name="passwordLogin">
+                <input type="password" class="form-control" id="passwordLogin" formControlName="passwordLogin"
+                  name="passwordLogin">
                 <ng-container *ngIf="formLogin.controls.passwordLogin.touched">
                   <span *ngIf="formLogin.controls.passwordLogin.errors?.required">
-                      Campo obrigatório
+                    Campo obrigatório
                   </span>
-              </ng-container>
+                </ng-container>
               </div>
               <div class="form-group form-check">
-                <a data-toggle="modal" data-target="#modalReset" class="text-yellow">Esqueci a senha</a >
+                <a data-toggle="modal" (click)="resetPassword()" class="text-yellow">Esqueci a senha</a>
+              </div>
+              <div class="alert col-md-12" [ngStyle]="{'color': messageType == 'success' ? 'green' : 'red'}"
+                role="alert">
+                {{message}}
               </div>
               <button type="submit" class="btn btn-success mb-3" [disabled]="!formLogin.valid || isLoading">
                 <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                 Entrar</button><br>
-              <span>Precisa de uma conta? <a class="text-yellow" data-toggle="modal" (click)="getOpportunity()">Crie uma</a></span>
+              <span>Precisa de uma conta? <a class="text-yellow" data-toggle="modal" (click)="getOpportunity()">Crie
+                  uma</a></span>
             </form>
           </div>
         </div>

@@ -10,3 +10,10 @@
   color: #0A273D;
   font-family: 'Gilroy-Bold', sans-serif;
 }
+
+.modal-position {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

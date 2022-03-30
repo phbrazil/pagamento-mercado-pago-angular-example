@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
 import { CreateAccountComponent } from '../create-account/create-account.component';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +14,9 @@ import { CreateAccountComponent } from '../create-account/create-account.compone
 })
 export class LoginComponent implements OnInit {
 
+  message: string = '';
+  messageType: string = '';
+
   formLogin = this.fb.group({
     emailLogin: ['', Validators.required],
     passwordLogin: ['', Validators.required],
@@ -21,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  constructor(private fb: FormBuilder, private alertService: AlertService, public dialog: MatDialog,  private router: Router,
+  constructor(private fb: FormBuilder, private alertService: AlertService, public dialog: MatDialog, private router: Router,
     private accountService: AccountService) { }
 
   ngOnInit(): void {
@@ -49,14 +52,18 @@ export class LoginComponent implements OnInit {
 
     this.accountService.login(formLogin.value.emailLogin, formLogin.value.passwordLogin).subscribe(res => {
 
-      console.log(res)
-
       this.accountService.setUser(res);
 
       this.router.navigate(['/home']);
       this.close();
 
     }, err => {
+
+      this.isLoading = false;
+
+      this.message = 'Verifique seu email e senha';
+
+      this.messageType = 'danger';
 
     })
 
@@ -71,6 +78,15 @@ export class LoginComponent implements OnInit {
     this.close();
 
     this.dialog.open(CreateAccountComponent);
-   }
+  }
+
+  resetPassword(){
+
+    this.close();
+
+    this.dialog.open(ResetPasswordComponent);
+
+
+  }
 
 }

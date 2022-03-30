@@ -43,7 +43,6 @@ export class CreateAccountComponent implements OnInit {
 
   send() {
 
-    console.log('to aqui')
     this.isRegistering = true;
 
     this.message = 'Aguarde enquanto nossos servidores iniciem';
