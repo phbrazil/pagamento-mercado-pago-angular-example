@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!--nav class="navbar navbar-expand-lg navbar-light bg-light sticky">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,9 +28,28 @@
       </li>
     </ul>
   </div>
+</nav-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/"> <img id="pic-img" src="assets/img/icon.png" alt="logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse mt-4" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" routerLink="/dash">Início <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" routerLink="/time">Tempo</a>
+      <a class="nav-item nav-link" routerLink="/advance">Adiantamento</a>
+      <a class="nav-item nav-link" routerLink="/refund">Reembolso</a>
+      <a class="nav-item nav-link" routerLink="/manage">Gerenciar</a>
+      <a class="nav-item nav-link" routerLink="/profile">Meu Perfil</a>
+      <a class="nav-link nav-link" (click)="logout()">Sair</a>
+    </div>
+  </div>
 </nav>
 
+
+
+
+
 <router-outlet></router-outlet>
-
-
-
