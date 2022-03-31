@@ -1,148 +1,24 @@
-<section class="container">
-  <div class="row mt-5 mb-5 pt-5 pb-5">
-    <div class="col-md-12 game-content">
-      <h2 class="mb-5">Meu <span class="text-yellow default-font">Perfil</span></h2>
-      <div class="row mt-4">
-        <div class="col-md-4 mb-3 order-xl-2 mb-xl-0">
-          <div class="card card-profile">
-            <div class="card-body pt-0 pt-md-4">
-              <div class="d-flex flex-column align-items-center text-center">
-                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
-                  width="150">
-                <div class="mt-3">
-                  <h4>{{user.nome}}</h4>
-                  <p class="text-secondary mb-1">{{user.wzProfile}}</p>
-                  <p class="text-muted font-size-sm">{{user.estado}}, {{user.pais}} </p>
-                </div>
-                <div class="mt-2">
-                  <h4>Créditos: <span class="text-yellow">{{user.creditos}}</span></h4>
-                </div>
-              </div>
-              <div *ngIf="isLoading" class="d-flex justify-content-center">
-                <div class="spinner-grow text-warning" role="status" style="width: 3rem; height: 3rem;">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8 order-xl-1">
-          <div class="card">
-            <div class="card-body">
-              <form autocomplete="off" novalidate [formGroup]="userForm" (ngSubmit)="editUser()">
-                <input type="hidden" formControlName="idUser" name="idUser" value="{{user.idUser}}">
-                <h6 class="heading-small text-muted mb-4">Informações pessoais</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-username">Nome Completo</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative"
-                          value="{{user.nome}}" [disabled]="true">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-userWz">Usuário Warzone</label>
-                        <input type="text" id="input-userWz" class="form-control form-control-alternative"
-                          name="username" formControlName="username">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative"
-                          value="{{user.email}}" [disabled]="true">
-                      </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-last-name">Data Nascimento</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative"
-                          name="nascimento" formControlName="nascimento"
-                          value="{{user.nascimento | date: 'dd/MM/yyyy'}}" [disabled]="true">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4">
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Endereço</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-address">País</label>
-                        <select class="form-control" id="pais" name="pais" formControlName="pais">
-                          <option value="{{user.pais}}">{{user.pais}}</option>
-                          <option value="Argentina">Argentina</option>
-                          <option value="Bolívia">Bolívia</option>
-                          <option value="Brasil" selected>Brasil</option>
-                          <option value="Chile">Chile</option>
-                          <option value="Colômbia">Colômbia</option>
-                          <option value="Equador">Equador</option>
-                          <option value="Guiana">Guiana</option>
-                          <option value="Paraguai">Paraguai</option>
-                          <option value="Peru">Peru</option>
-                          <option value="Suriname">Suriname</option>
-                          <option value="Uruguai">Uruguai</option>
-                          <option value="Venezuela">Venezuela</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-address">Estado</label>
-                        <!-- <input type="text" id="input-address" class="form-control form-control-alternative" name="userEstado" formControlName="userEstado"> -->
-                        <select class="form-control" id="input-address" name="estado" formControlName="estado">
-                          <option value="{{user.estado}}" selected>{{user.estado}}</option>
-                          <option value="Acre">Acre</option>
-                          <option value="Alagoas">Alagoas</option>
-                          <option value="Amapá">Amapá</option>
-                          <option value="Amazonas">Amazonas</option>
-                          <option value="Bahia">Bahia</option>
-                          <option value="Ceará">Ceará</option>
-                          <option value="Espírito Santo">Espírito Santo</option>
-                          <option value="Goiás">Goiás</option>
-                          <option value="Maranhão">Maranhão</option>
-                          <option value="Mato Grosso">Mato Grosso</option>
-                          <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-                          <option value="Pará">Pará</option>
-                          <option value="Paraíba">Paraíba</option>
-                          <option value="Paraná">Paraná</option>
-                          <option value="Pernambuco">Pernambuco</option>
-                          <option value="Piauí">Piauí</option>
-                          <option value="Rio de Janeiro">Rio de Janeiro</option>
-                          <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-                          <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                          <option value="Rondônia">Rondônia</option>
-                          <option value="Roraima">Roraima</option>
-                          <option value="Santa Catarina">Santa Catarina</option>
-                          <option value="São Paulo">São Paulo</option>
-                          <option value="Sergipe">Sergipe</option>
-                          <option value="Tocantins">Tocantins</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4">
-
-                <div class="row pb-5 pt-5">
-                  <div class="col-sm-12">
-                    <a *ngIf="disable" class="btn btn-success" (click)="enableForm()">Editar</a>
-                    <button *ngIf="!disable" type="submit" class="btn btn-success">
-                      <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-                      Salvar</button>
-                    <a *ngIf="!disable" class="btn btn-outline-secondary" (click)="disableForm()">Cancelar</a>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
+<div classs="center">
+  <div class="container-fluid">
+    <div class="mt-4 mb-4 p-3 d-flex justify-content-center">
+      <div class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center"> <button
+            class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100"
+              alt="logo" /></button>
+          <span class="name mt-3">Eleanor Pena</span> <span class="idd">@eleanorpena</span>
+          <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span
+              class="idd1">Oxc4c16a645_b21a</span> <span><em class="fa fa-copy"></em></span> </div>
+          <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069 <span
+                class="follow">Followers</span></span> </div>
+          <div class=" d-flex mt-2"> <button class="btn1 btn-dark">Editar Perfil</button> </div>
+          <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital
+              artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div>
+          <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><em
+                class="fa fa-twitter"></em></span> <span><em class="fa fa-facebook-f"></em></span> <span><em
+                class="fa fa-instagram"></em></span> <span><em class="fa fa-linkedin"></em></span> </div>
+          <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> </div>
         </div>
       </div>
     </div>
   </div>
+</div>

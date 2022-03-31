@@ -19,6 +19,11 @@ import { HomeComponent } from './components/logged-pages/home/home.component';
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import { faFish } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localePT);
 
@@ -36,17 +41,24 @@ registerLocaleData(localePT);
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     AppRoutingModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     SharedModule,
     AdminLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR'}
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor() {
+      library.add(faFilm, faFish);
+    }
+}

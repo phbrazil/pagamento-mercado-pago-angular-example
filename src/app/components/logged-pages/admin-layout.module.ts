@@ -11,6 +11,12 @@ import { RefundComponent } from './refund/refund.component';
 import { ManageComponent } from './manage/manage.component';
 import { DashboardsComponent } from './dashboards/dashboards.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee, faFilm, faFish } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { NewEntryComponent } from './time/new-entry/new-entry.component';
+import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
+import {  NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
     RefundComponent,
     ManageComponent,
     DashboardsComponent,
-    ProfileComponent
+    ProfileComponent,
+    NewEntryComponent
   ],
   imports: [
     RouterModule,
@@ -29,10 +36,19 @@ import { ProfileComponent } from './profile/profile.component';
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild(AdminLayoutRoutes),
+    FontAwesomeModule,
+    AngularMaterialModule,
+    NgbDatepickerModule
   ], exports: [
     NavbarComponent,
     TimeComponent,
     AdvanceComponent
   ],
 })
-export class AdminLayoutModule { }
+export class AdminLayoutModule {
+
+  constructor() {
+    library.add(faFilm, faFish, faCoffee);
+  }
+
+}
