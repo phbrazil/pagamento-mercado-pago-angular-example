@@ -18,5 +18,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'manage', component: ManageComponent },
     { path: 'dash', component: DashboardsComponent },
     { path: 'profile', component: ProfileComponent },
-    { path: '**', component: HomeComponent },
+    { path: '**', component: TimeComponent },
 ];

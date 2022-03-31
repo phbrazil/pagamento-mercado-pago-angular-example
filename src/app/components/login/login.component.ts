@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
       this.accountService.setUser(res);
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/time']);
       this.close();
 
     }, err => {
