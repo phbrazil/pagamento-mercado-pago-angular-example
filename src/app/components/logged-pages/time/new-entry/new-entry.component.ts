@@ -14,21 +14,14 @@ import * as $ from 'jquery';
 export class NewEntryComponent implements OnInit {
 
 
-
-  myControl = new FormControl('');
-
   totalHours: number = 10;
-
-  formLogin = this.fb.group({
-    date: ['', Validators.required],
-  });
 
   newEntryForm: FormGroup;
 
   projeto: string;
 
-  selectedAppendices: any = [];
-  appendices = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
+  project: any = [];
+  projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
 
 
 
@@ -36,12 +29,10 @@ export class NewEntryComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.newEntryForm = this.fb.group({
       projeto: ['', Validators.required],
-
-      //cidade: ['', Validators.required],
-      //estado: ['', Validators.required],
-      //uf: ['', Validators.required],
+      time: ['', Validators.required],
     });
 
   }
@@ -50,7 +41,11 @@ export class NewEntryComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  onChange(){
+  onChangeProject(){
+
+    this.project = this.newEntryForm.value.projeto;
+
+    console.log(this.newEntryForm.value.projeto)
 
   }
 }
