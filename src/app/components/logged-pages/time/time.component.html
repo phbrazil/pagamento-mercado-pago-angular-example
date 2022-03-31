@@ -27,21 +27,17 @@
         </button>
       </div>
       <div class="col-md-2 mt-2">
-        <p>Simple datepicker</p>
+          <ngb-datepicker #dp [(ngModel)]="model" name="date" (navigate)="date = $event.next"></ngb-datepicker>
 
-        <ngb-datepicker #dp [(ngModel)]="model" name="date" (navigate)="date = $event.next"></ngb-datepicker>
+          <hr />
 
-        <hr />
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="selectToday()">Ir para hoje</button>
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo()">Ir para o mês atual</button>
 
-        <button class="btn btn-sm btn-outline-primary me-2" (click)="selectToday()">Select Today</button>
-        <button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo()">To current month</button>
-        <button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo({year: 2013, month: 2})">To Feb
-          2013</button>
+          <hr />
 
-        <hr />
-
-        <pre>Month: {{ date.month }}.{{ date.year }}</pre>
-        <pre>Model: {{ model | json }}</pre>
+          <pre>Mês: {{ date.month }}/{{ date.year }}</pre>
+          <pre>Model: {{ model | json }}</pre>
       </div>
       <div class="col-md-2 mb-2">
         <span style="font-size: xx-large;" class="badge badge-light mb-1 text-muted bg-light">

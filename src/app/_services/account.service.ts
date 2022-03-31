@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AlertService } from './alert.service';
 import { User } from '../_models/user';
+import { MatDialog } from '@angular/material/dialog';
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   private userSubject: BehaviorSubject<User>;
@@ -21,6 +22,7 @@ export class AccountService {
     private router: Router,
     private http: HttpClient,
     private alertService: AlertService,
+    public dialog: MatDialog
   ) {
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
@@ -317,6 +319,8 @@ export class AccountService {
   }
 
   logout(){
+
+    this.dialog.closeAll();
 
     // remove user from local storage and set current user to null
     localStorage.removeItem('user');

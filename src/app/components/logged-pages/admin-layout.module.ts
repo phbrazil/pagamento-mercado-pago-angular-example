@@ -17,6 +17,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { NewEntryComponent } from './time/new-entry/new-entry.component';
 import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
 import {  NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {  NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule.forChild(AdminLayoutRoutes),
     FontAwesomeModule,
     AngularMaterialModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    NgSelectModule
   ], exports: [
     NavbarComponent,
     TimeComponent,
