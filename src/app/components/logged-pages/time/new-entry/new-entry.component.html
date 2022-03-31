@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title default-font modal-header-font">Novo registro em {{myDate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,14 +13,15 @@
           <div class="col-md-12 order-md-1">
 
             <label>Projeto</label>
-            <ng-select formControlName="projeto" class="form-control default-font custom-drop ng-select" [items]="projects" [multiple]="false" [closeOnSelect]="true"
-              [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" name="projeto">
+            <ng-select formControlName="projeto" class="form-control default-font custom-drop ng-select"
+              [items]="projects" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true"
+              (change)="onChangeProject()" bindLabel="name" name="projeto">
             </ng-select>
           </div>
           <div *ngIf="project?.name" class="col-md-12 order-md-1 mt-2">
             <div class="row">
               <div class="col-md-12 order-md-1 mb-2">
-                  <input type="time" class="form-control" name="time" formControlName="time" >
+                <input type="time" class="form-control" name="time" formControlName="time">
 
                 <!--select data-toggle="tooltip" type="text" autocomplete="off" class="form-control" data-width="auto"
                   data-live-search="true" data-size="5" id="hoursNew" name="hours" maxlength="70" required="true">
@@ -127,9 +128,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!newEntryForm.valid || isLoading">Salvar</button>
+        <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
 </div>
+
+

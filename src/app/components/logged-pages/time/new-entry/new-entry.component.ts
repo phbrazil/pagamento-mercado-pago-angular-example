@@ -4,6 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import * as $ from 'jquery';
+import moment from 'moment';
+moment().format('LL');
+moment.locale('pt')
 
 
 @Component({
@@ -18,17 +21,23 @@ export class NewEntryComponent implements OnInit {
 
   newEntryForm: FormGroup;
 
+  isLoading: boolean = false;
+
   projeto: string;
 
   project: any = [];
   projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
 
+  today = new Date();
+
+  myDate = moment(this.today).format('Do MMMM YYYY');
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
 
+    console.log(this.myDate)
 
     this.newEntryForm = this.fb.group({
       projeto: ['', Validators.required],
@@ -48,4 +57,6 @@ export class NewEntryComponent implements OnInit {
     console.log(this.newEntryForm.value.projeto)
 
   }
+
+
 }

@@ -18,6 +18,7 @@ import { NewEntryComponent } from './time/new-entry/new-entry.component';
 import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
 import {  NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TasksComponent } from './time/tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ManageComponent,
     DashboardsComponent,
     ProfileComponent,
-    NewEntryComponent
+    NewEntryComponent,
+    TasksComponent
   ],
   imports: [
     RouterModule,

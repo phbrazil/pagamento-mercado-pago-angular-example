@@ -27,17 +27,17 @@
         </button>
       </div>
       <div class="col-md-2 mt-2">
+        <div class="col-md-12">
           <ngb-datepicker #dp [(ngModel)]="model" name="date" (navigate)="date = $event.next"></ngb-datepicker>
-
-          <hr />
-
+        </div>
+        <div class="col-md-12">
           <button class="btn btn-sm btn-outline-primary me-2" (click)="selectToday()">Ir para hoje</button>
-          <button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo()">Ir para o mês atual</button>
+        </div>
 
-          <hr />
+        <!--button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo()">Ir para o mês atual</button-->
 
-          <pre>Mês: {{ date.month }}/{{ date.year }}</pre>
-          <pre>Model: {{ model | json }}</pre>
+        <!--pre>Mês: {{ date.month }}/{{ date.year }}</pre>
+          <pre>Model: {{ model | json }}</pre-->
       </div>
       <div class="col-md-2 mb-2">
         <span style="font-size: xx-large;" class="badge badge-light mb-1 text-muted bg-light">
@@ -51,3 +51,13 @@
     </div>
   </div>
 </form>
+
+<div class="col-md-12 mt-2">
+  <div clas="row">
+    <div *ngFor="let task of tasks" class="col-md-3">
+
+      <app-tasks></app-tasks>
+
+    </div>
+  </div>
+</div>

@@ -23,9 +23,14 @@ export class TimeComponent implements OnInit {
   faArrowRight = faArrowRight;
   faClock = faClock;
 
+  tasks: any = [];
+
   constructor(public dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar) { }
 
   ngOnInit(): void {
+
+    this.loadTasks();
+
   }
 
   newEntry() {
@@ -37,6 +42,14 @@ export class TimeComponent implements OnInit {
 
   selectToday() {
     this.model = this.calendar.getToday();
+  }
+
+  loadTasks() {
+
+    for (var i = 0; i < 10; i++) {
+      this.tasks.push({ name: 'teste ' + i });
+    }
+
   }
 
 
