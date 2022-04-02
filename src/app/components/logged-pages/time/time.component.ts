@@ -34,15 +34,14 @@ export class TimeComponent implements OnInit {
 
   day = new Date();
 
-  currentDay = moment(this.day).format('Do MMMM YYYY');
+  currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
 
-
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar,
+  constructor(private readonly dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar,
     private accountService: AccountService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-   }
+  }
 
   ngOnInit(): void {
 
@@ -52,51 +51,60 @@ export class TimeComponent implements OnInit {
 
   newEntry() {
 
-
-    const dialogRef = this.dialog.open(NewEntryComponent,{ data: { currentDay: this.currentDay }});
-
-
-
+    this.dialog.open(NewEntryComponent,
+      {
+        data: {
+          currentDay: this.currentDay }
+      });
   }
 
   selectToday() {
     this.model = this.calendar.getToday();
 
-    this.currentDay = moment(this.model.month+'-'+this.model.day+'-'+this.model.year).format('Do MMMM YYYY');
+    this.currentDay = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
 
+    this.loadTasks();
   }
 
   loadTasks() {
 
-    for (var i = 0; i < 10; i++) {
+    this.tasks = [];
 
-      this.task = {idTask: 1, project: 'Projeto Teste '+i, user: this.user, task: 'Tarefa '+i, date: '29/01/1990', time: '8:00' }
+    for (var i = 1; i < 10; i++) {
+
+      this.task = { idTask: 1, project: 'Projeto Teste ' + i, user: this.user, task: 'Tarefa ' + i, date: this.currentDay, time: '8:00' }
 
       this.tasks.push(this.task);
     }
 
   }
 
-  nextDay(){
+  nextDay() {
 
     this.day.setDate(this.day.getDate() + 1);
 
-    this.currentDay = moment(this.day).format('Do MMMM YYYY');
+    this.currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
+
+    this.loadTasks();
 
   }
 
-  previousDay(){
+  previousDay() {
 
-    this.day.setDate(this.day.getDate() -1);
+    this.day.setDate(this.day.getDate() - 1);
 
-    this.currentDay = moment(this.day).format('Do MMMM YYYY');
+    this.currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
+
+    this.loadTasks();
 
   }
 
-  changeDay(){
+  changeDay() {
 
 
-    this.currentDay = moment(this.model.month+'-'+this.model.day+'-'+this.model.year).format('Do MMMM YYYY');
+    this.currentDay = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
+
+    this.loadTasks();
 
 
   }

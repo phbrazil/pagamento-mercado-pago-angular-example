@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import * as $ from 'jquery';
@@ -30,12 +30,14 @@ export class NewEntryComponent implements OnInit {
 
 
 
-  @Input() currentDay: string;
+  //@Input() currentDay: string;
 
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(public dialog: MatDialog, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public currentDay: any) { }
 
   ngOnInit(): void {
+
+    console.log(this.currentDay.currentDay)
 
     this.newEntryForm = this.fb.group({
       projeto: ['', Validators.required],

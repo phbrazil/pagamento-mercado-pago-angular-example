@@ -19,6 +19,7 @@ import { AngularMaterialModule } from '../shared/angular-material/angular-materi
 import {  NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TasksComponent } from './time/tasks/tasks.component';
+import { LoggedFooterComponent } from './logged-footer/logged-footer.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TasksComponent } from './time/tasks/tasks.component';
     DashboardsComponent,
     ProfileComponent,
     NewEntryComponent,
-    TasksComponent
+    TasksComponent,
+    LoggedFooterComponent
   ],
   imports: [
     RouterModule,
