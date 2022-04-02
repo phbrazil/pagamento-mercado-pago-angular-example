@@ -25,7 +25,9 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(private fb: FormBuilder, private alertService: AlertService, public dialog: MatDialog, private router: Router,
-    private accountService: AccountService) { }
+    private accountService: AccountService) {
+
+    }
 
   ngOnInit(): void {
 

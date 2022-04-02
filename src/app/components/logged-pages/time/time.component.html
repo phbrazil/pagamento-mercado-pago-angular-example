@@ -13,22 +13,22 @@
       </div>
       <div class="col-md-1">
         <button data-toggle="tooltip" title='Dia anterior' id='previous' name='previous' value='previous'
-          onclick="changeEntryDate(this.value)" class="btn btn-lg btn-outline-info shadow">
+          (click)="previousDay()" class="btn btn-lg btn-outline-info shadow">
           <fa-icon class="fa-2x" [icon]="faArrowLeft"></fa-icon>
         </button>
       </div>
       <div class="col-md-3">
-        <h4 class="text-muted h4-responsive default-font"><strong>Hoje:</strong> Quarta, Mar 30, 2022</h4>
+        <h4 class="text-muted h4-responsive default-font"><strong>Hoje:</strong> {{currentDay}}</h4>
       </div>
       <div class="col-md-1">
         <button data-toggle="tooltip" title='Dia posterior' id='next' name='next' value='next'
-          onclick="changeEntryDate(this.value)" class="btn btn-lg btn-outline-info shadow">
+          (click)="nextDay()" class="btn btn-lg btn-outline-info shadow">
           <fa-icon class="fa-2x" [icon]="faArrowRight"></fa-icon>
         </button>
       </div>
       <div class="col-md-2 mt-2">
         <div class="col-md-12">
-          <ngb-datepicker #dp [(ngModel)]="model" name="date" (navigate)="date = $event.next"></ngb-datepicker>
+          <ngb-datepicker #dp [(ngModel)]="model" (click)="changeDay()" name="date" (navigate)="date = $event.next"></ngb-datepicker>
         </div>
         <div class="col-md-12">
           <button class="btn btn-sm btn-outline-primary me-2" (click)="selectToday()">Ir para hoje</button>
@@ -39,8 +39,8 @@
         <!--pre>Mês: {{ date.month }}/{{ date.year }}</pre>
           <pre>Model: {{ model | json }}</pre-->
       </div>
-      <div class="col-md-2 mb-2">
-        <span style="font-size: xx-large;" class="badge badge-light mb-1 text-muted bg-light">
+      <div class="col-md-1 mb-2">
+        <span style="font-size: large;" class="badge badge-light mb-1 text-muted bg-light">
           <div class="row">
             <div class="col-md-12 mb-2">
               <fa-icon class="fa-1x" [icon]="faClock"></fa-icon> Total: 0:0
@@ -56,7 +56,7 @@
   <div clas="row">
     <div *ngFor="let task of tasks" class="col-md-3">
 
-      <app-tasks></app-tasks>
+      <app-tasks [user]="user" [task]="task"></app-tasks>
 
     </div>
   </div>

@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faArrowLeft, faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import moment from 'moment';
+import { TimeTask } from 'src/app/_models/task';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { NewEntryComponent } from './new-entry/new-entry.component';
 @Component({
   selector: 'app-time',
@@ -23,9 +27,22 @@ export class TimeComponent implements OnInit {
   faArrowRight = faArrowRight;
   faClock = faClock;
 
-  tasks: any = [];
+  tasks: TimeTask[] = [];
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar) { }
+  user: User;
+  task: TimeTask;
+
+  day = new Date();
+
+  currentDay = moment(this.day).format('Do MMMM YYYY');
+
+
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar,
+    private accountService: AccountService) {
+
+    this.accountService.user.subscribe(x => this.user = x);
+
+   }
 
   ngOnInit(): void {
 
@@ -35,20 +52,52 @@ export class TimeComponent implements OnInit {
 
   newEntry() {
 
-    this.dialog.open(NewEntryComponent);
+
+    const dialogRef = this.dialog.open(NewEntryComponent,{ data: { currentDay: this.currentDay }});
+
 
 
   }
 
   selectToday() {
     this.model = this.calendar.getToday();
+
+    this.currentDay = moment(this.model.month+'-'+this.model.day+'-'+this.model.year).format('Do MMMM YYYY');
+
   }
 
   loadTasks() {
 
     for (var i = 0; i < 10; i++) {
-      this.tasks.push({ name: 'teste ' + i });
+
+      this.task = {idTask: 1, project: 'Projeto Teste '+i, user: this.user, task: 'Tarefa '+i, date: '29/01/1990', time: '8:00' }
+
+      this.tasks.push(this.task);
     }
+
+  }
+
+  nextDay(){
+
+    this.day.setDate(this.day.getDate() + 1);
+
+    this.currentDay = moment(this.day).format('Do MMMM YYYY');
+
+  }
+
+  previousDay(){
+
+    this.day.setDate(this.day.getDate() -1);
+
+    this.currentDay = moment(this.day).format('Do MMMM YYYY');
+
+  }
+
+  changeDay(){
+
+
+    this.currentDay = moment(this.model.month+'-'+this.model.day+'-'+this.model.year).format('Do MMMM YYYY');
+
 
   }
 

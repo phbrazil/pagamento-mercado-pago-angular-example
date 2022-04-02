@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -28,16 +28,14 @@ export class NewEntryComponent implements OnInit {
   project: any = [];
   projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
 
-  today = new Date();
 
-  myDate = moment(this.today).format('Do MMMM YYYY');
+
+  @Input() currentDay: string;
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-
-    console.log(this.myDate)
 
     this.newEntryForm = this.fb.group({
       projeto: ['', Validators.required],
