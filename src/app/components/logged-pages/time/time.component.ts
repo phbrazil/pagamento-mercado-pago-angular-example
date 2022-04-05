@@ -34,6 +34,8 @@ export class TimeComponent implements OnInit {
 
   day = new Date();
 
+  total: number = 8.45;
+
   currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
 
   constructor(private readonly dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar,

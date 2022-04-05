@@ -42,6 +42,7 @@ export class NewEntryComponent implements OnInit {
     this.newEntryForm = this.fb.group({
       projeto: ['', Validators.required],
       time: ['', Validators.required],
+      task: ['', Validators.required],
     });
 
   }

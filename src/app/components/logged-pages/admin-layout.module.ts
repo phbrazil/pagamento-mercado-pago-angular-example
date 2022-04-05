@@ -20,6 +20,8 @@ import {  NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TasksComponent } from './time/tasks/tasks.component';
 import { LoggedFooterComponent } from './logged-footer/logged-footer.component';
+import { EditTaskComponent } from './time/tasks/edit-task/edit-task.component';
+import { DeleteTaskComponent } from './time/tasks/delete-task/delete-task.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { LoggedFooterComponent } from './logged-footer/logged-footer.component';
     ProfileComponent,
     NewEntryComponent,
     TasksComponent,
-    LoggedFooterComponent
+    LoggedFooterComponent,
+    EditTaskComponent,
+    DeleteTaskComponent
   ],
   imports: [
     RouterModule,
