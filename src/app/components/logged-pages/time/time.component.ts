@@ -49,6 +49,8 @@ export class TimeComponent implements OnInit {
 
     this.loadTasks();
 
+    this.calcTime(1.50);
+
   }
 
   newEntry() {
@@ -74,7 +76,7 @@ export class TimeComponent implements OnInit {
 
     for (var i = 1; i < 10; i++) {
 
-      this.task = { idTask: 1, project: 'Projeto Teste ' + i, user: this.user, task: 'Tarefa ' + i, date: this.currentDay, time: '8:00' }
+      this.task = { idTask: 1, project: 'Projeto Teste ' + i, user: this.user, task: 'Tarefa ' + i, date: this.currentDay, time: this.calcTime(7.45) }
 
       this.tasks.push(this.task);
     }
@@ -108,6 +110,29 @@ export class TimeComponent implements OnInit {
 
     this.loadTasks();
 
+
+  }
+
+  calcTime(time: number) {
+
+    console.log(time)
+
+    var hour = Number(String(time).split(".")[0]);
+    var minute = Number(String(time).split(".")[1]);
+
+    do {
+
+      if (minute >= 60) {
+        hour = hour + 1;
+        minute = minute - 60;
+      }
+
+      console.log(hour)
+      console.log(minute)
+
+    } while (minute >= 60);
+
+    return hour+':'+minute;
 
   }
 

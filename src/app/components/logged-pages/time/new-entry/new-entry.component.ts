@@ -59,5 +59,4 @@ export class NewEntryComponent implements OnInit {
 
   }
 
-
 }

@@ -20,17 +20,16 @@ export class TasksComponent implements OnInit {
 
   }
 
-  edit(){
+  edit() {
 
     this.dialog.open(EditTaskComponent)
 
 
   }
 
-  delete(){
+  delete() {
 
     this.dialog.open(DeleteTaskComponent)
-
 
   }
 
