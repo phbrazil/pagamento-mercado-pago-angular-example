@@ -24,6 +24,8 @@ import { faFish } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PricingComponent } from './components/pricing/pricing.component';
+import { RouterModule } from '@angular/router';
 
 registerLocaleData(localePT);
 
@@ -37,7 +39,8 @@ registerLocaleData(localePT);
     CreateAccountComponent,
     LoginComponent,
     HomeComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    PricingComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ registerLocaleData(localePT);
     AdminLayoutModule,
     HttpClientModule,
     NgbModule,
+    RouterModule,
 
   ],
   providers: [

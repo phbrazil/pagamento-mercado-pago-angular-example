@@ -1,0 +1,48 @@
+<div class="container col-md-12" style="margin-top: 50px;">
+  <div class="container">
+    <p class="font">Valores</p>
+  </div>
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Grátis</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">R$0 <small class="text-muted">/ 7 dias</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>10 usuários</li>
+          <li>1 GB de armazenamento</li>
+          <li>Suporte por email</li>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-outline-primary" (click)="getOpportunity('free')">Experimentar</button>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Pro</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">R$15 <small class="text-muted">/ mês por usuário</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>20 usuários incluídos</li>
+          <li>5 GB de armazenamento</li>
+          <li>Suporte por email priorizado</li>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-primary" (click)="getOpportunity('pro')">Selecionar</button>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Corporativo</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">R$29 <small class="text-muted">/ mês por usuário</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Usuários ilimitados</li>
+          <li>50 GB de armazenamento</li>
+          <li>Suporte por email priorizado</li>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-primary" (click)="getOpportunity('corp')">Selecionar</button>
+      </div>
+    </div>
+  </div>
