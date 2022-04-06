@@ -22,6 +22,7 @@ import { TasksComponent } from './time/tasks/tasks.component';
 import { LoggedFooterComponent } from './logged-footer/logged-footer.component';
 import { EditTaskComponent } from './time/tasks/edit-task/edit-task.component';
 import { DeleteTaskComponent } from './time/tasks/delete-task/delete-task.component';
+import { NewAdvanceComponent } from './advance/new-advance/new-advance.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DeleteTaskComponent } from './time/tasks/delete-task/delete-task.compon
     TasksComponent,
     LoggedFooterComponent,
     EditTaskComponent,
-    DeleteTaskComponent
+    DeleteTaskComponent,
+    NewAdvanceComponent
   ],
   imports: [
     RouterModule,

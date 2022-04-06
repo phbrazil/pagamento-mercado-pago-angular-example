@@ -53,8 +53,7 @@ registerLocaleData(localePT);
     AdminLayoutModule,
     HttpClientModule,
     NgbModule,
-    RouterModule,
-
+    RouterModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }

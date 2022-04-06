@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { AlertComponent } from './alert';
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   declarations: [
     AlertComponent
@@ -11,10 +12,12 @@ import { AlertComponent } from './alert';
     CommonModule,
     RouterModule,
     AngularMaterialModule,
+    DataTablesModule
   ],
 
   exports: [
-    AlertComponent
+    AlertComponent,
+    DataTablesModule
   ]
 })
 export class SharedModule {
