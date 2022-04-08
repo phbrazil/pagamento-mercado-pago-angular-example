@@ -6,4 +6,5 @@ export class Advance {
   user: User
   value: number
   date: string
+  status: string
 }

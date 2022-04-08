@@ -35,9 +35,9 @@ export class AdvanceComponent implements OnInit {
 
     this.dtOptions = this.dataTableSettings.getSettings();
 
-    for(var i = 0;i<100;i++){
+    for(var i = 1;i<100;i++){
 
-      this.advance = {idAdvance: 1, project: '000'+i, user: this.user, date: '29-01-1990', value: 200.00 }
+      this.advance = {idAdvance: 1, project: '000'+i, user: this.user, date: '29-01-1990', value: 200.00, status: 'Pendente' }
 
       this.table.push(this.advance)
 
