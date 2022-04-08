@@ -115,8 +115,6 @@ export class TimeComponent implements OnInit {
 
   calcTime(time: number) {
 
-    console.log(time)
-
     var hour = Number(String(time).split(".")[0]);
     var minute = Number(String(time).split(".")[1]);
 
@@ -126,9 +124,6 @@ export class TimeComponent implements OnInit {
         hour = hour + 1;
         minute = minute - 60;
       }
-
-      console.log(hour)
-      console.log(minute)
 
     } while (minute >= 60);
 

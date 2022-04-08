@@ -26,6 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { RouterModule } from '@angular/router';
+import { InterceptorModule } from './_services/interceptor.module';
 
 registerLocaleData(localePT);
 
@@ -53,7 +54,8 @@ registerLocaleData(localePT);
     AdminLayoutModule,
     HttpClientModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    InterceptorModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }
