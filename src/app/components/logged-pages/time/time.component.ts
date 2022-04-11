@@ -36,7 +36,10 @@ export class TimeComponent implements OnInit {
 
   total: number = 8.45;
 
+  isToday: boolean = true;
+
   currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
+  today = moment(new Date(this.day)).format('Do MMMM YYYY');
 
   constructor(private readonly dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar,
     private accountService: AccountService) {
@@ -58,8 +61,24 @@ export class TimeComponent implements OnInit {
     this.dialog.open(NewEntryComponent,
       {
         data: {
-          currentDay: this.currentDay }
+          currentDay: this.currentDay
+        }
       });
+  }
+
+  checkIsToday() {
+
+    if (this.currentDay == this.today) {
+
+      this.isToday = true;
+
+    } else {
+
+      this.isToday = false;
+
+    }
+
+
   }
 
   selectToday() {
@@ -67,7 +86,10 @@ export class TimeComponent implements OnInit {
 
     this.currentDay = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
 
+
     this.loadTasks();
+
+    this.checkIsToday();
   }
 
   loadTasks() {
@@ -91,6 +113,8 @@ export class TimeComponent implements OnInit {
 
     this.loadTasks();
 
+    this.checkIsToday();
+
   }
 
   previousDay() {
@@ -101,6 +125,8 @@ export class TimeComponent implements OnInit {
 
     this.loadTasks();
 
+    this.checkIsToday();
+
   }
 
   changeDay() {
@@ -109,6 +135,8 @@ export class TimeComponent implements OnInit {
     this.currentDay = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
 
     this.loadTasks();
+
+    this.checkIsToday();
 
 
   }
@@ -127,7 +155,7 @@ export class TimeComponent implements OnInit {
 
     } while (minute >= 60);
 
-    return hour+':'+minute;
+    return hour + ':' + minute;
 
   }
 
