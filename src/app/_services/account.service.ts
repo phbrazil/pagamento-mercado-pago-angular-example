@@ -15,6 +15,7 @@ export class AccountService {
 
 
   readonly baseUrl: string = 'https://sparta-clan.herokuapp.com'
+  //readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
 
 
@@ -318,7 +319,7 @@ export class AccountService {
       }));
   }
 
-  logout(){
+  logout() {
 
     this.dialog.closeAll();
 

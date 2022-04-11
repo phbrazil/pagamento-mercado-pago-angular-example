@@ -16,33 +16,30 @@ moment.locale('pt')
 })
 export class NewEntryComponent implements OnInit {
 
-
-  totalHours: number = 10;
+  timeModel: string;
 
   newEntryForm: FormGroup;
 
   isLoading: boolean = false;
 
-  projeto: string;
-
   project: any = [];
   projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
 
 
-
-  //@Input() currentDay: string;
+  task: any = [];
+  tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public currentDay: any) { }
 
   ngOnInit(): void {
 
-    console.log(this.currentDay.currentDay)
-
     this.newEntryForm = this.fb.group({
-      projeto: ['', Validators.required],
+      project: ['', Validators.required],
       time: ['', Validators.required],
       task: ['', Validators.required],
+      notes: [''],
+      date: [this.currentDay, Validators.required],
     });
 
   }
@@ -53,10 +50,41 @@ export class NewEntryComponent implements OnInit {
 
   onChangeProject(){
 
-    this.project = this.newEntryForm.value.projeto;
-
-    console.log(this.newEntryForm.value.projeto)
+    this.project = this.newEntryForm.value.project;
 
   }
+
+  onChangeTask(){
+
+    this.task = this.newEntryForm.value.task;
+
+  }
+
+  checkTime(time: any){
+
+    time = time.replace(/\D/g, "")
+    //time = time.replace(/^(\d)/, ":$1")
+    //time = time.replace(/(.{3})(\d)/, "$1)$2")
+    if (time.length >= 3) {
+        time = time.replace(/(.{2})$/, ":$1")
+    } else if (time.length >= 2) {
+        time = time.replace(/(.{2})$/, ":$1")
+    } else if (time.length >= 1) {
+        time = time.replace(/(.{2})$/, ":$1")
+    }
+
+    this.timeModel = time;
+
+    this.newEntryForm.patchValue({
+      time: this.timeModel
+    })
+
+  }
+
+  onSubmit(){
+    this.isLoading = true;
+    console.log('to aqui')
+  }
+
 
 }

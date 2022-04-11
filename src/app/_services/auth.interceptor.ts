@@ -33,8 +33,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log('teste')
-
     if (!this.token) {
 
       this.token = this.accountService.getToken();
