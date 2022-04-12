@@ -15,8 +15,6 @@ export class AppComponent {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-    console.log(this.user)
-
   }
 
 }

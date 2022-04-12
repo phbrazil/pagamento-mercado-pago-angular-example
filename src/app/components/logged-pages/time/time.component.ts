@@ -54,13 +54,29 @@ export class TimeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadTasks();
+    this.timeService.getCurrentDay().subscribe(res => {
+
+      if (res != null) {
+        this.day = res;
+        this.currentDayFormatted = moment(new Date(this.day)).format('Do MMMM YYYY');
+        this.today = moment(new Date(this.day)).format('Do MMMM YYYY');
+
+      }
+
+      this.loadTasks();
+
+      this.checkIsToday();
+
+    })
+
 
     this.calcTime(1.50);
 
   }
 
   newEntry() {
+
+    this.timeService.setCurrentDay(this.day);
 
     this.dialog.open(NewEntryComponent,
       {
@@ -73,16 +89,15 @@ export class TimeComponent implements OnInit {
 
   checkIsToday() {
 
-    if (this.currentDayFormatted == this.today) {
+    let today = moment(new Date()).format('Do MMMM YYYY');
+
+    this.isToday = false;
+
+    if (this.currentDayFormatted == today) {
 
       this.isToday = true;
 
-    } else {
-
-      this.isToday = false;
-
     }
-
 
   }
 
@@ -96,6 +111,9 @@ export class TimeComponent implements OnInit {
     this.loadTasks();
 
     this.checkIsToday();
+
+    this.close();
+
   }
 
   loadTasks() {
@@ -106,8 +124,6 @@ export class TimeComponent implements OnInit {
 
     this.timeService.getEntries(this.user.idUser, moment(this.day).format('DD-MM-YYYY'), this.accountService.getToken()).subscribe(res => {
 
-      console.log(res)
-
       this.tasks = res;
 
       this.isLoading = false;
@@ -116,7 +132,6 @@ export class TimeComponent implements OnInit {
 
       this.isLoading = false;
 
-      console.log(err)
     });
 
     /*for (var i = 1; i < 10; i++) {
@@ -138,6 +153,8 @@ export class TimeComponent implements OnInit {
 
     this.checkIsToday();
 
+    this.close();
+
   }
 
   previousDay() {
@@ -149,6 +166,8 @@ export class TimeComponent implements OnInit {
     this.loadTasks();
 
     this.checkIsToday();
+
+    this.close();
 
   }
 
@@ -162,6 +181,8 @@ export class TimeComponent implements OnInit {
     this.loadTasks();
 
     this.checkIsToday();
+
+    this.close();
 
 
   }
@@ -182,6 +203,10 @@ export class TimeComponent implements OnInit {
 
     return hour + ':' + minute;
 
+  }
+
+  close() {
+    this.dialog.closeAll();
   }
 
 

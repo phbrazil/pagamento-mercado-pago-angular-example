@@ -49,8 +49,6 @@ export class NewEntryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.currentDay)
-
     this.newEntryForm = this.fb.group({
       project: ['', Validators.required],
       time: ['', Validators.required],
@@ -112,7 +110,7 @@ export class NewEntryComponent implements OnInit {
       this.isLoading = false;
 
     }, err => {
-      console.log(err)
+
       this.isLoading = false;
 
     })

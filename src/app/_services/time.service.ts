@@ -10,8 +10,7 @@ import { TimeTask } from '../_models/task';
 @Injectable({ providedIn: 'root' })
 export class TimeService {
 
-  private tasksSubject: BehaviorSubject<TimeTask[]>;
-  public tasks: Observable<TimeTask[]>;
+  private currentDay = new BehaviorSubject<Date>(null);
 
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
@@ -26,21 +25,16 @@ export class TimeService {
 
 }
 
-public get tasksList(): TimeTask[] {
-  return this.tasksSubject.value;
+public setCurrentDay(day: Date): void {
+  this.currentDay.next(day);
 }
 
-public setTasks(tasks: TimeTask[]) {
-
-  this.tasksSubject.next(tasks);
+public getCurrentDay(): Observable<Date> {
+  return this.currentDay.asObservable();
 
 }
-
 
   getEntries(idUser: number, date: string, token: string) {
-
-    console.log(idUser)
-    console.log(date)
 
     var header = {
       headers: new HttpHeaders()
@@ -55,8 +49,6 @@ public setTasks(tasks: TimeTask[]) {
 
 
   newEntry(task: TimeTask, token: string) {
-
-    console.log(task)
 
     var header = {
       headers: new HttpHeaders()
