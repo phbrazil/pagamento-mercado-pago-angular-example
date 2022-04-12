@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import * as $ from 'jquery';
 import moment from 'moment';
+import { TimeService } from 'src/app/_services/time.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/user';
+import { Router } from '@angular/router';
+import { TimeTask } from 'src/app/_models/task';
 moment().format('LL');
 moment.locale('pt')
 
@@ -22,55 +27,70 @@ export class NewEntryComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  project: any = [];
+  user: User;
+
+  project: string;
   projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
 
 
-  task: any = [];
+  task: string;
   tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
 
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public currentDay: any) { }
+  constructor(public dialog: MatDialog, private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public currentDay: any,
+    private timeService: TimeService,
+    private accountService: AccountService,
+    private router: Router) {
+
+    this.accountService.user.subscribe(x => this.user = x);
+
+  }
 
   ngOnInit(): void {
+
+    console.log(this.currentDay)
 
     this.newEntryForm = this.fb.group({
       project: ['', Validators.required],
       time: ['', Validators.required],
       task: ['', Validators.required],
       notes: [''],
-      date: [this.currentDay, Validators.required],
+      date: [this.currentDay.currentDay, Validators.required],
+      idUser: [this.user.idUser, Validators.required],
     });
 
   }
 
   close() {
     this.dialog.closeAll();
+
+    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
+    this.router.navigate(['/time'])
+);
   }
 
-  onChangeProject(){
+  onChangeProject() {
 
-    this.project = this.newEntryForm.value.project;
-
-  }
-
-  onChangeTask(){
-
-    this.task = this.newEntryForm.value.task;
+    this.project = this.newEntryForm.value.project.name;
 
   }
 
-  checkTime(time: any){
+  onChangeTask() {
 
-    time = time.replace(/\D/g, "")
-    //time = time.replace(/^(\d)/, ":$1")
-    //time = time.replace(/(.{3})(\d)/, "$1)$2")
+    this.task = this.newEntryForm.value.task.name;
+
+  }
+
+  checkTime(time: any) {
+
+    time = time.replace(/\D/g, "");
     if (time.length >= 3) {
-        time = time.replace(/(.{2})$/, ":$1")
+      time = time.replace(/(.{2})$/, ":$1");
     } else if (time.length >= 2) {
-        time = time.replace(/(.{2})$/, ":$1")
+      time = time.replace(/(.{2})$/, ":$1");
     } else if (time.length >= 1) {
-        time = time.replace(/(.{2})$/, ":$1")
+      time = time.replace(/(.{2})$/, ":$1");
     }
 
     this.timeModel = time;
@@ -81,9 +101,22 @@ export class NewEntryComponent implements OnInit {
 
   }
 
-  onSubmit(){
+  onSubmit() {
+
     this.isLoading = true;
-    console.log('to aqui')
+
+    this.timeService.newEntry(this.newEntryForm.value, this.accountService.getToken()).subscribe(res => {
+
+      this.close();
+
+      this.isLoading = false;
+
+    }, err => {
+      console.log(err)
+      this.isLoading = false;
+
+    })
+
   }
 
 

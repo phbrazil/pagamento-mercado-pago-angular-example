@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="align-self: center;">
-        <h3 class="modal-title default-font modal-header-font">Novo registro em {{currentDay.currentDay}}</h3>
+        <h3 class="modal-title default-font modal-header-font">Novo registro em {{currentDay.currentDayFormatted}}</h3>
         <!--button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button-->
@@ -18,21 +18,21 @@
               (change)="onChangeProject()" bindLabel="name" name="project">
             </ng-select>
           </div>
-          <div *ngIf="project?.name" class="col-md-12 order-md-1" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
+          <div *ngIf="project" class="col-md-12 order-md-1" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <label>Atividade</label>
             <ng-select formControlName="task" class="form-control default-font custom-drop ng-select"
               [items]="tasks" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true"
               (change)="onChangeTask()" bindLabel="name" name="task">
             </ng-select>
           </div>
-          <div *ngIf="task?.name" class="col-md-8 order-md-1 mt-2">
+          <div *ngIf="task" class="col-md-8 order-md-1 mt-2">
             <div class="row">
               <div class="col-md-12 order-md-1 mb-2">
                 <textarea type="text" class="form-control default-font custom-drop" #notes name="notes" autocomplete="false" placeholder="Notas (Opcional)"></textarea>
               </div>
             </div>
           </div>
-          <div *ngIf="task?.name" class="col-md-4 order-md-1 mt-2">
+          <div *ngIf="task" class="col-md-4 order-md-1 mt-2">
             <div class="row">
               <div class="col-md-12 order-md-1 mb-2">
                 <input placeholder="0:00" type="text" class="form-control default-font time-font" maxlength="4" #time name="time" autocomplete="false" [(ngModel)]="timeModel" (keyup)="checkTime(time.value)">

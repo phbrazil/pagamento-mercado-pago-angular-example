@@ -4,9 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { faArrowLeft, faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
+import { Observable, Subject } from 'rxjs';
 import { TimeTask } from 'src/app/_models/task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { TimeService } from 'src/app/_services/time.service';
 import { NewEntryComponent } from './new-entry/new-entry.component';
 @Component({
   selector: 'app-time',
@@ -38,11 +40,13 @@ export class TimeComponent implements OnInit {
 
   isToday: boolean = true;
 
-  currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
+  isLoading: boolean = false;
+
+  currentDayFormatted = moment(new Date(this.day)).format('Do MMMM YYYY');
   today = moment(new Date(this.day)).format('Do MMMM YYYY');
 
   constructor(private readonly dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar,
-    private accountService: AccountService) {
+    private accountService: AccountService, private timeService: TimeService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -61,14 +65,15 @@ export class TimeComponent implements OnInit {
     this.dialog.open(NewEntryComponent,
       {
         data: {
-          currentDay: this.currentDay
+          currentDayFormatted: this.currentDayFormatted,
+          currentDay: moment(this.day).format('DD-MM-YYYY')
         }
       });
   }
 
   checkIsToday() {
 
-    if (this.currentDay == this.today) {
+    if (this.currentDayFormatted == this.today) {
 
       this.isToday = true;
 
@@ -84,8 +89,9 @@ export class TimeComponent implements OnInit {
   selectToday() {
     this.model = this.calendar.getToday();
 
-    this.currentDay = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
+    this.currentDayFormatted = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
 
+    this.day = new Date(this.model.month + '-' + this.model.day + '-' + this.model.year);
 
     this.loadTasks();
 
@@ -96,12 +102,29 @@ export class TimeComponent implements OnInit {
 
     this.tasks = [];
 
-    for (var i = 1; i < 10; i++) {
+    this.isLoading = true;
 
-      this.task = { idTask: 1, project: 'Projeto Teste ' + i, user: this.user, task: 'Tarefa ' + i, date: this.currentDay, time: this.calcTime(7.45) }
+    this.timeService.getEntries(this.user.idUser, moment(this.day).format('DD-MM-YYYY'), this.accountService.getToken()).subscribe(res => {
+
+      console.log(res)
+
+      this.tasks = res;
+
+      this.isLoading = false;
+
+    }, err => {
+
+      this.isLoading = false;
+
+      console.log(err)
+    });
+
+    /*for (var i = 1; i < 10; i++) {
+
+      this.task = { idTask: 1, project: 'Projeto Teste ' + i, idUser: this.user.idUser, task: 'Tarefa ' + i, date: this.currentDayFormatted, time: this.calcTime(7.45) }
 
       this.tasks.push(this.task);
-    }
+    }*/
 
   }
 
@@ -109,7 +132,7 @@ export class TimeComponent implements OnInit {
 
     this.day.setDate(this.day.getDate() + 1);
 
-    this.currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
+    this.currentDayFormatted = moment(new Date(this.day)).format('Do MMMM YYYY');
 
     this.loadTasks();
 
@@ -121,7 +144,7 @@ export class TimeComponent implements OnInit {
 
     this.day.setDate(this.day.getDate() - 1);
 
-    this.currentDay = moment(new Date(this.day)).format('Do MMMM YYYY');
+    this.currentDayFormatted = moment(new Date(this.day)).format('Do MMMM YYYY');
 
     this.loadTasks();
 
@@ -132,7 +155,9 @@ export class TimeComponent implements OnInit {
   changeDay() {
 
 
-    this.currentDay = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
+    this.currentDayFormatted = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
+
+    this.day = new Date(this.model.month + '-' + this.model.day + '-' + this.model.year);
 
     this.loadTasks();
 

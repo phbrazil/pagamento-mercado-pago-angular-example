@@ -2,8 +2,8 @@ import { User } from "./user"
 
 export class TimeTask {
   idTask: number
+  idUser: number
   project: string
-  user: User
   time: string
   date: string
   task: string

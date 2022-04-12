@@ -29,7 +29,8 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes, {
       useHash: true,
-      scrollPositionRestoration: 'enabled'
+      scrollPositionRestoration: 'enabled',
+      onSameUrlNavigation: 'reload' 
     })],
   exports: [RouterModule]
 })

@@ -14,8 +14,7 @@ export class AccountService {
   private isLogged = new BehaviorSubject<boolean>(false);
 
 
-  readonly baseUrl: string = 'https://sparta-clan.herokuapp.com'
-  //readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
+  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
 
 
@@ -194,9 +193,6 @@ export class AccountService {
 
 
   login(username: string, password: string) {
-
-    console.log(username)
-    console.log(password)
 
     const url = `${this.baseUrl}/account/api/auth/signin`;
 
