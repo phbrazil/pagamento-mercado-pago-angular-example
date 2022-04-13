@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { faArrowLeft, faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faClock, faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import { Observable, Subject } from 'rxjs';
@@ -28,6 +28,7 @@ export class TimeComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
   faClock = faClock;
+  faCoffee = faCoffee;
 
   tasks: TimeTask[] = [];
 

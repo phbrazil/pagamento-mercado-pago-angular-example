@@ -1,15 +1,11 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import * as $ from 'jquery';
 import moment from 'moment';
 import { TimeService } from 'src/app/_services/time.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { Router } from '@angular/router';
-import { TimeTask } from 'src/app/_models/task';
 moment().format('LL');
 moment.locale('pt')
 

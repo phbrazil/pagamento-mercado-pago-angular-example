@@ -12,20 +12,22 @@
 
         </div>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-1 mb-4">
         <button data-toggle="tooltip" title='Dia anterior' id='previous' name='previous' value='previous'
           (click)="previousDay()" class="btn btn-lg btn-outline-info shadow zoom">
           <fa-icon class="fa-2x" [icon]="faArrowLeft"></fa-icon>
         </button>
       </div>
       <div class="col-md-4">
-        <h4 class="text-muted h4-responsive default-font">{{currentDayFormatted}} <strong
+        <div class="margin-calendar">
+          <h4 class="text-muted h4-responsive default-font">{{currentDayFormatted}} <strong
             *ngIf="isToday">(Hoje)</strong></h4>
-        <div class="col-md-12">
-          <ngb-datepicker #dp [(ngModel)]="model" (click)="changeDay()" name="date" (navigate)="date = $event.next">
+        </div>
+        <div class="mt-4 center">
+          <ngb-datepicker id="calendar" #dp [(ngModel)]="model" (click)="changeDay()" name="date" (navigate)="date = $event.next">
           </ngb-datepicker>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mt-4">
           <button class="btn btn-sm btn-outline-primary me-2 zoom" (click)="selectToday()">Ir para hoje</button>
         </div>
 
@@ -40,7 +42,7 @@
           <fa-icon class="fa-2x" [icon]="faArrowRight"></fa-icon>
         </button>
       </div>
-      <div class="col-md-1 mb-2">
+      <div class="col-md-1 mb-2 mt-4">
         <span style="font-size: large;" class="badge badge-light mb-1 text-muted bg-light">
           <div class="row">
             <div class="col-md-12 mb-2">
@@ -67,7 +69,7 @@
       <a contenteditable>
         <h2>Você não tem atividades nesta data</h2>
         <br>
-        <h4>Pegue um café e relaxe</h4>
+        <h4>Pegue um café e relaxe <fa-icon class="fa-1x" [icon]="faCoffee"></fa-icon></h4>
       </a>
     </li>
   </ul>

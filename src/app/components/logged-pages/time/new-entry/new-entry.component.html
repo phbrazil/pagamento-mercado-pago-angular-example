@@ -45,8 +45,8 @@
         <button type="submit" class="btn btn-primary" (click)="onSubmit()"  [disabled]="!newEntryForm.valid || isLoading || timeModel.length <= 3 ">
           <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
           Salvar</button>
-        <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Fechar</button>
-      </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Fechar</button>
+        </div>
     </div>
   </div>
 </div>
