@@ -36,7 +36,8 @@ export class TimeComponent implements OnInit {
 
   day = new Date();
 
-  total: number = 8.45;
+  total: number = 0;
+  totalFormatted: string;
 
   isToday: boolean = true;
 
@@ -68,9 +69,6 @@ export class TimeComponent implements OnInit {
       this.checkIsToday();
 
     })
-
-
-    this.calcTime(1.50);
 
   }
 
@@ -128,11 +126,21 @@ export class TimeComponent implements OnInit {
 
       this.isLoading = false;
 
+      res.forEach(element => {
+
+        this.total = this.total + this.calcTime(Number(element.time.replace(':', '.')));
+
+
+      });
+
+      this.FinishCalcTime();
+
     }, err => {
 
       this.isLoading = false;
 
     });
+
 
     /*for (var i = 1; i < 10; i++) {
 
@@ -189,19 +197,57 @@ export class TimeComponent implements OnInit {
 
   calcTime(time: number) {
 
-    var hour = Number(String(time).split(".")[0]);
-    var minute = Number(String(time).split(".")[1]);
 
-    do {
+    if (!Number.isInteger(time)) {
 
-      if (minute >= 60) {
-        hour = hour + 1;
-        minute = minute - 60;
-      }
+      var hour = Number(String(time).split(".")[0]);
+      var minute = Number(String(time).split(".")[1]);
 
-    } while (minute >= 60);
+      do {
 
-    return hour + ':' + minute;
+        if (minute >= 60) {
+          hour = hour + 1;
+          minute = minute - 60;
+        }
+
+      } while (minute >= 60);
+
+
+      return Number(hour + '.' + minute);
+
+    }
+
+    return time;
+
+  }
+
+  FinishCalcTime() {
+
+    console.log(this.total)
+
+    if (!Number.isInteger(this.total)) {
+
+      let hour = Number(String(this.total).split(".")[0]);
+      let minute = Number(String(this.total).split(".")[1]);
+
+      do {
+
+        if (minute >= 60) {
+          hour = hour + 1;
+          minute = minute - 60;
+        }
+
+      } while (minute >= 60);
+
+
+      this.totalFormatted = (hour + ':' + minute);
+
+    }else{
+
+      this.totalFormatted = (String(this.total).replace('.', ':')+':00');
+
+    }
+
 
   }
 
