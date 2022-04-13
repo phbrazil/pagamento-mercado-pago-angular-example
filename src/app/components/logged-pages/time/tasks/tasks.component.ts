@@ -29,7 +29,12 @@ export class TasksComponent implements OnInit {
 
   delete() {
 
-    this.dialog.open(DeleteTaskComponent)
+    this.dialog.open(DeleteTaskComponent,
+      {
+        data: {
+          task: this.task
+        }
+      })
 
   }
 

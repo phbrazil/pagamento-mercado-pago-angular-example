@@ -63,4 +63,16 @@ public getCurrentDay(): Observable<Date> {
       }));
   }
 
+  deleteEntry(idTask: number, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/time/deleteEntry/${idTask}`
+
+    return this.http.delete<[any]>(url, header);
+  }
+
 }

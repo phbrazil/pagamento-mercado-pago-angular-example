@@ -28,6 +28,7 @@
         <div class="col-md-12">
           <button class="btn btn-sm btn-outline-primary me-2 zoom" (click)="selectToday()">Ir para hoje</button>
         </div>
+
         <!--button class="btn btn-sm btn-outline-primary me-2" (click)="dp.navigateTo()">Ir para o mês atual</button-->
 
         <!--pre>Mês: {{ date.month }}/{{ date.year }}</pre>
@@ -60,12 +61,25 @@
   </div>
 </div>
 
-<div class="col-md-12 mt-2">
-  <div clas="row">
+<div *ngIf="!isLoading && tasks.length == 0" class="col-md-12 mt-4">
+  <ul>
+    <li>
+      <a contenteditable>
+        <h2>Você não tem atividades nesta data</h2>
+        <br>
+        <h4>Pegue um café e relaxe</h4>
+      </a>
+    </li>
+  </ul>
+</div>
 
-    <div *ngFor="let task of tasks" class="col-md-3">
-      <app-tasks [user]="user" [task]="task"></app-tasks>
-    </div>
+<div class="col-md-12 mt-4">
+  <div clas="row">
+    <ul>
+      <li *ngFor="let task of tasks">
+          <app-tasks [user]="user" [task]="task"></app-tasks>
+      </li>
+    </ul>
 
   </div>
 </div>

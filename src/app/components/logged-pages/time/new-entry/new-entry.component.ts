@@ -30,11 +30,13 @@ export class NewEntryComponent implements OnInit {
   user: User;
 
   project: string;
-  projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
+  //projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
+  projects = ['Mustard', 'Ketchup', 'Relish' ];
 
 
   task: string;
-  tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
+  //tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
+  tasks = ['Relatórios' , 'Reunião Interna', 'Reunião Externa' ,'Visita Cliente' ];
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
@@ -63,20 +65,22 @@ export class NewEntryComponent implements OnInit {
   close() {
     this.dialog.closeAll();
 
-    this.router.navigateByUrl('/reload', {skipLocationChange: true}).then(()=>
-    this.router.navigate(['/time'])
-);
+    this.router.navigateByUrl('/reload', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/time'])
+    );
   }
 
   onChangeProject() {
 
-    this.project = this.newEntryForm.value.project.name;
+  //  this.project = this.newEntryForm.value.project.name;
+  this.project = this.newEntryForm.value.project;
 
   }
 
   onChangeTask() {
 
-    this.task = this.newEntryForm.value.task.name;
+   // this.task = this.newEntryForm.value.task.name;
+   this.task = this.newEntryForm.value.task;
 
   }
 
