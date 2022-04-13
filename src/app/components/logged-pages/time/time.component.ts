@@ -134,6 +134,7 @@ export class TimeComponent implements OnInit {
 
       });
 
+      //aqui ta dando bug modal new entry
       this.FinishCalcTime();
 
     }, err => {
@@ -253,6 +254,9 @@ export class TimeComponent implements OnInit {
   }
 
   close() {
+
+    this.total = 0;
+
     this.dialog.closeAll();
   }
 
