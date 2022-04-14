@@ -75,4 +75,19 @@ public getCurrentDay(): Observable<Date> {
     return this.http.delete<[any]>(url, header);
   }
 
+  checkTime(time: any) {
+
+    time = time.replace(/\D/g, "");
+    if (time.length >= 3) {
+      time = time.replace(/(.{2})$/, ":$1");
+    } else if (time.length >= 2) {
+      time = time.replace(/(.{2})$/, ":$1");
+    } else if (time.length >= 1) {
+      time = time.replace(/(.{2})$/, ":$1");
+    }
+
+    return time;
+
+  }
+
 }

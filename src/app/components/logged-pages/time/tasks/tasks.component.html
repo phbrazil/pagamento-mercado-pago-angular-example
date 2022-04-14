@@ -17,11 +17,12 @@
     </div>
   </div-->
 
-<a contenteditable>
-  <h2>Projeto #{{task.project}}</h2>
-  <p>Atividade #{{task.task}}</p>
-  <p>Tempo #{{task.time}}</p>
-  <div class="d-grid gap-2 d-md-block footer">
+<a>
+  <h2 style="margin-top: -5px;">#{{task.project}}</h2>
+  <p>#{{task.task}}</p>
+  <p>#{{task.time}}</p>
+  <small>#{{task.notes != '' ? task.notes : 'Nenhuma nota'}}</small>
+  <div class="d-grid gap-2 d-md-block footer mt-4">
       <button type="button" class="btn btn-outline-primary zoom" (click)="edit()">Editar</button>
       <button type="button" class="btn btn-outline-danger zoom" (click)="delete()">Excluir</button>
     </div>

@@ -25,10 +25,10 @@
               (change)="onChangeTask()" bindLabel="name" name="task">
             </ng-select>
           </div>
-          <div *ngIf="task" class="col-md-8 order-md-1 mt-2">
+          <div *ngIf="task" class="col-md-8 order-md-1 mt-2" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-md-12 order-md-1 mb-2">
-                <textarea type="text" class="form-control default-font custom-drop" #notes name="notes" autocomplete="false" placeholder="Notas (Opcional)"></textarea>
+                <textarea formControlName="notes" type="text" class="form-control default-font custom-drop" #notes name="notes" autocomplete="false" placeholder="Notas (Opcional)"></textarea>
               </div>
             </div>
           </div>

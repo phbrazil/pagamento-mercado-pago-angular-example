@@ -22,7 +22,12 @@ export class TasksComponent implements OnInit {
 
   edit() {
 
-    this.dialog.open(EditTaskComponent)
+    this.dialog.open(EditTaskComponent,
+      {
+        data: {
+          task: this.task
+        }
+      })
 
 
   }

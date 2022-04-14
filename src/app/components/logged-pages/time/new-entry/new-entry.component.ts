@@ -27,12 +27,12 @@ export class NewEntryComponent implements OnInit {
 
   project: string;
   //projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
-  projects = ['Mustard', 'Ketchup', 'Relish' ];
+  projects = ['MCI Brasil', 'Sparta Clã', 'Outros' ];
 
 
   task: string;
   //tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
-  tasks = ['Relatórios' , 'Reunião Interna', 'Reunião Externa' ,'Visita Cliente' ];
+  tasks = ['Bugs' , 'Melhorias', 'Manutenção' ,'Suporte Email', 'Suporte Telefone' ];
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
@@ -82,16 +82,7 @@ export class NewEntryComponent implements OnInit {
 
   checkTime(time: any) {
 
-    time = time.replace(/\D/g, "");
-    if (time.length >= 3) {
-      time = time.replace(/(.{2})$/, ":$1");
-    } else if (time.length >= 2) {
-      time = time.replace(/(.{2})$/, ":$1");
-    } else if (time.length >= 1) {
-      time = time.replace(/(.{2})$/, ":$1");
-    }
-
-    this.timeModel = time;
+    this.timeModel = this.timeService.checkTime(time);;
 
     this.newEntryForm.patchValue({
       time: this.timeModel

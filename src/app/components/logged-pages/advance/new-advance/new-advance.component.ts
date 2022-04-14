@@ -39,7 +39,5 @@ export class NewAdvanceComponent implements OnInit {
 
     this.project = this.newAdvanceForm.value.projeto;
 
-    console.log(this.newAdvanceForm.value.projeto)
-
   }
 }

@@ -3,29 +3,54 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000!important;
+  z-index: 1000 !important;
 }
+
 .drop {
   display: block !important;
 }
 
-.custom-drop{
+.custom-drop {
   font-size: 20px;
   margin-bottom: 20px;
 
 }
 
-.ng-select .ng-select-container:hover{
+.ng-select .ng-select-container:hover {
   background-color: yellow;
 }
 
-.modal-header-font{
+.modal-header-font {
   font-size: 25px;
 }
 
 .zoom {
-  transition: transform .2s; /* Animation */
+  transition: transform .2s;
+  /* Animation */
 }
+
 .zoom:hover {
-  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.5);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.modal-position {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+}
+
+.bg {
+  background-color: transparent;
+  font-family: 'Amatic SC';
+  font-size: 2rem;
+  border: 0;
+  outline: 0;
+  font-weight: bold;
+}
+
+.bg:focus {
+  outline: none !important;
 }

@@ -225,8 +225,6 @@ export class TimeComponent implements OnInit {
 
   FinishCalcTime() {
 
-    console.log(this.total)
-
     if (!Number.isInteger(this.total)) {
 
       let hour = Number(String(this.total).split(".")[0]);

@@ -18,7 +18,6 @@ export class DeleteTaskComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.task.task)
   }
 
   close() {

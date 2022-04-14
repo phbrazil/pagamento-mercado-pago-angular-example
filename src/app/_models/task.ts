@@ -7,4 +7,5 @@ export class TimeTask {
   time: string
   date: string
   task: string
+  notes: string
 }

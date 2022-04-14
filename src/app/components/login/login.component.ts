@@ -48,8 +48,6 @@ export class LoginComponent implements OnInit {
 
   postLogin(formLogin: FormGroup) {
 
-    console.log(formLogin)
-
     this.isLoading = true;
 
     this.accountService.login(formLogin.value.emailLogin, formLogin.value.passwordLogin).subscribe(res => {
