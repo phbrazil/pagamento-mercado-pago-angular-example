@@ -17,6 +17,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'refund', component: RefundComponent },
     { path: 'manage', component: ManageComponent },
     { path: 'dash', component: DashboardsComponent },
-    { path: 'profile', component: ProfileComponent },
+    //{ path: 'profile', component: ProfileComponent },
     { path: '**', component: TimeComponent },
 ];

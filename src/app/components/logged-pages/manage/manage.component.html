@@ -1,1 +1,30 @@
-<p>manage works!</p>
+<div class="container">
+  <div class="col-md-12 navbar-adjust">
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="list-group" id="myList" role="tablist">
+          <a class="list-group-item list-group-item-action active" data-toggle="list" href="#home" role="tab">Home</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Perfil</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#projects" role="tab">Projetos</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#settings" role="tab">Settings</a>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content">
+          <div class="tab-pane active" id="home" role="tabpanel">Home Page</div>
+          <div class="tab-pane" id="profile" role="tabpanel"><app-profile></app-profile></div>
+          <div class="tab-pane" id="projects" role="tabpanel"><app-projects></app-projects></div>
+          <div class="tab-pane" id="settings" role="tabpanel">...</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(function () {
+        $('#myList a:last-child').tab('show')
+      })
+    </script>
+  </div>
+
+</div>

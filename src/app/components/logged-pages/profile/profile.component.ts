@@ -36,25 +36,15 @@ export class ProfileComponent implements OnInit {
     this.userForm = this.fb.group({
       idUser: [{ value: `${user.idUser}`, disabled: true }, [Validators.required]],
       username: [{ value: `${user.username}`, disabled: true }, [Validators.required]],
-      pais: [{ value: `${user.pais}`, disabled: true }, [Validators.required]],
-      estado: [{ value: `${user.estado}`, disabled: true }, [Validators.required]],
-      nascimento: [{ value: `${user.nascimento}`, disabled: true }, [Validators.required]],
-      wzProfile: [{ value: `${user.wzProfile}`, disabled: true }, [Validators.required]],
-      platform: [{ value: `${user.platform}`, disabled: true }, [Validators.required]],
     })
   }
 
   formUserEmpty(): User {
     return {
       idUser: null,
-      nome: null,
+      name: null,
       username: null,
       email: null,
-      wzProfile: null,
-      platform: null,
-      nascimento: null,
-      pais: null,
-      estado: null,
     } as User
   }
 
@@ -84,16 +74,10 @@ export class ProfileComponent implements OnInit {
         let user = JSON.parse(localStorage.getItem('user'));
 
         user.username = this.userForm.value.username;
-        user.estado = this.userForm.value.estado;
-        user.pais = this.userForm.value.pais;
-        user.wzProfile = this.userForm.value.wzProfile;
-        user.platform = this.userForm.value.platform;
+
 
         this.user.username = this.userForm.value.username;
-        this.user.estado = this.userForm.value.estado;
-        this.user.pais = this.userForm.value.pais;
-        this.user.wzProfile = this.userForm.value.wzProfile;
-        this.user.platform = this.userForm.value.platform;
+
 
         localStorage.setItem('user', JSON.stringify(user));
 

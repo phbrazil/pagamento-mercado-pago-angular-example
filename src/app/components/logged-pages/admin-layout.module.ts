@@ -23,6 +23,8 @@ import { LoggedFooterComponent } from './logged-footer/logged-footer.component';
 import { EditTaskComponent } from './time/tasks/edit-task/edit-task.component';
 import { DeleteTaskComponent } from './time/tasks/delete-task/delete-task.component';
 import { NewAdvanceComponent } from './advance/new-advance/new-advance.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { NewProjectComponent } from './projects/new-project/new-project.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { NewAdvanceComponent } from './advance/new-advance/new-advance.component
     LoggedFooterComponent,
     EditTaskComponent,
     DeleteTaskComponent,
-    NewAdvanceComponent
+    NewAdvanceComponent,
+    ProjectsComponent,
+    NewProjectComponent
     ],
   imports: [
     RouterModule,
@@ -54,7 +58,9 @@ import { NewAdvanceComponent } from './advance/new-advance/new-advance.component
   ], exports: [
     NavbarComponent,
     TimeComponent,
-    AdvanceComponent
+    AdvanceComponent,
+    LoggedFooterComponent,
+
   ],
 })
 export class AdminLayoutModule {

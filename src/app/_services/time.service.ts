@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AlertService } from './alert.service';
-import { User } from '../_models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { TimeTask } from '../_models/task';
 @Injectable({ providedIn: 'root' })

@@ -204,6 +204,7 @@ export class AccountService {
         //localStorage.setItem('token', user.token);
         this.userSubject.next(user);
         this.setIsLogged(true);
+        console.log(user)
         return user;
       }));
   }

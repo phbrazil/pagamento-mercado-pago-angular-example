@@ -1,18 +1,14 @@
 export class User {
   token: string
   idUser: number
-  nome: string
+  name: string
   username: string
   email: string
-  wzProfile: string
-  platform: string
-  nascimento: string
-  pais: string
-  estado: string
+  regDate: string
   pendingRegistration: boolean
   pendingEmailConfirmation: boolean
   message: string
   changePassword: boolean
   admin: boolean
-  creditos: number
+  isActive: boolean
 }
