@@ -4,7 +4,7 @@
       <li>
         <a>
           <div [formGroup]="editEntryForm">
-            <input type="text" class="form-control bg" formControlName="project" style="margin-top: -5px;"
+            <input autofocus type="text" class="form-control bg" formControlName="project" style="margin-top: -5px;"
               name="project" value="{{task.project}}" />
             <input type="text" class="form-control bg" formControlName="task" name="task" value="{{task.task}}" />
           </div>
@@ -16,7 +16,7 @@
           </div>
           <div class="d-grid gap-2 d-md-block footer mt-4">
             <button type="submit" (click)="editTask()" class="btn btn-sm btn-outline-primary"
-              [disabled]="!editEntryForm.valid || isLoading">
+              [disabled]="!editEntryForm.valid || isLoading || timeModel.length <= 3 ">
               <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
               Salvar</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" (click)="close()"
