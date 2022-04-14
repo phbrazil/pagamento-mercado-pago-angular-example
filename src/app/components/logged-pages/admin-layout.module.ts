@@ -39,7 +39,7 @@ import { NewAdvanceComponent } from './advance/new-advance/new-advance.component
     EditTaskComponent,
     DeleteTaskComponent,
     NewAdvanceComponent
-  ],
+    ],
   imports: [
     RouterModule,
     CommonModule,

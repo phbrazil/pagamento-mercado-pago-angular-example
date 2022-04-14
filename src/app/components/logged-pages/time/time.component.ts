@@ -1,10 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faArrowLeft, faArrowRight, faClock, faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
-import { Observable, Subject } from 'rxjs';
 import { TimeTask } from 'src/app/_models/task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -43,6 +42,8 @@ export class TimeComponent implements OnInit {
   isToday: boolean = true;
 
   isLoading: boolean = false;
+
+  isModalCalendar: boolean = false;
 
   currentDayFormatted = moment(new Date(this.day)).format('Do MMMM YYYY');
   today = moment(new Date(this.day)).format('Do MMMM YYYY');
@@ -143,14 +144,6 @@ export class TimeComponent implements OnInit {
 
     });
 
-
-    /*for (var i = 1; i < 10; i++) {
-
-      this.task = { idTask: 1, project: 'Projeto Teste ' + i, idUser: this.user.idUser, task: 'Tarefa ' + i, date: this.currentDayFormatted, time: this.calcTime(7.45) }
-
-      this.tasks.push(this.task);
-    }*/
-
   }
 
   nextDay() {
@@ -242,21 +235,30 @@ export class TimeComponent implements OnInit {
 
       this.totalFormatted = (hour + ':' + minute);
 
-    }else{
+    } else {
 
-      this.totalFormatted = (String(this.total).replace('.', ':')+':00');
+      this.totalFormatted = (String(this.total).replace('.', ':') + ':00');
 
     }
 
 
   }
 
+  openCalendar() {
+
+    this.isModalCalendar = true;
+  }
+
   close() {
+
+    //REMOVE FADE BUGADO QUE CONTINUAVA AO LOGAR
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+
+    this.isModalCalendar = false
 
     this.total = 0;
 
     this.dialog.closeAll();
   }
-
-
 }

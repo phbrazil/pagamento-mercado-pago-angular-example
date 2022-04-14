@@ -14,7 +14,7 @@ display:flex; justify-content:center; text-align:center;
 
   text-decoration:none;
   color:#000;
-  background:#ffc;
+  background:white;
   display:block;
   height:14em;
   width:13em;
@@ -24,6 +24,7 @@ display:flex; justify-content:center; text-align:center;
   transition: transform .15s linear;
   font-family: 'Amatic SC';
   font-weight: bold;
+  margin-top: -200px;
 }
 
 #calendar:hover, #calendar:focus{
@@ -40,3 +41,19 @@ display:flex; justify-content:center; text-align:center;
 
 }
 
+.margin-calendar-icon{
+  margin-top: -25px;
+
+}
+
+.modal-position {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.modal-open{
+  z-index: 10000!important;
+}
