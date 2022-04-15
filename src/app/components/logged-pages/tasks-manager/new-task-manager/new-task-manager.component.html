@@ -1,0 +1,32 @@
+<div class="modal-position col-md-12" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title default-font modal-header-font">Nova Atividade</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--Body-->
+        <div class="modal-body mb-0" [formGroup]="newTaskForm">
+          <div class="col-md-12 order-md-1">
+            <label>Nome</label>
+            <input type="text" class="form-control" name="name" formControlName="name">
+          </div>
+          <div class="col-md-12 order-md-1 mt-2">
+            <div class="row">
+              <div class="col-md-12 order-md-1 mb-2">
+                <input type="time" class="form-control" name="time" formControlName="time">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!newTaskForm.valid || isLoading">Salvar</button>
+        <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

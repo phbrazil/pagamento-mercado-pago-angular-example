@@ -35,16 +35,19 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "node_modules/animate.css/animate.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css"
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
+              "src/assets/sass/light-bootstrap-dashboard.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
-              "node_modules/datatables.net/js/jquery.dataTables.js"
-
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/chartist/dist/chartist.js"
             ]
           },
           "configurations": {
@@ -58,7 +61,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [
