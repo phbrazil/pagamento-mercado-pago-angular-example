@@ -3,20 +3,32 @@
     <div class="row">
       <div class="col-md-4">
         <div class="list-group" id="myList" role="tablist">
-          <a *ngIf="user.admin" class="list-group-item list-group-item-action active" data-toggle="list" href="#plan" role="tab">Plano</a>
-          <a class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Perfil</a>
-          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#projects" role="tab">Projetos</a>
-          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#tasks" role="tab">Atividades</a>
-          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#integration" role="tab">Integrações</a>
-          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#settings" role="tab">Configurações</a>
+          <a *ngIf="user.admin" [ngClass]="{'active': user.admin}" class="list-group-item list-group-item-action" data-toggle="list" href="#plan" role="tab">Plano</a>
+          <a [ngClass]="{'active': !user.admin}" class="list-group-item list-group-item-action" data-toggle="list" href="#profile" role="tab">Perfil</a>
+          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#projects"
+            role="tab">Projetos</a>
+          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#tasks"
+            role="tab">Atividades</a>
+          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#integration"
+            role="tab">Integrações</a>
+          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#settings"
+            role="tab">Configurações</a>
         </div>
       </div>
       <div class="col-md-8">
         <div class="tab-content">
-          <div class="tab-pane active" id="plan" role="tabpanel"><app-plan-account></app-plan-account></div>
-          <div class="tab-pane" id="profile" role="tabpanel"><app-profile></app-profile></div>
-          <div class="tab-pane" id="projects" role="tabpanel"><app-projects></app-projects></div>
-          <div class="tab-pane" id="tasks" role="tabpanel"><app-tasks-manager></app-tasks-manager></div>
+          <div class="tab-pane active" id="plan" role="tabpanel">
+            <app-plan-account></app-plan-account>
+          </div>
+          <div class="tab-pane" id="profile" role="tabpanel">
+            <app-profile></app-profile>
+          </div>
+          <div class="tab-pane" id="projects" role="tabpanel">
+            <app-projects></app-projects>
+          </div>
+          <div class="tab-pane" id="tasks" role="tabpanel">
+            <app-tasks-manager></app-tasks-manager>
+          </div>
           <div class="tab-pane" id="integration" role="tabpanel">Integrações</div>
           <div class="tab-pane" id="settings" role="tabpanel">...</div>
         </div>
