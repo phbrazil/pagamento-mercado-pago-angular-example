@@ -2,7 +2,6 @@ import { Routes } from "@angular/router";
 import { AdvanceComponent } from "./advance/advance.component";
 import { HomeComponent } from "./home/home.component";
 import { ManageComponent } from "./manage/manage.component";
-import { ProfileComponent } from "./profile/profile.component";
 import { RefundComponent } from "./refund/refund.component";
 import { ReportsComponent } from "./reports/reports.component";
 import { TimeComponent } from "./time/time.component";

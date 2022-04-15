@@ -3,7 +3,13 @@
 a {
   font-size: 22px;
   font-family: 'Gilroy-Bold', sans-serif;
-  margin-right: 20px
+  margin-right: 20px;
+  color: white;
+
+}
+
+.nav-green{
+  background-color: #357a38;
 }
 
 #pic-img {
@@ -19,3 +25,10 @@ a {
     width: 200%;
   }
 }
+
+.end{
+
+  position: fixed;
+  right: 0;
+}
+

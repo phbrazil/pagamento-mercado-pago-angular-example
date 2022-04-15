@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/user';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -8,12 +10,33 @@ import { AccountService } from 'src/app/_services/account.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private accountService: AccountService) { }
 
-  ngOnInit(): void {
+  user: User;
+
+  faUser = faUser;
+
+  navColor: string = 'nav-green';
+
+  name: string = '';
+
+
+  constructor(private accountService: AccountService) {
+
+    this.accountService.user.subscribe(x => this.user = x);
+
   }
 
-  logout(){
+  ngOnInit(): void {
+
+    for (var i = 0; i < this.user.name.length; i++) {
+      if (this.user.name.charAt(i) == ' ') {
+        break
+      }
+      this.name = this.name + this.user.name.charAt(i);
+    }
+  }
+
+  logout() {
 
     this.accountService.logout();
 

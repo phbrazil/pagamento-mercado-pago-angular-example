@@ -9,7 +9,7 @@ import { TimeComponent } from './time/time.component';
 import { AdvanceComponent } from './advance/advance.component';
 import { RefundComponent } from './refund/refund.component';
 import { ManageComponent } from './manage/manage.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './manage/profile/profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee, faFilm, faFish } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -22,13 +22,14 @@ import { LoggedFooterComponent } from './logged-footer/logged-footer.component';
 import { EditTaskComponent } from './time/tasks/edit-task/edit-task.component';
 import { DeleteTaskComponent } from './time/tasks/delete-task/delete-task.component';
 import { NewAdvanceComponent } from './advance/new-advance/new-advance.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { NewProjectComponent } from './projects/new-project/new-project.component';
-import { TasksManagerComponent } from './tasks-manager/tasks-manager.component';
-import { NewTaskManagerComponent } from './tasks-manager/new-task-manager/new-task-manager.component';
-import { PlanAccountComponent } from './plan-account/plan-account.component';
+import { ProjectsComponent } from './manage/projects/projects.component';
+import { NewProjectComponent } from './manage/projects/new-project/new-project.component';
+import { TasksManagerComponent } from './manage/tasks-manager/tasks-manager.component';
+import { NewTaskManagerComponent } from './manage/tasks-manager/new-task-manager/new-task-manager.component';
+import { PlanAccountComponent } from './manage/plan-account/plan-account.component';
 import { ReportsComponent } from './reports/reports.component';
 import { LbdChartComponent } from './lbd/lbd-chart/lbd-chart.component';
+import { SettingsComponent } from './manage/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { LbdChartComponent } from './lbd/lbd-chart/lbd-chart.component';
     NewTaskManagerComponent,
     PlanAccountComponent,
     ReportsComponent,
-    LbdChartComponent
+    LbdChartComponent,
+    SettingsComponent
     ],
   imports: [
     RouterModule,
