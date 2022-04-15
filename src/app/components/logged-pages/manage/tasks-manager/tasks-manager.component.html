@@ -1,0 +1,39 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-4">
+      <button type="button" class="btn btn-sm btn-success zoom" (click)="newTaskManager()">
+        <fa-icon class="fa" [icon]="faPlus"></fa-icon> Nova Atividade
+      </button>
+    </div>
+  </div>
+  <table class="table text-muted table-striped" aria-describedby="atividades">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Horas Alocadas</th>
+        <th scope="col">Mais</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Bug</td>
+        <td>3</td>
+        <td><input type="button" class="btn btn-outline-primary btn-sm" value="Detalhes"></td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Melhorias</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

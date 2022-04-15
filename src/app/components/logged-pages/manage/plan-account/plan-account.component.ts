@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+
 @Component({
-  selector: 'app-manage',
-  templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.scss']
+  selector: 'app-plan-account',
+  templateUrl: './plan-account.component.html',
+  styleUrls: ['./plan-account.component.scss']
 })
-export class ManageComponent implements OnInit {
+export class PlanAccountComponent implements OnInit {
 
-  user: User
+  user: User;
 
-  faSignOut = faSignOut;
+  activeUsers: number = 10;
+  currentPlanValue: number = 120;
+  brand: string = 'visa'
 
   constructor(private accountService: AccountService) {
 
@@ -19,15 +21,7 @@ export class ManageComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
-  }
-
-
-  logout() {
-
-    this.accountService.logout();
-
   }
 
 }
