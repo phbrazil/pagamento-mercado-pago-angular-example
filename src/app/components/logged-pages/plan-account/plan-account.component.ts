@@ -11,7 +11,11 @@ export class PlanAccountComponent implements OnInit {
 
   user: User;
 
-  constructor(private accountService: AccountService ) {
+  activeUsers: number = 10;
+  currentPlanValue: number = 120;
+  brand: string = 'visa'
+
+  constructor(private accountService: AccountService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 

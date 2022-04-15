@@ -1,23 +1,43 @@
-<header class="header">
+<div class="col-md-12">
+  <div class="row">
 
-  <h3 class="title-home text-muted">Plano <strong>Professional</strong></h3>
+    <header class="header">
 
-</header>
+      <h3 class="title-home text-muted">Plano <strong>Pro</strong></h3>
 
-<div class="panel">
-  <div class="card card--front">
-    <div class="card__number">4111 **** **** 1111</div>
-    <div class="card__expiry-date">10/17</div>
-    <div class="card__owner">{{user.name}}</div>
-    <img class="card__logo" src="assets/img/plan/visa.png" alt="visa" />
-  </div>
+    </header>
 
-  <div class="col-md-4">
-    <input type="button" class="btn btn-primary btn-lg" value="Alterar Plano" />
-  </div>
-  <!--div class="card card--back">
+    <div class="panel">
+      <div class="card card--front">
+        <div class="card__number">4111 **** **** 1111</div>
+        <div class="card__expiry-date">10/17</div>
+        <div class="card__owner">{{user.name}}</div>
+        <img class="card__logo" src="assets/img/plan/{{brand == 'visa'? 'visa': 'master'}}.png" alt="visa" />
+      </div>
+
+
+      <div class="text-muted">
+        <h4>Você tem <strong>{{activeUsers}}</strong> usuários ativos</h4>
+        <h4>Valor atual do plano está em <strong>{{currentPlanValue | currency : 'BRL'}} mensais</strong></h4>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-md-4 mt-4">
+          <input type="button" class="btn btn-primary btn-lg" value="Alterar Plano" />
+        </div>
+        <div class="col-md-4 mt-4">
+          <input type="button" class="btn btn-secondary btn-lg" value="Alterar Cartão" />
+        </div>
+        <div class="col-md-4 mt-4">
+          <input type="button" class="btn btn-danger btn-lg" value="Cancelar Assinatura" />
+        </div>
+      </div>
+
+      <!--div class="card card--back">
     <div class="card__strip"></div>
     <div class="card__signature"></div>
     <div class="card__ccv">303</div>
   </div-->
+    </div>
+  </div>
 </div>

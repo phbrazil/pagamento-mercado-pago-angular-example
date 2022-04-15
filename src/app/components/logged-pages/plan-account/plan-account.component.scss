@@ -67,11 +67,11 @@ a {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  width: 425px;
-  height: 270px;
+  width: 380px;
+  height: 225px;
   text-align: left;
-  padding: 30px;
-  margin-bottom: 50px;
+  padding: 35px;
+  margin-bottom: 20px;
   color: #fff;
   border-radius: 20px;
   box-sizing: border-box;
@@ -79,7 +79,7 @@ a {
 
   &__number {
     font-size: 30px;
-    padding: 90px 0 15px;
+    padding: 40px 0 15px;
     text-align: center;
   }
 
@@ -97,6 +97,7 @@ a {
     position: absolute;
     right: 20px;
     bottom: 20px;
+    max-width: 100px;
   }
 
   &__strip {
@@ -126,6 +127,7 @@ a {
     font-size: 16px;
     font-family: 'Source Code Pro';
     text-shadow: 0 1px 1px rgba(0, 0, 0, .6);
+    margin-bottom: 10px;
   }
 
   &--back {
