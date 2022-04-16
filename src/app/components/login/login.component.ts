@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private alertService: AlertService, public dialog: MatDialog, private router: Router,
     private accountService: AccountService) {
 
-    }
+  }
 
   ngOnInit(): void {
 
@@ -52,10 +52,24 @@ export class LoginComponent implements OnInit {
 
     this.accountService.login(formLogin.value.emailLogin, formLogin.value.passwordLogin).subscribe(res => {
 
-      this.accountService.setUser(res);
+      if (res.pendingEmailConfirmation) {
 
-      this.router.navigate(['/time']);
-      this.close();
+        this.message = 'Seu email ainda não foi confirmado, verifique sua caixa de emails';
+        this.messageType = 'danger';
+
+      } else {
+
+        this.accountService.setUser(res);
+
+        //this.userSubject.next(user);
+        this.accountService.setIsLogged(true);
+
+        this.router.navigate(['/time']);
+        this.close();
+      }
+
+      this.isLoading = false;
+
 
     }, err => {
 
@@ -80,7 +94,7 @@ export class LoginComponent implements OnInit {
     this.dialog.open(CreateAccountComponent);
   }
 
-  resetPassword(){
+  resetPassword() {
 
     this.close();
 

@@ -192,18 +192,18 @@ export class AccountService {
 
 
 
-  login(username: string, password: string) {
+  login(email: string, password: string) {
 
     const url = `${this.baseUrl}/account/api/auth/signin`;
 
     https://sparta-clan.herokuapp.com/account/api/auth/signin
-    return this.http.post<User>(url, { username, password })
+    return this.http.post<User>(url, { email, password })
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
         //localStorage.setItem('token', user.token);
-        this.userSubject.next(user);
-        this.setIsLogged(true);
+        //this.userSubject.next(user);
+        //this.setIsLogged(true);
         console.log(user)
         return user;
       }));

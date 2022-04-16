@@ -19,6 +19,7 @@ export class CreateAccountComponent implements OnInit {
   formRegister = this.fb.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
+    password: ['', Validators.required],
     phone: ['', Validators.required],
   });
 
@@ -64,10 +65,17 @@ export class CreateAccountComponent implements OnInit {
 
     this.accountService.register(this.formRegister.value).subscribe(res =>{
 
+      this.text = '';
+      this.subText = '';
       if(res.message.code == 401 && res.message.text == 'Email já está em uso'){
         this.text  = res.message.text;
         this.subText  = res.message.subText;
         this.messageType = 'danger';
+      }else{
+        this.text  = res.message.text;
+        this.subText  = res.message.subText;
+        this.messageType = 'success';
+        this.formRegister.reset();
       }
 
       this.isRegistering = false;

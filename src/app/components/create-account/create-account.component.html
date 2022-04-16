@@ -13,24 +13,11 @@
       <div class="modal-body">
         <div class="col-md-12">
           <div class="row">
-            <form class="mt-4" [formGroup]="formRegister" (ngSubmit)="send()">
-              <div class="form-group">
-                <label for="email">Email Corporativo*</label>
-                <input type="email" placeholder="seunome@empresa.com" class="form-control" id="email" aria-describedby="email" formControlName="email"
-                  name="email">
-                <ng-container *ngIf="formRegister.controls.email.touched">
-                  <span *ngIf="formRegister.controls.email.errors?.required">
-                    Campo obrigatório
-                  </span>
-                  <span *ngIf="formRegister.controls.email.errors?.email">
-                    E-mail inválido
-                  </span>
-                </ng-container>
-              </div>
+            <form [formGroup]="formRegister" (ngSubmit)="send()">
               <div class="form-group">
                 <label for="name">Nome Completo*</label>
-                <input type="text" placeholder="Nome e sobrenome" class="form-control" id="name" aria-describedby="name" formControlName="name"
-                  name="name">
+                <input type="text" placeholder="Nome e sobrenome" class="form-control" id="name" aria-describedby="name"
+                  formControlName="name" name="name">
                 <ng-container *ngIf="formRegister.controls.name.touched">
                   <span *ngIf="formRegister.controls.name.errors?.required">
                     Campo obrigatório
@@ -41,8 +28,36 @@
                 </ng-container>
               </div>
               <div class="form-group">
+                <label for="email">Email Corporativo*</label>
+                <input type="email" placeholder="seunome@empresa.com" class="form-control" id="email"
+                  aria-describedby="email" formControlName="email" name="email">
+                <ng-container *ngIf="formRegister.controls.email.touched">
+                  <span *ngIf="formRegister.controls.email.errors?.required">
+                    Campo obrigatório
+                  </span>
+                  <span *ngIf="formRegister.controls.email.errors?.email">
+                    E-mail inválido
+                  </span>
+                </ng-container>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Senha*</label>
+                <input type="password" placeholder="******" class="form-control" id="password"
+                  aria-describedby="password" formControlName="password" name="password">
+                <ng-container *ngIf="formRegister.controls.password.touched">
+                  <span *ngIf="formRegister.controls.password.errors?.required">
+                    Campo obrigatório
+                  </span>
+                  <span *ngIf="formRegister.controls.password.errors?.password">
+                    Senha inválida
+                  </span>
+                </ng-container>
+              </div>
+              <div class="form-group">
                 <label for="phone">Telefone*</label>
-                <input mask="(000) 00000-0000" placeholder="(000) 0000-0000" type="text" class="form-control" id="phone" formControlName="phone" name="phone">
+                <input mask="(000) 00000-0000" placeholder="(000) 0000-0000" type="text" class="form-control" id="phone"
+                  formControlName="phone" name="phone">
                 <ng-container *ngIf="formRegister.controls.phone.touched">
                   <span *ngIf="formRegister.controls.phone.errors?.required">
                     Campo obrigatório
@@ -54,16 +69,23 @@
                   <a routerLink="/privacy">política de privacidade</a></span>
               </div>
               <span>Já tem uma <a data-toggle="modal" (click)="login()" class="text-yellow">conta?</a></span>
-              <div class="alert col-md-12" [ngStyle]="{'color': messageType == 'success' ? 'green' : 'red'}"
-                role="alert">
-                {{text}}<br>
-                <small>{{subText}}</small><br>
-              </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" (click)="createAccount()" [disabled]="!formRegister.valid || isRegistering">
-                  <span *ngIf="isRegistering" class="spinner-border spinner-border-sm mr-1"></span>
-                  Criar Conta</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Fechar</button>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="alert col-md-6" [ngStyle]="{'color': messageType == 'success' ? 'green' : 'red'}"
+                      role="alert">
+                      {{text}} <br>{{subText}}
+                    </div>
+                    <div class="col-md-6">
+                      <button type="submit" class="btn btn-primary" (click)="createAccount()"
+                        [disabled]="!formRegister.valid || isRegistering">
+                        <span *ngIf="isRegistering" class="spinner-border spinner-border-sm mr-1"></span>
+                        Criar Conta</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        (click)="close()">Fechar</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
