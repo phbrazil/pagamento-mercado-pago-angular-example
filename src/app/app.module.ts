@@ -56,7 +56,7 @@ registerLocaleData(localePT);
     NgbModule,
     RouterModule,
     InterceptorModule
-  ],
+    ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],

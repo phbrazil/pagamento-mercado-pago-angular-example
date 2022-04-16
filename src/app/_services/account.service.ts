@@ -234,7 +234,7 @@ export class AccountService {
   register(body: any) {
 
 
-    return this.http.post<any>(`${this.baseUrl}/spartaclan/createAccount`, body);
+    return this.http.post<any>(`${this.baseUrl}/opportunity/createAccount`, body);
 
   }
 
@@ -293,8 +293,6 @@ export class AccountService {
     return this.http.put<any>(`${this.baseUrl}/spartaclan/editAccount`, body, { headers });
 
   }
-
-
 
   resetPassword(body: any) {
 

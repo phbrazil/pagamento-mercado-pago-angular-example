@@ -15,7 +15,7 @@ import { faCoffee, faFilm, faFish } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { NewEntryComponent } from './time/new-entry/new-entry.component';
 import { AngularMaterialModule } from '../shared/angular-material/angular-material.module';
-import {  NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TasksComponent } from './time/tasks/tasks.component';
 import { LoggedFooterComponent } from './logged-footer/logged-footer.component';
@@ -53,7 +53,7 @@ import { SettingsComponent } from './manage/settings/settings.component';
     ReportsComponent,
     LbdChartComponent,
     SettingsComponent
-    ],
+  ],
   imports: [
     RouterModule,
     CommonModule,

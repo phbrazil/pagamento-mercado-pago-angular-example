@@ -12,4 +12,5 @@ export class User {
   admin: boolean
   isActive: boolean
   isTrial: boolean
+  phone: string
 }

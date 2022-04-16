@@ -4,6 +4,10 @@ import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { AlertComponent } from './alert';
 import { DataTablesModule } from 'angular-datatables';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+
 @NgModule({
   declarations: [
     AlertComponent
@@ -12,12 +16,14 @@ import { DataTablesModule } from 'angular-datatables';
     CommonModule,
     RouterModule,
     AngularMaterialModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxMaskModule.forRoot(),
   ],
 
   exports: [
     AlertComponent,
-    DataTablesModule
+    DataTablesModule,
+    NgxMaskModule
   ]
 })
 export class SharedModule {

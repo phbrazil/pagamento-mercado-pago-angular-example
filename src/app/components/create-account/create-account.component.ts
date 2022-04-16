@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
 import { LoginComponent } from '../login/login.component';
 
@@ -11,23 +12,18 @@ import { LoginComponent } from '../login/login.component';
 })
 export class CreateAccountComponent implements OnInit {
 
-  message: string = '';
+  text: string = '';
+  subText: string = '';
   messageType: string = '';
 
   formRegister = this.fb.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
     phone: ['', Validators.required],
-
-    /*address: this.fb.group({
-      street: [''],
-      city: [''],
-      state: [''],
-      zip: ['']
-    }),*/
   });
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, private alertService: AlertService) { }
+  constructor(public dialog: MatDialog, private fb: FormBuilder, private alertService: AlertService,
+    private accountService: AccountService) { }
 
   isRegistering: boolean = false;
 
@@ -45,7 +41,7 @@ export class CreateAccountComponent implements OnInit {
 
     this.isRegistering = true;
 
-    this.message = 'Aguarde enquanto nossos servidores iniciem';
+    this.text = 'Aguarde enquanto nossos servidores iniciem';
     this.messageType = 'success';
 
 
@@ -54,12 +50,37 @@ export class CreateAccountComponent implements OnInit {
 
   }
 
-  login(){
+  login() {
 
     this.close();
 
     this.dialog.open(LoginComponent);
 
+  }
+
+  createAccount() {
+
+    this.isRegistering = true;
+
+    this.accountService.register(this.formRegister.value).subscribe(res =>{
+
+      if(res.message.code == 401 && res.message.text == 'Email já está em uso'){
+        this.text  = res.message.text;
+        this.subText  = res.message.subText;
+        this.messageType = 'danger';
+      }
+
+      this.isRegistering = false;
+
+      console.log(res);
+
+    }, err =>{
+      console.log(err)
+      this.isRegistering = false;
+
+    })
+
+    console.log(this.formRegister.value)
   }
 
 }
