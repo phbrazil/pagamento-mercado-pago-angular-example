@@ -30,7 +30,7 @@ import { PlanAccountComponent } from './manage/plan-account/plan-account.compone
 import { ReportsComponent } from './reports/reports.component';
 import { LbdChartComponent } from './lbd/lbd-chart/lbd-chart.component';
 import { SettingsComponent } from './manage/settings/settings.component';
-import { MyEntriesComponent } from './time/my-entries/my-entries.component';
+import { MyTimeComponent } from './time/my-time/my-time.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { MyEntriesComponent } from './time/my-entries/my-entries.component';
     ReportsComponent,
     LbdChartComponent,
     SettingsComponent,
-    MyEntriesComponent
+    MyTimeComponent
   ],
   imports: [
     RouterModule,
