@@ -36,9 +36,7 @@
                 <button class="btn btn-primary me-2 zoom" (click)="selectToday()">Ir para hoje</button>
               </div>
             </div>
-
           </div>
-
         </div>
 
 
@@ -58,7 +56,8 @@
           <div class="row">
             <div class="col-md-12 mb-2">
               <fa-icon class="fa-1x" [icon]="faClock"></fa-icon> Horas: <span>{{totalFormatted}}</span><br>
-              <small class="font-hours-small">soma de todas atividades nesta data</small>
+              <small class="font-hours-small">soma de todas atividades nesta data</small><br>
+              <input class="btn btn-sm btn-outline-success zoom" value="Minhas Atividades" (click)="myTasks()">
             </div>
           </div>
         </span>

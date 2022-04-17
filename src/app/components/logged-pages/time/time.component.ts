@@ -8,6 +8,7 @@ import { TimeTask } from 'src/app/_models/task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { TimeService } from 'src/app/_services/time.service';
+import { MyEntriesComponent } from './my-entries/my-entries.component';
 import { NewEntryComponent } from './new-entry/new-entry.component';
 @Component({
   selector: 'app-time',
@@ -260,5 +261,17 @@ export class TimeComponent implements OnInit {
     this.total = 0;
 
     this.dialog.closeAll();
+  }
+
+  myTasks(){
+
+    this.dialog.open(MyEntriesComponent,
+      {
+        data: {
+          currentDayFormatted: this.currentDayFormatted,
+          currentDay: moment(this.day).format('DD-MM-YYYY')
+        }
+      });
+
   }
 }

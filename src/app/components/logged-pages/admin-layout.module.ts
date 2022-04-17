@@ -24,12 +24,13 @@ import { DeleteTaskComponent } from './time/tasks/delete-task/delete-task.compon
 import { NewAdvanceComponent } from './advance/new-advance/new-advance.component';
 import { ProjectsComponent } from './manage/projects/projects.component';
 import { NewProjectComponent } from './manage/projects/new-project/new-project.component';
-import { TasksManagerComponent } from './manage/tasks-manager/tasks-manager.component';
-import { NewTaskManagerComponent } from './manage/tasks-manager/new-task-manager/new-task-manager.component';
+import { TasksManagerComponent } from './tasks-manager/tasks-manager.component';
+import { NewTaskManagerComponent } from './tasks-manager/new-task-manager/new-task-manager.component';
 import { PlanAccountComponent } from './manage/plan-account/plan-account.component';
 import { ReportsComponent } from './reports/reports.component';
 import { LbdChartComponent } from './lbd/lbd-chart/lbd-chart.component';
 import { SettingsComponent } from './manage/settings/settings.component';
+import { MyEntriesComponent } from './time/my-entries/my-entries.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SettingsComponent } from './manage/settings/settings.component';
     PlanAccountComponent,
     ReportsComponent,
     LbdChartComponent,
-    SettingsComponent
+    SettingsComponent,
+    MyEntriesComponent
   ],
   imports: [
     RouterModule,
