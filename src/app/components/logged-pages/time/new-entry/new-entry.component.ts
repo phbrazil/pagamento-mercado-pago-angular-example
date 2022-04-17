@@ -27,12 +27,12 @@ export class NewEntryComponent implements OnInit {
 
   project: string;
   //projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
-  projects = ['MCI Brasil', 'Sparta Clã', 'Outros' ];
+  projects = ['MCI Brasil', 'Sparta Clã', 'Campanha de Marketing', 'Outros' ];
 
 
   task: string;
   //tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
-  tasks = ['Bugs' , 'Melhorias', 'Manutenção' ,'Suporte Email', 'Suporte Telefone' ];
+  tasks = ['Bugs' , 'Melhorias', 'Manutenção' ,'Suporte Email', 'Suporte Telefone', 'Visita ao cliente' ];
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
