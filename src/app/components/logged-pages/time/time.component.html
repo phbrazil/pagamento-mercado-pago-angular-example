@@ -66,12 +66,8 @@
   </div>
 </form>
 
-<div *ngIf="isLoading" class="col-md-12 mt-4">
-  <div class="center">
-    <div class="spinner-border" style="width: 8rem; height: 8rem;" role="status">
-      <span class="sr-only">Carregando...</span>
-    </div>
-  </div>
+<div *ngIf="isLoading" class="col-md-12 mt-4 center">
+  <app-spinner-loader></app-spinner-loader>>
 </div>
 
 <div *ngIf="!isLoading && tasks.length == 0 && !isModalCalendar" class="col-md-12 mt-4">

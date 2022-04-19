@@ -31,6 +31,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { LbdChartComponent } from './lbd/lbd-chart/lbd-chart.component';
 import { SettingsComponent } from './manage/settings/settings.component';
 import { MyTimeComponent } from './time/my-time/my-time.component';
+import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MyTimeComponent } from './time/my-time/my-time.component';
     ReportsComponent,
     LbdChartComponent,
     SettingsComponent,
-    MyTimeComponent
+    MyTimeComponent,
+    SpinnerLoaderComponent
   ],
   imports: [
     RouterModule,

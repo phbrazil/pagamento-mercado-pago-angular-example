@@ -6,6 +6,8 @@ import { TimeService } from 'src/app/_services/time.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { Router } from '@angular/router';
+import { Project } from 'src/app/_models/project';
+import { ProjectService } from 'src/app/_services/project.service';
 moment().format('LL');
 moment.locale('pt')
 
@@ -27,7 +29,8 @@ export class NewEntryComponent implements OnInit {
 
   project: string;
   //projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
-  projects = ['MCI Brasil', 'Sparta Clã', 'Campanha de Marketing', 'Outros' ];
+  //projects = ['MCI Brasil', 'Sparta Clã', 'Campanha de Marketing', 'Outros' ];
+  projects: Project[] = [];
 
 
   task: string;
@@ -39,7 +42,8 @@ export class NewEntryComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public currentDay: any,
     private timeService: TimeService,
     private accountService: AccountService,
-    private router: Router) {
+    private router: Router,
+    private projectService: ProjectService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -55,6 +59,10 @@ export class NewEntryComponent implements OnInit {
       date: [this.currentDay.currentDay, Validators.required],
       idUser: [this.user.idUser, Validators.required],
     });
+
+    this.loadProjects();
+
+
 
   }
 
@@ -104,6 +112,18 @@ export class NewEntryComponent implements OnInit {
 
       this.isLoading = false;
 
+    })
+
+  }
+
+  loadProjects(){
+    this.isLoading = true;
+
+    this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res =>{
+      this.isLoading = false;
+      this.projects = res;
+    }, err=>{
+      this.isLoading = false;
     })
 
   }
