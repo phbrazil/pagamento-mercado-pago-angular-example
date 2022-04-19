@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Project } from '../_models/project';
 
@@ -8,6 +9,8 @@ import { Project } from '../_models/project';
 })
 export class ProjectService {
 
+  private isReloadProject = new BehaviorSubject<boolean>(false);
+
 
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
@@ -15,6 +18,15 @@ export class ProjectService {
   constructor(
     private http: HttpClient
   ) { }
+
+  public setIsReload(status: boolean): void {
+    this.isReloadProject.next(status);
+  }
+
+  public getIsReload(): Observable<boolean> {
+    return this.isReloadProject.asObservable();
+
+  }
 
   newProject(project: Project, token: string) {
 

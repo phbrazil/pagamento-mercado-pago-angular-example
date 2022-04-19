@@ -27,7 +27,15 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.projectService.getIsReload().subscribe(status=>{
+      if(status){
+        this.loadProjects();
+      }
+    })
+
     this.loadProjects();
+
   }
 
 

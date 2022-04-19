@@ -1,4 +1,4 @@
-<div class="col-md-12 table-responsive">
+<div *ngIf="!isLoading" class="col-md-12 table-responsive">
   <div class="row">
     <div class="col-md-4">
       <button type="button" class="btn btn-sm btn-success zoom" (click)="newProject()">
@@ -26,4 +26,12 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="isLoading" class="col-md-12 mt-4">
+  <div class="center">
+    <div class="spinner-border" style="width: 8rem; height: 8rem;" role="status">
+      <span class="sr-only">Carregando...</span>
+    </div>
+  </div>
 </div>
