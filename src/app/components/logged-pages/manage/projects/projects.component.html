@@ -11,28 +11,18 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nome</th>
-        <th scope="col">Horas Alocadas</th>
+        <th scope="col">Orçamento (Budget)</th>
+        <th scope="col">Final do Projeto (Deadline)</th>
         <th scope="col">Mais</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>MCI</td>
-        <td>3</td>
+      <tr *ngFor="let project of projects; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{project.name}}</td>
+        <td>{{project.budget}}</td>
+        <td>{{project.endDate}}</td>
         <td><input type="button" class="btn btn-outline-primary btn-sm" value="Detalhes"></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
       </tr>
     </tbody>
   </table>

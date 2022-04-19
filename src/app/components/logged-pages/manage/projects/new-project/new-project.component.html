@@ -1,8 +1,8 @@
 <div class="modal-position col-md-12" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content text-muted">
       <div class="modal-header">
-        <h5 class="modal-title default-font modal-header-font">Novo Projeto</h5>
+        <h5 class="modal-title default-font modal-header-font text-muted">Novo Projeto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,16 +15,24 @@
             <input type="text" class="form-control" name="name" formControlName="name">
           </div>
           <div class="col-md-12 order-md-1 mt-2">
-            <div class="row">
-              <div class="col-md-12 order-md-1 mb-2">
-                <input type="time" class="form-control" name="time" formControlName="time">
-              </div>
-            </div>
+            <label>Orçamento (Budget)</label>
+            <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control" name="budget" formControlName="budget">
+          </div>
+          <div class="col-md-12 order-md-1 mt-2">
+            <label>Fim do projeto (Deadline)</label>
+            <input type="text" class="form-control" name="endDate" formControlName="endDate">
+          </div>
+          <div class="col-md-3 mt-2">
+            <label>Ativado</label>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="!newProjectForm.valid || isLoading">Salvar</button>
+        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="!newProjectForm.valid || isLoading">Salvar</button>
         <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Fechar</button>
       </div>
     </div>

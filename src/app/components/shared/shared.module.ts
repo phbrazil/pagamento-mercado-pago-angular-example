@@ -8,6 +8,7 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { Calendar, FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import { NgxCurrencyModule } from 'ngx-currency';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -25,14 +26,16 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AngularMaterialModule,
     DataTablesModule,
     NgxMaskModule.forRoot(),
-    FullCalendarModule
+    FullCalendarModule,
+    NgxCurrencyModule
   ],
 
   exports: [
     AlertComponent,
     DataTablesModule,
     NgxMaskModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NgxCurrencyModule
   ]
 })
 export class SharedModule {
