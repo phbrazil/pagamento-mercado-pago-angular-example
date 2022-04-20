@@ -5,11 +5,13 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
-import { TimeTask } from '../_models/task';
+import { TimeTask } from '../_models/time-task';
 @Injectable({ providedIn: 'root' })
 export class TimeService {
 
   private currentDay = new BehaviorSubject<Date>(null);
+  private isReloadTimeTasks = new BehaviorSubject<boolean>(false);
+
 
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
@@ -21,6 +23,15 @@ export class TimeService {
     private alertService: AlertService,
     public dialog: MatDialog
   ) {
+
+}
+
+public setIsReload(status: boolean): void {
+  this.isReloadTimeTasks.next(status);
+}
+
+public getIsReload(): Observable<boolean> {
+  return this.isReloadTimeTasks.asObservable();
 
 }
 

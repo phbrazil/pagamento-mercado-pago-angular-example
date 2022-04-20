@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { faArrowLeft, faArrowRight, faClock, faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
-import { TimeTask } from 'src/app/_models/task';
+import { TimeTask } from 'src/app/_models/time-task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { TimeService } from 'src/app/_services/time.service';
@@ -66,6 +66,12 @@ export class TimeComponent implements OnInit {
         this.today = moment(new Date(this.day)).format('Do MMMM YYYY');
 
       }
+
+      this.timeService.getIsReload().subscribe(status=>{
+        if(status){
+          this.loadTasks();
+        }
+      })
 
       this.loadTasks();
 
@@ -137,7 +143,7 @@ export class TimeComponent implements OnInit {
       });
 
       //aqui ta dando bug modal new entry
-      this.FinishCalcTime();
+      this.finishCalcTime();
 
     }, err => {
 
@@ -217,7 +223,7 @@ export class TimeComponent implements OnInit {
 
   }
 
-  FinishCalcTime() {
+  finishCalcTime() {
 
     if (!Number.isInteger(this.total)) {
 

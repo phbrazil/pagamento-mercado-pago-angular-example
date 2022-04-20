@@ -13,6 +13,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Orçamento (Budget)</th>
         <th scope="col">Final do Projeto (Deadline)</th>
+        <th scope="col">Status</th>
         <th scope="col">Mais</th>
       </tr>
     </thead>
@@ -20,8 +21,9 @@
       <tr *ngFor="let project of projects; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{project.name}}</td>
-        <td>{{project.budget}}</td>
+        <td>{{project.budget | currency : 'BRL'}}</td>
         <td>{{project.endDate}}</td>
+        <td>{{project.isActive}}</td>
         <td><input type="button" class="btn btn-outline-primary btn-sm" value="Detalhes"></td>
       </tr>
     </tbody>

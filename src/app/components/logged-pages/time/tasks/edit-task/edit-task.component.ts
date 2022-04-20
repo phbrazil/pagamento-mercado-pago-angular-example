@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TimeTask } from 'src/app/_models/task';
+import { TimeTask } from 'src/app/_models/time-task';
 import { TimeService } from 'src/app/_services/time.service';
 
 @Component({

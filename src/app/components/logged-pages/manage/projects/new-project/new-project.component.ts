@@ -65,6 +65,9 @@ export class NewProjectComponent implements OnInit {
 
   changeStatus(){
     this.isActive = !this.isActive;
+
+    this.newProjectForm.patchValue({isActive: this.isActive});
+
   }
 
 }

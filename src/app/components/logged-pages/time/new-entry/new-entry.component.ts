@@ -8,6 +8,8 @@ import { User } from 'src/app/_models/user';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
+import { Task } from 'src/app/_models/task';
+import { TaskService } from 'src/app/_services/task.service';
 moment().format('LL');
 moment.locale('pt')
 
@@ -35,7 +37,8 @@ export class NewEntryComponent implements OnInit {
 
   task: string;
   //tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
-  tasks = ['Bugs' , 'Melhorias', 'Manutenção' ,'Suporte Email', 'Suporte Telefone', 'Visita ao cliente' ];
+  //tasks = ['Bugs', 'Melhorias', 'Manutenção', 'Suporte Email', 'Suporte Telefone', 'Visita ao cliente'];
+  tasks: Task[] = [];
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
@@ -43,7 +46,8 @@ export class NewEntryComponent implements OnInit {
     private timeService: TimeService,
     private accountService: AccountService,
     private router: Router,
-    private projectService: ProjectService) {
+    private projectService: ProjectService,
+    private taskService: TaskService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -61,30 +65,25 @@ export class NewEntryComponent implements OnInit {
     });
 
     this.loadProjects();
-
-
+    this.loadTasks();
 
   }
 
   close() {
     this.dialog.closeAll();
-
-    this.router.navigateByUrl('/reload', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/time'])
-    );
   }
 
   onChangeProject() {
 
-  //  this.project = this.newEntryForm.value.project.name;
-  this.project = this.newEntryForm.value.project;
+    //  this.project = this.newEntryForm.value.project.name;
+    this.project = this.newEntryForm.value.project;
 
   }
 
   onChangeTask() {
 
-   // this.task = this.newEntryForm.value.task.name;
-   this.task = this.newEntryForm.value.task;
+    // this.task = this.newEntryForm.value.task.name;
+    this.task = this.newEntryForm.value.task;
 
   }
 
@@ -104,9 +103,11 @@ export class NewEntryComponent implements OnInit {
 
     this.timeService.newEntry(this.newEntryForm.value, this.accountService.getToken()).subscribe(res => {
 
-      this.close();
+      this.timeService.setIsReload(true);
 
       this.isLoading = false;
+
+      this.close();
 
     }, err => {
 
@@ -116,13 +117,26 @@ export class NewEntryComponent implements OnInit {
 
   }
 
-  loadProjects(){
+  loadProjects() {
     this.isLoading = true;
 
-    this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res =>{
+    this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
       this.projects = res;
-    }, err=>{
+    }, err => {
+      this.isLoading = false;
+    })
+
+  }
+
+  loadTasks() {
+    this.isLoading = true;
+
+    this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
+      this.isLoading = false;
+      this.tasks = res;
+      console.log(this.tasks);
+    }, err => {
       this.isLoading = false;
     })
 

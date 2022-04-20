@@ -1,11 +1,7 @@
-import { User } from "./user"
-
-export class TimeTask {
+export class Task {
   idTask: number
-  idUser: number
-  project: string
-  time: string
-  date: string
-  task: string
-  notes: string
+  idGroup: number
+  name: string
+  regDate: string
+  isActive: boolean
 }
