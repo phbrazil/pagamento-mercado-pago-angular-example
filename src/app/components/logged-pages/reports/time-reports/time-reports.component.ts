@@ -56,7 +56,6 @@ export class TimeReportsComponent implements OnInit {
       this.isOpenCalendar = false;
 
       this.loadTasks();
-      console.log((this.toDate))
 
     }
   }
@@ -83,6 +82,8 @@ export class TimeReportsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.loadTasks();
 
     this.emailChartType = ChartType.Pie;
     this.emailChartData = {
@@ -151,7 +152,6 @@ export class TimeReportsComponent implements OnInit {
 
       let startDate = this.fromDate.day + '-'+ this.fromDate.month+'-'+this.fromDate.year;
       let endDate = this.toDate.day + '-'+ this.toDate.month+'-'+this.toDate.year;
-
 
       this.timeService.getEntriesByDate(this.user.idUser, startDate, endDate, this.accountService.getToken()).subscribe(res=>{
 

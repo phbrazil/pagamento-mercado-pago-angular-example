@@ -1,7 +1,17 @@
-<a *ngIf="!isOpenCalendar" data-toggle="modal" data-target="#calendarModal" class="margin-calendar-icon">
-  <img src="assets/img/time/calendar.png" class="zoom" (click)="openCalendar()" alt="calendar" height="60px"
-    width="60px">
-</a>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-1">
+      <a *ngIf="!isOpenCalendar" data-toggle="modal" data-target="#calendarModal" class="margin-calendar-icon">
+        <img src="assets/img/time/calendar.png" class="zoom" (click)="openCalendar()" alt="calendar" height="60px"
+          width="60px">
+      </a>
+    </div>
+    <div class="col-md-4 mt-4">
+      <span class="text-muted">De: <strong>{{fromDate?.day}}-{{fromDate?.month}}-{{fromDate?.year}}</strong> até
+        <strong>{{toDate?.day}}-{{toDate?.month}}-{{toDate?.year}}</strong></span>
+    </div>
+  </div>
+</div>
 
 <div *ngIf="isOpenCalendar" class="col-md-6">
   <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
@@ -13,10 +23,6 @@
       {{ date.day }}
     </span>
   </ng-template>
-
-  <!--pre>De: {{ fromDate | json }} </pre>
-  <pre>Até: {{ toDate | json }} </pre-->
-
 </div>
 
 <div *ngIf="isLoading">
@@ -26,11 +32,18 @@
   <div clas="row">
     <ul>
       <li *ngFor="let task of tasks">
-        <app-tasks [user]="user" [task]="task"></app-tasks>
+        <app-tasks [user]="user" [disableButtons]="true" [showDate]="true" [task]="task"></app-tasks>
       </li>
     </ul>
   </div>
 </div>
+
+<div class="col-md-6 mt-4">
+  <div *ngIf="!isLoading && tasks.length == 0" class="alert alert-warning" role="alert">
+    Nenhum registro encontrado no período acima
+  </div>
+</div>
+
 <div class="col-md-12 mt-4">
   <div class="main-content">
     <div class="container-fluid text-muted">
