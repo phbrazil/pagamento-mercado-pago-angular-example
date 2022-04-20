@@ -31,14 +31,14 @@ export class NewEntryComponent implements OnInit {
 
   project: string;
   //projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
-  //projects = ['MCI Brasil', 'Sparta Clã', 'Campanha de Marketing', 'Outros' ];
-  projects: Project[] = [];
+  projects = ['MCI Brasil', 'Sparta Clã', 'Campanha de Marketing', 'Outros' ];
+  //projects: Project[] = [];
 
 
   task: string;
   //tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
-  //tasks = ['Bugs', 'Melhorias', 'Manutenção', 'Suporte Email', 'Suporte Telefone', 'Visita ao cliente'];
-  tasks: Task[] = [];
+  tasks = ['Bugs', 'Melhorias', 'Manutenção', 'Suporte Email', 'Suporte Telefone', 'Visita ao cliente'];
+  //tasks: Task[] = [];
 
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
@@ -64,8 +64,8 @@ export class NewEntryComponent implements OnInit {
       idUser: [this.user.idUser, Validators.required],
     });
 
-    this.loadProjects();
-    this.loadTasks();
+    //this.loadProjects();
+    //this.loadTasks();
 
   }
 
@@ -103,7 +103,7 @@ export class NewEntryComponent implements OnInit {
 
     this.timeService.newEntry(this.newEntryForm.value, this.accountService.getToken()).subscribe(res => {
 
-      this.timeService.setIsReload(true);
+      //this.timeService.setIsReload(true);
 
       this.isLoading = false;
 
@@ -122,7 +122,7 @@ export class NewEntryComponent implements OnInit {
 
     this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
-      this.projects = res;
+      //this.projects = res;
     }, err => {
       this.isLoading = false;
     })
@@ -134,8 +134,7 @@ export class NewEntryComponent implements OnInit {
 
     this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
-      this.tasks = res;
-      console.log(this.tasks);
+      //this.tasks = res;
     }, err => {
       this.isLoading = false;
     })

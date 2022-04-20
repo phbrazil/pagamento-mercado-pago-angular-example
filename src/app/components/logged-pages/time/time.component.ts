@@ -67,11 +67,12 @@ export class TimeComponent implements OnInit {
 
       }
 
-      this.timeService.getIsReload().subscribe(status=>{
-        if(status){
+      /*this.timeService.getIsReload().subscribe(status=>{
+        console.log(status)
+        if(status != null && status){
           this.loadTasks();
-        }
-      })
+       }
+      })*/
 
       this.loadTasks();
 
