@@ -32,7 +32,7 @@ export class TasksManagerComponent implements OnInit {
   ngOnInit(): void {
 
     this.taskService.getIsReload().subscribe(status=>{
-      if(status){
+      if(status !=null && status){
         this.loadTasks();
       }
     })
@@ -47,6 +47,8 @@ export class TasksManagerComponent implements OnInit {
   loadTasks(){
 
     this.isLoading = true;
+
+    this.taskService.setIsReload(false);
 
     this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res =>{
       this.isLoading = false;

@@ -46,10 +46,8 @@ export class NewProjectComponent implements OnInit {
   submit(){
     this.isLoading = true;
 
-
-
     this.projectService.newProject(this.newProjectForm.value, this.accountService.getToken()).subscribe(res =>{
-      console.log(res)
+
       this.isLoading = false;
 
       this.projectService.setIsReload(true);

@@ -67,12 +67,11 @@ export class TimeComponent implements OnInit {
 
       }
 
-      /*this.timeService.getIsReload().subscribe(status=>{
-        console.log(status)
+      this.timeService.getIsReload().subscribe(status=>{
         if(status != null && status){
           this.loadTasks();
        }
-      })*/
+      })
 
       this.loadTasks();
 
@@ -126,7 +125,12 @@ export class TimeComponent implements OnInit {
 
   loadTasks() {
 
+    this.timeService.setIsReload(false);
+
     this.tasks = [];
+
+    this.total = 0;
+    this.totalFormatted = '';
 
     this.isLoading = true;
 

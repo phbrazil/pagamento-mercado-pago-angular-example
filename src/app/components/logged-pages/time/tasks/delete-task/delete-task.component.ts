@@ -22,10 +22,6 @@ export class DeleteTaskComponent implements OnInit {
 
   close() {
     this.dialog.closeAll();
-
-    this.router.navigateByUrl('/reload', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/time'])
-    );
   }
 
   deleteEntry(){
@@ -35,6 +31,8 @@ export class DeleteTaskComponent implements OnInit {
     this.timeService.deleteEntry(this.task.task.idTask, this.accountService.getToken()).subscribe(res =>{
 
       this.isLoading = false;
+
+      this.timeService.setIsReload(true);
 
       this.close();
 

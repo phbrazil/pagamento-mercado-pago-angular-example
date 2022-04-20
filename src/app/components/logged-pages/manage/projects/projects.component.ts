@@ -29,7 +29,7 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
 
     this.projectService.getIsReload().subscribe(status=>{
-      if(status){
+      if(status != null && status){
         this.loadProjects();
       }
     })
@@ -45,11 +45,12 @@ export class ProjectsComponent implements OnInit {
 
   loadProjects() {
 
+    this.projectService.setIsReload(false);
+
     this.isLoading = true;
 
     this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.projects = res;
-      console.log(res);
       this.isLoading = false;
     }, err => {
       this.isLoading = false;

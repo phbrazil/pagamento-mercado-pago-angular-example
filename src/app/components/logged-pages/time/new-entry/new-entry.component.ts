@@ -103,7 +103,7 @@ export class NewEntryComponent implements OnInit {
 
     this.timeService.newEntry(this.newEntryForm.value, this.accountService.getToken()).subscribe(res => {
 
-      //this.timeService.setIsReload(true);
+      this.timeService.setIsReload(true);
 
       this.isLoading = false;
 
