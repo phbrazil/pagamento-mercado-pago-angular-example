@@ -1,0 +1,64 @@
+<a *ngIf="!isOpenCalendar" data-toggle="modal" data-target="#calendarModal" class="margin-calendar-icon">
+  <img src="assets/img/time/calendar.png" class="zoom" (click)="openCalendar()" alt="calendar" height="60px"
+    width="60px">
+</a>
+
+<div *ngIf="isOpenCalendar" class="col-md-6">
+  <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+  </ngb-datepicker>
+  <ng-template #t let-date let-focused="focused">
+    <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+      [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+      (mouseleave)="hoveredDate = null">
+      {{ date.day }}
+    </span>
+  </ng-template>
+
+  <!--pre>De: {{ fromDate | json }} </pre>
+  <pre>Até: {{ toDate | json }} </pre-->
+
+</div>
+
+<div *ngIf="isLoading">
+  <app-spinner-loader></app-spinner-loader>
+</div>
+<div class="col-md-12 mt-4">
+  <div clas="row">
+    <ul>
+      <li *ngFor="let task of tasks">
+        <app-tasks [user]="user" [task]="task"></app-tasks>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="col-md-12 mt-4">
+  <div class="main-content">
+    <div class="container-fluid text-muted">
+      <div class="row">
+        <div class="col-md-3">
+          <lbd-chart [title]="'Email Statistics'" [subtitle]="'Last Campaign Performance'"
+            [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType" [chartData]="emailChartData"
+            [legendItems]="emailChartLegendItems" [withHr]="true" [footerIconClass]="'fa fa-clock-o'"
+            [footerText]="'Campaign sent 2 days ago'">
+          </lbd-chart>
+        </div>
+
+        <div class="col-md-3">
+          <lbd-chart [title]="'Tasks Statistics'" [subtitle]="'Last Campaign Performance'"
+            [chartClass]="'ct-perfect-fourth'" [chartType]="tasksChartType" [chartData]="tasksChartData"
+            [legendItems]="tasksChartLegendItems" [withHr]="true" [footerIconClass]="'fa fa-clock-o'"
+            [footerText]="'Campaign sent 2 days ago'">
+          </lbd-chart>
+        </div>
+
+        <div class="col-md-6">
+          <lbd-chart [title]="'2014 Sales'" [subtitle]="'All products including Taxes'" [chartType]="activityChartType"
+            [chartData]="activityChartData" [chartOptions]="activityChartOptions"
+            [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems" [withHr]="true"
+            [footerIconClass]="'fa fa-check'" [footerText]="'Data information certified'">
+          </lbd-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

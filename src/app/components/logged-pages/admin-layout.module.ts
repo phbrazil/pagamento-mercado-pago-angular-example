@@ -33,6 +33,7 @@ import { SettingsComponent } from './manage/settings/settings.component';
 import { MyTimeComponent } from './time/my-time/my-time.component';
 import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.component';
 import { MyTeamComponent } from './manage/my-team/my-team.component';
+import { TimeReportsComponent } from './reports/time-reports/time-reports.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MyTeamComponent } from './manage/my-team/my-team.component';
     SettingsComponent,
     MyTimeComponent,
     SpinnerLoaderComponent,
-    MyTeamComponent
+    MyTeamComponent,
+    TimeReportsComponent
   ],
   imports: [
     RouterModule,

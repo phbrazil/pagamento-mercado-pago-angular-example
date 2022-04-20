@@ -52,6 +52,17 @@ public getCurrentDay(): Observable<Date> {
     return this.http.get<[TimeTask]>(url, header);
   }
 
+  getEntriesByDate(idUser: number, startDate: string, endDate: string, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/time/getEntriesByDate/${idUser}/${startDate}/${endDate}`
+
+    return this.http.get<[TimeTask]>(url, header);
+  }
 
 
   newEntry(task: TimeTask, token: string) {
