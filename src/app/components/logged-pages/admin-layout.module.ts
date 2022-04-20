@@ -32,6 +32,7 @@ import { LbdChartComponent } from './lbd/lbd-chart/lbd-chart.component';
 import { SettingsComponent } from './manage/settings/settings.component';
 import { MyTimeComponent } from './time/my-time/my-time.component';
 import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.component';
+import { MyTeamComponent } from './manage/my-team/my-team.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.c
     LbdChartComponent,
     SettingsComponent,
     MyTimeComponent,
-    SpinnerLoaderComponent
+    SpinnerLoaderComponent,
+    MyTeamComponent
   ],
   imports: [
     RouterModule,

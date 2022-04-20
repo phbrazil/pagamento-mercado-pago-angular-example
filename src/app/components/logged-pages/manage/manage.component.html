@@ -7,6 +7,8 @@
             data-toggle="list" href="#plan" role="tab">Plano</a>
           <a [ngClass]="{'active': !user.admin}" class="list-group-item list-group-item-action" data-toggle="list"
             href="#profile" role="tab">Perfil</a>
+          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#team"
+            role="tab">Meu Time</a>
           <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#projects"
             role="tab">Projetos</a>
           <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#tasks"
@@ -15,7 +17,8 @@
             role="tab">Integrações</a>
           <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#settings"
             role="tab">Configurações</a>
-          <a class="list-group-item list-group-item-action" (click)="logout()">Sair <fa-icon class="fa" [icon]="faSignOut"></fa-icon></a>
+          <a class="list-group-item list-group-item-action" (click)="logout()">Sair <fa-icon class="fa"
+              [icon]="faSignOut"></fa-icon></a>
         </div>
       </div>
       <div class="col-md-8">
@@ -32,8 +35,13 @@
           <div class="tab-pane" id="tasks" role="tabpanel">
             <app-tasks-manager></app-tasks-manager>
           </div>
+          <div class="tab-pane" id="team" role="tabpanel">
+            <app-my-team></app-my-team>
+          </div>
           <div class="tab-pane" id="integration" role="tabpanel">Integrações</div>
-          <div class="tab-pane" id="settings" role="tabpanel"><app-settings></app-settings></div>
+          <div class="tab-pane" id="settings" role="tabpanel">
+            <app-settings></app-settings>
+          </div>
         </div>
       </div>
     </div>
