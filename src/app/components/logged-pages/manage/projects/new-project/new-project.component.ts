@@ -46,7 +46,7 @@ export class NewProjectComponent implements OnInit {
   submit(){
     this.isLoading = true;
 
-    this.projectService.newProject(this.newProjectForm.value, this.accountService.getToken()).subscribe(res =>{
+    this.projectService.newProject(this.newProjectForm.value, this.accountService.getToken()).subscribe(_res =>{
 
       this.isLoading = false;
 
@@ -54,7 +54,7 @@ export class NewProjectComponent implements OnInit {
 
       this.close();
 
-    }, err =>{
+    }, _err =>{
       this.isLoading = false;
     })
 

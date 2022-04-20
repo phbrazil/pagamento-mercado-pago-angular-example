@@ -5,7 +5,6 @@ import moment from 'moment';
 import { TimeService } from 'src/app/_services/time.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
-import { Router } from '@angular/router';
 import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
 import { Task } from 'src/app/_models/task';
@@ -31,15 +30,11 @@ export class NewEntryComponent implements OnInit {
 
   project: string;
   idProject: number;
-  //projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
-  //projects = ['MCI Brasil', 'Sparta Clã', 'Campanha de Marketing', 'Outros' ];
   projects: Project[] = [];
 
 
   task: string;
   idTask: number;
-  //tasks = [{ name: 'Relatórios' }, { name: 'Reunião Interna' }, { name: 'Reunião Externa' }, { name: 'Visita Cliente' }];
-  //tasks = ['Bugs', 'Melhorias', 'Manutenção', 'Suporte Email', 'Suporte Telefone', 'Visita ao cliente'];
   tasks: Task[] = [];
 
 
@@ -47,7 +42,6 @@ export class NewEntryComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public currentDay: any,
     private timeService: TimeService,
     private accountService: AccountService,
-    private router: Router,
     private projectService: ProjectService,
     private taskService: TaskService) {
 
@@ -79,28 +73,23 @@ export class NewEntryComponent implements OnInit {
 
   onChangeProject() {
 
-    //  this.project = this.newEntryForm.value.project.name;
     this.project = this.newEntryForm.value.project.name;
     this.idProject = this.newEntryForm.value.project.idProject;
-
     this.newEntryForm.patchValue({project: this.project, idProject: this.idProject});
 
   }
 
   onChangeTask() {
 
-    // this.task = this.newEntryForm.value.task.name;
     this.task = this.newEntryForm.value.task.name;
     this.idTask = this.newEntryForm.value.task.idTask;
-
     this.newEntryForm.patchValue({idTask: this.idTask, task: this.task});
-
 
   }
 
   checkTime(time: any) {
 
-    this.timeModel = this.timeService.checkTime(time);;
+    this.timeModel = this.timeService.checkTime(time);
 
     this.newEntryForm.patchValue({
       time: this.timeModel
@@ -112,7 +101,7 @@ export class NewEntryComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.timeService.newEntry(this.newEntryForm.value, this.accountService.getToken()).subscribe(res => {
+    this.timeService.newEntry(this.newEntryForm.value, this.accountService.getToken()).subscribe(_res => {
 
       this.timeService.setIsReload(true);
 
@@ -134,7 +123,7 @@ export class NewEntryComponent implements OnInit {
     this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
       this.projects = res;
-    }, err => {
+    }, _err => {
       this.isLoading = false;
     })
 
@@ -146,7 +135,7 @@ export class NewEntryComponent implements OnInit {
     this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
       this.tasks = res;
-    }, err => {
+    }, _err => {
       this.isLoading = false;
     })
 

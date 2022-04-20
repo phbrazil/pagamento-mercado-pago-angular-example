@@ -1,9 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { TimeTask } from '../_models/time-task';
 @Injectable({ providedIn: 'root' })
@@ -18,9 +16,7 @@ export class TimeService {
 
 
   constructor(
-    private router: Router,
     private http: HttpClient,
-    private alertService: AlertService,
     public dialog: MatDialog
   ) {
 
@@ -88,16 +84,10 @@ public getCurrentDay(): Observable<Date> {
   checkTime(time: any) {
 
     time = time.replace(/\D/g, "");
-    if (time.length >= 3) {
-      time = time.replace(/(.{2})$/, ":$1");
-    } else if (time.length >= 2) {
-      time = time.replace(/(.{2})$/, ":$1");
-    } else if (time.length >= 1) {
+    if (time.length >= 3 || time.length >= 2 || time.length >= 1) {
       time = time.replace(/(.{2})$/, ":$1");
     }
-
     return time;
-
   }
 
 }

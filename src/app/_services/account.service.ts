@@ -99,7 +99,6 @@ export class AccountService {
 
         return this.http.get<any>(url)
           .pipe(map(dados => {
-            //this.alertService.success('Cep válido', { keepAfterRouteChange: true });
 
             switch (dados.dados.uf) {
               case 'RO':
@@ -196,14 +195,10 @@ export class AccountService {
 
     const url = `${this.baseUrl}/account/api/auth/signin`;
 
-    https://sparta-clan.herokuapp.com/account/api/auth/signin
     return this.http.post<User>(url, { email, password })
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
-        //localStorage.setItem('token', user.token);
-        //this.userSubject.next(user);
-        //this.setIsLogged(true);
         console.log(user)
         return user;
       }));
@@ -320,7 +315,6 @@ export class AccountService {
 
     // remove user from local storage and set current user to null
     localStorage.removeItem('user');
-    //localStorage.removeItem('token');
     this.userSubject.next(null);
     this.setUser(null);
 

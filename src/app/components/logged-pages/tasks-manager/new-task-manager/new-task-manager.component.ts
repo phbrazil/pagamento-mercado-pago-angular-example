@@ -45,7 +45,7 @@ export class NewTaskManagerComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.taskService.newTask(this.newTaskForm.value, this.accountService.getToken()).subscribe(res => {
+    this.taskService.newTask(this.newTaskForm.value, this.accountService.getToken()).subscribe(_res => {
 
       this.isLoading = false;
 
@@ -53,7 +53,7 @@ export class NewTaskManagerComponent implements OnInit {
 
       this.close();
 
-    }, err => {
+    }, _err => {
 
       this.isLoading = false;
     })

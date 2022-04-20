@@ -53,7 +53,7 @@ export class TasksManagerComponent implements OnInit {
     this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res =>{
       this.isLoading = false;
       this.tasks = res;
-    }, err=>{
+    }, _err=>{
       this.isLoading = false;
     })
 

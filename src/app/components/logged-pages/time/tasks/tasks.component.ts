@@ -16,7 +16,7 @@ export class TasksComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
   }
 

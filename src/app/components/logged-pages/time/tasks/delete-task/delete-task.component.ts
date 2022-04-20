@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
@@ -16,7 +16,7 @@ export class DeleteTaskComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  ngOnInit(): void {
+  ngOnInit() {
 
   }
 
@@ -28,7 +28,7 @@ export class DeleteTaskComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.timeService.deleteEntry(this.task.task.idTask, this.accountService.getToken()).subscribe(res =>{
+    this.timeService.deleteEntry(this.task.task.idTask, this.accountService.getToken()).subscribe(_res =>{
 
       this.isLoading = false;
 
@@ -37,7 +37,7 @@ export class DeleteTaskComponent implements OnInit {
       this.close();
 
 
-    }, err =>{
+    }, _err =>{
       this.isLoading = false;
 
     })

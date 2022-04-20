@@ -55,7 +55,7 @@ export class EditTaskComponent implements OnInit {
 
   checkTime(time: any) {
 
-    this.timeModel = this.timeService.checkTime(time);;
+    this.timeModel = this.timeService.checkTime(time);
 
     this.editEntryForm.patchValue({
       time: this.timeModel

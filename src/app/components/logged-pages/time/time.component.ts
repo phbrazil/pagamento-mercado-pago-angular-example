@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faArrowLeft, faArrowRight, faClock, faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -49,7 +49,7 @@ export class TimeComponent implements OnInit {
   currentDayFormatted = moment(new Date(this.day)).format('Do MMMM YYYY');
   today = moment(new Date(this.day)).format('Do MMMM YYYY');
 
-  constructor(private readonly dialog: MatDialog, private fb: FormBuilder, private calendar: NgbCalendar,
+  constructor(private readonly dialog: MatDialog, private calendar: NgbCalendar,
     private accountService: AccountService, private timeService: TimeService) {
 
     this.accountService.user.subscribe(x => this.user = x);
@@ -58,6 +58,8 @@ export class TimeComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    //recarrega sempre q a data muda
     this.timeService.getCurrentDay().subscribe(res => {
 
       if (res != null) {
@@ -67,23 +69,22 @@ export class TimeComponent implements OnInit {
 
       }
 
-      this.timeService.getIsReload().subscribe(status=>{
-        if(status != null && status){
-          this.loadTasks();
-       }
-      })
-
       this.loadTasks();
 
       this.checkIsToday();
 
     })
 
+    //recarrega sempre que a service mandar
+    this.timeService.getIsReload().subscribe(status => {
+      if (status != null && status) {
+        this.loadTasks();
+      }
+    })
+
   }
 
   newEntry() {
-
-    this.timeService.setCurrentDay(this.day);
 
     this.dialog.open(NewEntryComponent,
       {
@@ -125,6 +126,8 @@ export class TimeComponent implements OnInit {
 
   loadTasks() {
 
+    console.log('to aqui')
+
     this.timeService.setIsReload(false);
 
     this.tasks = [];
@@ -150,7 +153,7 @@ export class TimeComponent implements OnInit {
       //aqui ta dando bug modal new entry
       this.finishCalcTime();
 
-    }, err => {
+    }, _err => {
 
       this.isLoading = false;
 
@@ -274,7 +277,7 @@ export class TimeComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  myTasks(){
+  myTasks() {
 
     this.dialog.open(MyTimeComponent,
       {

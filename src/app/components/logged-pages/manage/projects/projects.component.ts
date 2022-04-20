@@ -52,7 +52,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.projects = res;
       this.isLoading = false;
-    }, err => {
+    }, _err => {
       this.isLoading = false;
     })
 

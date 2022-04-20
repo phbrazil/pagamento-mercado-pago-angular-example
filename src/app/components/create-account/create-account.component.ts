@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
@@ -28,8 +28,7 @@ export class CreateAccountComponent implements OnInit {
 
   isRegistering: boolean = false;
 
-  ngOnInit(): void {
-
+  ngOnInit() {
 
   }
 
@@ -44,10 +43,6 @@ export class CreateAccountComponent implements OnInit {
 
     this.text = 'Aguarde enquanto nossos servidores iniciem';
     this.messageType = 'success';
-
-
-    //this.alertService.success('TEXTO 1', 'SUBTEXTO', { keepAfterRouteChange: true });
-
 
   }
 

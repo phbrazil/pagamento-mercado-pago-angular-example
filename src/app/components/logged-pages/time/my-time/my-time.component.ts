@@ -28,7 +28,7 @@ export class MyTimeComponent implements OnInit {
 
   constructor(private dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   handleDateClick(arg: any) {
