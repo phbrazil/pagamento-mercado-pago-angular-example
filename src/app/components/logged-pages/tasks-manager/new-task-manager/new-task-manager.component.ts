@@ -46,7 +46,7 @@ export class NewTaskManagerComponent implements OnInit {
     this.isLoading = true;
 
     this.taskService.newTask(this.newTaskForm.value, this.accountService.getToken()).subscribe(res => {
-      console.log(res)
+
       this.isLoading = false;
 
       this.taskService.setIsReload(true);
@@ -54,7 +54,7 @@ export class NewTaskManagerComponent implements OnInit {
       this.close();
 
     }, err => {
-      console.log(err)
+
       this.isLoading = false;
     })
 
