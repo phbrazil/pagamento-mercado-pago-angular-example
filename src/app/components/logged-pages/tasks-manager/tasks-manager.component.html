@@ -1,17 +1,18 @@
-<div class="col-md-12">
-  <div class="row">
+<div *ngIf="!isLoading" class="col-md-12 table-responsive">
+  <div class="row mb-4">
     <div class="col-md-4">
       <button type="button" class="btn btn-sm btn-success zoom" (click)="newTaskManager()">
         <fa-icon class="fa" [icon]="faPlus"></fa-icon> Nova Atividade
       </button>
     </div>
   </div>
-  <table class="table text-muted table-striped" aria-describedby="atividades">
+  <table datatable [dtOptions]="dtOptions" class="table text-muted table-striped" id="tasks" aria-describedby="atividades">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nome</th>
         <th scope="col">Status</th>
+        <th scope="col">Criado em</th>
         <th scope="col">Mais</th>
       </tr>
     </thead>
@@ -20,6 +21,7 @@
         <th scope="row">{{i+1}}</th>
         <td>{{task.name}}</td>
         <td>{{task.isActive}}</td>
+        <td>{{task.regDate}}</td>
         <td><input type="button" class="btn btn-outline-primary btn-sm" value="Detalhes"></td>
       </tr>
     </tbody>

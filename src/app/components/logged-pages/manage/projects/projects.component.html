@@ -1,16 +1,17 @@
 <div *ngIf="!isLoading" class="col-md-12 table-responsive">
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-md-4">
       <button type="button" class="btn btn-sm btn-success zoom" (click)="newProject()">
         <fa-icon class="fa" [icon]="faPlus"></fa-icon> Novo Projeto
       </button>
     </div>
   </div>
-  <table class="table text-muted table-striped" aria-describedby="projetos">
+  <table datatable [dtOptions]="dtOptions" class="table text-muted table-striped" id="projects" aria-describedby="projetos">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nome</th>
+        <th scope="col">Código</th>
         <th scope="col">Orçamento (Budget)</th>
         <th scope="col">Final do Projeto (Deadline)</th>
         <th scope="col">Status</th>
@@ -21,6 +22,7 @@
       <tr *ngFor="let project of projects; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{project.name}}</td>
+        <td>{{project.code}}</td>
         <td>{{project.budget | currency : 'BRL'}}</td>
         <td>{{project.endDate}}</td>
         <td>{{project.isActive}}</td>

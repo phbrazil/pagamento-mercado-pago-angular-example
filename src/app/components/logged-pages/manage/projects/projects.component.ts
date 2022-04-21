@@ -6,6 +6,7 @@ import { ProjectService } from 'src/app/_services/project.service';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
+import { TableSortService } from 'src/app/components/shared/table-sort.service';
 
 @Component({
   selector: 'app-projects',
@@ -20,7 +21,10 @@ export class ProjectsComponent implements OnInit {
 
   projects: Project[] = [];
 
-  constructor(private dialog: MatDialog, private projectService: ProjectService, private accountService: AccountService) {
+  //DATATABLE
+  dtOptions: DataTables.Settings = {};
+
+  constructor(private dialog: MatDialog, private projectService: ProjectService, private accountService: AccountService, private dataTableSettings: TableSortService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -28,8 +32,10 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.projectService.getIsReload().subscribe(status=>{
-      if(status != null && status){
+    this.dtOptions = this.dataTableSettings.getSettings();
+
+    this.projectService.getIsReload().subscribe(status => {
+      if (status != null && status) {
         this.loadProjects();
       }
     })

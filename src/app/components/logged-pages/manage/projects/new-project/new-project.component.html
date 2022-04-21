@@ -10,20 +10,24 @@
       <div class="modal-body">
         <!--Body-->
         <div class="modal-body mb-0" [formGroup]="newProjectForm">
-          <div class="col-md-12 order-md-1">
+          <div class="col-md-8 order-md-1">
             <label>Nome do Projeto</label>
             <input type="text" placeholder="Ex.: Ação de Marketing" class="form-control" name="name" formControlName="name">
           </div>
+          <div class="col-md-4 order-md-1">
+            <label>Código</label>
+            <input type="text" placeholder="Ex.: 1234" class="form-control" name="code" formControlName="code">
+          </div>
           <div class="col-md-4 order-md-1 mt-2">
-            <label>Orçamento (Budget)</label>
-            <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control" name="budget" formControlName="budget">
+            <label>Orçamento</label>
+            <input type="text" currencyMask value="0,00" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control" name="budget" formControlName="budget">
           </div>
           <div class="col-md-5 order-md-1 mt-2">
-            <label>Fim do projeto (Deadline)</label>
+            <label>Fim do projeto</label>
             <input type="date" class="form-control" name="endDate" formControlName="endDate">
           </div>
           <div class="col-md-3 order-md-1 mt-2">
-            <label>Ativar/Desativar Projeto</label>
+            <label>Ativar/Desativar</label>
             <label class="switch">
               <input type="checkbox" checked (click)="changeStatus()">
               <span class="slider round"></span>

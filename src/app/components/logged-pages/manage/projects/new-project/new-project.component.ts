@@ -32,6 +32,7 @@ export class NewProjectComponent implements OnInit {
 
     this.newProjectForm = this.fb.group({
       name: ['', Validators.required],
+      code: [''],
       budget: ['', Validators.required],
       endDate: ['', Validators.required],
       isActive: [this.isActive, Validators.required],

@@ -5,6 +5,7 @@ import { Task } from 'src/app/_models/task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { TaskService } from 'src/app/_services/task.service';
+import { TableSortService } from '../../shared/table-sort.service';
 import { NewTaskManagerComponent } from './new-task-manager/new-task-manager.component';
 
 @Component({
@@ -14,11 +15,11 @@ import { NewTaskManagerComponent } from './new-task-manager/new-task-manager.com
 })
 export class TasksManagerComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private taskService: TaskService, private accountService: AccountService) {
+  constructor(private dialog: MatDialog, private taskService: TaskService, private accountService: AccountService, private dataTableSettings: TableSortService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-   }
+  }
 
   faPlus = faPlus;
 
@@ -28,11 +29,16 @@ export class TasksManagerComponent implements OnInit {
 
   user: User;
 
+  //DATATABLE
+  dtOptions: DataTables.Settings = {};
+
 
   ngOnInit(): void {
 
-    this.taskService.getIsReload().subscribe(status=>{
-      if(status !=null && status){
+    this.dtOptions = this.dataTableSettings.getSettings();
+
+    this.taskService.getIsReload().subscribe(status => {
+      if (status != null && status) {
         this.loadTasks();
       }
     })
@@ -40,20 +46,20 @@ export class TasksManagerComponent implements OnInit {
     this.loadTasks();
   }
 
-  newTaskManager(){
+  newTaskManager() {
     this.dialog.open(NewTaskManagerComponent)
   }
 
-  loadTasks(){
+  loadTasks() {
 
     this.isLoading = true;
 
     this.taskService.setIsReload(false);
 
-    this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res =>{
+    this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
       this.tasks = res;
-    }, _err=>{
+    }, _err => {
       this.isLoading = false;
     })
 
