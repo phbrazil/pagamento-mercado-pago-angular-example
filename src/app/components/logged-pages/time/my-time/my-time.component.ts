@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions, CalendarApi, FullCalendarComponent } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import ptLocale from '@fullcalendar/core/locales/pt';
@@ -28,6 +28,8 @@ export class MyTimeComponent implements OnInit {
 
   isLoading: boolean = false;
 
+  events: any = [];
+
   user: User;
 
   calendarOptions: CalendarOptions = {
@@ -35,10 +37,7 @@ export class MyTimeComponent implements OnInit {
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this), // bind is important!
     weekends: this.isWeekend, // initial value
-    events: [
-      { title: '3 hrs', date: '2022-04-05' },
-      { title: '7 hrs', date: '2022-04-07' }
-    ],
+    events: this.events,
     customButtons: {
       next: {
         text: "Próximo",
@@ -54,15 +53,25 @@ export class MyTimeComponent implements OnInit {
         click: this.today.bind(this),
       }
     },
-  };
+  } as CalendarOptions;
 
   constructor(private dialog: MatDialog, private timeService: TimeService, private accountService: AccountService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-   }
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
+    //POPULA DATA COM MES INICIAL AO INICIAR
+    var today = new Date();
+    var day = '01';
+    var month = today.getMonth()+1;
+    var year = today.getFullYear();
+
+    this.currentMonth = day+'-'+month+'-'+ year;
+
+    this.loadMyTasks();
 
   }
 
@@ -80,7 +89,7 @@ export class MyTimeComponent implements OnInit {
 
     this.currentMonth = date.format("DD-MM-YYYY");
 
-    this.loadTasks();
+    this.loadMyTasks();
 
   }
 
@@ -94,7 +103,7 @@ export class MyTimeComponent implements OnInit {
 
     this.currentMonth = date.format("DD-MM-YYYY");
 
-    this.loadTasks();
+    this.loadMyTasks();
 
   }
 
@@ -108,7 +117,7 @@ export class MyTimeComponent implements OnInit {
 
     this.currentMonth = date.format("DD-MM-YYYY");
 
-    this.loadTasks();
+    this.loadMyTasks();
 
   }
 
@@ -121,21 +130,14 @@ export class MyTimeComponent implements OnInit {
   }
 
   enableWeekend() {
+
     this.isWeekend = !this.isWeekend;
 
-    this.calendarOptions = {
-      locale: ptLocale,
-      initialView: 'dayGridMonth',
-      dateClick: this.handleDateClick.bind(this), // bind is important!
-      weekends: this.isWeekend, // initial value
-      events: [
-        { title: '3 hrs', date: '2022-04-05' },
-        { title: '7 hrs', date: '2022-04-07' }
-      ]
-    } as CalendarOptions;
+   this.loadCalendar(this.isWeekend);
+
   }
 
-  loadTasks(){
+  loadMyTasks() {
 
     this.tasks = [];
 
@@ -145,23 +147,38 @@ export class MyTimeComponent implements OnInit {
 
     var toDate = new Date(date.format("YYYY/MM/DD"));
 
-    let toDateFormatted = (toDate.getDate()+30)+'-'+(toDate.getMonth()+1)+'-'+toDate.getFullYear();
+    let toDateFormatted = (toDate.getDate() + 30) + '-' + (toDate.getMonth() + 1) + '-' + toDate.getFullYear();
 
-    this.timeService.getEntriesByDate(this.user.idUser, this.currentMonth, toDateFormatted , this.accountService.getToken()).subscribe(res =>{
+    this.timeService.getEntriesByDate(this.user.idUser, this.currentMonth, toDateFormatted, this.accountService.getToken()).subscribe(res => {
       this.tasks = res;
       this.isLoading = false;
-      this.reloadCalendar();
-    }, _err=>{
+      this.loadCalendar(this.isWeekend);
+    }, _err => {
       this.isLoading = false;
     })
   }
 
-  reloadCalendar() {
+  loadCalendar(isWeekend: boolean) {
+
+    this.events = [];
 
     this.tasks.forEach(task => {
 
-      console.log(task)
+      let event = {
+        title: Number(task.time.replace(':', '.')) + ' hrs',
+        date: this.timeService.convertDDMMYYYToYYYYMMDD(task.date)
+      }
 
+      this.events.push(event);
+
+      if(this.events.length == this.tasks.length){
+
+        this.calendarOptions.events = this.events;
+
+      }
     });
+
+    this.calendarOptions.weekends = isWeekend;
+
   }
 }

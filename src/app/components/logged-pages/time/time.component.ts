@@ -145,13 +145,13 @@ export class TimeComponent implements OnInit {
 
       res.forEach(element => {
 
-        this.total = this.total + this.calcTime(Number(element.time.replace(':', '.')));
+        this.total = this.total + this.timeService.calcTime(Number(element.time.replace(':', '.')));
 
 
       });
 
       //aqui ta dando bug modal new entry
-      this.finishCalcTime();
+      this.totalFormatted = this.timeService.finishCalcTime(this.total);
 
     }, _err => {
 
@@ -160,6 +160,7 @@ export class TimeComponent implements OnInit {
     });
 
   }
+
 
   nextDay() {
 
@@ -201,60 +202,6 @@ export class TimeComponent implements OnInit {
     this.checkIsToday();
 
     this.close();
-
-
-  }
-
-  calcTime(time: number) {
-
-
-    if (!Number.isInteger(time)) {
-
-      var hour = Number(String(time).split(".")[0]);
-      var minute = Number(String(time).split(".")[1]);
-
-      do {
-
-        if (minute >= 60) {
-          hour = hour + 1;
-          minute = minute - 60;
-        }
-
-      } while (minute >= 60);
-
-
-      return Number(hour + '.' + minute);
-
-    }
-
-    return time;
-
-  }
-
-  finishCalcTime() {
-
-    if (!Number.isInteger(this.total)) {
-
-      let hour = Number(String(this.total).split(".")[0]);
-      let minute = Number(String(this.total).split(".")[1]);
-
-      do {
-
-        if (minute >= 60) {
-          hour = hour + 1;
-          minute = minute - 60;
-        }
-
-      } while (minute >= 60);
-
-
-      this.totalFormatted = (hour + ':' + minute);
-
-    } else {
-
-      this.totalFormatted = (String(this.total).replace('.', ':') + ':00');
-
-    }
 
 
   }

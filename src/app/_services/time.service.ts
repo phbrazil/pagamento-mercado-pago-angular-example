@@ -101,4 +101,71 @@ public getCurrentDay(): Observable<Date> {
     return time;
   }
 
+  calcTime(time: number) {
+
+
+    if (!Number.isInteger(time)) {
+
+      var hour = Number(String(time).split(".")[0]);
+      var minute = Number(String(time).split(".")[1]);
+
+      do {
+
+        if (minute >= 60) {
+          hour = hour + 1;
+          minute = minute - 60;
+        }
+
+      } while (minute >= 60);
+
+
+      return Number(hour + '.' + minute);
+
+    }
+
+    return time;
+
+  }
+
+  finishCalcTime(total: number) {
+
+    let totalFormatted;
+
+    if (!Number.isInteger(total)) {
+
+      let hour = Number(String(total).split(".")[0]);
+      let minute = Number(String(total).split(".")[1]);
+
+      do {
+
+        if (minute >= 60) {
+          hour = hour + 1;
+          minute = minute - 60;
+        }
+
+      } while (minute >= 60);
+
+
+      totalFormatted = (hour + ':' + minute);
+
+    } else {
+
+      totalFormatted = (String(total).replace('.', ':') + ':00');
+
+    }
+
+    return totalFormatted;
+
+
+  }
+
+  convertDDMMYYYToYYYYMMDD(data: string) {
+    var dia  = data.split("-")[0];
+    var mes  = data.split("-")[1];
+    var ano  = data.split("-")[2];
+
+    return ano + '-' + ("0"+mes).slice(-2) + '-' + ("0"+dia).slice(-2);
+  }
+
+
 }
