@@ -1,3 +1,4 @@
+
 .modal-position {
   position: fixed;
   top: 40%;
@@ -12,6 +13,7 @@
 .custom-drop{
   font-size: 20px;
   margin-bottom: 20px;
+  background-color: white !important;
 
 }
 
@@ -21,10 +23,7 @@
   height: 110%;
 }
 
-.ng-select .ng-select-container:hover{
-  background-color: yellow;
-}
-
 .modal-header-font{
   font-size: 20px;
 }
+

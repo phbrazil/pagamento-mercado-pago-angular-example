@@ -75,8 +75,8 @@ export class TimeReportsComponent implements OnInit {
   }
 
   constructor(calendar: NgbCalendar, private accountService: AccountService, private timeService: TimeService) {
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.fromDate = calendar.getPrev(calendar.getToday(), 'd', 10);
+    this.toDate = calendar.getToday();
     this.accountService.user.subscribe(x => this.user = x);
 
   }

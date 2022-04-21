@@ -7,17 +7,17 @@
       </div>
       <div class="modal-body default-font">
         <!--Body-->
-        <div class="modal-body mb-0">
+        <div class="modal-body mb-0 text-muted">
           <div class="col-md-12 order-md-1" [formGroup]="newEntryForm">
             <label>Projeto</label>
-            <ng-select formControlName="project" class="form-control default-font custom-drop ng-select"
+            <ng-select formControlName="project" class="custom-drop"
               [items]="projects" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true"
               (change)="onChangeProject()" bindLabel="name" name="project">
             </ng-select>
           </div>
-          <div *ngIf="project" class="col-md-12 order-md-1" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
+          <div *ngIf="project" class="col-md-12 order-md-1 mt-2" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <label>Atividade</label>
-            <ng-select formControlName="task" class="form-control default-font custom-drop ng-select"
+            <ng-select formControlName="task" class="custom-drop"
               [items]="tasks" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true"
               (change)="onChangeTask()" bindLabel="name" name="task">
             </ng-select>
