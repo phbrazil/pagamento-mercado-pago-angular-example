@@ -81,3 +81,17 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.cost
+{
+    position:relative;
+    height:30px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    color:#000;
+    transition:all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+	-webkit-transition: all linear 0.5s;
+    z-index:-1;
+}

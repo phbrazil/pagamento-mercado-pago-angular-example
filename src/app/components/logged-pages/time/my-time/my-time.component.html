@@ -1,17 +1,26 @@
 <div class="modal-position col-md-12" tabindex="-1" role="dialog">
-  <div class="modal-dialog"  style="max-width: 100%" role="document">
+  <div class="modal-dialog" style="max-width: 100%" role="document">
     <div class="modal-content">
       <div class="col-md-12">
         <div class="row">
-          <div class="col-md-3 mt-2">
+          <div class="col-md-4 mt-2">
             <label class="switch">
               <input type="checkbox" (click)="enableWeekend()">
               <span class="slider round"></span>
             </label>
+            <div class="mt-2">
+              <small class="text-muted">Finais de semana</small>
+            </div>
           </div>
-          <div class="col-md-3 mt-2">
-            <small class="text-muted">Finais de semana</small>
-          </div>
+          <!--div class="col-md-4 mt-2">
+            <label class="switch">
+              <input type="checkbox" (click)="changeView($event)">
+              <span class="slider round"></span>
+            </label>
+            <div class="mt-2">
+              <small class="text-muted">Visão Semanal</small>
+            </div>
+          </div-->
           <div class="mb-4">
             <button type="button" class="close close-button zoom" data-dismiss="modal" aria-label="Close"
               (click)="close()">

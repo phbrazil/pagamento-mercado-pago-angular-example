@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CalendarOptions, CalendarApi, FullCalendarComponent } from '@fullcalendar/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import ptLocale from '@fullcalendar/core/locales/pt';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,9 +32,13 @@ export class MyTimeComponent implements OnInit {
 
   user: User;
 
+  initialView: string = 'dayGridMonth';
+
+  //'dayGridWeek'
+
   calendarOptions: CalendarOptions = {
     locale: ptLocale,
-    initialView: 'dayGridMonth',
+    initialView: this.initialView,
     dateClick: this.handleDateClick.bind(this), // bind is important!
     weekends: this.isWeekend, // initial value
     events: this.events,
@@ -56,7 +60,8 @@ export class MyTimeComponent implements OnInit {
     },
   } as CalendarOptions;
 
-  constructor(private dialog: MatDialog, private timeService: TimeService, private accountService: AccountService) {
+  constructor(private dialog: MatDialog, private timeService: TimeService,
+    private accountService: AccountService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -134,7 +139,7 @@ export class MyTimeComponent implements OnInit {
 
     this.isWeekend = !this.isWeekend;
 
-   this.loadCalendar(this.isWeekend);
+   this.changeCalendar(this.isWeekend, this.initialView);
 
   }
 
@@ -153,13 +158,13 @@ export class MyTimeComponent implements OnInit {
     this.timeService.getEntriesByDate(this.user.idUser, this.currentMonth, toDateFormatted, this.accountService.getToken()).subscribe(res => {
       this.tasks = res;
       this.isLoading = false;
-      this.loadCalendar(this.isWeekend);
+      this.changeCalendar(this.isWeekend, this.initialView);
     }, _err => {
       this.isLoading = false;
     })
   }
 
-  loadCalendar(isWeekend: boolean) {
+  changeCalendar(isWeekend: boolean, initialView: string) {
 
     this.events = [];
 
@@ -178,6 +183,8 @@ export class MyTimeComponent implements OnInit {
 
       }
     });
+
+    this.calendarOptions.initialView = initialView;
 
     this.calendarOptions.weekends = isWeekend;
 
