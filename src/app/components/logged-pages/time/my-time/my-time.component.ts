@@ -20,7 +20,7 @@ export class MyTimeComponent implements OnInit {
 
   calendarPlugins = [dayGridPlugin];
 
-  isWeekend: boolean = true;
+  isWeekend: boolean = false;
 
   currentMonth: string;
 
@@ -38,6 +38,7 @@ export class MyTimeComponent implements OnInit {
     dateClick: this.handleDateClick.bind(this), // bind is important!
     weekends: this.isWeekend, // initial value
     events: this.events,
+    eventColor: '#357a38',
     customButtons: {
       next: {
         text: "Próximo",
@@ -165,7 +166,7 @@ export class MyTimeComponent implements OnInit {
     this.tasks.forEach(task => {
 
       let event = {
-        title: Number(task.time.replace(':', '.')) + ' hrs',
+        title: Number(task.time.replace(':', '.')) + ' hrs '+task.project,
         date: this.timeService.convertDDMMYYYToYYYYMMDD(task.date)
       }
 

@@ -192,10 +192,10 @@ export class TimeComponent implements OnInit {
 
   changeDay() {
 
+    //FIXING DATE ON SAFARI
+    this.currentDayFormatted = moment(new Date(this.model.year + '/' + this.model.month + '/' + this.model.day)).format('Do MMMM YYYY');
 
-    this.currentDayFormatted = moment(new Date(this.model.month + '-' + this.model.day + '-' + this.model.year)).format('Do MMMM YYYY');
-
-    this.day = new Date(this.model.month + '-' + this.model.day + '-' + this.model.year);
+    this.day = new Date(this.model.year + '/' + this.model.month + '/' + this.model.day);
 
     this.loadTasks();
 
