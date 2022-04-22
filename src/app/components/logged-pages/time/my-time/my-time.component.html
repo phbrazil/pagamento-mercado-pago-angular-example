@@ -12,15 +12,15 @@
               <small class="text-muted">Finais de semana</small>
             </div>
           </div>
-          <!--div class="col-md-4 mt-2">
+          <div class="col-md-4 mt-2">
             <label class="switch">
-              <input type="checkbox" (click)="changeView($event)">
+              <input [checked]="isCheckedInitialView" type="checkbox" (click)="changeView($event)">
               <span class="slider round"></span>
             </label>
             <div class="mt-2">
               <small class="text-muted">Visão Semanal</small>
             </div>
-          </div-->
+          </div>
           <div class="mb-4">
             <button type="button" class="close close-button zoom" data-dismiss="modal" aria-label="Close"
               (click)="close()">

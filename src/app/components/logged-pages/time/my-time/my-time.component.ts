@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import ptLocale from '@fullcalendar/core/locales/pt';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import moment from 'moment';
 import { TimeTask } from 'src/app/_models/time-task';
 import { TimeService } from 'src/app/_services/time.service';
@@ -17,6 +17,7 @@ import { AccountService } from 'src/app/_services/account.service';
 export class MyTimeComponent implements OnInit {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
+  @ViewChild("changeViewElement") changeViewElement: ElementRef;
 
   calendarPlugins = [dayGridPlugin];
 
@@ -32,13 +33,14 @@ export class MyTimeComponent implements OnInit {
 
   user: User;
 
-  initialView: string = 'dayGridMonth';
+  isCheckedInitialView: boolean = false;
+
 
   //'dayGridWeek'
 
   calendarOptions: CalendarOptions = {
     locale: ptLocale,
-    initialView: this.initialView,
+    initialView: this.parameters.initialView,
     dateClick: this.handleDateClick.bind(this), // bind is important!
     weekends: this.isWeekend, // initial value
     events: this.events,
@@ -61,7 +63,10 @@ export class MyTimeComponent implements OnInit {
   } as CalendarOptions;
 
   constructor(private dialog: MatDialog, private timeService: TimeService,
-    private accountService: AccountService) {
+    private accountService: AccountService,
+    @Inject(MAT_DIALOG_DATA) public parameters: any) {
+
+    this.parameters.initialView == 'dayGridMonth' ? this.isCheckedInitialView = false : this.isCheckedInitialView = true;
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -72,10 +77,11 @@ export class MyTimeComponent implements OnInit {
     //POPULA DATA COM MES INICIAL AO INICIAR
     var today = new Date();
     var day = '01';
-    var month = today.getMonth()+1;
+    var month = today.getMonth() + 1;
     var year = today.getFullYear();
 
-    this.currentMonth = day+'-'+month+'-'+ year;
+    this.currentMonth = day + '-' + month + '-' + year;
+
 
     this.loadMyTasks();
 
@@ -139,7 +145,7 @@ export class MyTimeComponent implements OnInit {
 
     this.isWeekend = !this.isWeekend;
 
-   this.changeCalendar(this.isWeekend, this.initialView);
+    this.changeCalendar(this.isWeekend, this.parameters.initialView);
 
   }
 
@@ -158,7 +164,7 @@ export class MyTimeComponent implements OnInit {
     this.timeService.getEntriesByDate(this.user.idUser, this.currentMonth, toDateFormatted, this.accountService.getToken()).subscribe(res => {
       this.tasks = res;
       this.isLoading = false;
-      this.changeCalendar(this.isWeekend, this.initialView);
+      this.changeCalendar(this.isWeekend, this.parameters.initialView);
     }, _err => {
       this.isLoading = false;
     })
@@ -171,13 +177,13 @@ export class MyTimeComponent implements OnInit {
     this.tasks.forEach(task => {
 
       let event = {
-        title: Number(task.time.replace(':', '.')) + ' hrs '+task.project,
+        title: Number(task.time.replace(':', '.')) + ' hrs ' + task.project,
         date: this.timeService.convertDDMMYYYToYYYYMMDD(task.date)
       }
 
       this.events.push(event);
 
-      if(this.events.length == this.tasks.length){
+      if (this.events.length == this.tasks.length) {
 
         this.calendarOptions.events = this.events;
 
@@ -189,4 +195,30 @@ export class MyTimeComponent implements OnInit {
     this.calendarOptions.weekends = isWeekend;
 
   }
+
+  changeView(event: any) {
+
+    if (event.target.checked) {
+
+      this.close();
+
+      this.dialog.open(MyTimeComponent,
+        {
+          data: {
+            initialView: 'dayGridWeek'
+          }
+        });
+    }else{
+
+      this.dialog.open(MyTimeComponent,
+        {
+          data: {
+            initialView: 'dayGridMonth'
+          }
+        });
+
+    }
+  }
+
+
 }

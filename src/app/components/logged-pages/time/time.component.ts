@@ -127,8 +127,6 @@ export class TimeComponent implements OnInit {
 
   loadTasks() {
 
-    console.log('to aqui')
-
     this.timeService.setIsReload(false);
 
     this.tasks = [];
@@ -231,7 +229,8 @@ export class TimeComponent implements OnInit {
       {
         data: {
           currentDayFormatted: this.currentDayFormatted,
-          currentDay: moment(this.day).format('DD-MM-YYYY')
+          currentDay: moment(this.day).format('DD-MM-YYYY'),
+          initialView: 'dayGridMonth'
         }
       });
 
