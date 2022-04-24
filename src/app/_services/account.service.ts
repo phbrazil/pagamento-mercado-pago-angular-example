@@ -12,7 +12,7 @@ export class AccountService {
   public user: Observable<User>;
   private emailNewPassword = new BehaviorSubject<string>(null);
   private isLogged = new BehaviorSubject<boolean>(false);
-
+  private isReloadmember = new BehaviorSubject<boolean>(false);
 
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
@@ -45,6 +45,15 @@ export class AccountService {
 
   public getIsLogged(): Observable<boolean> {
     return this.isLogged.asObservable();
+
+  }
+
+  public setIsReloadMembers(status: boolean): void {
+    this.isReloadmember.next(status);
+  }
+
+  public getIsReloadMembers(): Observable<boolean> {
+    return this.isReloadmember.asObservable();
 
   }
 
@@ -233,6 +242,18 @@ export class AccountService {
 
   }
 
+
+  createMemberAccount(body: User, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    return this.http.post<User>(`${this.baseUrl}/opportunity/createAccountMember`, body, header);
+
+  }
+
   completeRegister(body: any) {
 
     const token = this.getToken();
@@ -247,6 +268,20 @@ export class AccountService {
 
     return this.http.post<any>(`${this.baseUrl}/spartaclan/confirmEmail/${validationCode}`, {});
 
+  }
+
+  getTeamMembers(idUser: number, idGroup: number) {
+
+    const token = this.getToken();
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/opportunity/getTeamMembers/${idUser}/${idGroup}`
+
+    return this.http.get<[User]>(url, header);
   }
 
   getAllUsers() {

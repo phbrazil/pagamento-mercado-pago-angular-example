@@ -24,9 +24,9 @@ export class NewProjectComponent implements OnInit {
   constructor(private fb: FormBuilder, private dialog: MatDialog, private projectService: ProjectService,
     private accountService: AccountService, private router: Router) {
 
-      this.accountService.user.subscribe(x => this.user = x);
+    this.accountService.user.subscribe(x => this.user = x);
 
-    }
+  }
 
   ngOnInit(): void {
 
@@ -40,14 +40,14 @@ export class NewProjectComponent implements OnInit {
     });
   }
 
-    close() {
+  close() {
     this.dialog.closeAll();
   }
 
-  submit(){
+  submit() {
     this.isLoading = true;
 
-    this.projectService.newProject(this.newProjectForm.value, this.accountService.getToken()).subscribe(_res =>{
+    this.projectService.newProject(this.newProjectForm.value, this.accountService.getToken()).subscribe(_res => {
 
       this.isLoading = false;
 
@@ -55,17 +55,17 @@ export class NewProjectComponent implements OnInit {
 
       this.close();
 
-    }, _err =>{
+    }, _err => {
       this.isLoading = false;
     })
 
 
   }
 
-  changeStatus(){
+  changeStatus() {
     this.isActive = !this.isActive;
 
-    this.newProjectForm.patchValue({isActive: this.isActive});
+    this.newProjectForm.patchValue({ isActive: this.isActive });
 
   }
 

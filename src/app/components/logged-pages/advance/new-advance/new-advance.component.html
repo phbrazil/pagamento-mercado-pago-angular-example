@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title default-font modal-header-font">Novo adiantamento</h5>
+        <h5 class="modal-title default-font modal-header-font text-muted">Novo adiantamento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,19 +11,24 @@
         <!--Body-->
         <div class="modal-body mb-0" [formGroup]="newAdvanceForm">
           <div class="col-md-12 order-md-1">
-
+            <label>Nome</label>
+            <input type="text" value="{{user.name}}" readonly class="form-control" name="name" formControlName="name">
+          </div>
+          <div class="col-md-12 order-md-1 mt-2">
             <label>Projeto</label>
-            <ng-select formControlName="projeto" class="form-control default-font custom-drop ng-select"
-              [items]="projects" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true"
-              (change)="onChangeProject()" bindLabel="name" name="projeto">
+            <ng-select formControlName="project" class="custom-drop" [items]="projects" [multiple]="false"
+              [closeOnSelect]="true" [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" name="project">
             </ng-select>
           </div>
           <div *ngIf="project?.name" class="col-md-12 order-md-1 mt-2">
-            <div class="row">
-              <div class="col-md-12 order-md-1 mb-2">
-                <input type="time" class="form-control" name="time" formControlName="time">
-              </div>
+            <div class="col-md-12 order-md-1 ">
+              <input type="time" class="form-control" name="time" formControlName="time">
             </div>
+          </div>
+          <div class="col-md-4 order-md-1 mt-2">
+            <label>Valor</label>
+            <input type="text" currencyMask value="0,00" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+              class="form-control" name="value" formControlName="value">
           </div>
         </div>
       </div>
@@ -34,5 +39,3 @@
     </div>
   </div>
 </div>
-
-
