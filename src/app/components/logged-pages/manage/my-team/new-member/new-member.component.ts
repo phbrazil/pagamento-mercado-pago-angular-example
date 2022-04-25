@@ -17,6 +17,9 @@ export class NewMemberComponent implements OnInit {
 
   isLoading: boolean = false;
 
+  message: string = '';
+  messageType: string = ''
+
   user: User;
 
   constructor(private dialog: MatDialog, private fb: FormBuilder, private accountService: AccountService) {
@@ -42,13 +45,26 @@ export class NewMemberComponent implements OnInit {
   submit() {
     this.isLoading = true;
 
-    this.accountService.createMemberAccount(this.newMemberForm.value, this.accountService.getToken()).subscribe(_res => {
+    this.accountService.createMemberAccount(this.newMemberForm.value, this.accountService.getToken(), this.user.idUser).subscribe(_res => {
 
       this.isLoading = false;
 
-      this.accountService.setIsReloadMembers(true);
+      if (_res.message.code == 409) {
 
-      this.close();
+        this.message = 'Esse email já foi adicionado como membro do time';
+        this.messageType = 'danger';
+
+      } else {
+
+        this.message = '';
+        this.messageType = '';
+        this.accountService.setIsReloadMembers(true);
+
+        this.close();
+
+      }
+
+
 
     }, _err => {
       this.isLoading = false;

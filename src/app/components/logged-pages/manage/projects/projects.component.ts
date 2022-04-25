@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
 import { NewProjectComponent } from './new-project/new-project.component';
@@ -16,6 +16,8 @@ import { TableSortService } from 'src/app/components/shared/table-sort.service';
 export class ProjectsComponent implements OnInit {
 
   faPlus = faPlus;
+  faActive = faThumbsUp;
+  faInactive = faThumbsDown;
   user: User;
   isLoading: boolean = false;
 

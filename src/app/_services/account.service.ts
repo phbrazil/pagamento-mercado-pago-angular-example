@@ -243,14 +243,14 @@ export class AccountService {
   }
 
 
-  createMemberAccount(body: User, token: string) {
+  createMemberAccount(body: User, token: string, idUser: number) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    return this.http.post<User>(`${this.baseUrl}/opportunity/createAccountMember`, body, header);
+    return this.http.post<User>(`${this.baseUrl}/opportunity/createAccountMember/${idUser}`, body, header);
 
   }
 

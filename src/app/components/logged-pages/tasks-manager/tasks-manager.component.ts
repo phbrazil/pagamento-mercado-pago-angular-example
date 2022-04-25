@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Task } from 'src/app/_models/task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -22,6 +22,8 @@ export class TasksManagerComponent implements OnInit {
   }
 
   faPlus = faPlus;
+  faActive = faThumbsUp;
+  faInactive = faThumbsDown;
 
   isLoading: boolean = false;
 

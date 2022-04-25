@@ -36,7 +36,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="!newProjectForm.valid || isLoading">Salvar</button>
+        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="!newProjectForm.valid || isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+          Salvar</button>
         <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Fechar</button>
       </div>
     </div>

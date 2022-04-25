@@ -6,7 +6,8 @@
       </button>
     </div>
   </div>
-  <table datatable [dtOptions]="dtOptions" class="table text-muted table-striped" id="projects" aria-describedby="projetos">
+  <table datatable [dtOptions]="dtOptions" class="table text-muted table-striped" id="projects"
+    aria-describedby="projetos">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -25,7 +26,14 @@
         <td>{{project.code}}</td>
         <td>{{project.budget | currency : 'BRL'}}</td>
         <td>{{project.endDate}}</td>
-        <td>{{project.active}}</td>
+        <td *ngIf="project.active ; else inactive">
+          <fa-icon style="color: green;" class="fa" [icon]="faActive"></fa-icon>
+        </td>
+        <ng-template #inactive>
+          <td>
+            <fa-icon class="fa" style="color: red;" [icon]="faInactive"></fa-icon>
+          </td>
+        </ng-template>
         <td><input type="button" class="btn btn-outline-primary btn-sm" value="Detalhes"></td>
       </tr>
     </tbody>

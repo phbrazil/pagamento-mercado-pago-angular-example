@@ -8,7 +8,7 @@ export class User {
   regDate: string
   pendingRegistration: boolean
   pendingEmailConfirmation: boolean
-  message: string
+  message: any
   changePassword: boolean
   admin: boolean
   active: boolean

@@ -16,7 +16,8 @@
           </div>
           <div class="col-md-12 order-md-1 mt-2">
             <label>Email</label>
-            <input type="email" placeholder="Ex.: membro@empresa.com" class="form-control" name="code" formControlName="code">
+            <input type="email" placeholder="Ex.: membro@empresa.com" class="form-control" name="email"
+              formControlName="email">
           </div>
           <div class="col-md-3 order-md-1 mt-4">
             <label>Ativar/Desativar</label>
@@ -28,7 +29,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="!newMemberForm.valid || isLoading">Salvar</button>
+        <div class="alert col-md-12" [ngStyle]="{'color': messageType == 'success' ? 'green' : 'red'}" role="alert">
+          {{message}}
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="!newMemberForm.valid || isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+          Salvar</button>
         <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Fechar</button>
       </div>
     </div>
