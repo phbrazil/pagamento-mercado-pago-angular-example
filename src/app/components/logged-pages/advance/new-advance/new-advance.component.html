@@ -9,10 +9,10 @@
       </div>
       <div class="modal-body">
         <!--Body-->
-        <div class="modal-body mb-0" [formGroup]="newAdvanceForm">
+        <div class="modal-body mb-0 custom-drop text-muted" [formGroup]="newAdvanceForm">
           <div class="col-md-12 order-md-1">
             <label>Nome</label>
-            <input type="text" value="{{user.name}}" readonly class="form-control" name="name" formControlName="name">
+            <input type="text" value="{{user.name}}" readonly class="form-control custom-drop" name="name" formControlName="name">
           </div>
           <div class="col-md-12 order-md-1 mt-2">
             <label>Projeto</label>
@@ -28,7 +28,7 @@
           <div class="col-md-4 order-md-1 mt-2">
             <label>Valor</label>
             <input type="text" currencyMask value="0,00" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-              class="form-control" name="value" formControlName="value">
+              class="form-control custom-drop" name="value" formControlName="value">
           </div>
         </div>
       </div>

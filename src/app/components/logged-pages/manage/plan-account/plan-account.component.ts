@@ -11,9 +11,10 @@ export class PlanAccountComponent implements OnInit {
 
   user: User;
 
-  activeUsers: number = 10;
-  currentPlanValue: number = 120;
+  activeUsers: number = 0;
+  currentPlanValue: number = 0;
   brand: string = 'visa'
+  isLoading: boolean = true;
 
   constructor(private accountService: AccountService) {
 
@@ -22,6 +23,21 @@ export class PlanAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.loadActiveMembers();
+  }
+
+  loadActiveMembers() {
+
+    this.isLoading = true;
+
+    this.accountService.getTeamMembers(this.user.idUser, this.user.idGroup).subscribe(res => {
+      this.activeUsers = res.length;
+      this.currentPlanValue = this.activeUsers *12;
+      this.isLoading = false;
+    }, err => {
+      this.isLoading = false;
+    })
   }
 
 }
