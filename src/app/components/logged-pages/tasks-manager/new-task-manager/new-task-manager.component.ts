@@ -15,7 +15,7 @@ export class NewTaskManagerComponent implements OnInit {
 
   newTaskForm: FormGroup;
 
-  isActive: boolean = true;
+  active: boolean = true;
 
   isLoading: boolean = false;
 
@@ -31,7 +31,7 @@ export class NewTaskManagerComponent implements OnInit {
 
     this.newTaskForm = this.fb.group({
       name: ['', Validators.required],
-      isActive: [this.isActive, Validators.required],
+      active: [this.active, Validators.required],
       idGroup: [this.user.idGroup, Validators.required],
     });
 
@@ -61,9 +61,9 @@ export class NewTaskManagerComponent implements OnInit {
   }
 
   changeStatus() {
-    this.isActive = !this.isActive;
+    this.active = !this.active;
 
-    this.newTaskForm.patchValue({isActive: this.isActive});
+    this.newTaskForm.patchValue({active: this.active});
   }
 
 }

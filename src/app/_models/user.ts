@@ -11,7 +11,7 @@ export class User {
   message: string
   changePassword: boolean
   admin: boolean
-  isActive: boolean
+  active: boolean
   isTrial: boolean
   phone: string
 }

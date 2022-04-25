@@ -6,5 +6,5 @@ export class Project {
   budget: number
   regDate: string
   endDate: string
-  isActive: boolean
+  active: boolean
 }

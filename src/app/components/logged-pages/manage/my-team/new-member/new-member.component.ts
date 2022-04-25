@@ -13,7 +13,7 @@ export class NewMemberComponent implements OnInit {
 
   newMemberForm: FormGroup;
 
-  isActive: boolean = true;
+  active: boolean = true;
 
   isLoading: boolean = false;
 
@@ -30,7 +30,7 @@ export class NewMemberComponent implements OnInit {
     this.newMemberForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
-      isActive: [this.isActive, Validators.required],
+      active: [this.active, Validators.required],
       idGroup: [this.user.idGroup, Validators.required],
     });
   }
@@ -58,9 +58,9 @@ export class NewMemberComponent implements OnInit {
   }
 
   changeStatus() {
-    this.isActive = !this.isActive;
+    this.active = !this.active;
 
-    this.newMemberForm.patchValue({ isActive: this.isActive });
+    this.newMemberForm.patchValue({ active: this.active });
 
   }
 

@@ -3,5 +3,5 @@ export class Task {
   idGroup: number
   name: string
   regDate: string
-  isActive: boolean
+  active: boolean
 }

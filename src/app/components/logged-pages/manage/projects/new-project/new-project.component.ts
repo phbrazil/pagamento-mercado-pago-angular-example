@@ -15,7 +15,7 @@ export class NewProjectComponent implements OnInit {
 
   newProjectForm: FormGroup;
 
-  isActive: boolean = true;
+  active: boolean = true;
 
   isLoading: boolean = false;
 
@@ -35,7 +35,7 @@ export class NewProjectComponent implements OnInit {
       code: [''],
       budget: ['', Validators.required],
       endDate: ['', Validators.required],
-      isActive: [this.isActive, Validators.required],
+      active: [this.active, Validators.required],
       idGroup: [this.user.idGroup, Validators.required],
     });
   }
@@ -63,9 +63,9 @@ export class NewProjectComponent implements OnInit {
   }
 
   changeStatus() {
-    this.isActive = !this.isActive;
+    this.active = !this.active;
 
-    this.newProjectForm.patchValue({ isActive: this.isActive });
+    this.newProjectForm.patchValue({ active: this.active });
 
   }
 
