@@ -13,7 +13,6 @@ import { AccountService } from './_services/account.service';
 export class AppComponent {
   title = 'Opportunity';
   user: User;
-  key: string = '';
 
   constructor(private accountService: AccountService, private route: ActivatedRoute, private dialog: MatDialog) {
 
@@ -26,14 +25,22 @@ export class AppComponent {
     //VERIFICA ROTA E DIRECIONA PARA NEW PASSWORD
     this.route.queryParams
       .subscribe(params => {
-        if(params.key){
+        if (params.key) {
           if (this.user == null) {
-            this.key = params.key;
-            this.dialog.open(ConfirmPasswordComponent)
-          }else{
+            this.dialog.open(ConfirmPasswordComponent,
+              {
+                data: {
+                  validationCode: params.key,
+                }
+              });
+          } else if(this.user.changePassword) {
             this.accountService.logout();
-            this.key = params.key;
-            this.dialog.open(ConfirmPasswordComponent)
+            this.dialog.open(ConfirmPasswordComponent,
+              {
+                data: {
+                  validationCode: params.key,
+                }
+              });
           }
         }
       }

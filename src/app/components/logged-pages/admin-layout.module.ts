@@ -31,7 +31,6 @@ import { ReportsComponent } from './reports/reports.component';
 import { LbdChartComponent } from './lbd/lbd-chart/lbd-chart.component';
 import { SettingsComponent } from './manage/settings/settings.component';
 import { MyTimeComponent } from './time/my-time/my-time.component';
-import { SpinnerLoaderComponent } from './shared/spinner-loader/spinner-loader.component';
 import { MyTeamComponent } from './manage/my-team/my-team.component';
 import { TimeReportsComponent } from './reports/time-reports/time-reports.component';
 import { NewMemberComponent } from './manage/my-team/new-member/new-member.component';
@@ -59,7 +58,6 @@ import { NewMemberComponent } from './manage/my-team/new-member/new-member.compo
     LbdChartComponent,
     SettingsComponent,
     MyTimeComponent,
-    SpinnerLoaderComponent,
     MyTeamComponent,
     TimeReportsComponent,
     NewMemberComponent

@@ -9,6 +9,7 @@ import { Calendar, FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { NgxCurrencyModule } from 'ngx-currency';
+import { SpinnerLoaderComponent } from './spinner-loader/spinner-loader.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -18,7 +19,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 @NgModule({
   declarations: [
-    AlertComponent
+    AlertComponent,
+    SpinnerLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     DataTablesModule,
     NgxMaskModule,
     FullCalendarModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    SpinnerLoaderComponent
   ]
 })
 export class SharedModule {

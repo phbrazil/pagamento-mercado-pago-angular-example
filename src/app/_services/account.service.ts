@@ -314,6 +314,21 @@ export class AccountService {
     return this.http.get<User>(url, header);
   }
 
+  getPendingPassword(validationCode: string) {
+
+    const token = this.getToken();
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/opportunity/getPendingPassword/${validationCode}`
+
+
+    return this.http.get<User>(url, header);
+  }
+
   editUser(body: any) {
 
     const token = this.getToken();
