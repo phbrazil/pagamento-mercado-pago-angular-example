@@ -24,7 +24,9 @@ export class PlanAccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadActiveMembers();
+    if(this.user.admin){
+      this.loadActiveMembers();
+    }
   }
 
   loadActiveMembers() {

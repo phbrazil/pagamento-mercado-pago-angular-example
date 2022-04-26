@@ -23,10 +23,10 @@
       </div>
       <div class="col-md-8">
         <div class="tab-content">
-          <div class="tab-pane active" id="plan" role="tabpanel">
+          <div class="tab-pane" [ngClass]="{'active': user.admin}" id="plan" role="tabpanel">
             <app-plan-account></app-plan-account>
           </div>
-          <div class="tab-pane" id="profile" role="tabpanel">
+          <div class="tab-pane" [ngClass]="{'active': !user.admin}" id="profile" role="tabpanel">
             <app-profile></app-profile>
           </div>
           <div class="tab-pane" id="projects" role="tabpanel">

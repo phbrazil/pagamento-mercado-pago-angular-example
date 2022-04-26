@@ -359,6 +359,20 @@ export class AccountService {
       }));
   }
 
+  createNewPassword(data: any) {
+
+    console.log(data)
+
+    const url = `${this.baseUrl}/opportunity/createNewPassword`;
+
+    return this.http.put<User>(url, data)
+      .pipe(map(user => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user));
+        return user;
+      }));
+  }
+
   logout() {
 
     this.dialog.closeAll();

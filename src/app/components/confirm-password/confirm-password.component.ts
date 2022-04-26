@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 
@@ -14,6 +15,7 @@ export class ConfirmPasswordComponent implements OnInit {
   newPassForm: FormGroup;
 
   isLoading: boolean = false;
+  isLogging: boolean = false;
 
   firstName: string = '';
 
@@ -22,7 +24,7 @@ export class ConfirmPasswordComponent implements OnInit {
   user: User;
 
   constructor(private dialog: MatDialog, private fb: FormBuilder, private accountService: AccountService,
-    @Inject(MAT_DIALOG_DATA) public parameters: any) {
+    @Inject(MAT_DIALOG_DATA) public parameters: any, private router: Router) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -39,11 +41,12 @@ export class ConfirmPasswordComponent implements OnInit {
   }
 
 
-  createForm(){
+  createForm() {
     this.newPassForm = this.fb.group({
       email: [this.user?.email, Validators.required],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      validationCode: [this.validationCode, Validators.required]
     });
   }
 
@@ -54,6 +57,33 @@ export class ConfirmPasswordComponent implements OnInit {
   onSubmit() {
 
     this.isLoading = true;
+    this.isLogging = true;
+
+    this.accountService.createNewPassword(this.newPassForm.value).subscribe(_res => {
+
+      this.isLoading = false;
+
+      this.accountService.login(this.newPassForm.value.email, this.newPassForm.value.password).subscribe(res =>{
+
+        this.isLogging = false;
+
+        this.accountService.setUser(res);
+
+        this.accountService.setIsLogged(true);
+
+        this.router.navigate(['/time']);
+        this.close();
+
+      }, _err=>{
+        this.isLogging = false;
+      })
+
+
+    }, _err => {
+
+      this.isLoading = false;
+
+    })
 
   }
 
@@ -70,7 +100,7 @@ export class ConfirmPasswordComponent implements OnInit {
         this.firstName = this.firstName + res.name.charAt(i);
       }
 
-      this.newPassForm.patchValue({email: res.email})
+      this.newPassForm.patchValue({ email: res.email })
 
       this.isLoading = false;
 
