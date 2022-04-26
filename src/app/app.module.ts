@@ -27,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PricingComponent } from './components/pricing/pricing.component';
 import { RouterModule } from '@angular/router';
 import { InterceptorModule } from './_services/interceptor.module';
+import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 
 registerLocaleData(localePT);
 
@@ -41,7 +42,8 @@ registerLocaleData(localePT);
     LoginComponent,
     HomeComponent,
     ResetPasswordComponent,
-    PricingComponent
+    PricingComponent,
+    ConfirmPasswordComponent
   ],
   imports: [
     BrowserModule,

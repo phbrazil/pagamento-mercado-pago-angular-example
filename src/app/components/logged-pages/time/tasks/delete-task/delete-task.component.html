@@ -11,10 +11,10 @@
         <p>Deseja realmente deletar a atividade <strong>{{task.task.task}}</strong> no projeto <strong>{{task.task.project}}</strong>?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" [disabled]="isLoading" (click)="deleteEntry()">
+        <button type="button" class="btn-custom-reject" [disabled]="isLoading" (click)="deleteEntry()">
           <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
           Deletar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Fechar</button>
+        <button type="button" class="btn-custom-decline" data-dismiss="modal" (click)="close()">Fechar</button>
       </div>
     </div>
   </div>

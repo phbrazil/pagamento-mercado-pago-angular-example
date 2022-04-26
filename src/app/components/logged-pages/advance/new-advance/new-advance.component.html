@@ -33,8 +33,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="!newAdvanceForm.valid || isLoading">Salvar</button>
-        <button type="button" class="btn btn-secondary" (click)="close()" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn-custom-confirm" [disabled]="!newAdvanceForm.valid || isLoading">Salvar</button>
+        <button type="button" class="btn-custom-decline" (click)="close()" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>

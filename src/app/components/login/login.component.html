@@ -42,7 +42,7 @@
                 role="alert">
                 {{message}}
               </div>
-              <button type="submit" class="btn btn-success mb-3" [disabled]="!formLogin.valid || isLoading">
+              <button type="submit" class="btn-custom-confirm mb-3" [disabled]="!formLogin.valid || isLoading">
                 <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                 Entrar</button><br>
               <span>Precisa de uma conta? <a class="text-yellow" data-toggle="modal" (click)="getOpportunity()">Crie

@@ -4,6 +4,18 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css');
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+:root {
+  --background-color: #f6f6f6;
+  --background-Black: #1c181e;
+  --primary-color: #357a38;
+  --secondary-color: #1c181e;
+  --danger-color: #4d0000;
+  --text-color: #6c6c6c;
+  --text-color-light: #90949c;
+  --text-white: #fff;
+  --color-header: #edeaea;
+}
+
 .title-home {
   color: #0A273D;
   font-size: 42px;
@@ -130,4 +142,71 @@ ul li {
 .navbar-adjust {
   //AJUSTA FIXED NAVBAR
   margin-top: 100px;
+}
+
+
+.btn-custom-confirm {
+  transition: all 0.3s linear 0s;
+  color: #edeaea;
+  background-color: var(--primary-color);
+  border: 0.0625rem solid var(--primary-color);
+  transform: skewX(-10deg);
+  font-size: 1.2rem;
+  font-family: 'Amatic SC';
+  line-height: 0.875rem;
+  padding: 1rem 1.875rem;
+  text-transform: unset;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: .25rem;
+}
+
+.btn-custom-confirm:hover {
+  filter: brightness(1.2);
+  border-color: var(--primary-color);
+}
+
+.btn-custom-decline {
+  transition: all 0.3s linear 0s;
+  color: #edeaea;
+  background-color: var(--secondary-color);
+  border: 0.0625rem solid var(--secondary-color);
+  transform: skewX(-10deg);
+  font-size: 1.2rem;
+  font-family: 'Amatic SC';
+  line-height: 0.875rem;
+  padding: 1rem 1.875rem;
+  text-transform: unset;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: .25rem;
+}
+
+.btn-custom-decline:hover {
+  filter: brightness(1.2);
+  border-color: var(--secondary-color);
+}
+
+.btn-custom-reject {
+  transition: all 0.3s linear 0s;
+  color: #edeaea;
+  background-color: var(--danger-color);
+  border: 0.0625rem solid var(--danger-color);
+  transform: skewX(-10deg);
+  font-size: 1.2rem;
+  font-family: 'Amatic SC';
+  line-height: 0.875rem;
+  padding: 1rem 1.875rem;
+  text-transform: unset;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: .25rem;
+}
+
+.btn-custom-reject:hover {
+  filter: brightness(1.2);
+  border-color: var(--danger-color);
 }
