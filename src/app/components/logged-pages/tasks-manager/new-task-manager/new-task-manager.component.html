@@ -12,7 +12,7 @@
         <div class="modal-body mb-0" [formGroup]="newTaskForm">
           <div class="col-md-12 order-md-1">
             <label>Nome da Atividade/Tarefa</label>
-            <input type="text" placeholder="Ex.: Ação de Marketing" class="form-control" name="name" formControlName="name">
+            <input type="text" placeholder="Ex.: Ação de Marketing" class="form-control" name="name" maxlength="20" formControlName="name">
           </div>
           <div class="col-md-3 order-md-1 mt-2">
             <label>Ativar/Desativar Tarefa</label>

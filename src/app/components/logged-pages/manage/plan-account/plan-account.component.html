@@ -1,31 +1,29 @@
-<div class="col-md-12">
+<div class="col-md-12 mt-4">
   <div class="row">
-
-    <header class="header">
-
-      <h3 class="title-home text-muted">Plano <strong>Pro</strong></h3>
-
-    </header>
-
-    <div class="panel" style="background-color: transparent;">
-      <div class="card card--front">
-        <div class="card__number">4111 **** **** 1111</div>
-        <div class="card__expiry-date">10/17</div>
-        <div class="card__owner">{{user.name}}</div>
-        <img class="card__logo" src="assets/img/plan/{{brand == 'visa'? 'visa': 'master'}}.png" alt="visa" />
-      </div>
-
-
-      <div *ngIf="!isLoading" class="text-muted">
-        <h4>Você tem <strong>{{activeUsers}}</strong> usuários ativos</h4>
-        <h4>Valor atual do plano está em <strong>{{currentPlanValue | currency : 'BRL'}} mensais</strong></h4>
+     <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="card card--front">
+            <div class="card__number">4111 **** **** 1111</div>
+            <div class="card__expiry-date">10/17</div>
+            <div class="card__owner">{{user.name}}</div>
+            <img class="card__logo" src="assets/img/plan/{{brand == 'visa'? 'visa': 'master'}}.png" alt="visa" />
+          </div>
+        </div>
+        <div class="col-md-5 mt-4">
+          <div *ngIf="!isLoading">
+            <h4 class="title-home">Plano <strong>Pro</strong></h4>
+            <h4>Você tem <strong>{{activeUsers}}</strong> usuários ativos</h4>
+            <h4>Valor atual do plano está em <strong>{{currentPlanValue | currency : 'BRL'}} mensais</strong></h4>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="isLoading">
         <app-spinner-loader></app-spinner-loader>
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-12 mt-4">
         <div class="col-md-4 mt-4">
           <input type="button" class="btn-custom-confirm" value="Alterar Plano" />
         </div>

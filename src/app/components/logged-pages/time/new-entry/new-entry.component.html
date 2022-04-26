@@ -2,8 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="align-self: center;">
-        <h3 class="modal-title default-font modal-header-font text-muted">Novo registro em {{currentDay.currentDayFormatted}}</h3>
-        <hr class="hr-dark">
+        <h3 class="modal-title default-font modal-header-font">Novo registro em {{currentDay.currentDayFormatted}}</h3>
       </div>
       <div class="modal-body default-font">
         <!--Body-->
@@ -15,21 +14,21 @@
               (change)="onChangeProject()" bindLabel="name" [selectOnTab]="true" notFoundText="Nenhum projeto encontrado" name="project">
             </ng-select>
           </div>
-          <div *ngIf="project" class="col-md-12 order-md-1 mt-2" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
+          <div class="col-md-12 order-md-1 mt-2" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <label>Atividade</label>
             <ng-select formControlName="task"
               [items]="tasks" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true"
               (change)="onChangeTask()" bindLabel="name" [selectOnTab]="true" notFoundText="Nenhuma atividade encontrada" name="task">
             </ng-select>
           </div>
-          <div *ngIf="task" class="col-md-8 order-md-1 mt-2" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
+          <div class="col-md-8 order-md-1 mt-4" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-md-12 order-md-1 mb-2">
-                <textarea formControlName="notes" type="text" class="form-control default-font custom-drop" #notes name="notes" autocomplete="false" placeholder="Notas (Opcional)"></textarea>
+                <textarea formControlName="notes" maxlength="50" type="text" class="form-control default-font custom-drop" #notes name="notes" autocomplete="false" placeholder="Notas (Opcional)"></textarea>
               </div>
             </div>
           </div>
-          <div *ngIf="task" class="col-md-4 order-md-1 mt-2">
+          <div class="col-md-4 order-md-1 mt-4">
             <div class="row">
               <div class="col-md-12 order-md-1 mb-2">
                 <input placeholder="0:00" type="text" class="form-control default-font time-font" maxlength="4" #time name="time" autocomplete="false" [(ngModel)]="timeModel" (keyup)="checkTime(time.value)">

@@ -15,6 +15,7 @@ export class TasksComponent implements OnInit {
   @Input() task: TimeTask
   @Input() disableButtons: boolean = false;
   @Input() showDate: boolean = false;
+  @Input() size: string = '';
 
   constructor(public dialog: MatDialog) { }
 
