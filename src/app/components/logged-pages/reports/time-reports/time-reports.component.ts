@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { TimeTask } from 'src/app/_models/time-task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { TimeService } from 'src/app/_services/time.service';
 import { ChartType, LegendItem } from '../../lbd/lbd-chart/lbd-chart.component';
+import * as htmlToImage from 'html-to-image';
 
 @Component({
   selector: 'app-time-reports',
@@ -41,6 +42,12 @@ export class TimeReportsComponent implements OnInit {
   isLoading: boolean = false;
 
 
+
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
+
+
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
@@ -51,7 +58,7 @@ export class TimeReportsComponent implements OnInit {
       this.fromDate = date;
     }
 
-    if(this.toDate!= null){
+    if (this.toDate != null) {
 
       this.isOpenCalendar = false;
 
@@ -98,7 +105,7 @@ export class TimeReportsComponent implements OnInit {
 
 
 
-  this.tasksChartType = ChartType.Pie;
+    this.tasksChartType = ChartType.Pie;
     this.tasksChartData = {
       labels: ['62%', '32%', '6%'],
       series: [62, 32, 6]
@@ -110,61 +117,75 @@ export class TimeReportsComponent implements OnInit {
     ];
 
 
-  this.activityChartType = ChartType.Bar;
-      this.activityChartData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        series: [
-          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-          [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-        ]
-      };
-      this.activityChartOptions = {
-        seriesBarDistance: 10,
+    this.activityChartType = ChartType.Bar;
+    this.activityChartData = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      series: [
+        [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
+        [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
+      ]
+    };
+    this.activityChartOptions = {
+      seriesBarDistance: 10,
+      axisX: {
+        showGrid: false
+      },
+      height: '245px'
+    };
+    this.activityChartResponsive = [
+      ['screen and (max-width: 640px)', {
+        seriesBarDistance: 5,
         axisX: {
-          showGrid: false
-        },
-        height: '245px'
-      };
-      this.activityChartResponsive = [
-        ['screen and (max-width: 640px)', {
-          seriesBarDistance: 5,
-          axisX: {
-            labelInterpolationFnc: function (value: any) {
-              return value[0];
-            }
+          labelInterpolationFnc: function (value: any) {
+            return value[0];
           }
-        }]
-      ];
-      this.activityChartLegendItems = [
-        { title: 'Tesla Model S', imageClass: 'fa fa-circle text-info' },
-        { title: 'BMW 5 Series', imageClass: 'fa fa-circle text-danger' }
-      ];
+        }
+      }]
+    ];
+    this.activityChartLegendItems = [
+      { title: 'Tesla Model S', imageClass: 'fa fa-circle text-info' },
+      { title: 'BMW 5 Series', imageClass: 'fa fa-circle text-danger' }
+    ];
 
-    }
+  }
 
-    openCalendar(){
-      this.isOpenCalendar = true;
-    }
+  openCalendar() {
+    this.isOpenCalendar = true;
+  }
 
-    loadTasks(){
+  loadTasks() {
 
-      this.isLoading = true;
+    this.isLoading = true;
 
-      let startDate = this.fromDate.day + '-'+ this.fromDate.month+'-'+this.fromDate.year;
-      let endDate = this.toDate.day + '-'+ this.toDate.month+'-'+this.toDate.year;
+    let startDate = this.fromDate.day + '-' + this.fromDate.month + '-' + this.fromDate.year;
+    let endDate = this.toDate.day + '-' + this.toDate.month + '-' + this.toDate.year;
 
-      this.timeService.getEntriesByDate(this.user.idUser, startDate, endDate, this.accountService.getToken()).subscribe(res=>{
+    this.timeService.getEntriesByDate(this.user.idUser, startDate, endDate, this.accountService.getToken()).subscribe(res => {
 
-        this.isLoading = false;
+      this.isLoading = false;
 
-        this.tasks = res;
+      this.tasks = res;
 
-      }, _err =>{
+    }, _err => {
 
-        this.isLoading = false;
+      this.isLoading = false;
 
+    })
+  }
+
+  generateImage() {
+
+    var node: any = document.getElementById('image-section');
+
+    htmlToImage.toPng(node)
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        document.body.appendChild(img);
       })
-    }
-
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+      });
+  }
 
 }

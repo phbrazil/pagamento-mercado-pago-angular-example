@@ -10,6 +10,9 @@
       <span class="text-muted">De: <strong>{{fromDate?.day}}-{{fromDate?.month}}-{{fromDate?.year}}</strong> até
         <strong>{{toDate?.day}}-{{toDate?.month}}-{{toDate?.year}}</strong></span>
     </div>
+    <div *ngIf="tasks.length >0" class="col-md-4 mt-4">
+      <button class="btn-custom-decline" type="button" (click)="generateImage()">Exportar</button>
+    </div>
   </div>
 </div>
 
@@ -25,10 +28,11 @@
   </ng-template>
 </div>
 
+
 <div *ngIf="isLoading">
   <app-spinner-loader></app-spinner-loader>
 </div>
-<div class="col-md-12 mt-4">
+<div class="col-md-12 mt-4" id="image-section">
   <div clas="row">
     <ul>
       <li *ngFor="let task of tasks">
