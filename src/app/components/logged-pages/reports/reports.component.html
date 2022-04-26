@@ -1,31 +1,29 @@
 <div class="container-fluid">
   <div class="col-md-12 navbar-adjust">
     <div class="row">
-        <div class="col-md-2">
-          <div class="list-group" id="myList" role="tablist">
-            <a class="list-group-item list-group-item-action active" data-toggle="list" href="#time-reports"
-              role="tab">Tempo</a>
-            <a class="list-group-item list-group-item-action" data-toggle="list" href="#projects"
-              role="tab">Projetos</a>
-          </div>
+      <div class="col-md-2">
+        <div class="list-group" id="myList" role="tablist">
+          <a class="list-group-item list-group-item-action active" data-toggle="list" href="#projects" role="tab">Projetos</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#time-reports" role="tab">Tempo</a>
         </div>
-        <div class="col-md-10">
-          <div class="tab-content">
-            <div class="tab-pane active" id="time-reports" role="tabpanel">
-              <app-time-reports></app-time-reports>
-            </div>
-            <div class="tab-pane" id="projects" role="tabpanel">
-              <app-project-reports></app-project-reports>
-            </div>
+      </div>
+      <div class="col-md-10">
+        <div class="tab-content">
+          <div class="tab-pane" id="time-reports" role="tabpanel">
+            <app-time-reports></app-time-reports>
+          </div>
+          <div class="tab-pane active" id="projects" role="tabpanel">
+            <app-project-reports></app-project-reports>
           </div>
         </div>
       </div>
-
-      <script>
-        $(function () {
-          $('#myList a:last-child').tab('show')
-        })
-      </script>
     </div>
 
+    <script>
+      $(function () {
+        $('#myList a:last-child').tab('show')
+      })
+    </script>
   </div>
+
+</div>

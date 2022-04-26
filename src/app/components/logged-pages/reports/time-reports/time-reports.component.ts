@@ -1,10 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { TimeTask } from 'src/app/_models/time-task';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { TimeService } from 'src/app/_services/time.service';
-import { ChartType, LegendItem } from '../../lbd/lbd-chart/lbd-chart.component';
 import * as htmlToImage from 'html-to-image';
 
 @Component({
@@ -13,8 +12,6 @@ import * as htmlToImage from 'html-to-image';
   styleUrls: ['./time-reports.component.scss']
 })
 export class TimeReportsComponent implements OnInit {
-
-
 
   hoveredDate: NgbDate | null = null;
 
@@ -27,13 +24,6 @@ export class TimeReportsComponent implements OnInit {
   tasks: TimeTask[] = [];
 
   isLoading: boolean = false;
-
-
-
-  @ViewChild('screen') screen: ElementRef;
-  @ViewChild('canvas') canvas: ElementRef;
-  @ViewChild('downloadLink') downloadLink: ElementRef;
-
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {

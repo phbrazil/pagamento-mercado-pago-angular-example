@@ -23,9 +23,21 @@ export class ProjectReportsComponent implements OnInit {
   public activityChartResponsive: any[];
   public activityChartLegendItems: LegendItem[];
 
+  isLoading: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+
+    this.loadCharts();
+
+
+  }
+
+  loadCharts(){
+
+    this.isLoading = true;
+
 
     this.emailChartType = ChartType.Pie;
     this.emailChartData = {
@@ -82,6 +94,9 @@ export class ProjectReportsComponent implements OnInit {
       { title: 'BMW 5 Series', imageClass: 'fa fa-circle text-danger' }
     ];
 
+    this.isLoading = false;
+
   }
+
 
 }
