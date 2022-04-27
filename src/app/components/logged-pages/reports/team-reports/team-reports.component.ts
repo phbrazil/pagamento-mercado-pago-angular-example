@@ -4,6 +4,7 @@ import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { TableSortService } from 'src/app/components/shared/table-sort.service';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { TeamService } from 'src/app/_services/team.service';
 
 @Component({
   selector: 'app-team-reports',
@@ -25,7 +26,7 @@ export class TeamReportsComponent implements OnInit {
   faActive = faThumbsUp;
   faInactive = faThumbsDown;
 
-  team: User[] = []
+  team: any[] = []
 
   dtOptions: DataTables.Settings = {};
 
@@ -62,7 +63,9 @@ export class TeamReportsComponent implements OnInit {
 
   }
 
-  constructor(calendar: NgbCalendar, private accountService: AccountService,  private dataTableSettings: TableSortService) {
+  constructor(calendar: NgbCalendar, private accountService: AccountService,
+    private dataTableSettings: TableSortService,
+    private teamService: TeamService) {
     this.fromDate = calendar.getPrev(calendar.getToday(), 'd', 10);
     this.toDate = calendar.getToday();
     this.accountService.user.subscribe(x => this.user = x);
@@ -81,7 +84,13 @@ export class TeamReportsComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.accountService.getTeamMembers(this.user.idUser, this.user.idGroup).subscribe(res=>{
+    let startDate = this.fromDate.day + '-' + this.fromDate.month + '-' + this.fromDate.year;
+    let endDate = this.toDate.day + '-' + this.toDate.month + '-' + this.toDate.year;
+
+    this.teamService.getTeamReport(this.user.idUser, this.user.idGroup, startDate, endDate,
+      this.accountService.getToken()).subscribe(res=>{
+
+        console.log(res)
       this.team = res;
       this.isLoading = false;
     }, _err =>{
