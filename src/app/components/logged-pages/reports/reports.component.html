@@ -3,17 +3,21 @@
     <div class="row">
       <div class="col-md-2">
         <div class="list-group" id="myList" role="tablist">
-          <a class="list-group-item list-group-item-action active" data-toggle="list" href="#projects" role="tab">Projetos</a>
+          <a class="list-group-item list-group-item-action active" data-toggle="list" href="#project-reports" role="tab">Projetos</a>
           <a class="list-group-item list-group-item-action" data-toggle="list" href="#time-reports" role="tab">Tempo</a>
+          <a *ngIf="user.admin" class="list-group-item list-group-item-action" data-toggle="list" href="#team-reports" role="tab">Time</a>
         </div>
       </div>
       <div class="col-md-10">
         <div class="tab-content">
+          <div class="tab-pane active" id="project-reports" role="tabpanel">
+            <app-project-reports></app-project-reports>
+          </div>
           <div class="tab-pane" id="time-reports" role="tabpanel">
             <app-time-reports></app-time-reports>
           </div>
-          <div class="tab-pane active" id="projects" role="tabpanel">
-            <app-project-reports></app-project-reports>
+          <div class="tab-pane" id="team-reports" role="tabpanel">
+            <app-team-reports></app-team-reports>
           </div>
         </div>
       </div>

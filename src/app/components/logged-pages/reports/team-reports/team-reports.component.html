@@ -10,9 +10,6 @@
       <span class="text-muted">De: <strong>{{fromDate?.day}}-{{fromDate?.month}}-{{fromDate?.year}}</strong> até
         <strong>{{toDate?.day}}-{{toDate?.month}}-{{toDate?.year}}</strong></span>
     </div>
-    <div *ngIf="tasks.length >0" class="col-md-4 mt-4">
-      <button class="btn-custom-decline" type="button" (click)="generateImage()">Exportar</button>
-    </div>
   </div>
 </div>
 
@@ -28,21 +25,33 @@
   </ng-template>
 </div>
 
+<div *ngIf="!isLoading" class="col-md-12 table-responsive mt-4">
+  <table datatable [dtOptions]="dtOptions" class="table text-muted table-striped" id="team" aria-describedby="team">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Horas apontadas</th>
+        <th scope="col">Mais</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of team; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{member.name}}</td>
+        <td>{{member.email}}</td>
+        <td>10 hrs</td>
+        <td><input type="button" class="btn btn-outline-primary btn-sm" value="Detalhes"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<div *ngIf="isLoading">
+<div *ngIf="isLoading" class="col-md-12 mt-4">
   <app-spinner-loader></app-spinner-loader>
 </div>
-<div class="col-md-12 mt-4" id="image-section">
-  <div clas="row">
-    <ul>
-      <li *ngFor="let task of tasks">
-        <app-tasks [user]="user" [size]="'small'" [disableButtons]="true" [showDate]="true" [task]="task"></app-tasks>
-      </li>
-    </ul>
-  </div>
-</div>
 
-
-<div *ngIf="!isLoading && tasks.length == 0">
+<div *ngIf="!isLoading && team.length == 0">
   <app-no-register-found></app-no-register-found>
 </div>

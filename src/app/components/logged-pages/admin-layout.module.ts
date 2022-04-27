@@ -35,6 +35,7 @@ import { MyTeamComponent } from './manage/my-team/my-team.component';
 import { TimeReportsComponent } from './reports/time-reports/time-reports.component';
 import { NewMemberComponent } from './manage/my-team/new-member/new-member.component';
 import { ProjectReportsComponent } from './reports/project-reports/project-reports.component';
+import { TeamReportsComponent } from './reports/team-reports/team-reports.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ProjectReportsComponent } from './reports/project-reports/project-repor
     MyTeamComponent,
     TimeReportsComponent,
     NewMemberComponent,
-    ProjectReportsComponent
+    ProjectReportsComponent,
+    TeamReportsComponent
   ],
   imports: [
     RouterModule,
