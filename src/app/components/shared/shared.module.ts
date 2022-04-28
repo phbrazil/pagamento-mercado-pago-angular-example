@@ -11,6 +11,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { NgxCurrencyModule } from 'ngx-currency';
 import { SpinnerLoaderComponent } from './spinner-loader/spinner-loader.component';
 import { NoRegisterFoundComponent } from './no-register-found/no-register-found.component';
+import { TrialBannerComponent } from './trial-banner/trial-banner.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -22,7 +23,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   declarations: [
     AlertComponent,
     SpinnerLoaderComponent,
-    NoRegisterFoundComponent
+    NoRegisterFoundComponent,
+    TrialBannerComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     NgxCurrencyModule,
     SpinnerLoaderComponent,
-    NoRegisterFoundComponent
+    NoRegisterFoundComponent,
+    TrialBannerComponent
   ]
 })
 export class SharedModule {
