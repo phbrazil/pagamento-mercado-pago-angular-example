@@ -3,24 +3,37 @@
     <ul>
       <li>
         <a>
-          <div [formGroup]="editEntryForm">
-            <input autofocus type="text" class="form-control bg" formControlName="project" style="margin-top: -5px;"
-              name="project" value="{{task.project}}" />
-            <input type="text" class="form-control bg" formControlName="task" name="task" value="{{task.task}}" />
+          <div class="col-md-12" *ngIf="isLoading">
+            <app-spinner-loader></app-spinner-loader>
           </div>
-          <input type="text" class="form-control bg" placeholder="0:00" maxlength="4" #time name="time"
-            autocomplete="false" [(ngModel)]="timeModel" (keyup)="checkTime(time.value)">
-          <div [formGroup]="editEntryForm">
-            <textarea type="text" class="form-control" formControlName="notes" name="notes"
-              value="{{task.notes}}">{{task.notes}}</textarea>
-          </div>
-          <div class="d-grid gap-2 d-md-block footer mt-4">
-            <button type="submit" (click)="editTask()" class="btn-custom-confirm"
-              [disabled]="!editEntryForm.valid || isLoading || timeModel.length <= 3 ">
-              <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-              Salvar</button>
-            <button type="button" class="btn-custom-decline" (click)="close()"
-              data-dismiss="modal">Fechar</button>
+          <div *ngIf="!isLoading">
+            <div [formGroup]="editEntryForm">
+              <div class="col-md-12 order-md-1" [formGroup]="editEntryForm">
+                <ng-select formControlName="project" [items]="projects" [multiple]="false" [closeOnSelect]="true"
+                  [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" [selectOnTab]="true"
+                  notFoundText="Nenhum projeto encontrado" name="project">
+                </ng-select>
+              </div>
+              <div class="col-md-12 order-md-1 mt-2" [formGroup]="editEntryForm">
+                <ng-select formControlName="task" [items]="tasks" [multiple]="false" [closeOnSelect]="true"
+                  [hideSelected]="true" (change)="onChangeTask()" bindLabel="name" [selectOnTab]="true"
+                  notFoundText="Nenhuma atividade encontrada" name="task">
+                </ng-select>
+              </div>
+            </div>
+            <input type="text" class="form-control bg" placeholder="0:00" maxlength="4" #time name="time"
+              autocomplete="false" [(ngModel)]="timeModel" (keyup)="checkTime(time.value)">
+            <div [formGroup]="editEntryForm">
+              <textarea type="text" class="form-control" formControlName="notes" name="notes"
+                value="{{task.notes}}">{{task.notes}}</textarea>
+            </div>
+            <div class="d-grid gap-2 d-md-block footer mt-4">
+              <button type="submit" (click)="editTask()" class="btn-custom-confirm mr-4"
+                [disabled]="!editEntryForm.valid || isLoading || timeModel.length <= 3 ">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                Salvar</button>
+              <button type="button" class="btn-custom-decline" (click)="close()" data-dismiss="modal">Fechar</button>
+            </div>
           </div>
         </a>
       </li>

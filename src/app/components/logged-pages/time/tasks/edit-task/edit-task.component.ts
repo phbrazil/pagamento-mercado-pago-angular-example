@@ -1,8 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Project } from 'src/app/_models/project';
 import { TimeTask } from 'src/app/_models/time-task';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
+import { ProjectService } from 'src/app/_services/project.service';
+import { TaskService } from 'src/app/_services/task.service';
 import { TimeService } from 'src/app/_services/time.service';
+import { Task } from 'src/app/_models/task';
 
 @Component({
   selector: 'app-edit-task',
@@ -19,11 +25,24 @@ export class EditTaskComponent implements OnInit {
 
   timeModel: string;
 
-  project: any = [];
-  projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
+  user: User;
+
+  project: string;
+  idProject: number;
+  projects: Project[] = [];
 
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public timeTask: any, private timeService: TimeService) { }
+  newTask: string;
+  idTask: number;
+  tasks: Task[] = [];
+
+
+  constructor(public dialog: MatDialog, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public timeTask: any, private timeService: TimeService,
+    private taskService: TaskService, private projectService: ProjectService, private accountService: AccountService) {
+
+    this.accountService.user.subscribe(x => this.user = x);
+
+  }
 
   ngOnInit(): void {
 
@@ -38,14 +57,12 @@ export class EditTaskComponent implements OnInit {
       notes: [this.task.notes],
       date: [this.task.date, Validators.required],
       idUser: [this.task.idUser, Validators.required],
+      idTask: [this.task.idTask, Validators.required],
 
     });
 
-  }
-
-  onChangeProject(){
-
-    this.project = this.editEntryForm.value.projeto;
+    this.loadProjects();
+    this.loadTasks();
 
   }
 
@@ -63,11 +80,62 @@ export class EditTaskComponent implements OnInit {
 
   }
 
-  editTask(){
+  onChangeProject() {
+
+    this.project = this.editEntryForm.value.project.name;
+    this.idProject = this.editEntryForm.value.project.idProject;
+    this.editEntryForm.patchValue({ project: this.project, idProject: this.idProject });
+
+  }
+
+  onChangeTask() {
+
+    this.task = this.editEntryForm.value.task.name;
+    this.editEntryForm.patchValue({ task: this.task });
+
+  }
+
+  loadProjects() {
+    this.isLoading = true;
+
+    this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
+      this.isLoading = false;
+      this.projects = res;
+    }, _err => {
+      this.isLoading = false;
+    })
+
+  }
+
+  loadTasks() {
+    this.isLoading = true;
+
+    this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
+      this.isLoading = false;
+      this.tasks = res;
+    }, _err => {
+      this.isLoading = false;
+    })
+
+  }
+
+  editTask() {
 
     this.isLoading = true;
 
-    console.log(this.editEntryForm.value)
+    this.timeService.editEntry(this.editEntryForm.value, this.accountService.getToken()).subscribe(res => {
+
+      this.isLoading = false;
+
+      this.timeService.setIsReload(true);
+
+      this.close();
+
+    }, _err => {
+
+      this.isLoading = false;
+
+    })
   }
 
 }

@@ -11,8 +11,8 @@ export class TimeService {
   private isReloadTimeTasks = new BehaviorSubject<boolean>(false);
 
 
-  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
-  //readonly baseUrl: string = 'http://localhost:8080'
+  //readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
+  readonly baseUrl: string = 'http://localhost:8080'
 
 
   constructor(
@@ -20,25 +20,25 @@ export class TimeService {
     public dialog: MatDialog
   ) {
 
-}
+  }
 
-public setIsReload(status: boolean): void {
-  this.isReloadTimeTasks.next(status);
-}
+  public setIsReload(status: boolean): void {
+    this.isReloadTimeTasks.next(status);
+  }
 
-public getIsReload(): Observable<boolean> {
-  return this.isReloadTimeTasks.asObservable();
+  public getIsReload(): Observable<boolean> {
+    return this.isReloadTimeTasks.asObservable();
 
-}
+  }
 
-public setCurrentDay(day: Date): void {
-  this.currentDay.next(day);
-}
+  public setCurrentDay(day: Date): void {
+    this.currentDay.next(day);
+  }
 
-public getCurrentDay(): Observable<Date> {
-  return this.currentDay.asObservable();
+  public getCurrentDay(): Observable<Date> {
+    return this.currentDay.asObservable();
 
-}
+  }
 
   getEntries(idUser: number, date: string, token: string) {
 
@@ -74,7 +74,22 @@ public getCurrentDay(): Observable<Date> {
 
     const url = `${this.baseUrl}/time/newEntry`;
 
-    return this.http.post<any>(url,  task , header)
+    return this.http.post<any>(url, task, header)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  editEntry(task: TimeTask, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/time/editEntry`;
+
+    return this.http.patch<any>(url, task, header)
       .pipe(map(res => {
         return res;
       }));
@@ -160,11 +175,11 @@ public getCurrentDay(): Observable<Date> {
   }
 
   convertDDMMYYYToYYYYMMDD(data: string) {
-    var dia  = data.split("-")[0];
-    var mes  = data.split("-")[1];
-    var ano  = data.split("-")[2];
+    var dia = data.split("-")[0];
+    var mes = data.split("-")[1];
+    var ano = data.split("-")[2];
 
-    return ano + '-' + ("0"+mes).slice(-2) + '-' + ("0"+dia).slice(-2);
+    return ano + '-' + ("0" + mes).slice(-2) + '-' + ("0" + dia).slice(-2);
   }
 
 
