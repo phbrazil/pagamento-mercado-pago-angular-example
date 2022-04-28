@@ -116,7 +116,6 @@ export class MyTimeComponent implements OnInit {
     this.currentMonth = date.format("DD-MM-YYYY");
 
     this.loadMyTasks();
-
   }
 
   today(): void {
@@ -153,7 +152,7 @@ export class MyTimeComponent implements OnInit {
 
     this.tasks = [];
 
-    this.isLoading = true;
+    //this.isLoading = true;
 
     var date = moment(this.currentMonth, "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
 
@@ -164,13 +163,13 @@ export class MyTimeComponent implements OnInit {
     this.timeService.getEntriesByDate(this.user.idUser, this.currentMonth, toDateFormatted, this.accountService.getToken()).subscribe(res => {
       this.tasks = res;
       this.isLoading = false;
-      this.changeCalendar(this.isWeekend, this.parameters.initialView);
+      this.newEvents();
     }, _err => {
       this.isLoading = false;
     })
   }
 
-  changeCalendar(isWeekend: boolean, initialView: string) {
+  newEvents(){
 
     this.events = [];
 
@@ -190,6 +189,10 @@ export class MyTimeComponent implements OnInit {
       }
     });
 
+  }
+
+  changeCalendar(isWeekend: boolean, initialView: string) {
+
     this.calendarOptions.initialView = initialView;
 
     this.calendarOptions.weekends = isWeekend;
@@ -208,7 +211,7 @@ export class MyTimeComponent implements OnInit {
             initialView: 'dayGridWeek'
           }
         });
-    }else{
+    } else {
 
       this.dialog.open(MyTimeComponent,
         {
