@@ -339,9 +339,9 @@ export class AccountService {
 
   }
 
-  resetPassword(body: any) {
+  resetPassword(email: string) {
 
-    return this.http.post<any>(`${this.baseUrl}/account/api/auth/resetPassword`, body);
+    return this.http.post<boolean>(`${this.baseUrl}/opportunity/resetPassword/${email}` ,{});
 
   }
 

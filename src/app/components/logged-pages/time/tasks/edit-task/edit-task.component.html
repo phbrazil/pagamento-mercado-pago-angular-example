@@ -6,7 +6,11 @@
           <div class="col-md-12" *ngIf="isLoading">
             <app-spinner-loader></app-spinner-loader>
           </div>
+
           <div *ngIf="!isLoading">
+            <div class="center">
+              <h4>Atualizar atividade</h4>
+            </div>
             <div [formGroup]="editEntryForm">
               <div class="col-md-12 order-md-1" [formGroup]="editEntryForm">
                 <ng-select formControlName="project" [items]="projects" [multiple]="false" [closeOnSelect]="true"
@@ -21,11 +25,13 @@
                 </ng-select>
               </div>
             </div>
-            <input type="text" class="form-control bg" placeholder="0:00" maxlength="4" #time name="time"
-              autocomplete="false" [(ngModel)]="timeModel" (keyup)="checkTime(time.value)">
-            <div [formGroup]="editEntryForm">
-              <textarea type="text" class="form-control" formControlName="notes" name="notes"
-                value="{{task.notes}}">{{task.notes}}</textarea>
+            <div class="col-md-12 order-md-1">
+              <input type="text" class="form-control bg" placeholder="0:00" maxlength="4" #time name="time"
+                autocomplete="false" [(ngModel)]="timeModel" (keyup)="checkTime(time.value)">
+              <div [formGroup]="editEntryForm">
+                <textarea type="text" class="form-control" formControlName="notes" name="notes"
+                  value="{{task.notes}}">{{task.notes}}</textarea>
+              </div>
             </div>
             <div class="d-grid gap-2 d-md-block footer mt-4">
               <button type="submit" (click)="editTask()" class="btn-custom-confirm mr-4"

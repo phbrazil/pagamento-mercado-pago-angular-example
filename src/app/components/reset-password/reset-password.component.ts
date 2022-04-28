@@ -46,11 +46,9 @@ export class ResetPasswordComponent implements OnInit {
 
   postReset(body: any){
 
-    body = {email: body.value.emailReset};
-
     this.isLoading = true;
 
-    this.accountService.resetPassword(body).subscribe(res =>{
+    this.accountService.resetPassword(body.value.emailReset).subscribe(res =>{
 
       this.isLoading = false;
 

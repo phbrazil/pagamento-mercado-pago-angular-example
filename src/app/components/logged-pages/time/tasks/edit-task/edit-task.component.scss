@@ -111,3 +111,17 @@ ul li a:focus {
 ul li {
   margin: 2em;
 }
+
+.footer {
+  position : absolute;
+  bottom : 0;
+  height : 40px;
+  margin-top : 40px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+}
