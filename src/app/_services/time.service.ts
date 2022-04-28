@@ -11,8 +11,8 @@ export class TimeService {
   private isReloadTimeTasks = new BehaviorSubject<boolean>(false);
 
 
-  //readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
-  readonly baseUrl: string = 'http://localhost:8080'
+  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
+  //readonly baseUrl: string = 'http://localhost:8080'
 
 
   constructor(
