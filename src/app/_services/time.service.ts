@@ -182,5 +182,13 @@ export class TimeService {
     return ano + '-' + ("0" + mes).slice(-2) + '-' + ("0" + dia).slice(-2);
   }
 
+  convertDDMMYYYToMMDDYYYY(data: string) {
+    var day = data.split("-")[0];
+    var month = data.split("-")[1];
+    var year = data.split("-")[2];
+
+    return month + '-' + ("0" + day).slice(-2) + '-' + ("0" + year).slice(-2);
+  }
+
 
 }

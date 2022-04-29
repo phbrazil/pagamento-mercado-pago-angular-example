@@ -1,11 +1,11 @@
 
-<div *ngIf="user.admin" class="col-md-12" style="margin-bottom: -100px; margin-top: -50px; z-index: 9!important;">
+<div *ngIf="user.trial" class="col-md-12 trial-banner">
   <footer class="footer mt-auto py-3">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
           <div class="container div-center">
-            <span class="text-muted">Você ainda tem <strong>{{daysLeft}} dias</strong> de uso grátis.</span><button type="button" class="btn btn-outline-secondary zoom">Assinar</button>
+            <span class="font-style">Você ainda tem <strong>{{daysLeft}} dias</strong> de uso grátis.   <button routerLink="/manage" type="button" class="btn-custom-decline zoom">Assinar</button></span>
           </div>
         </div>
       </div>

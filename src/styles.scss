@@ -7,9 +7,9 @@
 :root {
   --background-color: #f6f6f6;
   --background-Black: #1c181e;
-  --primary-color: #357a38;
+  --primary-color: #2E8B57;
   --secondary-color: #1c181e;
-  --danger-color: #f70d1a;
+  --danger-color: #DC143C;
   --text-color: #6c6c6c;
   --text-color-light: #90949c;
   --text-white: #fff;
@@ -147,19 +147,22 @@ ul li {
 
 .btn-custom-confirm {
   transition: all 0.3s linear 0s;
-  color: #edeaea;
-  background-color: var(--primary-color);
-  border: 0.0625rem solid var(--primary-color);
+  color: black;
+  background-color: transparent;
+  //border: 0.0625rem solid var(--primary-color);
   transform: skewX(-10deg);
   font-size: 1.2rem;
   font-family: 'Amatic SC';
   line-height: 0.875rem;
   padding: 1rem 1.875rem;
-  text-transform: unset;
+//  text-transform: unset;
   font-weight: 600;
   cursor: pointer;
   text-transform: uppercase;
   border-radius: .25rem;
+  border-color: var(--primary-color);
+	border-width: 3px;
+
 }
 
 .btn-custom-confirm:hover {
@@ -169,15 +172,15 @@ ul li {
 
 .btn-custom-decline {
   transition: all 0.3s linear 0s;
-  color: #edeaea;
-  background-color: var(--secondary-color);
-  border: 0.0625rem solid var(--secondary-color);
+  color: black;
+  background-color: transparent;
+  //border: 0.0625rem solid var(--secondary-color);
   transform: skewX(-10deg);
   font-size: 1.2rem;
   font-family: 'Amatic SC';
   line-height: 0.875rem;
   padding: 1rem 1.875rem;
-  text-transform: unset;
+  //text-transform: unset;
   font-weight: 600;
   cursor: pointer;
   text-transform: uppercase;
@@ -191,15 +194,15 @@ ul li {
 
 .btn-custom-reject {
   transition: all 0.3s linear 0s;
-  color: #edeaea;
-  background-color: var(--danger-color);
-  border: 0.0625rem solid var(--danger-color);
+  color: black;
+  background-color: transparent;
+  //border: 0.0625rem solid var(--danger-color);
   transform: skewX(-10deg);
   font-size: 1.2rem;
   font-family: 'Amatic SC';
   line-height: 0.875rem;
   padding: 1rem 1.875rem;
-  text-transform: unset;
+  //text-transform: unset;
   font-weight: 600;
   cursor: pointer;
   text-transform: uppercase;

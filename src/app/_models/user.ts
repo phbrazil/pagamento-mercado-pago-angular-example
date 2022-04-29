@@ -12,6 +12,8 @@ export class User {
   changePassword: boolean
   admin: boolean
   active: boolean
-  isTrial: boolean
+  trialDate: string
+  trial: boolean
   phone: string
+
 }
