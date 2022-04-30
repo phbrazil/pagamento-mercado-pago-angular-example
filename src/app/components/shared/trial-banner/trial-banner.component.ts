@@ -27,11 +27,11 @@ export class TrialBannerComponent implements OnInit {
   ngOnInit(): void {
 
     var date1 = new Date(this.today);
-    var date2 = new Date(this.timeService.convertDDMMYYYToYYYYMMDD(this.user.trialDate).replace('-', '/'));
+    var date2 = new Date(this.timeService.convertDDMMYYYToYYYYMMDD(this.user.trialDate));
 
     var Difference_In_Time = date2.getTime() - date1.getTime();
 
-    this.daysLeft = Difference_In_Time / (1000 * 3600 * 24);
+    this.daysLeft = Math.round(Difference_In_Time / (1000 * 3600 * 24));
 
   }
 

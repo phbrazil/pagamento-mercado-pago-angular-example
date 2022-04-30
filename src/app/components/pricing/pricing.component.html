@@ -11,27 +11,60 @@
         <div class="card-body font-home">
           <h1 class="card-title pricing-card-title">R$0 <small class="text-muted">/ 7 dias</small></h1>
           <ul class="list-unstyled mt-3 mb-4">
-            <li>10 usuários</li>
-            <li>1 GB de armazenamento</li>
-            <li>Suporte por email</li>
+            <li><small>Até 10 usuários</small></li>
+            <li><small>1 GB de armazenamento</small></li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-outline-primary"
+          <div class="mt-4">
+            <button type="button" class="btn btn-lg btn-block btn-primary"
             (click)="getOpportunity('free')">Experimentar</button>
+          </div>
         </div>
+
       </div>
       <div class="card mb-4 box-shadow">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal font-home">Pro</h4>
         </div>
         <div class="card-body font-home">
-          <h1 class="card-title pricing-card-title">R$15 <small class="text-muted">/ mês por usuário</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>20 usuários incluídos</li>
-            <li>5 GB de armazenamento</li>
-            <li>Suporte por email priorizado</li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary"
-            (click)="getOpportunity('pro')">Selecionar</button>
+          <!--h1 class="card-title pricing-card-title">R$15 <small class="text-muted">/ mês por usuário</small></h1-->
+          <!--ul>
+            <li><small>20 usuários</small></li>
+            <li><small>20 GB de armazenamento</small></li>
+          </ul-->
+          <div>
+            <h4>Até 20 usuários</h4>
+            <h4>20 GB de armazenamento</h4>
+            <h4>Suporte via email</h4>
+          </div>
+          <h5 class="text-muted">Selecione os produtos para incluir na estimativa</h5>
+          <input type="button" (click)="checkIsTimePro()" [ngClass]="{'active' : isTimePro, '' : !isTimePro}"
+            class="btn-block btn-lg btn-custom-success" value="Timesheet">
+          <input type="button" (click)="checkIsAdvancePro()" [ngClass]="{'active' : isAdvancePro, '' : !isAdvancePro}"
+            class="btn-block btn-lg btn-custom-success" value="Adiantamentos e Prestação de Contas">
+          <input type="button" (click)="checkIsRefundPro()" [ngClass]="{'active' : isRefundPro, '' : !isRefundPro}"
+            class="btn-block btn-lg btn-custom-success" value="Reembolsos">
+          <div class="col-md-12 mb-4 mt-2">
+            <div class="row">
+              <div class="col-md-3">
+                <button data-toggle="tooltip" id='previous' name='previous' value='previous' (click)="decreaseUserPro()"
+                  class="btn btn-lg btn-outline-info shadow zoom">
+                  <fa-icon class="fa-2x" [icon]="faMinus"></fa-icon>
+                </button>
+              </div>
+              <div class="col-md-6">
+                <input type="number" min="0" max="20" (keyup)="addUserPro($event)" (keyup)="addUserPro($event)"
+                  class="form-control default-font pricing-font mt-2 mb-2 text-center" value="{{usersPro}}">
+              </div>
+              <div class="col-md-3">
+                <button data-toggle="tooltip" id='next' name='next' value='next' (click)="increaseUserPro()"
+                  class="btn btn-lg btn-outline-info shadow zoom">
+                  <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button [disabled]="totalPro == 0" type="button" class="btn btn-lg btn-block btn-primary"
+            (click)="getOpportunity('pro')">Estimativa {{this.totalPro | currency : 'BRL'}} / mês</button>
         </div>
       </div>
       <div class="card mb-4 box-shadow">
@@ -39,14 +72,49 @@
           <h4 class="my-0 font-weight-normal font-home">Corporativo</h4>
         </div>
         <div class="card-body font-home">
-          <h1 class="card-title pricing-card-title">R$29 <small class="text-muted">/ mês por usuário</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>Usuários ilimitados</li>
-            <li>50 GB de armazenamento</li>
-            <li>Suporte por email priorizado</li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary"
-            (click)="getOpportunity('corp')">Selecionar</button>
+          <!--h1 class="card-title pricing-card-title">R$29 <small class="text-muted">/ mês por usuário</small></h1-->
+          <!--ul class="list-group list-group-flush">
+            <li class="list-group-item">Usuários ilimitados</li>
+            <li class="list-group-item">50 GB de armazenamento</li>
+          </ul-->
+          <div>
+            <h4>Usuários ilimitados</h4>
+            <h4>50 GB de armazenamento</h4>
+            <h4>Suporte via email</h4>
+          </div>
+          <h5 class="text-muted">Selecione os produtos para incluir na estimativa</h5>
+          <input type="button" (click)="checkIsTimeCorp()" [ngClass]="{'active' : isTimeCorp, '' : !isTimeCorp}"
+            class="btn-block btn-lg btn-custom-success" value="Timesheet">
+          <input type="button" (click)="checkIsAdvanceCorp()"
+            [ngClass]="{'active' : isAdvanceCorp, '' : !isAdvanceCorp}" class="btn-block btn-lg btn-custom-success"
+            value="Adiantamentos e Prestação de Contas">
+          <input type="button" (click)="checkIsRefundCorp()" [ngClass]="{'active' : isRefundCorp, '' : !isRefundCorp}"
+            class="btn-block btn-lg btn-custom-success" value="Reembolsos">
+
+          <div class="col-md-12 mb-4 mt-2">
+            <div class="row">
+              <div class="col-md-3">
+                <button data-toggle="tooltip" id='previous' name='previous' value='previous'
+                  (click)="decreaseUserCorp()" class="btn btn-lg btn-outline-info shadow zoom">
+                  <fa-icon class="fa-2x" [icon]="faMinus"></fa-icon>
+                </button>
+              </div>
+              <div class="col-md-6">
+                <input type="number" min="0" (change)="addUserCorp($event)" (keyup)="addUserCorp($event)"
+                  class="form-control default-font pricing-font mt-2 mb-2 text-center" value="{{usersCorp}}">
+              </div>
+              <div class="col-md-3">
+                <button data-toggle="tooltip" id='next' name='next' value='next' (click)="increaseUserCorp()"
+                  class="btn btn-lg btn-outline-info shadow zoom">
+                  <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button [disabled]="totalCorp == 0" type="button" class="btn btn-lg btn-block btn-primary"
+            (click)="getOpportunity('corp')">Estimativa
+            {{this.totalCorp | currency : 'BRL'}} / mês</button>
         </div>
       </div>
     </div>
