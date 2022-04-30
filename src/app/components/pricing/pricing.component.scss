@@ -1,6 +1,7 @@
 
 .active{
-  background-color: #90EE90;
+  background-color: #3CB371;
+  color: white;
 }
 .pricing-font{
   font-size: 40px;
@@ -11,4 +12,11 @@
 .footer {
   position : absolute;
   bottom : 0;
+}
+
+.zoom {
+  transition: transform .2s; /* Animation */
+}
+.zoom:hover {
+  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }

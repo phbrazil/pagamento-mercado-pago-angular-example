@@ -15,7 +15,7 @@
             <li><small>1 GB de armazenamento</small></li>
           </ul>
           <div class="mt-4">
-            <button type="button" class="btn btn-lg btn-block btn-primary"
+            <button type="button" class="btn-lg btn-block btn-custom-confirm"
             (click)="getOpportunity('free')">Experimentar</button>
           </div>
         </div>
@@ -52,7 +52,7 @@
                 </button>
               </div>
               <div class="col-md-6">
-                <input type="number" min="0" max="20" (keyup)="addUserPro($event)" (keyup)="addUserPro($event)"
+                <input type="number" min="0" max="20" (change)="addUserPro($event)" (keyup)="addUserPro($event)"
                   class="form-control default-font pricing-font mt-2 mb-2 text-center" value="{{usersPro}}">
               </div>
               <div class="col-md-3">
