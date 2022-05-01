@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Roles } from 'src/app/_models/roles';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { RolesService } from 'src/app/_services/roles.service copy';
 
 @Component({
   selector: 'app-new-member',
@@ -21,20 +23,28 @@ export class NewMemberComponent implements OnInit {
   messageType: string = ''
 
   user: User;
+  roles: Roles;
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder, private accountService: AccountService) {
+  constructor(private dialog: MatDialog, private fb: FormBuilder,
+    private accountService: AccountService,
+    private rolesService: RolesService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
+    this.rolesService.roles.subscribe(x => this.roles = x);
   }
 
   ngOnInit(): void {
+
+    console.log(this.roles)
 
     this.newMemberForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
       active: [this.active, Validators.required],
       idGroup: [this.user.idGroup, Validators.required],
+      trialDate: [this.user.trialDate, Validators.required ],
+      trial: [this.user.trial, Validators.required ]
     });
   }
 
@@ -45,22 +55,38 @@ export class NewMemberComponent implements OnInit {
   submit() {
     this.isLoading = true;
 
-    this.accountService.createMemberAccount(this.newMemberForm.value, this.accountService.getToken(), this.user.idUser).subscribe(_res => {
+    this.accountService.createMemberAccount(this.newMemberForm.value, this.accountService.getToken(), this.user.idUser).subscribe(res => {
 
       this.isLoading = false;
 
-      if (_res.message.code == 409) {
+      if (res.message.code == 409) {
 
         this.message = 'Esse email já foi adicionado como membro do time';
         this.messageType = 'danger';
 
       } else {
 
-        this.message = '';
-        this.messageType = '';
-        this.accountService.setIsReloadMembers(true);
+        //SAVE ROLES
+        let newRoles = {
+          idUser: res.idUser,
+          enableTime: this.roles.enableTime,
+          enableRefund: this.roles.enableRefund,
+          enableAdvance: this.roles.enableAdvance
+        };
 
-        this.close();
+        this.rolesService.newRoles(newRoles, this.accountService.getToken()).subscribe(_res => {
+
+          this.message = '';
+          this.messageType = '';
+          this.accountService.setIsReloadMembers(true);
+
+          this.close();
+
+        }, _err => {
+
+        })
+
+
 
       }
 

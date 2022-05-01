@@ -7,9 +7,9 @@
     </button>
     <div class="collapse navbar-collapse mt-4" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/time">Tempo</a>
-        <a class="nav-item nav-link" routerLink="/advance">Adiantamento</a>
-        <a class="nav-item nav-link" routerLink="/refund">Reembolso</a>
+        <a *ngIf="roles?.enableTime" class="nav-item nav-link" routerLink="/time">Tempo</a>
+        <a *ngIf="roles?.enableAdvance" class="nav-item nav-link" routerLink="/advance">Adiantamento</a>
+        <a *ngIf="roles?.enableRefund" class="nav-item nav-link" routerLink="/refund">Reembolso</a>
         <a class="nav-item nav-link" routerLink="/reports">Relatórios</a>
         <a class="nav-item nav-link end" routerLink="/manage">
           <fa-icon class="fa" [icon]="faUser"></fa-icon> {{name}}
