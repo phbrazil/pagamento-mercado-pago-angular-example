@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Roles } from 'src/app/_models/roles';
+import { RolesService } from 'src/app/_services/roles.service copy';
 
 @Component({
   selector: 'app-refund',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RefundComponent implements OnInit {
 
-  constructor() { }
+  roles: Roles;
+  constructor(private rolesService: RolesService) {
+
+
+  }
 
   ngOnInit(): void {
   }

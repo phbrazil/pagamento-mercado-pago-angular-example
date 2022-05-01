@@ -1,0 +1,32 @@
+
+.modal-position {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000!important;
+}
+.drop {
+  display: block !important;
+}
+
+.custom-drop{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.time-font{
+  font-size: 43px;
+  text-align: center;
+  height: 110%;
+}
+
+.modal-header-font{
+  font-size: 20px;
+}
+
+.active{
+  background-color: #d2f8d2;
+  color: black;
+}
+

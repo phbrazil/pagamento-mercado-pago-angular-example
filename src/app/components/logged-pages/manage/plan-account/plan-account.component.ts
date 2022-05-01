@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { ChangePlanComponent } from './change-plan/change-plan.component';
 
 @Component({
   selector: 'app-plan-account',
@@ -16,7 +18,7 @@ export class PlanAccountComponent implements OnInit {
   brand: string = 'visa'
   isLoading: boolean = true;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private dialog: MatDialog) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -40,6 +42,13 @@ export class PlanAccountComponent implements OnInit {
     }, err => {
       this.isLoading = false;
     })
+  }
+
+  changePlan(){
+
+    this.dialog.open(ChangePlanComponent);
+
+
   }
 
 }
