@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Roles } from 'src/app/_models/roles';
+import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { RolesService } from 'src/app/_services/roles.service copy';
+import { PlanService } from 'src/app/_services/plan.service';
 
 @Component({
   selector: 'app-change-plan',
@@ -12,7 +12,7 @@ import { RolesService } from 'src/app/_services/roles.service copy';
 })
 export class ChangePlanComponent implements OnInit {
 
-  roles: Roles;
+  plan: Plan;
   user: User;
 
   isLoading: boolean = false;
@@ -21,7 +21,7 @@ export class ChangePlanComponent implements OnInit {
   isAdvance: boolean = false;
   isTime: boolean = false;
 
-  constructor(private rolesService: RolesService, private accountService: AccountService,
+  constructor(private planService: PlanService, private accountService: AccountService,
     private dialog: MatDialog) {
 
     this.accountService.user.subscribe(x => this.user = x);
@@ -35,15 +35,15 @@ export class ChangePlanComponent implements OnInit {
 
   loadRoles(){
     this.isLoading = true;
-    this.rolesService.getRoles(this.user.idUser, this.accountService.getToken()).subscribe(roles=>{
+    this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan=>{
 
-      this.roles = roles;
+      this.plan = plan;
 
       this.isLoading = false;
 
-      this.checkCurrentPlan(roles);
+      this.checkCurrentPlan(plan);
 
-      console.log(roles)
+      console.log(plan)
 
     }, _err=>{
       this.isLoading = false;
@@ -70,11 +70,11 @@ export class ChangePlanComponent implements OnInit {
     this.isAdvance = !this.isAdvance;
   }
 
-  checkCurrentPlan(roles: Roles){
+  checkCurrentPlan(plan: Plan){
 
-    this.isAdvance = roles.enableAdvance;
-    this.isTime = roles.enableTime;
-    this.isRefund = roles.enableRefund;
+    this.isAdvance = plan.enableAdvance;
+    this.isTime = plan.enableTime;
+    this.isRefund = plan.enableRefund;
 
   }
 

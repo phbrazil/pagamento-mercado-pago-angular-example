@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Roles } from 'src/app/_models/roles';
-import { RolesService } from 'src/app/_services/roles.service copy';
+import { Plan } from 'src/app/_models/plan';
+import { PlanService } from 'src/app/_services/plan.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
   user: User;
 
-  roles: Roles;
+  plan: Plan;
 
   faUser = faUser;
   faBars = faBars;
@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private accountService: AccountService,
-    private rolesService: RolesService) {
+    private planService: PlanService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -35,10 +35,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
 
     //CHECK USER ROLES
-    this.rolesService.getRoles(this.user.idUser, this.accountService.getToken()).subscribe(roles => {
+    this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan => {
 
-      this.rolesService.setRoles(roles);
-      this.roles = roles;
+      this.planService.setPlan(plan);
+      this.plan = plan;
 
     }, _err => {
       this.accountService.logout();

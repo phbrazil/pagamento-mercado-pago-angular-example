@@ -4,11 +4,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Roles } from '../_models/roles';
+import { Plan } from '../_models/plan';
 @Injectable({ providedIn: 'root' })
-export class RolesService {
-  private rolesSubject: BehaviorSubject<Roles>;
-  public roles: Observable<Roles>;
+export class PlanService {
+  private planSubject: BehaviorSubject<Plan>;
+  public plan: Observable<Plan>;
 
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
@@ -20,40 +20,40 @@ export class RolesService {
     private alertService: AlertService,
     public dialog: MatDialog
   ) {
-    this.rolesSubject = new BehaviorSubject<Roles>(JSON.parse(localStorage.getItem('roles')));
-    this.roles = this.rolesSubject.asObservable();
+    this.planSubject = new BehaviorSubject<Plan>(JSON.parse(localStorage.getItem('plan')));
+    this.plan = this.planSubject.asObservable();
   }
 
-  public get rolesValue(): Roles {
-    return this.rolesSubject.value;
+  public get rolesValue(): Plan {
+    return this.planSubject.value;
   }
 
-  public setRoles(roles: Roles) {
+  public setPlan(plan: Plan) {
 
-    this.rolesSubject.next(roles);
+    this.planSubject.next(plan);
 
   }
 
-  getRoles(idUser: number, token: string) {
+  getPlan(idUser: number, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/account/api/auth/roles/getRoles/${idUser}`
+    const url = `${this.baseUrl}/account/api/auth/plan/getPlan/${idUser}`
 
-    return this.http.get<Roles>(url, header);
+    return this.http.get<Plan>(url, header);
   }
 
-  newRoles(body: any, token: string) {
+  newPlan(body: any, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/account/api/auth/roles/newRoles`
+    const url = `${this.baseUrl}/account/api/auth/plan/newPlan`
 
     return this.http.post<[any]>(url, body, header);
   }

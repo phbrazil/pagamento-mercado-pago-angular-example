@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
-import { RolesService } from 'src/app/_services/roles.service copy';
 import { CreateAccountComponent } from '../create-account/create-account.component';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  constructor(private rolesService: RolesService, private fb: FormBuilder, private alertService: AlertService, public dialog: MatDialog, private router: Router,
+  constructor(private fb: FormBuilder, private alertService: AlertService, public dialog: MatDialog, private router: Router,
     private accountService: AccountService) {
 
   }

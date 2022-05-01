@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Roles } from 'src/app/_models/roles';
+import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { RolesService } from 'src/app/_services/roles.service copy';
+import { PlanService } from 'src/app/_services/plan.service';
 
 @Component({
   selector: 'app-new-member',
@@ -23,20 +23,18 @@ export class NewMemberComponent implements OnInit {
   messageType: string = ''
 
   user: User;
-  roles: Roles;
+  plan: Plan;
 
   constructor(private dialog: MatDialog, private fb: FormBuilder,
     private accountService: AccountService,
-    private rolesService: RolesService) {
+    private planService: PlanService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-    this.rolesService.roles.subscribe(x => this.roles = x);
+    this.planService.plan.subscribe(x => this.plan = x);
   }
 
   ngOnInit(): void {
-
-    console.log(this.roles)
 
     this.newMemberForm = this.fb.group({
       name: ['', Validators.required],
@@ -67,14 +65,15 @@ export class NewMemberComponent implements OnInit {
       } else {
 
         //SAVE ROLES
-        let newRoles = {
+        let newPlan = {
           idUser: res.idUser,
-          enableTime: this.roles.enableTime,
-          enableRefund: this.roles.enableRefund,
-          enableAdvance: this.roles.enableAdvance
+          plan: 'Pro',
+          enableTime: this.plan.enableTime,
+          enableRefund: this.plan.enableRefund,
+          enableAdvance: this.plan.enableAdvance
         };
 
-        this.rolesService.newRoles(newRoles, this.accountService.getToken()).subscribe(_res => {
+        this.planService.newPlan(newPlan, this.accountService.getToken()).subscribe(_res => {
 
           this.message = '';
           this.messageType = '';
