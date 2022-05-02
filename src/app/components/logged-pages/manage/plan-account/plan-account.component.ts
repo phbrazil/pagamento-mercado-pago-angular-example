@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { PlanService } from 'src/app/_services/plan.service';
 import { ChangePlanComponent } from './change-plan/change-plan.component';
 
 @Component({
@@ -17,8 +19,10 @@ export class PlanAccountComponent implements OnInit {
   currentPlanValue: number = 0;
   brand: string = 'visa'
   isLoading: boolean = true;
+  plan: Plan;
 
-  constructor(private accountService: AccountService, private dialog: MatDialog) {
+  constructor(private accountService: AccountService, private dialog: MatDialog,
+    private planService: PlanService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -26,8 +30,18 @@ export class PlanAccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.user.admin){
+    this.planService.getIsReload().subscribe(status => {
+      if (status != null && status) {
+        if (this.user.admin) {
+          this.loadActiveMembers();
+          this.loadPlan();
+        }
+      }
+    })
+
+    if (this.user.admin) {
       this.loadActiveMembers();
+      this.loadPlan();
     }
   }
 
@@ -37,17 +51,30 @@ export class PlanAccountComponent implements OnInit {
 
     this.accountService.getTeamMembers(this.user.idUser, this.user.idGroup).subscribe(res => {
       this.activeUsers = res.length;
-      this.currentPlanValue = this.activeUsers *12;
+      this.currentPlanValue = this.activeUsers * 12;
       this.isLoading = false;
     }, err => {
       this.isLoading = false;
     })
   }
 
-  changePlan(){
+  changePlan() {
 
     this.dialog.open(ChangePlanComponent);
 
+
+  }
+
+  loadPlan() {
+
+    this.isLoading = true;
+
+    this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(res => {
+      this.plan = res;
+      this.isLoading = false;
+    }, _err=>{
+      this.isLoading = false;
+    })
 
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAccountComponent } from '../create-account/create-account.component';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Constants } from '../shared/utils/Constants';
 
 @Component({
   selector: 'app-pricing',
@@ -73,7 +74,7 @@ export class PricingComponent implements OnInit {
 
   calcPricingPro() {
 
-    let multiply = 5;
+    let multiply = Constants.multiplyPro;
 
     this.isTimePro ? multiply = multiply + 5 : multiply = multiply - 0;
     this.isAdvancePro ? multiply = multiply + 5 : multiply = multiply - 0;
@@ -141,7 +142,7 @@ export class PricingComponent implements OnInit {
 
   calcPricingCorp() {
 
-    let multiply = 10;
+    let multiply = Constants.multiplyCorp;
 
     this.isTimeCorp ? multiply = multiply + 5 : multiply = multiply - 0;
     this.isAdvanceCorp ? multiply = multiply + 5 : multiply = multiply - 0;

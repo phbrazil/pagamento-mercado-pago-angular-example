@@ -10,6 +10,8 @@ export class PlanService {
   private planSubject: BehaviorSubject<Plan>;
   public plan: Observable<Plan>;
 
+  private isReloadPlan = new BehaviorSubject<boolean>(false);
+
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
 
@@ -34,12 +36,22 @@ export class PlanService {
 
   }
 
+  public setIsReload(status: boolean): void {
+    this.isReloadPlan.next(status);
+  }
+
+  public getIsReload(): Observable<boolean> {
+    return this.isReloadPlan.asObservable();
+
+  }
+
   getPlan(idUser: number, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
+
 
     const url = `${this.baseUrl}/account/api/auth/plan/getPlan/${idUser}`
 
@@ -54,6 +66,18 @@ export class PlanService {
     }
 
     const url = `${this.baseUrl}/account/api/auth/plan/newPlan`
+
+    return this.http.post<[any]>(url, body, header);
+  }
+
+  changePlan(body: any, idPlan: number, token: string,) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/account/api/auth/plan/changePlan/${idPlan}`
 
     return this.http.post<[any]>(url, body, header);
   }
