@@ -1,22 +1,43 @@
-
-.active{
+.active {
   background-color: #d2f8d2;
   color: black;
 }
-.pricing-font{
+
+.pricing-font {
   font-size: 40px;
   text-align: center;
-  height: 100%;
+  height: 65px;
+  width: 65px;
+
 }
 
-.footer {
-  position : absolute;
-  bottom : 0;
-}
+  .form-control {
+    align-self: center;
+    display: block;
+    width: 65px;
+    height: 65px;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 
-.zoom {
-  transition: transform .2s; /* Animation */
-}
-.zoom:hover {
-  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
+  }
+
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .zoom {
+    transition: transform .2s;
+    /* Animation */
+  }
+
+  .zoom:hover {
+    transform: scale(1.2);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }

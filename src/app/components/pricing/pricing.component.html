@@ -16,7 +16,7 @@
           </ul>
           <div class="mt-4">
             <button type="button" class="btn-lg btn-block btn-custom-confirm"
-            (click)="getOpportunity('free')">Experimentar</button>
+              (click)="getOpportunity('free')">Experimentar</button>
           </div>
         </div>
 
@@ -45,17 +45,17 @@
             class="btn-block btn-lg btn-custom-success" value="Reembolsos">
           <div class="col-md-12 mb-4 mt-2">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <button data-toggle="tooltip" id='previous' name='previous' value='previous' (click)="decreaseUserPro()"
                   class="btn btn-lg btn-outline-info shadow zoom">
                   <fa-icon class="fa-2x" [icon]="faMinus"></fa-icon>
                 </button>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="number" min="0" max="20" (change)="addUserPro($event)" (keyup)="addUserPro($event)"
-                  class="form-control default-font pricing-font mt-2 mb-2 text-center" value="{{usersPro}}">
+                  class="form-control default-font pricing-font mt-2 mb-2" value="{{usersPro}}">
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <button data-toggle="tooltip" id='next' name='next' value='next' (click)="increaseUserPro()"
                   class="btn btn-lg btn-outline-info shadow zoom">
                   <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
@@ -93,17 +93,17 @@
 
           <div class="col-md-12 mb-4 mt-2">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <button data-toggle="tooltip" id='previous' name='previous' value='previous'
                   (click)="decreaseUserCorp()" class="btn btn-lg btn-outline-info shadow zoom">
                   <fa-icon class="fa-2x" [icon]="faMinus"></fa-icon>
                 </button>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <input type="number" min="0" (change)="addUserCorp($event)" (keyup)="addUserCorp($event)"
-                  class="form-control default-font pricing-font mt-2 mb-2 text-center" value="{{usersCorp}}">
+                  class="form-control default-font pricing-font mt-2 mb-2" value="{{usersCorp}}">
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <button data-toggle="tooltip" id='next' name='next' value='next' (click)="increaseUserCorp()"
                   class="btn btn-lg btn-outline-info shadow zoom">
                   <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
