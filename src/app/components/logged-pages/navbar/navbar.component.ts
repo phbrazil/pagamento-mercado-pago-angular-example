@@ -34,15 +34,16 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //CHECK USER ROLES
-    this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan => {
+    //reload navbar if plan change
+    this.planService.getIsReload().subscribe(status => {
+      if (status != null && status) {
+        if (this.user.admin) {
+          this.getPlan();
+        }
+      }
+    })
 
-      this.planService.setPlan(plan);
-      this.plan = plan;
-
-    }, _err => {
-      this.accountService.logout();
-    });
+    this.getPlan();
 
     for (var i = 0; i < this.user.name.length; i++) {
       if (this.user.name.charAt(i) == ' ') {
@@ -56,6 +57,18 @@ export class NavbarComponent implements OnInit {
 
     this.accountService.logout();
 
+  }
+
+  getPlan(){
+     //CHECK USER ROLES
+     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan => {
+
+      this.planService.setPlan(plan);
+      this.plan = plan;
+
+    }, _err => {
+      this.accountService.logout();
+    });
   }
 
 }

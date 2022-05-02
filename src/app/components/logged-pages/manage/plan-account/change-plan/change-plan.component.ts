@@ -70,6 +70,9 @@ export class ChangePlanComponent implements OnInit {
 
       this.planService.setIsReload(true);
 
+      this.planService.setPlan(res);
+
+
       this.close();
 
     }, _err => {

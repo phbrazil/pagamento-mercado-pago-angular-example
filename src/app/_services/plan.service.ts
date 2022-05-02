@@ -79,7 +79,7 @@ export class PlanService {
 
     const url = `${this.baseUrl}/account/api/auth/plan/changePlan/${idPlan}`
 
-    return this.http.post<[any]>(url, body, header);
+    return this.http.post<Plan>(url, body, header);
   }
 
 }
