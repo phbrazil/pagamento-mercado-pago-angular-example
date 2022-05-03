@@ -38,8 +38,8 @@
             class="btn-block btn-lg btn-custom-success" value="Adiantamentos e Prestação de Contas">
           <input type="button" (click)="checkIsRefundPro()" [ngClass]="{'active' : isRefundPro, '' : !isRefundPro}"
             class="btn-block btn-lg btn-custom-success" value="Reembolsos">
-          <div class="col-md-12 mb-4 mt-2">
-            <div class="row">
+          <div class="col-md-12 mb-4 mt-4">
+            <div class="row_inline">
               <div class="col-md-4">
                 <button data-toggle="tooltip" id='previous' name='previous' value='previous' (click)="decreaseUserPro()"
                   class="btn btn-lg btn-outline-info shadow">
@@ -81,8 +81,8 @@
           <input type="button" (click)="checkIsRefundCorp()" [ngClass]="{'active' : isRefundCorp, '' : !isRefundCorp}"
             class="btn-block btn-lg btn-custom-success" value="Reembolsos">
 
-          <div class="col-md-12 mb-4 mt-2">
-            <div class="row">
+          <div class="col-md-12 mb-4 mt-4">
+            <div class="row_inline">
               <div class="col-md-4">
                 <button data-toggle="tooltip" id='previous' name='previous' value='previous'
                   (click)="decreaseUserCorp()" class="btn btn-lg btn-outline-info shadow">

@@ -1,3 +1,5 @@
+
+
 .active {
   background-color: #d2f8d2;
   color: black;
@@ -11,33 +13,40 @@
 
 }
 
-  .form-control {
-    align-self: center;
-    display: block;
-    width: 65px;
-    height: 65px;
-    padding: 6px 12px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.form-control {
+  align-self: center;
+  display: block;
+  width: 65px;
+  height: 65px;
+  padding: 6px 12px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 
-  }
+}
 
 
-  .footer {
-    position: absolute;
-    bottom: 0;
-  }
+.footer {
+  position: absolute;
+  bottom: 0;
+}
 
-  .zoom {
-    transition: transform .2s;
-    /* Animation */
-  }
+.zoom {
+  transition: transform .2s;
+  /* Animation */
+}
 
-  .zoom:hover {
-    transform: scale(1.2);
-    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  }
+.zoom:hover {
+  transform: scale(1.2);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.row_inline {
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin-right: -15px;
+  margin-left: -15px;
+}
