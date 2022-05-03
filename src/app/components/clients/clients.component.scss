@@ -6,3 +6,11 @@
   .logo{
     max-width: 100px;
   }
+
+  .row_inline {
+    display: flex;
+    /* flex-wrap: wrap; */
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
