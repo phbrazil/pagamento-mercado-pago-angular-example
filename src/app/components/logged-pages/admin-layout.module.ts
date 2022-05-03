@@ -37,6 +37,7 @@ import { NewMemberComponent } from './manage/my-team/new-member/new-member.compo
 import { ProjectReportsComponent } from './reports/project-reports/project-reports.component';
 import { TeamReportsComponent } from './reports/team-reports/team-reports.component';
 import { ChangePlanComponent } from './manage/plan-account/change-plan/change-plan.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
