@@ -37,6 +37,9 @@ export class NewEntryComponent implements OnInit {
   idTask: number;
   tasks: Task[] = [];
 
+  notFoundProject: string = 'Nenhum projeto encontrado';
+  notFoundTask: string = 'Nenhuma atividade encontrada';
+
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public currentDay: any,
@@ -123,6 +126,10 @@ export class NewEntryComponent implements OnInit {
     this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
       this.projects = res;
+
+      if(this.project.length == 0 && this.user.admin){
+        this.notFoundProject = 'Nenhum projeto encontrado, crie seus projetos no menu Projetos'
+      }
     }, _err => {
       this.isLoading = false;
     })
@@ -135,6 +142,10 @@ export class NewEntryComponent implements OnInit {
     this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.isLoading = false;
       this.tasks = res;
+
+      if(this.tasks.length == 0 && this.user.admin){
+        this.notFoundTask = 'Nenhuma atividade encontrada, crie suas atividades no menu Atividades'
+      }
     }, _err => {
       this.isLoading = false;
     })

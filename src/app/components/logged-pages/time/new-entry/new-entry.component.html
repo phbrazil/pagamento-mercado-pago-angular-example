@@ -14,14 +14,14 @@
             <label>Projeto</label>
             <ng-select formControlName="project" [items]="projects" [multiple]="false" [closeOnSelect]="true"
               [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" [selectOnTab]="true"
-              notFoundText="Nenhum projeto encontrado" name="project">
+              notFoundText="{{notFoundProject}}" name="project">
             </ng-select>
           </div>
           <div class="col-md-12 order-md-1 mt-2" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <label>Atividade</label>
             <ng-select formControlName="task" [items]="tasks" [multiple]="false" [closeOnSelect]="true"
               [hideSelected]="true" (change)="onChangeTask()" bindLabel="name" [selectOnTab]="true"
-              notFoundText="Nenhuma atividade encontrada" name="task">
+              notFoundText="{{notFoundTask}}" name="task">
             </ng-select>
           </div>
           <div class="col-md-8 order-md-1 mt-4" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
