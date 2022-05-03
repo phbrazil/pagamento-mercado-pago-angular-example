@@ -20,11 +20,13 @@ moment.locale('pt')
 })
 export class NewEntryComponent implements OnInit {
 
-  timeModel: string;
+  timeModel: string = '';
 
   newEntryForm: FormGroup;
 
   isLoading: boolean = false;
+  isLoadingProject: boolean = false;
+  isLoadingTask: boolean = false;
 
   user: User;
 
@@ -74,19 +76,23 @@ export class NewEntryComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  onChangeProject() {
+  onChangeProject(event: any) {
 
-    this.project = this.newEntryForm.value.project.name;
-    this.idProject = this.newEntryForm.value.project.idProject;
-    this.newEntryForm.patchValue({project: this.project, idProject: this.idProject});
+    if (event != undefined) {
+      this.project = this.newEntryForm.value.project.name;
+      this.idProject = this.newEntryForm.value.project.idProject;
+      this.newEntryForm.patchValue({ project: this.project, idProject: this.idProject });
+    }
 
   }
 
-  onChangeTask() {
+  onChangeTask(event: any) {
 
-    this.task = this.newEntryForm.value.task.name;
-    this.idTask = this.newEntryForm.value.task.idTask;
-    this.newEntryForm.patchValue({idTask: this.idTask, task: this.task});
+    if (event != undefined) {
+      this.task = this.newEntryForm.value.task.name;
+      this.idTask = this.newEntryForm.value.task.idTask;
+      this.newEntryForm.patchValue({ idTask: this.idTask, task: this.task });
+    }
 
   }
 
@@ -121,33 +127,34 @@ export class NewEntryComponent implements OnInit {
   }
 
   loadProjects() {
-    this.isLoading = true;
+    this.isLoadingProject = true;
 
     this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
-      this.isLoading = false;
+      this.isLoadingProject = false;
       this.projects = res;
 
-      if(this.project.length == 0 && this.user.admin){
+
+      if (this.projects.length == 0 && this.user.admin) {
         this.notFoundProject = 'Nenhum projeto encontrado, crie seus projetos no menu Projetos'
       }
     }, _err => {
-      this.isLoading = false;
+      this.isLoadingProject = false;
     })
 
   }
 
   loadTasks() {
-    this.isLoading = true;
+    this.isLoadingTask = true;
 
     this.taskService.getTasks(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
-      this.isLoading = false;
+      this.isLoadingTask = false;
       this.tasks = res;
 
-      if(this.tasks.length == 0 && this.user.admin){
+      if (this.tasks.length == 0 && this.user.admin) {
         this.notFoundTask = 'Nenhuma atividade encontrada, crie suas atividades no menu Atividades'
       }
     }, _err => {
-      this.isLoading = false;
+      this.isLoadingTask = false;
     })
 
   }
@@ -156,7 +163,7 @@ export class NewEntryComponent implements OnInit {
     console.log(tag)
     /* https://github.com/ng-select/ng-select/issues/809 */
     return 'hueheuheuehue';
-}
+  }
 
 
 }

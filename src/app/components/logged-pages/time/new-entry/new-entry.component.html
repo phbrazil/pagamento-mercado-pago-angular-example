@@ -1,9 +1,9 @@
 <div class="modal-position col-md-12" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="div-center" *ngIf="isLoading">
+    <div class="div-center" *ngIf="isLoading || isLoadingProject || isLoadingTask">
       <app-spinner-loader></app-spinner-loader>
     </div>
-    <div *ngIf="!isLoading" class="modal-content">
+    <div *ngIf="!isLoading && !isLoadingProject && !isLoadingTask" class="modal-content">
       <div class="modal-header" style="align-self: center;">
         <h3 class="modal-title default-font modal-header-font">Novo registro em {{currentDay.currentDayFormatted}}</h3>
       </div>
@@ -12,15 +12,15 @@
         <div class="modal-body mb-0 text-muted">
           <div class="col-md-12 order-md-1" [formGroup]="newEntryForm">
             <label>Projeto</label>
-            <ng-select formControlName="project" [items]="projects" [multiple]="false" [closeOnSelect]="true"
-              [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" [selectOnTab]="true"
+            <ng-select [(ngModel)]="project" placeholder="Selecione o projeto" formControlName="project" [items]="projects" [multiple]="false" [closeOnSelect]="true"
+              [hideSelected]="true" (change)="onChangeProject($event)" bindLabel="name" [selectOnTab]="true"
               notFoundText="{{notFoundProject}}" name="project">
             </ng-select>
           </div>
           <div class="col-md-12 order-md-1 mt-2" [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <label>Atividade</label>
-            <ng-select formControlName="task" [items]="tasks" [multiple]="false" [closeOnSelect]="true"
-              [hideSelected]="true" (change)="onChangeTask()" bindLabel="name" [selectOnTab]="true"
+            <ng-select [(ngModel)]="task" placeholder="Selecione a atividade" formControlName="task" [items]="tasks" [multiple]="false" [closeOnSelect]="true"
+              [hideSelected]="true" (change)="onChangeTask($event)" bindLabel="name" [selectOnTab]="true"
               notFoundText="{{notFoundTask}}" name="task">
             </ng-select>
           </div>
