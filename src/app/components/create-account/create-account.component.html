@@ -11,7 +11,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="col-md-12">
+        <div *ngIf="isSuccess" class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Estamos quase lá!</h4>
+          <p>Obrigado por usar nossa ferramenta.</p>
+          <hr>
+          <p class="mb-0">Verifique sua caixa de emails e confirme seu cadastro para aproveitar nossos produtos.</p>
+        </div>
+        <div *ngIf="!isSuccess" class="col-md-12">
           <div class="row">
             <form [formGroup]="formRegister" (ngSubmit)="send()">
               <div class="form-group">

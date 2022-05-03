@@ -16,6 +16,8 @@ export class CreateAccountComponent implements OnInit {
   subText: string = '';
   messageType: string = '';
 
+  isSuccess: boolean = false;
+
   formRegister = this.fb.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
@@ -33,6 +35,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   close() {
+    this.isSuccess = false;
     this.dialog.closeAll();
   }
 
@@ -58,32 +61,30 @@ export class CreateAccountComponent implements OnInit {
 
     this.isRegistering = true;
 
-    this.accountService.register(this.formRegister.value).subscribe(res =>{
+    this.accountService.register(this.formRegister.value).subscribe(res => {
 
       this.text = '';
       this.subText = '';
-      if(res.message.code == 401 && res.message.text == 'Email já está em uso'){
-        this.text  = res.message.text;
-        this.subText  = res.message.subText;
+      if (res.message.code == 401 && res.message.text == 'Email já está em uso') {
+        this.text = res.message.text;
+        this.subText = res.message.subText;
         this.messageType = 'danger';
-      }else{
-        this.text  = res.message.text;
-        this.subText  = res.message.subText;
+      } else {
+        this.text = res.message.text;
+        this.subText = res.message.subText;
         this.messageType = 'success';
         this.formRegister.reset();
+        this.isSuccess = true;
       }
 
       this.isRegistering = false;
 
-      console.log(res);
+    }, err => {
 
-    }, err =>{
-      console.log(err)
       this.isRegistering = false;
 
     })
 
-    console.log(this.formRegister.value)
   }
 
 }
