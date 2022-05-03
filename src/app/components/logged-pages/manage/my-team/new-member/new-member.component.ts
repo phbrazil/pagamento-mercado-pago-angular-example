@@ -64,7 +64,7 @@ export class NewMemberComponent implements OnInit {
 
       } else {
 
-        //SAVE ROLES
+        //SAVE PLAN
         let newPlan = {
           idUser: res.idUser,
           plan: 'Pro',
