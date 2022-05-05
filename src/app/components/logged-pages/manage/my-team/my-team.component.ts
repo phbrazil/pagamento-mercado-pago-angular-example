@@ -55,8 +55,6 @@ export class MyTeamComponent implements OnInit {
       }
     })
 
-    this.loadMembers();
-
     this.loadPlan();
 
   }
@@ -93,6 +91,7 @@ export class MyTeamComponent implements OnInit {
     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(res => {
       this.plan = res;
       this.isLoadingPlan = false;
+      this.loadMembers();
     }, _err => {
       this.isLoadingPlan = false;
     })

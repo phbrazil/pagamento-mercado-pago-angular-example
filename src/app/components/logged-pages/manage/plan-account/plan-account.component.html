@@ -1,7 +1,7 @@
-<div class="col-md-12 mt-4">
+<div *ngIf="card; else noCard" class="col-md-12 mt-4">
   <div class="row">
     <div class="col-md-12">
-      <div *ngIf="!isLoading" class="row">
+      <div *ngIf="!isLoading && !isLoadingCard" class="row">
         <div class="col-md-5">
           <div class="card card--front">
             <div class="card__number">4111 **** **** 1111</div>
@@ -27,7 +27,7 @@
         <input type="button" (click)="changePlan()" class="btn-custom-confirm" value="Alterar Plano" />
       </div>
       <div class="col-md-4 mt-4">
-        <input type="button" class="btn-custom-decline" value="Alterar Cartão" />
+        <input type="button" (click)="newCard()" class="btn-custom-decline" value="Alterar Cartão" />
       </div>
       <div class="col-md-4 mt-4">
         <input type="button" class="btn-custom-reject" value="Cancelar Assinatura" />
@@ -35,3 +35,16 @@
     </div>
   </div>
 </div>
+
+<ng-template #noCard>
+  <div *ngIf="!isLoadingCard" class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="text-muted">Nenhum Cartão adicionado</h4>
+      </div>
+      <div class="col-md-6 mt-2">
+        <input type="button" class="btn-custom-confirm" (click)="newCard()" value="Adicionar Cartão">
+      </div>
+    </div>
+  </div>
+</ng-template>

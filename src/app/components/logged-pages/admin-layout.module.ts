@@ -38,6 +38,7 @@ import { ProjectReportsComponent } from './reports/project-reports/project-repor
 import { TeamReportsComponent } from './reports/team-reports/team-reports.component';
 import { ChangePlanComponent } from './manage/plan-account/change-plan/change-plan.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NewCardComponent } from './manage/plan-account/new-card/new-card.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     NewMemberComponent,
     ProjectReportsComponent,
     TeamReportsComponent,
-    ChangePlanComponent
+    ChangePlanComponent,
+    NewCardComponent
   ],
   imports: [
     RouterModule,

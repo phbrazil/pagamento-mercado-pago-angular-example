@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Card } from 'src/app/_models/card';
 import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { CardService } from 'src/app/_services/card.service';
 import { PlanService } from 'src/app/_services/plan.service';
 import { ChangePlanComponent } from './change-plan/change-plan.component';
+import { NewCardComponent } from './new-card/new-card.component';
 
 @Component({
   selector: 'app-plan-account',
@@ -18,11 +21,13 @@ export class PlanAccountComponent implements OnInit {
   activeUsers: number = 0;
   currentPlanValue: number = 0;
   brand: string = 'visa'
-  isLoading: boolean = true;
+  isLoading: boolean = false;
+  isLoadingCard: boolean = false;
   plan: Plan;
+  card: Card;
 
   constructor(private accountService: AccountService, private dialog: MatDialog,
-    private planService: PlanService) {
+    private planService: PlanService, private cardService: CardService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -43,6 +48,8 @@ export class PlanAccountComponent implements OnInit {
       this.loadActiveMembers();
       this.loadPlan();
     }
+
+    this.loadCard();
   }
 
   loadActiveMembers() {
@@ -62,7 +69,6 @@ export class PlanAccountComponent implements OnInit {
 
     this.dialog.open(ChangePlanComponent);
 
-
   }
 
   loadPlan() {
@@ -72,10 +78,28 @@ export class PlanAccountComponent implements OnInit {
     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(res => {
       this.plan = res;
       this.isLoading = false;
-    }, _err=>{
+    }, _err => {
       this.isLoading = false;
     })
 
   }
+
+  newCard() {
+    this.dialog.open(NewCardComponent);
+
+  }
+
+  loadCard(){
+    this.isLoadingCard = true;
+    this.cardService.getCard(this.user.idUser, this.accountService.getToken()).subscribe(res=>{
+      this.card = res;
+      this.isLoadingCard = false;
+    }, _err=>{
+      this.isLoadingCard = false;
+      console.log(_err)
+    })
+
+  }
+
 
 }
