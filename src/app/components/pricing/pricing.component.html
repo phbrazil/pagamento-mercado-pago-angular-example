@@ -32,7 +32,7 @@
             <h4>Suporte via email</h4>
           </div>
           <h5 class="text-muted">Selecione os produtos para incluir na estimativa</h5>
-          <input type="button" (click)="checkIsTimePro()" [ngClass]="{'active' : isTimePro, '' : !isTimePro}"
+          <input type="button" [ngClass]="{'active' : isTimePro, '' : !isTimePro}"
             class="btn-block btn-lg btn-custom-success" value="Timesheet">
           <input type="button" (click)="checkIsAdvancePro()" [ngClass]="{'active' : isAdvancePro, '' : !isAdvancePro}"
             class="btn-block btn-lg btn-custom-success" value="Adiantamentos e Prestação de Contas">
@@ -73,7 +73,7 @@
             <h4>Suporte via email</h4>
           </div>
           <h5 class="text-muted">Selecione os produtos para incluir na estimativa</h5>
-          <input type="button" (click)="checkIsTimeCorp()" [ngClass]="{'active' : isTimeCorp, '' : !isTimeCorp}"
+          <input type="button" [ngClass]="{'active' : isTimeCorp, '' : !isTimeCorp}"
             class="btn-block btn-lg btn-custom-success" value="Timesheet">
           <input type="button" (click)="checkIsAdvanceCorp()"
             [ngClass]="{'active' : isAdvanceCorp, '' : !isAdvanceCorp}" class="btn-block btn-lg btn-custom-success"

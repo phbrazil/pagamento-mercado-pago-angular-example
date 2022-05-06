@@ -18,14 +18,14 @@ export class PricingComponent implements OnInit {
   //PRO PLAN
   usersPro: number = 0;
   totalPro: number = 0;
-  isTimePro: boolean = false;
+  isTimePro: boolean = true;
   isAdvancePro: boolean = false;
   isRefundPro: boolean = false;
 
   //CORP PLAN
   usersCorp: number = 0;
   totalCorp: number = 0;
-  isTimeCorp: boolean = false;
+  isTimeCorp: boolean = true;
   isAdvanceCorp: boolean = false;
   isRefundCorp: boolean = false;
 

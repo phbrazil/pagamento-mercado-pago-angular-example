@@ -25,7 +25,7 @@
             </div>
           </div>
           <h5 class="text-muted">Selecione os produtos para incluir no seu plano</h5>
-          <input type="button" (click)="checkIsTime()" [ngClass]="{'active' : isTime, '' : !isTime}"
+          <input type="button" [ngClass]="{'active' : isTime, '' : !isTime}"
             class="btn-block btn-lg btn-custom-success" value="Timesheet">
           <input type="button" (click)="checkIsAdvance()" [ngClass]="{'active' : isAdvance, '' : !isAdvance}"
             class="btn-block btn-lg btn-custom-success" value="Adiantamentos e Prestação de Contas">

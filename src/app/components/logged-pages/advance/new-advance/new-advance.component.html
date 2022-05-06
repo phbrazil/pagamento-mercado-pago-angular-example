@@ -23,13 +23,12 @@
               [closeOnSelect]="true" [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" name="project">
             </ng-select>
           </div>
-          <div class="col-md-5" style="margin-top: -10px;">
+          <div class="col-md-5 negative-margin">
             <div class="radio">
               <label><input type="radio" name="currency" checked>Real</label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="currency">Dólar <strong>{{dolarPrice | currency :
-                  'BRL'}}</strong></label>
+              <label><input type="radio" name="currency">Dólar <strong>{{dolarPrice | currency : 'BRL'}}</strong></label>
             </div>
             <div class="radio">
               <label><input type="radio" name="currency">Euro <strong>{{euroPrice | currency : 'BRL'}}</strong></label>

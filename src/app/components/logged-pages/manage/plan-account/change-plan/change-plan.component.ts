@@ -22,7 +22,7 @@ export class ChangePlanComponent implements OnInit {
 
   isRefund: boolean = false;
   isAdvance: boolean = false;
-  isTime: boolean = false;
+  isTime: boolean = true;
 
   constructor(private planService: PlanService, private accountService: AccountService,
     private dialog: MatDialog) {
