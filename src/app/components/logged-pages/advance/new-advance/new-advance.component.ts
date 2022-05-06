@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Project } from 'src/app/_models/project';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { CurrencyService } from 'src/app/_services/currency.service';
 import { ProjectService } from 'src/app/_services/project.service';
 
 @Component({
@@ -21,13 +22,17 @@ export class NewAdvanceComponent implements OnInit {
 
   user: User;
 
+  dolarPrice: number;
+  euroPrice: number;
+
   project: any = [];
-  //projects = [{ name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }, { name: 'Mustard' }, { name: 'Ketchup' }, { name: 'Relish' }];
   projects: Project[] = [];
 
+  reason = [{ name: 'Viagem' }, { name: 'Almoço' }, { name: 'Jantar' }, { name: 'Café da manhã' }, { name: 'Hotel' }, { name: 'Passagem Aérea' }, { name: 'Combustível' }, { name: 'Passagem Terrestre' }, { name: 'Uber' }];
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
-    private accountService: AccountService, private projectService: ProjectService) {
+    private accountService: AccountService, private projectService: ProjectService,
+    private currencyService: CurrencyService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -37,12 +42,15 @@ export class NewAdvanceComponent implements OnInit {
 
     this.newAdvanceForm = this.fb.group({
       project: ['', Validators.required],
-      name: [this.user.name, Validators.required],
       idUser: [this.user.idUser, Validators.required],
       value: ['', Validators.required],
+      deadline: ['', Validators.required],
     });
 
     this.loadProjects();
+
+   this.loadDolar();
+   this.loadEuro();
 
   }
 
@@ -63,6 +71,39 @@ export class NewAdvanceComponent implements OnInit {
       this.isLoading = false;
       this.projects = res;
     }, _err => {
+      this.isLoading = false;
+    })
+
+  }
+
+  loadDolar(){
+
+    this.isLoading = true;
+
+    this.currencyService.getCurrency('USD').subscribe(res=>{
+
+      this.dolarPrice = res.USD.bid;
+      this.isLoading = false;
+
+    }, _err=>{
+      console.log(_err);
+      this.isLoading = false;
+    })
+
+  }
+
+  loadEuro(){
+
+    this.isLoading = true;
+
+    this.currencyService.getCurrency('EUR').subscribe(res=>{
+
+      this.euroPrice = res.EUR.bid;
+      this.isLoading = false;
+
+
+    }, _err=>{
+      console.log(_err);
       this.isLoading = false;
     })
 

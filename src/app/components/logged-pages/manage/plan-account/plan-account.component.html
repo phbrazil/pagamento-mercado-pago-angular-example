@@ -1,7 +1,7 @@
 <div *ngIf="card; else noCard" class="col-md-12 mt-4">
   <div class="row">
     <div class="col-md-12">
-      <div *ngIf="!isLoading && !isLoadingCard" class="row">
+      <div *ngIf="!isLoading && !isLoadingCard && !isLoadingPlan" class="row">
         <div class="col-md-5">
           <div class="card card--front">
             <div class="card__number">4111 **** **** 1111</div>
@@ -17,12 +17,7 @@
         </div>
       </div>
     </div>
-
-    <div *ngIf="isLoading">
-      <app-spinner-loader></app-spinner-loader>
-    </div>
-
-    <div *ngIf="!isLoading" class="col-md-12 mt-4">
+    <div *ngIf="!isLoading && !isLoadingCard && !isLoadingPlan" class="col-md-12 mt-4">
       <div class="col-md-4 mt-4">
         <input type="button" (click)="changePlan()" class="btn-custom-confirm" value="Alterar Plano" />
       </div>
@@ -36,8 +31,12 @@
   </div>
 </div>
 
+<div *ngIf="isLoading || isLoadingCard || isLoadingPlan">
+  <app-spinner-loader></app-spinner-loader>
+</div>
+
 <ng-template #noCard>
-  <div *ngIf="!isLoadingCard" class="col-md-12">
+  <div *ngIf="!isLoadingCard && !isLoading && !isLoadingPlan" class="col-md-12">
     <div class="row">
       <div class="col-md-6">
         <h4 class="text-muted">Nenhum Cartão adicionado</h4>

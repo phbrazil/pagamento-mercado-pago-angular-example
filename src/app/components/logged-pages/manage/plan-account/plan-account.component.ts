@@ -23,6 +23,7 @@ export class PlanAccountComponent implements OnInit {
   brand: string = 'visa'
   isLoading: boolean = false;
   isLoadingCard: boolean = false;
+  isLoadingPlan: boolean = false;
   plan: Plan;
   card: Card;
 
@@ -73,13 +74,13 @@ export class PlanAccountComponent implements OnInit {
 
   loadPlan() {
 
-    this.isLoading = true;
+    this.isLoadingPlan = true;
 
     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(res => {
       this.plan = res;
-      this.isLoading = false;
+      this.isLoadingPlan = false;
     }, _err => {
-      this.isLoading = false;
+      this.isLoadingPlan = false;
     })
 
   }

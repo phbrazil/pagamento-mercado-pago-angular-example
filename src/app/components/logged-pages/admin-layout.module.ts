@@ -39,6 +39,7 @@ import { TeamReportsComponent } from './reports/team-reports/team-reports.compon
 import { ChangePlanComponent } from './manage/plan-account/change-plan/change-plan.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NewCardComponent } from './manage/plan-account/new-card/new-card.component';
+import { EditProfileComponent } from './manage/profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { NewCardComponent } from './manage/plan-account/new-card/new-card.compon
     ProjectReportsComponent,
     TeamReportsComponent,
     ChangePlanComponent,
-    NewCardComponent
+    NewCardComponent,
+    EditProfileComponent
   ],
   imports: [
     RouterModule,
