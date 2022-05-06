@@ -28,7 +28,9 @@ export class NewAdvanceComponent implements OnInit {
   project: any = [];
   projects: Project[] = [];
 
-  reason = [{ name: 'Viagem' }, { name: 'Almoço' }, { name: 'Jantar' }, { name: 'Café da manhã' }, { name: 'Hotel' }, { name: 'Passagem Aérea' }, { name: 'Combustível' }, { name: 'Passagem Terrestre' }, { name: 'Uber' }];
+  reasons = [{ name: 'Viagem' }, { name: 'Almoço' }, { name: 'Jantar' }, { name: 'Café da manhã' }, { name: 'Hotel' },
+   { name: 'Passagem Aérea' }, { name: 'Combustível' }, { name: 'Passagem Terrestre' }, { name: 'Uber' }, {name: 'Outro'}];
+  reason: string;
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
     private accountService: AccountService, private projectService: ProjectService,
@@ -45,6 +47,7 @@ export class NewAdvanceComponent implements OnInit {
       idUser: [this.user.idUser, Validators.required],
       value: ['', Validators.required],
       deadline: ['', Validators.required],
+      reason: ['', Validators.required],
     });
 
     this.loadProjects();
@@ -68,8 +71,8 @@ export class NewAdvanceComponent implements OnInit {
     this.isLoading = true;
 
     this.projectService.getProjects(this.user.idGroup, this.accountService.getToken()).subscribe(res => {
-      this.isLoading = false;
       this.projects = res;
+      this.isLoading = false;
     }, _err => {
       this.isLoading = false;
     })
@@ -107,5 +110,10 @@ export class NewAdvanceComponent implements OnInit {
       this.isLoading = false;
     })
 
+  }
+
+  submit(){
+    this.isLoading = true;
+    console.log(this.newAdvanceForm.value);
   }
 }

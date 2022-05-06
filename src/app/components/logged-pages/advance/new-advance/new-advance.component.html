@@ -19,7 +19,7 @@
         <div class="modal-body mb-0 custom-font text-muted" [formGroup]="newAdvanceForm">
           <div class="col-md-7 order-md-1">
             <label>Projeto</label>
-            <ng-select formControlName="project" class="custom-font" [items]="projects" [multiple]="false"
+            <ng-select [(ngModel)]="project" placeholder="selecione o projeto" formControlName="project" class="custom-font" [items]="projects" [multiple]="false"
               [closeOnSelect]="true" [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" name="project">
             </ng-select>
           </div>
@@ -37,8 +37,8 @@
           </div>
           <div class="col-md-7">
             <label>Finalidade</label>
-            <ng-select formControlName="reason" class="custom-font" [items]="reason" [multiple]="false"
-              [closeOnSelect]="true" [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" name="reason">
+            <ng-select placeholder="selecione o motivo da despesa" formControlName="reason" class="custom-font" [items]="reasons" [multiple]="true"
+              [closeOnSelect]="true" [hideSelected]="true" bindLabel="name" name="reason">
             </ng-select>
           </div>
           <div class="col-md-2">
@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn-custom-confirm" [disabled]="!newAdvanceForm.valid || isLoading">Salvar</button>
+        <button type="submit" class="btn-custom-confirm" [disabled]="!newAdvanceForm.valid || isLoading" (click)="submit()">Salvar</button>
         <button type="button" class="btn-custom-decline" (click)="close()" data-dismiss="modal">Fechar</button>
       </div>
     </div>
