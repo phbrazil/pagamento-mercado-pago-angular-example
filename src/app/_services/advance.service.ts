@@ -5,12 +5,13 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Plan } from '../_models/plan';
+import { Advance } from '../_models/advance';
 @Injectable({ providedIn: 'root' })
-export class PlanService {
-  private planSubject: BehaviorSubject<Plan>;
-  public plan: Observable<Plan>;
+export class AdvanceService {
+  private advanceSubject: BehaviorSubject<Advance>;
+  public advance: Observable<Advance>;
 
-  private isReloadPlan = new BehaviorSubject<boolean>(false);
+  private isReloadAdvance = new BehaviorSubject<boolean>(false);
 
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
@@ -22,64 +23,63 @@ export class PlanService {
     private alertService: AlertService,
     public dialog: MatDialog
   ) {
-    this.planSubject = new BehaviorSubject<Plan>(JSON.parse(localStorage.getItem('plan')));
-    this.plan = this.planSubject.asObservable();
+    this.advanceSubject = new BehaviorSubject<Advance>(JSON.parse(localStorage.getItem('plan')));
+    this.advance = this.advanceSubject.asObservable();
   }
 
-  public get rolesValue(): Plan {
-    return this.planSubject.value;
+  public get rolesValue(): Advance {
+    return this.advanceSubject.value;
   }
 
-  public setPlan(plan: Plan) {
+  public setAdvance(advance: Advance) {
 
-    this.planSubject.next(plan);
+    this.advanceSubject.next(advance);
 
   }
 
   public setIsReload(status: boolean): void {
-    this.isReloadPlan.next(status);
+    this.isReloadAdvance.next(status);
   }
 
   public getIsReload(): Observable<boolean> {
-    return this.isReloadPlan.asObservable();
+    return this.isReloadAdvance.asObservable();
 
   }
 
-  getPlan(idUser: number, token: string) {
+  getAdvance(idAdvance: number, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
+    const url = `${this.baseUrl}/advance/getAdvance/${idAdvance}`
 
-    const url = `${this.baseUrl}/account/api/auth/plan/getPlan/${idUser}`
-
-    return this.http.get<Plan>(url, header);
+    return this.http.get<Advance>(url, header);
   }
 
-  newPlan(body: any, token: string) {
+  getAllAdvances(idUser: number, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/account/api/auth/plan/newPlan`
+    const url = `${this.baseUrl}/advance/getAllAdvances/${idUser}`
 
-    return this.http.post<Plan>(url, body, header);
+    return this.http.get<[Advance]>(url, header);
   }
 
-  changePlan(body: any, idPlan: number, token: string,) {
+  newAdvance(body: any, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/account/api/auth/plan/changePlan/${idPlan}`
+    const url = `${this.baseUrl}/advance/newAdvance`
 
-    return this.http.post<Plan>(url, body, header);
+    return this.http.post<Advance>(url, body, header);
   }
 
 }

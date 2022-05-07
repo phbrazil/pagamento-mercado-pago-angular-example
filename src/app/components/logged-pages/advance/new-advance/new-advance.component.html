@@ -20,24 +20,24 @@
           <div class="col-md-7 order-md-1">
             <label>Projeto</label>
             <ng-select [(ngModel)]="project" placeholder="selecione o projeto" formControlName="project" class="custom-font" [items]="projects" [multiple]="false"
-              [closeOnSelect]="true" [hideSelected]="true" (change)="onChangeProject()" bindLabel="name" name="project">
+              [closeOnSelect]="true" [hideSelected]="true" (change)="onChangeProject($event)" bindLabel="name" name="project">
             </ng-select>
           </div>
           <div class="col-md-5 negative-margin">
             <div class="radio">
-              <label><input type="radio" name="currency" checked>Real</label>
+              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Real" checked>Real</label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="currency">Dólar <strong>{{dolarPrice | currency : 'BRL'}}</strong></label>
+              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Dólar">Dólar <strong>{{dolarPrice | currency : 'BRL'}}</strong></label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="currency">Euro <strong>{{euroPrice | currency : 'BRL'}}</strong></label>
+              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Euro">Euro <strong>{{euroPrice | currency : 'BRL'}}</strong></label>
             </div>
           </div>
           <div class="col-md-7">
             <label>Finalidade</label>
             <ng-select placeholder="selecione o(s) motivo(s) do adiantamento" formControlName="reason" class="custom-font" [items]="reasons" [multiple]="true"
-              [closeOnSelect]="true" [hideSelected]="true" bindLabel="name" name="reason">
+              [closeOnSelect]="true" formControlName="reason" [hideSelected]="true" bindLabel="name" name="reason">
             </ng-select>
           </div>
           <div class="col-md-2">
@@ -56,22 +56,22 @@
             <div class="row">
               <div class="col-md-2">
                 <div class="radio">
-                  <label><input type="radio" name="paymentType" checked>Pix</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Pix" checked>Pix</label>
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="radio">
-                  <label><input type="radio" name="paymentType">Dinheiro</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Dinheiro">Dinheiro</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="radio">
-                  <label><input type="radio" name="paymentType">Cartão de Crédito</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Cartão de Crédito">Cartão de Crédito</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="radio">
-                  <label><input type="radio" name="paymentType">Cartão pré-pago</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Cartão pré-pago">Cartão pré-pago</label>
                 </div>
               </div>
             </div>

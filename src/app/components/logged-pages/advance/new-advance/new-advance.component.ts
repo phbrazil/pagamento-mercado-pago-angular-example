@@ -26,10 +26,15 @@ export class NewAdvanceComponent implements OnInit {
   euroPrice: number;
 
   project: any = [];
+  idProject: number;
   projects: Project[] = [];
 
+  //CURRENCY
+  currency: string = '';
+  exchange: number = 0;
+
   reasons = [{ name: 'Viagem' }, { name: 'Almoço' }, { name: 'Jantar' }, { name: 'Café da manhã' }, { name: 'Hotel' },
-   { name: 'Passagem Aérea' }, { name: 'Combustível' }, { name: 'Passagem Terrestre' }, { name: 'Uber' }, {name: 'Outro'}];
+  { name: 'Passagem Aérea' }, { name: 'Combustível' }, { name: 'Passagem Terrestre' }, { name: 'Uber' }, { name: 'Outro' }];
   reason: string;
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
@@ -44,16 +49,19 @@ export class NewAdvanceComponent implements OnInit {
 
     this.newAdvanceForm = this.fb.group({
       project: ['', Validators.required],
+      idProject: ['', Validators.required],
       idUser: [this.user.idUser, Validators.required],
       value: ['', Validators.required],
       deadline: ['', Validators.required],
       reason: ['', Validators.required],
+      receiveType: ['', Validators.required],
+      currency: ['', Validators.required],
+      exchange: ['', Validators.required],
     });
 
     this.loadProjects();
-
-   this.loadDolar();
-   this.loadEuro();
+    this.loadDolar();
+    this.loadEuro();
 
   }
 
@@ -61,9 +69,37 @@ export class NewAdvanceComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  onChangeProject(){
+  onChangeProject(event: any) {
 
-    this.project = this.newAdvanceForm.value.projeto;
+    if (event != undefined) {
+      this.project = this.newAdvanceForm.value.project.name;
+      this.idProject = this.newAdvanceForm.value.project.idProject;
+      this.newAdvanceForm.patchValue({ project: this.project, idProject: this.idProject });
+    }
+
+  }
+
+  changeCurrency(event: any){
+
+    this.currency = event.target.value;
+
+    if(event.target.value == 'Dólar'){
+      this.exchange = this.dolarPrice;
+
+    }else if(event.target.value == 'Euro'){
+      this.exchange = this.euroPrice;
+
+    }else{
+      this.exchange = 0;
+    }
+
+    this.newAdvanceForm.patchValue({ currency: this.currency, exchange: this.exchange });
+
+  }
+
+  changeReceive(event: any){
+
+    this.newAdvanceForm.patchValue({ receiveType: event.target.value });
 
   }
 
@@ -79,41 +115,42 @@ export class NewAdvanceComponent implements OnInit {
 
   }
 
-  loadDolar(){
+  loadDolar() {
 
     this.isLoading = true;
 
-    this.currencyService.getCurrency('USD').subscribe(res=>{
+    this.currencyService.getCurrency('USD').subscribe(res => {
 
       this.dolarPrice = res.USD.bid;
       this.isLoading = false;
 
-    }, _err=>{
+    }, _err => {
       console.log(_err);
       this.isLoading = false;
     })
 
   }
 
-  loadEuro(){
+  loadEuro() {
 
     this.isLoading = true;
 
-    this.currencyService.getCurrency('EUR').subscribe(res=>{
+    this.currencyService.getCurrency('EUR').subscribe(res => {
 
       this.euroPrice = res.EUR.bid;
       this.isLoading = false;
 
 
-    }, _err=>{
+    }, _err => {
       console.log(_err);
       this.isLoading = false;
     })
 
   }
 
-  submit(){
+  submit() {
     this.isLoading = true;
     console.log(this.newAdvanceForm.value);
   }
+
 }
