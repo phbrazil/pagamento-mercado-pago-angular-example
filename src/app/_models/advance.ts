@@ -3,7 +3,7 @@ import { User } from "./user"
 export class Advance {
   idAdvance: number
   project: string
-  reason: string
+  reason: [string]
   user: User
   value: number
   currency: string

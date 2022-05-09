@@ -9,6 +9,9 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { PlanService } from 'src/app/_services/plan.service';
 import { NewMemberComponent } from './new-member/new-member.component';
+import { DisableMemberComponent } from './disable-member/disable-member.component';
+import { TeamService } from 'src/app/_services/team.service';
+import { EnableMemberComponent } from './enable-member/enable-member.component';
 
 @Component({
   selector: 'app-my-team',
@@ -28,6 +31,7 @@ export class MyTeamComponent implements OnInit {
   user: User;
   isLoading: boolean = false;
   isLoadingPlan: boolean = false;
+  isLoadingMember: boolean = false;
 
   plan: Plan;
 
@@ -40,7 +44,8 @@ export class MyTeamComponent implements OnInit {
 
   constructor(private accountService: AccountService, private dialog: MatDialog,
     private dataTableSettings: TableSortService,
-    private planService: PlanService) {
+    private planService: PlanService,
+    private teamService: TeamService) {
 
     this.accountService.user.subscribe(x => this.user = x);
   }
@@ -71,7 +76,7 @@ export class MyTeamComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.accountService.getTeamMembers(this.user.idUser, this.user.idGroup).subscribe(res => {
+    this.teamService.getTeamMembers(this.user.idUser, this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.members = res;
       this.isLoading = false;
 
@@ -95,6 +100,44 @@ export class MyTeamComponent implements OnInit {
     }, _err => {
       this.isLoadingPlan = false;
     })
+  }
+
+  disableMember(idUser: number) {
+
+    this.isLoadingMember = true;
+
+    this.accountService.getUserById(idUser).subscribe(user =>{
+      this.isLoadingMember = false;
+
+      this.dialog.open(DisableMemberComponent,
+        {
+          data: {
+            user: user
+          }
+        })
+
+    }, _err =>{
+      this.isLoadingMember = false;
+    });
+  }
+
+  enableMember(idUser: number) {
+
+    this.isLoadingMember = true;
+
+    this.accountService.getUserById(idUser).subscribe(user =>{
+      this.isLoadingMember = false;
+
+      this.dialog.open(EnableMemberComponent,
+        {
+          data: {
+            user: user
+          }
+        })
+
+    }, _err =>{
+      this.isLoadingMember = false;
+    });
   }
 
 }

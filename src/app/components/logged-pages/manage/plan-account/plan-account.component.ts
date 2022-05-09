@@ -6,6 +6,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { CardService } from 'src/app/_services/card.service';
 import { PlanService } from 'src/app/_services/plan.service';
+import { TeamService } from 'src/app/_services/team.service';
 import { ChangePlanComponent } from './change-plan/change-plan.component';
 import { NewCardComponent } from './new-card/new-card.component';
 
@@ -28,7 +29,8 @@ export class PlanAccountComponent implements OnInit {
   card: Card;
 
   constructor(private accountService: AccountService, private dialog: MatDialog,
-    private planService: PlanService, private cardService: CardService) {
+    private planService: PlanService, private cardService: CardService,
+    private teamService: TeamService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -57,7 +59,7 @@ export class PlanAccountComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.accountService.getTeamMembers(this.user.idUser, this.user.idGroup).subscribe(res => {
+    this.teamService.getTeamMembers(this.user.idUser, this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.activeUsers = res.length;
       this.currentPlanValue = this.activeUsers * 12;
       this.isLoading = false;
@@ -97,7 +99,6 @@ export class PlanAccountComponent implements OnInit {
       this.isLoadingCard = false;
     }, _err=>{
       this.isLoadingCard = false;
-      console.log(_err)
     })
 
   }

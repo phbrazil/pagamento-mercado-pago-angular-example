@@ -82,4 +82,23 @@ export class AdvanceService {
     return this.http.post<Advance>(url, body, header);
   }
 
+  getStatus(status: string): string{
+    switch(status){
+      case '0':{
+        return "Criado"
+      }
+      case '1':{
+        return "Aprovado"
+      }
+      case '2':{
+        return "Rejeitado"
+      }
+
+
+    }
+
+    return "";
+
+  }
+
 }

@@ -89,8 +89,6 @@ export class TeamReportsComponent implements OnInit {
 
     this.teamService.getTeamReport(this.user.idUser, this.user.idGroup, startDate, endDate,
       this.accountService.getToken()).subscribe(res=>{
-
-        console.log(res)
       this.team = res;
       this.isLoading = false;
     }, _err =>{

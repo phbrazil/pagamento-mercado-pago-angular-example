@@ -159,11 +159,4 @@ export class NewEntryComponent implements OnInit {
 
   }
 
-  addTag(tag: string) {
-    console.log(tag)
-    /* https://github.com/ng-select/ng-select/issues/809 */
-    return 'hueheuheuehue';
-  }
-
-
 }

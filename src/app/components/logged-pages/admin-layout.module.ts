@@ -40,6 +40,8 @@ import { ChangePlanComponent } from './manage/plan-account/change-plan/change-pl
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NewCardComponent } from './manage/plan-account/new-card/new-card.component';
 import { EditProfileComponent } from './manage/profile/edit-profile/edit-profile.component';
+import { DisableMemberComponent } from './manage/my-team/disable-member/disable-member.component';
+import { EnableMemberComponent } from './manage/my-team/enable-member/enable-member.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { EditProfileComponent } from './manage/profile/edit-profile/edit-profile
     TeamReportsComponent,
     ChangePlanComponent,
     NewCardComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    DisableMemberComponent,
+    EnableMemberComponent
   ],
   imports: [
     RouterModule,

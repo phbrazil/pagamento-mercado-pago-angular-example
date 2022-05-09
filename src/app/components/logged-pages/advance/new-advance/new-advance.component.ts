@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Project } from 'src/app/_models/project';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { AdvanceService } from 'src/app/_services/advance.service';
 import { CurrencyService } from 'src/app/_services/currency.service';
 import { ProjectService } from 'src/app/_services/project.service';
 
@@ -30,7 +31,7 @@ export class NewAdvanceComponent implements OnInit {
   projects: Project[] = [];
 
   //CURRENCY
-  currency: string = '';
+  currency: string = 'Real';
   exchange: number = 0;
 
   reasons = [{ name: 'Viagem' }, { name: 'Almoço' }, { name: 'Jantar' }, { name: 'Café da manhã' }, { name: 'Hotel' },
@@ -39,7 +40,7 @@ export class NewAdvanceComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private fb: FormBuilder,
     private accountService: AccountService, private projectService: ProjectService,
-    private currencyService: CurrencyService) {
+    private currencyService: CurrencyService, private advanceService: AdvanceService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -54,9 +55,9 @@ export class NewAdvanceComponent implements OnInit {
       value: ['', Validators.required],
       deadline: ['', Validators.required],
       reason: ['', Validators.required],
-      receiveType: ['', Validators.required],
-      currency: ['', Validators.required],
-      exchange: ['', Validators.required],
+      receiveType: ['Pix', Validators.required],
+      currency: [this.currency, Validators.required],
+      exchange: [this.exchange, Validators.required],
     });
 
     this.loadProjects();
@@ -79,17 +80,17 @@ export class NewAdvanceComponent implements OnInit {
 
   }
 
-  changeCurrency(event: any){
+  changeCurrency(event: any) {
 
     this.currency = event.target.value;
 
-    if(event.target.value == 'Dólar'){
+    if (event.target.value == 'Dólar') {
       this.exchange = this.dolarPrice;
 
-    }else if(event.target.value == 'Euro'){
+    } else if (event.target.value == 'Euro') {
       this.exchange = this.euroPrice;
 
-    }else{
+    } else {
       this.exchange = 0;
     }
 
@@ -97,7 +98,7 @@ export class NewAdvanceComponent implements OnInit {
 
   }
 
-  changeReceive(event: any){
+  changeReceive(event: any) {
 
     this.newAdvanceForm.patchValue({ receiveType: event.target.value });
 
@@ -125,7 +126,6 @@ export class NewAdvanceComponent implements OnInit {
       this.isLoading = false;
 
     }, _err => {
-      console.log(_err);
       this.isLoading = false;
     })
 
@@ -142,15 +142,40 @@ export class NewAdvanceComponent implements OnInit {
 
 
     }, _err => {
-      console.log(_err);
       this.isLoading = false;
     })
 
   }
 
+  setReason() {
+
+    var reasons = this.newAdvanceForm.value.reason;
+
+    var reasonArray = [];
+
+    for (const reason of reasons) {
+
+      reasonArray.push(reason.name);
+
+    }
+
+    this.newAdvanceForm.patchValue({ reason: reasonArray });
+
+  }
+
   submit() {
+
+    this.setReason();
+
     this.isLoading = true;
-    console.log(this.newAdvanceForm.value);
+
+    this.advanceService.newAdvance(this.newAdvanceForm.value, this.accountService.getToken()).subscribe(_res => {
+      this.isLoading = false;
+      this.advanceService.setIsReload(true);
+      this.close();
+    }, _err => {
+      this.isLoading = true;
+    })
   }
 
 }

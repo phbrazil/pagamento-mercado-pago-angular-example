@@ -270,19 +270,6 @@ export class AccountService {
 
   }
 
-  getTeamMembers(idUser: number, idGroup: number) {
-
-    const token = this.getToken();
-
-    var header = {
-      headers: new HttpHeaders()
-        .set('Authorization', `Bearer ${token}`)
-    }
-
-    const url = `${this.baseUrl}/opportunity/getTeamMembers/${idUser}/${idGroup}`
-
-    return this.http.get<[User]>(url, header);
-  }
 
   getAllUsers() {
 
@@ -293,7 +280,7 @@ export class AccountService {
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/spartaclan/getAllUsers`
+    const url = `${this.baseUrl}/userDelete/getAllUsers`
 
     return this.http.get<[User]>(url, header);
   }
@@ -308,7 +295,7 @@ export class AccountService {
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/spartaclan/getUser/${idUser}`
+    const url = `${this.baseUrl}/opportunity/getUser/${idUser}`
 
 
     return this.http.get<User>(url, header);
@@ -360,8 +347,6 @@ export class AccountService {
   }
 
   createNewPassword(data: any) {
-
-    console.log(data)
 
     const url = `${this.baseUrl}/opportunity/createNewPassword`;
 

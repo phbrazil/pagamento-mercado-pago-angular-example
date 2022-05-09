@@ -134,8 +134,6 @@ export class MyTimeComponent implements OnInit {
 
   close() {
 
-    console.log('cliquei')
-
     this.dialog.closeAll();
 
   }

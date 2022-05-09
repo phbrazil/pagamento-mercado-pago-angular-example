@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { TimeTask } from '../_models/time-task';
+import { User } from '../_models/user';
 @Injectable({ providedIn: 'root' })
 export class TeamService {
 
@@ -30,5 +31,47 @@ export class TeamService {
 
     return this.http.get<[any]>(url, header);
   }
+
+
+  getTeamMembers(idUser: number, idGroup: number, token: string) {
+
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/team/getTeamMembers/${idUser}/${idGroup}`
+
+    return this.http.get<[User]>(url, header);
+  }
+
+  disableUser(idUserRequester: number, idUser: number, token: string) {
+
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/team/disableUser/${idUserRequester}/${idUser}`
+
+    return this.http.delete<any>(url, header);
+  }
+
+  enableUser(idUserRequester: number, idUser: number, token: string) {
+
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/team/enableUser/${idUserRequester}/${idUser}`
+
+    return this.http.post<any>(url, header);
+  }
+
+
 
 }

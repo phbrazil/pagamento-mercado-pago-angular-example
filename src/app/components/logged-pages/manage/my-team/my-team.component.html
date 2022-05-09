@@ -18,7 +18,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Email</th>
         <th scope="col">Status</th>
-        <th scope="col">Mais</th>
+        <th scope="col">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -34,7 +34,8 @@
             <fa-icon class="fa" style="color: red;" [icon]="faInactive"></fa-icon>
           </td>
         </ng-template>
-        <td><input type="button" class="btn btn-outline-primary btn-sm" value="Detalhes"></td>
+        <td><input *ngIf="member.active" type="button" (click)="disableMember(member.idUser)" class="btn-sm btn-custom-reject" value="Desativar">
+          <input *ngIf="!member.active" type="button" (click)="enableMember(member.idUser)" class="btn-sm btn-custom-confirm" value="Ativar"></td>
       </tr>
     </tbody>
   </table>

@@ -39,8 +39,13 @@ export class AdvanceComponent implements OnInit {
 
     this.dtOptions = this.dataTableSettings.getSettings();
 
-    this.loadAdvances();
+    this.advanceService.getIsReload().subscribe(status => {
+      if (status != null && status) {
+          this.loadAdvances();
+      }
+    })
 
+    this.loadAdvances();
 
   }
 
@@ -59,6 +64,11 @@ export class AdvanceComponent implements OnInit {
       this.isLoading = false;
     })
 
+  }
+
+  getStatus(status: string): string{
+
+    return this.advanceService.getStatus(status);
 
   }
 

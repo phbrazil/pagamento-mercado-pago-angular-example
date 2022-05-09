@@ -1,31 +1,45 @@
 <div class="container">
   <div class="col-md-12 navbar-adjust">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 mt-4">
         <button type="button" class="btn-sm btn-custom-confirm zoom" (click)="newAdvance()">
           <fa-icon class="fa" [icon]="faPlus"></fa-icon> Novo Adiantamento
         </button>
       </div>
     </div>
+    <div *ngIf="isLoading">
+      <app-spinner-loader></app-spinner-loader>
+    </div>
 
-    <div class="col-md-12 mt-4 table-responsive">
+    <div *ngIf="!isLoading && advances.length == 0">
+      <app-no-register-found></app-no-register-found>
+    </div>
+
+    <div *ngIf="!isLoading && advances.length > 0" class="col-md-12 mt-4 table-responsive">
       <table datatable [dtOptions]="dtOptions" class="table table-striped text-muted" id="table" aria-describedby="tabela adiantamentos">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Projeto</th>
-            <th scope="col">Usuário</th>
             <th scope="col">Valor</th>
+            <th scope="col">Moeda</th>
+            <th scope="col">Cambio</th>
+            <th scope="col">Recebimento</th>
             <th scope="col">Status</th>
+            <th scope="col">Mais</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of advances; let i = index">
             <th scope="row">{{i+1}}</th>
             <td>{{data.project}}</td>
-            <td>{{data.user.email}}</td>
-            <td>{{data.value | currency : 'BRL'}}</td>
-            <td>{{data.status}}</td>
+            <td>{{data.value | currency : data.currency == 'Dólar' ? 'USD' : data.currency == 'Euro' ? 'EUR' : 'BRL'}}</td>
+            <td>{{data.currency}}</td>
+            <td>{{data.exchange | currency : 'BRL'}}</td>
+            <td>{{data.receiveType}}</td>
+            <td>{{getStatus(data.status)}}</td>
+            <td><!--input type="button" class="btn-sm btn-custom-confirm" value="Prestar Contas"><br-->
+              <input type="button" class="btn-sm btn-custom-decline mt-2" value="Detalhes"></td>
           </tr>
         </tbody>
       </table>

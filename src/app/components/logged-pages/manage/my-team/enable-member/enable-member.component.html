@@ -1,0 +1,22 @@
+<div class="modal-position col-md-12" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ativar Usuário</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente ativar o usuário <strong>{{userEnable.user.name}}</strong>?</p><br>
+        <small class="text-muted">Esta ação irá gerar custos no seu plano atual</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-custom-reject" [disabled]="isLoading" (click)="enableUser()">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+          Ativar</button>
+        <button type="button" class="btn-custom-decline" data-dismiss="modal" (click)="close()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
