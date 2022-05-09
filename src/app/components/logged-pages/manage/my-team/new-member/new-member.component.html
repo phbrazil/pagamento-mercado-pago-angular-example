@@ -2,7 +2,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content text-muted">
       <div class="modal-header">
-        <h5 class="modal-title default-font modal-header-font text-muted">Novo Membro</h5>
+        <h5 class="modal-title default-font modal-header-font">
+          <fa-icon class="fa-1x" [icon]="faPencil"></fa-icon>
+          Novo membro</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,7 +13,7 @@
         <!--Body-->
         <div class="modal-body mb-0" [formGroup]="newMemberForm">
           <div class="col-md-12 order-md-1">
-            <label>Nome do Usuário</label>
+            <label>Nome do usuário</label>
             <input type="text" placeholder="Nome e Sobrenome" class="form-control" name="name" formControlName="name">
           </div>
           <div class="col-md-12 order-md-1 mt-2">

@@ -9,6 +9,7 @@ import { Project } from 'src/app/_models/project';
 import { ProjectService } from 'src/app/_services/project.service';
 import { Task } from 'src/app/_models/task';
 import { TaskService } from 'src/app/_services/task.service';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 moment().format('LL');
 moment.locale('pt')
 
@@ -19,6 +20,8 @@ moment.locale('pt')
   styleUrls: ['./new-entry.component.scss']
 })
 export class NewEntryComponent implements OnInit {
+
+  faPencil = faPencil;
 
   timeModel: string = '';
 

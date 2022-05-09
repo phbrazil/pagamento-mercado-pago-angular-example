@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/_models/project';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -14,6 +15,8 @@ import { ProjectService } from 'src/app/_services/project.service';
   styleUrls: ['./new-advance.component.scss']
 })
 export class NewAdvanceComponent implements OnInit {
+
+  faPencil = faPencil;
 
   newAdvanceForm: FormGroup;
 

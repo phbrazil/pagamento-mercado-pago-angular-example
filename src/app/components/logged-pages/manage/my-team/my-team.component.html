@@ -34,8 +34,8 @@
             <fa-icon class="fa" style="color: red;" [icon]="faInactive"></fa-icon>
           </td>
         </ng-template>
-        <td><input *ngIf="member.active" type="button" (click)="disableMember(member.idUser)" class="btn-sm btn-custom-reject" value="Desativar">
-          <input *ngIf="!member.active" type="button" (click)="enableMember(member.idUser)" class="btn-sm btn-custom-confirm" value="Ativar"></td>
+        <td><input *ngIf="member.active" [disabled]="member.idUser == user.idUser" type="button" (click)="disableMember(member.idUser)" class="btn-sm btn-custom-reject" value="Desativar">
+          <input *ngIf="!member.active" [disabled]="member.idUser == user.idUser" type="button" (click)="enableMember(member.idUser)" class="btn-sm btn-custom-confirm" value="Ativar"></td>
       </tr>
     </tbody>
   </table>

@@ -2,7 +2,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content text-muted">
       <div class="modal-header">
-        <h5 class="modal-title default-font modal-header-font text-muted">Nova Atividade/Tarefa</h5>
+        <h5 class="modal-title default-font modal-header-font">
+          <fa-icon class="fa-1x" [icon]="faPencil"></fa-icon>
+          Nova atividade/tarefa
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,11 +14,12 @@
         <!--Body-->
         <div class="modal-body mb-0" [formGroup]="newTaskForm">
           <div class="col-md-12 order-md-1">
-            <label>Nome da Atividade/Tarefa</label>
-            <input type="text" placeholder="Ex.: Ação de Marketing" class="form-control" name="name" maxlength="20" formControlName="name">
+            <label>Nome da atividade/tarefa</label>
+            <input type="text" placeholder="Ex.: Ação de Marketing" class="form-control" name="name" maxlength="20"
+              formControlName="name">
           </div>
           <div class="col-md-3 order-md-1 mt-2">
-            <label>Ativar/Desativar Tarefa</label>
+            <label>Ativar/Desativar tarefa</label>
             <label class="switch">
               <input type="checkbox" checked (click)="changeStatus()">
               <span class="slider round"></span>
@@ -24,7 +28,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn-custom-confirm" (click)="submit()" [disabled]="!newTaskForm.valid || isLoading">
+        <button type="submit" class="btn-custom-confirm" (click)="submit()"
+          [disabled]="!newTaskForm.valid || isLoading">
           <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
           Salvar</button>
         <button type="button" class="btn-custom-decline" (click)="close()" data-dismiss="modal">Fechar</button>

@@ -80,7 +80,7 @@ export class MyTeamComponent implements OnInit {
       this.members = res;
       this.isLoading = false;
 
-      if (this.user.trial && this.members.length == 10) {
+      if (this.user?.trial && this.members.length == 10) {
         this.tooltipMessage = 'Durante a avaliação você só pode adicionar até 10 membros';
       } else if (this.plan.plan == 'Pro' && this.members.length == 20) {
         this.tooltipMessage = 'Seu plano atual só permite até 10 membros';

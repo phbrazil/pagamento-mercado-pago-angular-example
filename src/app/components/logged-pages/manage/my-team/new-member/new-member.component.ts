@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -12,6 +13,8 @@ import { PlanService } from 'src/app/_services/plan.service';
   styleUrls: ['./new-member.component.scss']
 })
 export class NewMemberComponent implements OnInit {
+
+  faPencil = faPencil;
 
   newMemberForm: FormGroup;
 
@@ -41,8 +44,8 @@ export class NewMemberComponent implements OnInit {
       email: ['', Validators.required],
       active: [this.active, Validators.required],
       idGroup: [this.user.idGroup, Validators.required],
-      trialDate: [this.user.trialDate, Validators.required ],
-      trial: [this.user.trial, Validators.required ]
+      trialDate: [this.user.trialDate, Validators.required],
+      trial: [this.user.trial, Validators.required]
     });
   }
 

@@ -5,6 +5,7 @@ import { AccountService } from 'src/app/_services/account.service';
 import { ProjectService } from 'src/app/_services/project.service';
 import { User } from 'src/app/_models/user';
 import { Router } from '@angular/router';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-project',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-project.component.scss']
 })
 export class NewProjectComponent implements OnInit {
+
+  faPencil = faPencil;
 
   newProjectForm: FormGroup;
 

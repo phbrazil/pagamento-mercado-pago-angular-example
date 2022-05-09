@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { TaskService } from 'src/app/_services/task.service';
@@ -12,6 +13,7 @@ import { TaskService } from 'src/app/_services/task.service';
 })
 export class NewTaskManagerComponent implements OnInit {
 
+  faPencil = faPencil;
 
   newTaskForm: FormGroup;
 

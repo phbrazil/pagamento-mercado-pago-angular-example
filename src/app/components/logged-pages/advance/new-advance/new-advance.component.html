@@ -2,7 +2,10 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title default-font modal-header-font">Novo adiantamento</h5>
+        <h5 class="modal-title default-font modal-header-font">
+          <fa-icon class="fa-1x" [icon]="faPencil"></fa-icon>
+          Novo adiantamento
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -19,30 +22,35 @@
         <div class="modal-body mb-0 custom-font text-muted" [formGroup]="newAdvanceForm">
           <div class="col-md-7 order-md-1">
             <label>Projeto</label>
-            <ng-select [(ngModel)]="project" placeholder="selecione o projeto" formControlName="project" class="custom-font" [items]="projects" [multiple]="false"
-              [closeOnSelect]="true" [hideSelected]="true" (change)="onChangeProject($event)" bindLabel="name" name="project">
+            <ng-select [(ngModel)]="project" placeholder="selecione o projeto" formControlName="project"
+              class="custom-font" [items]="projects" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true"
+              (change)="onChangeProject($event)" bindLabel="name" name="project">
             </ng-select>
           </div>
           <div class="col-md-5 negative-margin">
             <div class="radio">
-              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Real" checked>Real</label>
+              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Real"
+                  checked>Real</label>
             </div>
             <div class="radio">
-              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Dólar">Dólar <strong>{{dolarPrice | currency : 'BRL'}}</strong></label>
+              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Dólar">Dólar
+                <strong>{{dolarPrice | currency : 'BRL'}}</strong></label>
             </div>
             <div class="radio">
-              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Euro">Euro <strong>{{euroPrice | currency : 'BRL'}}</strong></label>
+              <label><input type="radio" (change)="changeCurrency($event)" name="currency" value="Euro">Euro
+                <strong>{{euroPrice | currency : 'BRL'}}</strong></label>
             </div>
           </div>
           <div class="col-md-7">
             <label>Finalidade</label>
-            <ng-select placeholder="selecione o(s) motivo(s) do adiantamento"  formControlName="reason" class="custom-font" [items]="reasons" [multiple]="true"
-              [closeOnSelect]="true" formControlName="reason" [hideSelected]="true" bindLabel="name" name="reason">
+            <ng-select placeholder="selecione o(s) motivo(s) do adiantamento" formControlName="reason"
+              class="custom-font" [items]="reasons" [multiple]="true" [closeOnSelect]="true" formControlName="reason"
+              [hideSelected]="true" bindLabel="name" name="reason">
             </ng-select>
           </div>
           <div class="col-md-2">
             <label>Valor</label>
-            <input type="text" currencyMask value="0,00" [options]="{ prefix: '', thousands: '.', decimal: ',' }"
+            <input type="text" currencyMask value="0,00" [options]="{ prefix:  currency == 'Dólar' ? '$ ' : currency == 'Euro' ? '€ ' :  'R$ ', thousands: '.', decimal: ',' }"
               class="form-control custom-font" name="value" formControlName="value">
           </div>
 
@@ -56,22 +64,26 @@
             <div class="row">
               <div class="col-md-2">
                 <div class="radio">
-                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Pix" checked>Pix</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Pix"
+                      checked>Pix</label>
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="radio">
-                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Dinheiro">Dinheiro</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType"
+                      value="Dinheiro">Dinheiro</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="radio">
-                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Cartão de Crédito">Cartão de Crédito</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType"
+                      value="Cartão de Crédito">Cartão de crédito</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="radio">
-                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType" value="Cartão pré-pago">Cartão pré-pago</label>
+                  <label><input type="radio" (change)="changeReceive($event)" name="receiveType"
+                      value="Cartão pré-pago">Cartão pré-pago</label>
                 </div>
               </div>
             </div>
@@ -79,7 +91,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn-custom-confirm" [disabled]="!newAdvanceForm.valid || isLoading" (click)="submit()">Salvar</button>
+        <button type="submit" class="btn-custom-confirm" [disabled]="!newAdvanceForm.valid || isLoading"
+          (click)="submit()">Enviar</button>
         <button type="button" class="btn-custom-decline" (click)="close()" data-dismiss="modal">Fechar</button>
       </div>
     </div>
