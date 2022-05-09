@@ -21,7 +21,7 @@ export class CreateAccountComponent implements OnInit {
   formRegister = this.fb.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
-    password: ['', Validators.required],
+    //password: ['', Validators.required],
     phone: ['', Validators.required],
   });
 
