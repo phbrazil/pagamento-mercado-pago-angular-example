@@ -1,1 +1,90 @@
-<p>settings works!</p>
+<div class="col-md-12">
+  <h1>Configurações da conta</h1>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Adiantamentos</h2>
+      <table class="table" aria-describedby="adiantamentos">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Solicitar aprovação para adiantamentos</td>
+            <td>{{advanceRequestApproval ?  'Sim' : 'Não'}}</td>
+          </tr>
+          <tr>
+            <td>Email(s) para enviar notificações de novo adiantamento</td>
+            <td>{{emailsAdvanceNotify}}</td>
+          </tr>
+          <tr>
+            <td>Dias para enviar alerta de prestação de contas</td>
+            <td>{{advanceAlertDays}}</td>
+          </tr>
+          <tr>
+            <td>Máximo de adiantamentos abertos que o usuário solicita por vez</td>
+            <td>{{maxOpenAdvance}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col-md-12">
+      <h2>Reembolsos</h2>
+      <table class="table" aria-describedby="reembolso">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Solicitar aprovação para reembolsos</td>
+            <td>{{refundRequestApproval ?  'Sim' : 'Não'}}</td>
+          </tr>
+          <tr>
+            <td>Email(s) para enviar notificações de novo reebolso</td>
+            <td>{{emailsRefundNotify}}</td>
+          </tr>
+          <tr>
+            <td>Máximo de reembolsos abertos que o usuário solicita por vez</td>
+            <td>{{maxOpenRefund}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col-md-12">
+      <h2>Tempo</h2>
+      <table class="table" aria-describedby="tempo">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Solicitar aprovação semanal</td>
+            <td>{{timeRequestApproval ?  'Sim' : 'Não'}}</td>
+          </tr>
+          <tr>
+            <td>Dias para enviar alerta de preenchimento do tempo</td>
+            <td>{{timeAlertDays}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <hr>
+
+</div>
