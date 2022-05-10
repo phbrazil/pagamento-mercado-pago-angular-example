@@ -1,27 +1,42 @@
-.nav-green {
+@mixin nav-base{
   height: 25px;
   width: 25px;
-  background-color: #357a38;
   border-radius: 50%;
   display: inline-block;
   margin-right: 2px;
+}
+
+.nav-green {
+  @include nav-base();
+  background-color: #357a38;
 }
 
 .nav-blue {
-  height: 25px;
-  width: 25px;
+  @include nav-base();
   background-color: #20B2AA;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 2px;
-
 }
 
-.dot {
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 2px;
+.nav-red {
+  @include nav-base();
+  background-color: #B22222;
+}
+
+.nav-gray {
+  @include nav-base();
+  background-color: #2F4F4F;
+}
+
+.nav-black {
+  @include nav-base();
+  background-color: #000000;
+}
+
+.nav-pink {
+  @include nav-base();
+  background-color: #FF00FF;
+}
+
+.nav-purple {
+  @include nav-base();
+  background-color: #9370DB;
 }

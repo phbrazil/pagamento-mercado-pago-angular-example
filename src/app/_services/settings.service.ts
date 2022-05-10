@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
 
-  private defaultColor = new BehaviorSubject<string>('');
+  private defaultColor = new BehaviorSubject<string>('nav-green');
   readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
   //readonly baseUrl: string = 'http://localhost:8080'
 
