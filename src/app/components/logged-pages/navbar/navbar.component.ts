@@ -4,6 +4,7 @@ import { User } from 'src/app/_models/user';
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Plan } from 'src/app/_models/plan';
 import { PlanService } from 'src/app/_services/plan.service';
+import { SettingsService } from 'src/app/_services/settings.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,7 @@ import { PlanService } from 'src/app/_services/plan.service';
 })
 export class NavbarComponent implements OnInit {
 
+  isLoading: boolean = false;
 
   user: User;
 
@@ -26,7 +28,8 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private accountService: AccountService,
-    private planService: PlanService) {
+    private planService: PlanService,
+    private settingsService: SettingsService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -51,6 +54,8 @@ export class NavbarComponent implements OnInit {
       }
       this.name = this.name + this.user.name.charAt(i);
     }
+
+    this.loadColor();
   }
 
   logout() {
@@ -59,9 +64,9 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  getPlan(){
-     //CHECK USER ROLES
-     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan => {
+  getPlan() {
+    //CHECK USER ROLES
+    this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan => {
 
       this.planService.setPlan(plan);
       this.plan = plan;
@@ -69,6 +74,18 @@ export class NavbarComponent implements OnInit {
     }, _err => {
       this.accountService.logout();
     });
+  }
+
+  loadColor() {
+
+   this.settingsService.getColor().subscribe(res =>{
+
+    console.log(res)
+
+    this.navColor = res;
+
+   })
+
   }
 
 }

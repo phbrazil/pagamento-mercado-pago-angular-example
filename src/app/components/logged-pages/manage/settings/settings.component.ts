@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Settings } from 'src/app/_models/settings';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
+import { SettingsService } from 'src/app/_services/settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -8,31 +12,68 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsComponent implements OnInit {
 
 
-  //adiantamento
-  advanceRequestApproval: boolean = false;
-  emailsAdvanceNotify: string[] = [];
-  advanceAlertDays: number = 30;
-  maxOpenAdvance: number = 2;
 
-  //reembolso
-  refundRequestApproval: boolean = false;
-  maxOpenRefund: number = 3;
-  emailsRefundNotify: string[] = [];
+  isChangeSettings: boolean = false;
 
-  //tempo
-  timeRequestApproval: boolean = true;
-  timeAlertDays: string[] = [];
+  user: User
 
-  constructor() { }
+  isLoading: boolean = false;
+
+  settings: Settings
+
+  constructor(private accountService: AccountService, private settingsService: SettingsService) {
+
+    this.accountService.user.subscribe(x => this.user = x);
+
+   }
 
   ngOnInit(): void {
+    this.getSettings();
 
-    this.emailsAdvanceNotify.push('financeiro@empresa.com');
-    this.emailsRefundNotify.push('financeiro@empresa.com');
+  }
 
-    //time
-    this.timeAlertDays.push('Segunda, Terça, Quarta, Quinta, Sexta')
+  changeWeekApprovalTime() {
 
+    this.isChangeSettings = true;
+
+    this.settings.timeRequestApproval = !this.settings.timeRequestApproval;
+  }
+
+  changeRequestApprovalRefund() {
+
+    this.isChangeSettings = true;
+
+    this.settings.refundRequestApproval = !this.settings.refundRequestApproval;
+
+  }
+
+  changeRequestApprovalAdvance() {
+
+    this.isChangeSettings = true;
+
+    this.settings.advanceRequestApproval = !this.settings.advanceRequestApproval;
+
+  }
+
+  getSettings(){
+
+    this.isLoading = true;
+
+    this.settingsService.getSettings(this.user.idUser, this.accountService.getToken()).subscribe(res=>{
+      console.log(res);
+      this.isLoading = false;
+      this.settings = res;
+    }, _err=>{
+      this.isLoading = false;
+    })
+
+  }
+
+  changeColor(color: string){
+
+    this.isChangeSettings = true;
+
+    this.settingsService.setColor(color);
   }
 
 }

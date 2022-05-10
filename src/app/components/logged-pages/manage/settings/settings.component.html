@@ -2,7 +2,10 @@
   <h1>Configurações da conta</h1>
   <hr>
 
-  <div class="row">
+  <div *ngIf="isLoading">
+    <app-spinner-loader></app-spinner-loader>
+  </div>
+  <div *ngIf="!isLoading" class="row">
     <div class="col-md-12">
       <h2>Adiantamentos</h2>
       <table class="table" aria-describedby="adiantamentos">
@@ -15,19 +18,20 @@
         <tbody>
           <tr>
             <td>Solicitar aprovação para adiantamentos</td>
-            <td>{{advanceRequestApproval ?  'Sim' : 'Não'}}</td>
+            <td><a href="javascript:void(0)" (click)="changeRequestApprovalAdvance()">{{settings.advanceRequestApproval
+                ? 'Sim' : 'Não'}}</a></td>
           </tr>
           <tr>
             <td>Email(s) para enviar notificações de novo adiantamento</td>
-            <td>{{emailsAdvanceNotify}}</td>
+            <td>{{settings.emailsAdvanceNotify}}</td>
           </tr>
           <tr>
             <td>Dias para enviar alerta de prestação de contas</td>
-            <td>{{advanceAlertDays}}</td>
+            <td>{{settings.advanceAlertDays}}</td>
           </tr>
           <tr>
             <td>Máximo de adiantamentos abertos que o usuário solicita por vez</td>
-            <td>{{maxOpenAdvance}}</td>
+            <td>{{settings.maxOpenAdvance}}</td>
           </tr>
         </tbody>
       </table>
@@ -46,15 +50,16 @@
         <tbody>
           <tr>
             <td>Solicitar aprovação para reembolsos</td>
-            <td>{{refundRequestApproval ?  'Sim' : 'Não'}}</td>
+            <td><a href="javascript:void(0)" (click)="changeRequestApprovalRefund()">{{settings.refundRequestApproval ?
+                'Sim' : 'Não'}}</a></td>
           </tr>
           <tr>
             <td>Email(s) para enviar notificações de novo reebolso</td>
-            <td>{{emailsRefundNotify}}</td>
+            <td>{{settings.emailsRefundNotify}}</td>
           </tr>
           <tr>
             <td>Máximo de reembolsos abertos que o usuário solicita por vez</td>
-            <td>{{maxOpenRefund}}</td>
+            <td>{{settings.maxOpenRefund}}</td>
           </tr>
         </tbody>
       </table>
@@ -73,18 +78,46 @@
         <tbody>
           <tr>
             <td>Solicitar aprovação semanal</td>
-            <td>{{timeRequestApproval ?  'Sim' : 'Não'}}</td>
+            <td><a href="javascript:void(0)" (click)="changeWeekApprovalTime()">{{settings.timeRequestApproval ? 'Sim' :
+                'Não'}}</a></td>
           </tr>
           <tr>
             <td>Dias para enviar alerta de preenchimento do tempo</td>
-            <td>{{timeAlertDays}}</td>
+            <td>{{settings.timeAlertDays}}</td>
           </tr>
         </tbody>
       </table>
+    </div>
 
+    <div class="col-md-12">
+      <h2>Geral</h2>
+      <table class="table" aria-describedby="tempo">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cor do sistema</td>
+            <td><span (click)="changeColor('nav-green')" class="nav-green"></span>
+              <span  (click)="changeColor('nav-blue')" class="nav-blue"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <hr>
+
+  <div *ngIf="isChangeSettings" class="col-md-4">
+    <div class="row">
+      <input type="button" class="btn-lg btn-block btn-custom-confirm" value="Alterar">
+    </div>
+  </div>
 
 </div>
