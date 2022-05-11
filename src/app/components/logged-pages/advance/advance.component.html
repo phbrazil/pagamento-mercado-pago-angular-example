@@ -39,7 +39,7 @@
             <td>{{data.receiveType}}</td>
             <td>{{getStatus(data.status)}}</td>
             <td><!--input type="button" class="btn-sm btn-custom-confirm" value="Prestar Contas"><br-->
-              <input type="button" class="btn-sm btn-custom-decline mt-2" value="Detalhes"></td>
+              <input type="button" class="btn-sm btn-custom-decline mt-2" (click)="moreInfo(data.idAdvance)" value="Mais"></td>
           </tr>
         </tbody>
       </table>
