@@ -4,12 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Settings } from '../_models/settings';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Constants } from '../components/shared/utils/Constants';
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
 
+  private isReloadSettings = new BehaviorSubject<boolean>(false);
+
   private defaultColor = new BehaviorSubject<string>('nav-green');
-  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
-  //readonly baseUrl: string = 'http://localhost:8080'
+  readonly baseUrl: string = Constants.baseUrl;
 
 
   constructor(
@@ -17,16 +19,25 @@ export class SettingsService {
     public dialog: MatDialog
   ) {
 
-}
+  }
 
-public setColor(color: string): void {
-  this.defaultColor.next(color);
-}
+  public setIsReload(status: boolean): void {
+    this.isReloadSettings.next(status);
+  }
 
-public getColor(): Observable<string> {
-  return this.defaultColor.asObservable();
+  public getIsReload(): Observable<boolean> {
+    return this.isReloadSettings.asObservable();
 
-}
+  }
+
+  public setColor(color: string): void {
+    this.defaultColor.next(color);
+  }
+
+  public getColor(): Observable<string> {
+    return this.defaultColor.asObservable();
+
+  }
 
   getSettings(idUser: number, token: string) {
 
@@ -49,7 +60,22 @@ public getColor(): Observable<string> {
 
     const url = `${this.baseUrl}/settings/newSettings`;
 
-    return this.http.post<Settings>(url,  settings , header)
+    return this.http.post<any>(url, settings, header)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  editSettings(settings: Settings, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/settings/editSettings`;
+
+    return this.http.put<any>(url, settings, header)
       .pipe(map(res => {
         return res;
       }));

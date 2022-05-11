@@ -1,4 +1,10 @@
 export class Constants {
+
+  //BASE URL
+
+  public static baseUrl = 'https://opportunity-back-end.herokuapp.com';
+  //public static baseUrl = 'http://localhost:8080';
+
   public static email = 'paulo.henriqueb@me.com';
   public static password = 'mortadela1';
   public static SSOToken = 'MTAwNTU1MTE2MzI1ODIxMjE0MDg6MTYzMjYxMzA4NzYwMTphNjJiMDAxZGE2YjYyNjY2MzVhNTJjZDk0ZDJlMzYzYg';

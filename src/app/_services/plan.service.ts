@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Plan } from '../_models/plan';
+import { Constants } from '../components/shared/utils/Constants';
 @Injectable({ providedIn: 'root' })
 export class PlanService {
   private planSubject: BehaviorSubject<Plan>;
@@ -12,8 +13,7 @@ export class PlanService {
 
   private isReloadPlan = new BehaviorSubject<boolean>(false);
 
-  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
-  //readonly baseUrl: string = 'http://localhost:8080'
+  readonly baseUrl: string = Constants.baseUrl;
 
 
   constructor(

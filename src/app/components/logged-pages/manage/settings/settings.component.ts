@@ -28,6 +28,14 @@ export class SettingsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+
+    this.settingsService.getIsReload().subscribe(status => {
+      if (status != null && status) {
+        this.getSettings();
+      }
+    })
+
     this.getSettings();
 
   }
@@ -60,7 +68,6 @@ export class SettingsComponent implements OnInit {
     this.isLoading = true;
 
     this.settingsService.getSettings(this.user.idUser, this.accountService.getToken()).subscribe(res=>{
-      console.log(res);
       this.isLoading = false;
       this.settings = res;
     }, _err=>{
@@ -74,6 +81,22 @@ export class SettingsComponent implements OnInit {
     this.isChangeSettings = true;
 
     this.settingsService.setColor(color);
+
+    this.settings.defaultColor = color;
+
+  }
+
+  submit(){
+
+    this.isLoading = true;
+
+    this.settingsService.editSettings(this.settings, this.accountService.getToken()).subscribe(res=>{
+      this.isLoading = false;
+      this.settingsService.setIsReload(true);
+
+    },_err =>{
+      this.isLoading = false;
+    })
   }
 
 }

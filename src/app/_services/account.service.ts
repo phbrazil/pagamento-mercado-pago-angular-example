@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { AlertService } from './alert.service';
 import { User } from '../_models/user';
 import { MatDialog } from '@angular/material/dialog';
+import { Constants } from '../components/shared/utils/Constants';
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   private userSubject: BehaviorSubject<User>;
@@ -14,8 +15,7 @@ export class AccountService {
   private isLogged = new BehaviorSubject<boolean>(false);
   private isReloadmember = new BehaviorSubject<boolean>(false);
 
-  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
-  //readonly baseUrl: string = 'http://localhost:8080'
+  readonly baseUrl: string = Constants.baseUrl;
 
 
   constructor(

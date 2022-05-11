@@ -80,8 +80,6 @@ export class NavbarComponent implements OnInit {
 
    this.settingsService.getColor().subscribe(res =>{
 
-    console.log(res)
-
     this.navColor = res;
 
    })

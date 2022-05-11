@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Constants } from '../components/shared/utils/Constants';
 import { Project } from '../_models/project';
 
 @Injectable({
@@ -12,8 +13,7 @@ export class ProjectService {
   private isReloadProject = new BehaviorSubject<boolean>(false);
 
 
-  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
-  //readonly baseUrl: string = 'http://localhost:8080'
+  readonly baseUrl: string = Constants.baseUrl;
 
   constructor(
     private http: HttpClient

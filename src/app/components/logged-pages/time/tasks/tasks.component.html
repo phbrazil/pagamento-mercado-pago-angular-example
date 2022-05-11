@@ -5,7 +5,7 @@
   <p *ngIf="showDate"><strong>#{{task.date}}</strong></p>
   <small>#{{task.notes != '' ? task.notes : 'Nenhuma nota'}}</small>
   <div *ngIf="!disableButtons" class="d-grid gap-2 d-md-block footer mt-4">
-      <button type="button" class="btn-custom-confirm zoom mr-4" (click)="edit()">Editar</button>
-      <button type="button" class="btn-custom-reject zoom" (click)="delete()">Excluir</button>
+      <button type="button" class="btn btn-outline-primary zoom mr-4" (click)="edit()">Editar</button>
+      <button type="button" class="btn btn-outline-danger zoom" (click)="delete()">Excluir</button>
     </div>
 </a>

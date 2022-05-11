@@ -5,12 +5,12 @@ import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { TimeTask } from '../_models/time-task';
 import { User } from '../_models/user';
+import { Constants } from '../components/shared/utils/Constants';
 @Injectable({ providedIn: 'root' })
 export class TeamService {
 
 
-  readonly baseUrl: string = 'https://opportunity-back-end.herokuapp.com'
-  //readonly baseUrl: string = 'http://localhost:8080'
+  readonly baseUrl: string = Constants.baseUrl;
 
 
   constructor(
