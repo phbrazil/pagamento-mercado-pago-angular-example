@@ -141,7 +141,9 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     let settings = {
+
       idUser: user.idUser,
+
       advanceAlertDays: 30,
       advanceRequestApproval: false,
       emailsAdvanceNotify: [user.email],
@@ -151,8 +153,11 @@ export class LoginComponent implements OnInit {
       refundRequestApproval: false,
       emailsRefundNotify: [user.email],
 
-      timeAlertDays: ['Segunda-feira', 'Terça-feira'],
+      timeAlertDays: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'],
       timeRequestApproval: false,
+
+      defaultColor: 'nav-green'
+
     } as Settings;
 
 

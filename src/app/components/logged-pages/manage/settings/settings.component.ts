@@ -93,6 +93,7 @@ export class SettingsComponent implements OnInit {
     this.settingsService.editSettings(this.settings, this.accountService.getToken()).subscribe(res=>{
       this.isLoading = false;
       this.settingsService.setIsReload(true);
+      this.isChangeSettings = false;
 
     },_err =>{
       this.isLoading = false;

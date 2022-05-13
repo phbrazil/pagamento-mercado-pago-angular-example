@@ -1,5 +1,6 @@
 <form name="changeEntryDateForm" id="changeEntryDateForm" action="/TimeSheet" method="POST">
-  <div class="col-md-10 mb-1">
+  <div *ngIf="!isLoading" class="col-md-10 mb-1">
+
     <div class="row center navbar-adjust">
       <div class="col-md-3 mb-3">
         <div class="text-center">
@@ -60,7 +61,7 @@
   </div>
 </form>
 
-<div *ngIf="isLoading" class="col-md-12 mt-4 center">
+<div *ngIf="isLoading" class="col-md-12 center" style="margin-top: 100px;">
   <app-spinner-loader></app-spinner-loader>
 </div>
 
@@ -77,7 +78,7 @@
   </ul>
 </div>
 
-<div class="col-md-12 mt-4">
+<div *ngIf="!isLoading" class="col-md-12 mt-4">
   <div clas="row">
     <ul>
       <li *ngFor="let task of tasks">
