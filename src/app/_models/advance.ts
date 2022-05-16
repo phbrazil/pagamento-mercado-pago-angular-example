@@ -11,6 +11,13 @@ export class Advance {
   regDate: string
   receiveType: string
   deadline: string
-  status: string
+  status: AdvanceStatus
   active: boolean
+}
+
+export enum AdvanceStatus {
+  cr = 'cr',
+  ap = 'ap',
+  re = 're',
+  ca = 'ca'
 }

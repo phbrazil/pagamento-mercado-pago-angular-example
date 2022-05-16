@@ -70,28 +70,31 @@ export class AdvanceService {
     return this.http.get<[Advance]>(url, header);
   }
 
-  newAdvance(body: any, token: string) {
+  newAdvance(body: any, idUser: number, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/advance/newAdvance`
+    const url = `${this.baseUrl}/advance/newAdvance/${idUser}`
 
     return this.http.post<Advance>(url, body, header);
   }
 
   getStatus(status: string): string{
     switch(status){
-      case '0':{
+      case 'cr':{
         return "Criado"
       }
-      case '1':{
+      case 'ap':{
         return "Aprovado"
       }
-      case '2':{
+      case 're':{
         return "Rejeitado"
+      }
+      case 'ca':{
+        return "Cancelado"
       }
 
 

@@ -119,18 +119,22 @@ export class LoginComponent implements OnInit {
 
     this.accountService.user.subscribe(x => {
 
-      this.settingsService.getSettings(x.idUser, this.accountService.getToken()).subscribe(res => {
-        this.settings = res;
-        this.isLoading = false;
+      if (x) {
 
-        if (this.settings == null) {
-          this.newSettings(x);
-        }else{
-          this.settingsService.setColor(this.settings.defaultColor);
-        }
-      }, _err => {
-        this.isLoading = false;
-      })
+        this.settingsService.getSettings(x.idUser, this.accountService.getToken()).subscribe(res => {
+          this.settings = res;
+          this.isLoading = false;
+
+          if (this.settings == null) {
+            this.newSettings(x);
+          } else {
+            this.settingsService.setColor(this.settings.defaultColor);
+          }
+        }, _err => {
+          this.isLoading = false;
+        })
+
+      }
 
     });
 

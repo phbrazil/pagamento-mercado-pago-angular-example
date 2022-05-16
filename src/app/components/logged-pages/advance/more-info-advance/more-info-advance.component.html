@@ -1,0 +1,52 @@
+<div class="modal-position col-md-12" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="div-center" *ngIf="isLoading">
+      <app-spinner-loader></app-spinner-loader>
+    </div>
+    <div *ngIf="!isLoading" class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title default-font modal-header-font">
+          Detalhes
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body default-font">
+        <!--Body-->
+        <div class="modal-body mb-0 text-muted">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <small><strong>Projeto: </strong>{{advance.project}}</small>
+              </div>
+              <div class="col-md-6">
+                <small><strong>Valor: </strong>{{advance.value | currency : advance.currency == 'Dólar' ? 'USD' : advance.currency == 'Euro' ? 'EUR' : 'BRL'}}</small>
+              </div>
+              <div class="col-md-6">
+                <small><strong>Moeda: </strong>{{advance.currency}}</small>
+              </div>
+              <div class="col-md-6">
+                <small><strong>Cambio: </strong>{{advance.exchange | currency : 'BRL'}}</small>
+              </div>
+              <div class="col-md-6">
+                <small><strong>Recebimento: </strong>{{advance.receiveType}}</small>
+              </div>
+              <div class="col-md-6">
+                <small><strong>Status: </strong>{{getStatus(advance.status)}}</small>
+              </div>
+
+              <div class="col-md-12 mt-4">
+                <input *ngIf="advance.status == advanceStatus.cr" type="button" class="btn-custom-reject btn-block" value="Excluir">
+              </div>
+              <div class="col-md-12 mt-4">
+                <input *ngIf="advance.status == advanceStatus.ap" type="button" (click)="accountability()" class="btn-custom-confirm btn-block" value="Prestar Contas">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

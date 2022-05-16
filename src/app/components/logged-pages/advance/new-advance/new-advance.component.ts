@@ -172,7 +172,7 @@ export class NewAdvanceComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.advanceService.newAdvance(this.newAdvanceForm.value, this.accountService.getToken()).subscribe(_res => {
+    this.advanceService.newAdvance(this.newAdvanceForm.value, this.user.idUser, this.accountService.getToken()).subscribe(_res => {
       this.isLoading = false;
       this.advanceService.setIsReload(true);
       this.close();

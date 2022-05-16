@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-accountability',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountabilityComponent implements OnInit {
 
-  constructor() { }
+  isLoading: boolean = false;
+
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  close() {
+    this.dialog.closeAll()
   }
 
 }

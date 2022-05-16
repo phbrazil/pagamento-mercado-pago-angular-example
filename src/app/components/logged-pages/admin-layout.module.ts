@@ -43,7 +43,7 @@ import { EditProfileComponent } from './manage/profile/edit-profile/edit-profile
 import { DisableMemberComponent } from './manage/my-team/disable-member/disable-member.component';
 import { EnableMemberComponent } from './manage/my-team/enable-member/enable-member.component';
 import { AccountabilityComponent } from './advance/accountability/accountability.component';
-import { MoreInfoComponent } from './advance/more-info/more-info.component';
+import { MoreInfoComponentAdvance } from './advance/more-info-advance/more-info-advance.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +79,7 @@ import { MoreInfoComponent } from './advance/more-info/more-info.component';
     DisableMemberComponent,
     EnableMemberComponent,
     AccountabilityComponent,
-    MoreInfoComponent
+    MoreInfoComponentAdvance
   ],
   imports: [
     RouterModule,

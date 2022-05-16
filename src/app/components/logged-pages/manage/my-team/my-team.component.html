@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading && !isLoadingPlan" class="col-md-12 table-responsive">
+<div *ngIf="!isLoading && !isLoadingPlan && user.admin" class="col-md-12 table-responsive">
   <div class="row mb-4">
     <div class="col-md-4">
       <button title="{{tooltipMessage}}" #tooltip="matTooltip" matTooltip="Info about the action" [matTooltipPosition]="position.value"

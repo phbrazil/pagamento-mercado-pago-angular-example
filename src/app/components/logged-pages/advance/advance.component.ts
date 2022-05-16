@@ -6,7 +6,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AdvanceService } from 'src/app/_services/advance.service';
 import { TableSortService } from '../../shared/table-sort.service';
-import { MoreInfoComponent } from './more-info/more-info.component';
+import { MoreInfoComponentAdvance } from './more-info-advance/more-info-advance.component';
 import { NewAdvanceComponent } from './new-advance/new-advance.component';
 
 @Component({
@@ -75,7 +75,7 @@ export class AdvanceComponent implements OnInit {
 
   moreInfo(idAdvance: number){
 
-    this.dialog.open(MoreInfoComponent,
+    this.dialog.open(MoreInfoComponentAdvance,
       {
         data: {
           idAdvance: idAdvance,

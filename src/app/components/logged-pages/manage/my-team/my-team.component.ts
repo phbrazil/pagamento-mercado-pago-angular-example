@@ -60,6 +60,7 @@ export class MyTeamComponent implements OnInit {
       }
     })
 
+    if(this.user.admin)
     this.loadPlan();
 
   }

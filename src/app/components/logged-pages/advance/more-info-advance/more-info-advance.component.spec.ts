@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MoreInfoComponent } from './more-info.component';
+import { MoreInfoComponentAdvance } from './more-info-advance.component';
 
 describe('MoreInfoComponent', () => {
-  let component: MoreInfoComponent;
-  let fixture: ComponentFixture<MoreInfoComponent>;
+  let component: MoreInfoComponentAdvance;
+  let fixture: ComponentFixture<MoreInfoComponentAdvance>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MoreInfoComponent ]
+      declarations: [ MoreInfoComponentAdvance ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MoreInfoComponent);
+    fixture = TestBed.createComponent(MoreInfoComponentAdvance);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
