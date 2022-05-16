@@ -13,6 +13,7 @@ import { SpinnerLoaderComponent } from './spinner-loader/spinner-loader.componen
 import { NoRegisterFoundComponent } from './no-register-found/no-register-found.component';
 import { TrialBannerComponent } from './trial-banner/trial-banner.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { WorkingProgressComponent } from './working-progress/working-progress.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -25,7 +26,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AlertComponent,
     SpinnerLoaderComponent,
     NoRegisterFoundComponent,
-    TrialBannerComponent
+    TrialBannerComponent,
+    WorkingProgressComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     SpinnerLoaderComponent,
     NoRegisterFoundComponent,
     TrialBannerComponent,
-    MatTooltipModule
+    MatTooltipModule,
+    WorkingProgressComponent
   ]
 })
 export class SharedModule {
