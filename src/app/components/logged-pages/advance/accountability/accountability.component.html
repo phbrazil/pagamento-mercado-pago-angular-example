@@ -13,17 +13,32 @@
         </button>
       </div>
       <div class="modal-body default-font">
+        <div class="col-md-4 mb-4">
+          <input type="button" class="btn-custom-confirm btn-sm" value="Novo Comprovante">
+        </div>
+        <div class="col-md-12" *ngIf="!isLoading && receipts.length == 0">
+          <div class="alert alert-warning" role="alert">
+            Nenhum comprovante adicionado
+          </div>
+        </div>
+
+
         <!--Body-->
         <div class="modal-body mb-0 text-muted">
           <div class="col-md-12">
             <div class="row">
-              <div class="col-md-12">
 
-
+              <div *ngIf="!isLoading" class="col-md-12 mt-4">
+                <div clas="row">
+                  <ul>
+                    <li *ngFor="let receipt of receipts">
+                      <app-receipt-advance [fileName]="'teste'"></app-receipt-advance>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

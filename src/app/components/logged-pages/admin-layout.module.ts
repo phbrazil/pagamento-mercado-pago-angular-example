@@ -44,6 +44,7 @@ import { DisableMemberComponent } from './manage/my-team/disable-member/disable-
 import { EnableMemberComponent } from './manage/my-team/enable-member/enable-member.component';
 import { AccountabilityComponent } from './advance/accountability/accountability.component';
 import { MoreInfoComponentAdvance } from './advance/more-info-advance/more-info-advance.component';
+import { ReceiptAdvanceComponent } from './advance/accountability/receipt-advance/receipt-advance.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { MoreInfoComponentAdvance } from './advance/more-info-advance/more-info-
     DisableMemberComponent,
     EnableMemberComponent,
     AccountabilityComponent,
-    MoreInfoComponentAdvance
+    MoreInfoComponentAdvance,
+    ReceiptAdvanceComponent
   ],
   imports: [
     RouterModule,

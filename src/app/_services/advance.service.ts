@@ -4,9 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Plan } from '../_models/plan';
 import { Advance } from '../_models/advance';
 import { Constants } from '../components/shared/utils/Constants';
+import { ReceiptAdvance } from '../_models/receiptAdvance';
 @Injectable({ providedIn: 'root' })
 export class AdvanceService {
   private advanceSubject: BehaviorSubject<Advance>;
@@ -82,18 +82,54 @@ export class AdvanceService {
     return this.http.post<Advance>(url, body, header);
   }
 
-  getStatus(status: string): string{
-    switch(status){
-      case 'cr':{
+  newReceiptAd(body: any, idUser: number, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/advance/newReceiptAd/${idUser}`
+
+    return this.http.post<ReceiptAdvance>(url, body, header);
+  }
+
+  getReceiptAd(idReceiptAd: number, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/advance/getReceiptAd/${idReceiptAd}`
+
+    return this.http.get<ReceiptAdvance>(url, header);
+  }
+
+  getAllReceiptAd(idAdvance: number, idUser: number, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/advance/getAllReceiptAd/${idAdvance}/${idUser}`
+
+    return this.http.get<[ReceiptAdvance]>(url, header);
+  }
+
+  getStatus(status: string): string {
+    switch (status) {
+      case 'cr': {
         return "Criado"
       }
-      case 'ap':{
+      case 'ap': {
         return "Aprovado"
       }
-      case 're':{
+      case 're': {
         return "Rejeitado"
       }
-      case 'ca':{
+      case 'ca': {
         return "Cancelado"
       }
 
