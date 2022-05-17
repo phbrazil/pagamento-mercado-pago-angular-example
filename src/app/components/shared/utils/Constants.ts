@@ -10,6 +10,10 @@ export class Constants {
   public static SSOToken = 'MTAwNTU1MTE2MzI1ODIxMjE0MDg6MTYzMjYxMzA4NzYwMTphNjJiMDAxZGE2YjYyNjY2MzVhNTJjZDk0ZDJlMzYzYg';
 
 
+  //messages
+  public static errorTittle = 'Ocorreu um erro';
+  public static errorMessage = 'Tente novamente mais tarde';
+
   public static timeZone = 3;
   public static hoursToStart = 3 + Constants.timeZone;
 

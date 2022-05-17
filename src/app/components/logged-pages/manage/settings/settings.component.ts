@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Constants } from 'src/app/components/shared/utils/Constants';
 import { Settings } from 'src/app/_models/settings';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { AlertService } from 'src/app/_services/alert.service';
 import { SettingsService } from 'src/app/_services/settings.service';
 
 @Component({
@@ -11,11 +13,6 @@ import { SettingsService } from 'src/app/_services/settings.service';
 })
 export class SettingsComponent implements OnInit {
 
-  //TOAST
-  title: string = '';
-  message: string = '';
-  type: string = 'success';
-
   isChangeSettings: boolean = false;
 
   user: User
@@ -24,9 +21,7 @@ export class SettingsComponent implements OnInit {
 
   settings: Settings
 
-  changed: boolean = false;
-
-  constructor(private accountService: AccountService, private settingsService: SettingsService) {
+  constructor(private accountService: AccountService, private settingsService: SettingsService, private alertService: AlertService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -100,20 +95,14 @@ export class SettingsComponent implements OnInit {
       this.settingsService.setIsReload(true);
       this.isChangeSettings = false;
 
-      //TOAST
-      this.changed = true;
-      this.title = 'Configurações alteradas';
-      this.message = 'Suas configurações foram alteradas com sucesso';
-      this.type = 'success';
-
+      //alert
+      this.alertService.success('Configurações alteradas', 'Suas configurações foram alteradas com sucesso');
 
     }, _err => {
       this.isLoading = false;
-        //TOAST
-        this.changed = true;
-        this.title = 'Ocorreu um erro';
-        this.message = 'Tente novamente mais tarde';
-        this.type = 'danger';
+
+      this.alertService.error(Constants.errorTittle, Constants.errorMessage, { autoClose: true });
+
     })
   }
 

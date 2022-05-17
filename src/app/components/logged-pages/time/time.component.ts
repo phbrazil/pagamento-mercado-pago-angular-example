@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faArrowLeft, faArrowRight, faClock, faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +16,7 @@ import { NewEntryComponent } from './new-entry/new-entry.component';
   styleUrls: ['./time.component.scss']
 })
 export class TimeComponent implements OnInit {
+
 
 
   entryForm = new FormGroup({

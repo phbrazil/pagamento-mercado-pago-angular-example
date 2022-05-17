@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Constants } from 'src/app/components/shared/utils/Constants';
 import { AccountService } from 'src/app/_services/account.service';
+import { AlertService } from 'src/app/_services/alert.service';
 import { TimeService } from 'src/app/_services/time.service';
 
 @Component({
@@ -12,7 +14,7 @@ import { TimeService } from 'src/app/_services/time.service';
 export class DeleteTaskComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private timeService: TimeService, private accountService: AccountService,
-        @Inject(MAT_DIALOG_DATA) public task: any, private router: Router) { }
+        @Inject(MAT_DIALOG_DATA) public task: any, private alertService: AlertService) { }
 
   isLoading: boolean = false;
 
@@ -36,9 +38,11 @@ export class DeleteTaskComponent implements OnInit {
 
       this.close();
 
+      this.alertService.success('Registro deletado', 'Registro deletado com sucesso', { autoClose: true });
 
     }, _err =>{
       this.isLoading = false;
+      this.alertService.error(Constants.errorTittle, Constants.errorMessage);
 
     })
 

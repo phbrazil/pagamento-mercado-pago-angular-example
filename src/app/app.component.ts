@@ -11,8 +11,8 @@ import { AccountService } from './_services/account.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Opportunity';
   user: User;
+
 
   constructor(private accountService: AccountService, private route: ActivatedRoute, private dialog: MatDialog) {
 
@@ -33,7 +33,7 @@ export class AppComponent {
                   validationCode: params.key,
                 }
               });
-          } else if(this.user.changePassword) {
+          } else if (this.user.changePassword) {
             this.accountService.logout();
             this.dialog.open(ConfirmPasswordComponent,
               {
@@ -46,5 +46,4 @@ export class AppComponent {
       }
       );
   }
-
 }

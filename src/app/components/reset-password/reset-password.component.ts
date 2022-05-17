@@ -58,8 +58,6 @@ export class ResetPasswordComponent implements OnInit {
 
       this.messageType = 'success';
 
-      //this.alertService.success('Senha redefinida', 'Verifique sua senha provisória enviada por email', { keepAfterRouteChange: true });
-
     }, err =>{
 
       this.isLoading = false;
@@ -68,7 +66,6 @@ export class ResetPasswordComponent implements OnInit {
 
       this.messageType = 'danger';
 
-      //this.alertService.error('Ocorreu um erro', 'tente novamente mais tarde', { keepAfterRouteChange: true });
     })
 
   }

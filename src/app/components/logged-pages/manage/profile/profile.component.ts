@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Constants } from 'src/app/components/shared/utils/Constants';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { AlertService } from 'src/app/_services/alert.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,7 @@ export class ProfileComponent implements OnInit {
   user: User;
   userForm: FormGroup;
 
-  constructor(private accountService: AccountService, private fb: FormBuilder) {
+  constructor(private accountService: AccountService, private fb: FormBuilder, private alertService: AlertService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -81,7 +83,7 @@ export class ProfileComponent implements OnInit {
 
         localStorage.setItem('user', JSON.stringify(user));
 
-        //this.alertService.success('Usuário alterado com sucesso', '', { autoClose: true });
+        this.alertService.success('Usuário alterado com sucesso', '', { autoClose: true });
 
         this.disable = false;
         this.disableForm();
@@ -89,7 +91,7 @@ export class ProfileComponent implements OnInit {
       }, error => {
 
         this.isLoading = false;
-        //this.alertService.error('Ocorreu um erro', 'Tente novamente mais tarde');
+        this.alertService.error(Constants.errorTittle, Constants.errorMessage, { autoClose: true });
       });
     }
   }

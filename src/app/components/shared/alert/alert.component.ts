@@ -1,9 +1,15 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Alert, AlertType } from 'src/app/_models/alert';
+import { Alert } from 'src/app/_models/alert';
 import { AlertService } from 'src/app/_services/alert.service';
-@Component({ selector: 'app-alert', templateUrl: './alert.component.html' })
+import { faCheckCircle, faExclamationCircle, faThumbsDown, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+
+@Component({
+  selector: 'app-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.scss']
+})
 export class AlertComponent implements OnInit, OnDestroy {
   @Input() id = 'default-alert';
   @Input() fade = true;
@@ -12,8 +18,14 @@ export class AlertComponent implements OnInit, OnDestroy {
   alertSubscription: Subscription = new Subscription;
   routeSubscription: Subscription = new Subscription;
 
+  faInactive = faThumbsDown;
+  faSuccess = faCheckCircle;
+  faWarning = faExclamationCircle;
+  faInfo = faInfoCircle;
+
   title: string;
   description: string;
+  type: string;
 
   constructor(private router: Router, private alertService: AlertService) { }
 
@@ -22,6 +34,17 @@ export class AlertComponent implements OnInit, OnDestroy {
     // subscribe to new alert notifications
     this.alertSubscription = this.alertService.onAlert(this.id)
       .subscribe(alert => {
+
+        if (alert.type == 0) {
+          this.type = 'success'
+        } else if (alert.type == 1) {
+          this.type = 'danger'
+        } else if (alert.type == 2) {
+          this.type = 'info'
+        } else if (alert.type == 3) {
+          this.type = 'warning'
+        }
+
         // clear alerts when an empty alert is received
         if (!alert.message) {
           // filter out alerts without 'keepAfterRouteChange' flag
@@ -76,42 +99,5 @@ export class AlertComponent implements OnInit, OnDestroy {
       // remove alert
       this.alerts = this.alerts.filter(x => x !== alert);
     }
-  }
-
-  titleCss(alert: Alert) {
-
-    switch (alert.type) {
-      case 0:
-        return 'text-muted';
-      case 1:
-        return 'text-danger';
-      case 2:
-        return 'text-info';
-      case 3:
-        return 'text-warning';
-    }
-
-  }
-
-  cssClass(alert: Alert) {
-
-    if (!alert) return;
-
-    const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];
-
-    const alertTypeClass = {
-      [AlertType.Success]: 'alert alert-success',
-      [AlertType.Error]: 'alert alert-danger',
-      [AlertType.Info]: 'alert alert-info',
-      [AlertType.Warning]: 'alert alert-warning'
-    }
-
-    classes.push(alertTypeClass[alert.type]);
-
-    if (alert.fade) {
-      classes.push('fade');
-    }
-
-    return classes.join(' ');
   }
 }
