@@ -5,7 +5,7 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { AlertComponent } from './alert';
 import { DataTablesModule } from 'angular-datatables';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { Calendar, FullCalendarModule } from '@fullcalendar/angular';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { NgxCurrencyModule } from 'ngx-currency';
@@ -14,6 +14,8 @@ import { NoRegisterFoundComponent } from './no-register-found/no-register-found.
 import { TrialBannerComponent } from './trial-banner/trial-banner.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { WorkingProgressComponent } from './working-progress/working-progress.component';
+import { ToastComponent } from './toast/toast.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -27,7 +29,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     SpinnerLoaderComponent,
     NoRegisterFoundComponent,
     TrialBannerComponent,
-    WorkingProgressComponent
+    WorkingProgressComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +40,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgxMaskModule.forRoot(),
     FullCalendarModule,
     NgxCurrencyModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FontAwesomeModule
   ],
 
   exports: [
@@ -50,7 +54,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NoRegisterFoundComponent,
     TrialBannerComponent,
     MatTooltipModule,
-    WorkingProgressComponent
+    WorkingProgressComponent,
+    ToastComponent,
+    AngularMaterialModule,
+    FontAwesomeModule
   ]
 })
 export class SharedModule {
