@@ -8,7 +8,8 @@
           <li class="nav-item mb-2"><a href="#products" class="nav-link p-0 text-muted">Produtos</a></li>
           <li class="nav-item mb-2"><a href="#pricing" class="nav-link p-0 text-muted">Valores</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="https://www.9ember.com" target="_blank" class="nav-link p-0 text-muted">Sobre</a></li>
+          <li class="nav-item mb-2"><a href="https://www.9ember.com" target="_blank"
+              class="nav-link p-0 text-muted">Sobre</a></li>
         </ul>
       </div>
 
@@ -35,14 +36,20 @@
       </div-->
 
       <div class="col-6">
-        <form>
+        <form *ngIf="!subscribed" [formGroup]="subscribeForm" (ngSubmit)="submit()">
           <h5>Assine para receber novidades</h5>
           <div class="d-flex w-100 gap-2">
             <label for="newsletter1" class="visually-hidden">Endereço de Email</label>
-            <input id="newsletter1" type="text" class="form-control" placeholder="Endereço de Email">
-            <button class="btn btn-primary" type="button">Assinar</button>
+            <input id="newsletter1" type="email" name="email" formControlName="email" class="form-control"
+              placeholder="Endereço de Email">
+            <button type="submit" class="btn btn-primary" [disabled]="!subscribeForm.valid || isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+              Assinar</button><br>
           </div>
         </form>
+        <div *ngIf="subscribed" class="alert alert-success mt-4" role="alert">
+          Obrigado, iremos te atualizar com nossas novidades.
+        </div>
       </div>
     </div>
 
