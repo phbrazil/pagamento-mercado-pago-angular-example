@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 mt-4">
   <div class="navbar-adjust">
     <section class="u-align-center u-clearfix u-palette-3-light-3 u-section-2" id="carousel_74ea">
       <div
@@ -19,7 +19,7 @@
               </div>
               <div class="u-align-center u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
                 <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <h6 class="u-text u-text-1">Ajustes iniciais</h6>
+                  <h6 class="u-text u-text-1 text-muted">Ajustes iniciais</h6>
                   <h2 class="u-custom-font u-font-playfair-display u-text u-text-2">Bem-vindo ao <span
                       style="font-weight: 700;">Opportunity!</span>
                   </h2>
@@ -35,7 +35,7 @@
                         <div class="col-10 center">
                           <input maxlength="15" autofocus [(ngModel)]="name" type="text"
                             style="font-size: 20px; height: 40px; margin-top: 10px;" class="form-control"
-                            placeholder="Nome do projeto">
+                            placeholder="Nome">
                         </div>
                       </div>
                       <div class="carousel-item" id="3">
@@ -51,10 +51,10 @@
                       <div class="carousel-item" id="2">
                         <div class="col-12">
                           <label class="font-home" style="font-size: 20px;">Qual o budget do projeto
-                            <strong>{{name}}?</strong><small> Deixar 0 caso não possua</small>
+                            <strong>{{name}}?</strong><small class="text-muted"> Deixar 0 caso não possua</small>
                           </label>
                         </div>
-                        <div class="col-3 center">
+                        <div class="col-4 center">
                           <input [(ngModel)]="budget" currencyMask value="0,00"
                             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" type="text"
                             style="font-size: 20px; height: 40px; margin-top: 10px;" class="form-control"
