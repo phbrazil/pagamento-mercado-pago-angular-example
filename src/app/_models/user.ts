@@ -15,5 +15,6 @@ export class User {
   trialDate: string
   trial: boolean
   phone: string
+  initialSetup: boolean
 
 }

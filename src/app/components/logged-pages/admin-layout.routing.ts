@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { AdvanceComponent } from "./advance/advance.component";
 import { HomeComponent } from "./home/home.component";
+import { InitialSetupComponent } from "./initial-setup/initial-setup.component";
 import { ManageComponent } from "./manage/manage.component";
 import { RefundComponent } from "./refund/refund.component";
 import { ReportsComponent } from "./reports/reports.component";
@@ -16,6 +17,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'refund', component: RefundComponent },
     { path: 'manage', component: ManageComponent },
     { path: 'reports', component: ReportsComponent },
+    { path: 'setup', component: InitialSetupComponent },
     //{ path: 'profile', component: ProfileComponent },
     { path: '**', component: TimeComponent },
 ];

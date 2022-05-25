@@ -1,5 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../_models/user';
@@ -12,9 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   user: User;
   token: string;
 
-  constructor(private accountService: AccountService
-
-  ) {
+  constructor(private accountService: AccountService, private router: Router) {
 
     this.accountService.user.subscribe(x => {
 
@@ -24,19 +23,20 @@ export class AuthInterceptor implements HttpInterceptor {
 
     });
 
-    //this.token = this.user ? this.user.token : '' ;
-
   }
-
-  //token = localStorage.getItem('token');
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    //SETUP INICIAL NO PRIMEIRO ACESSO
+    if(this.user?.initialSetup && this.user?.admin){
+      this.router.navigate(['/setup']);
+    }
+
     if (!this.token) {
 
       this.token = this.accountService.getToken();
-      //this.accountService.logout()
+
     }
 
     req = req.clone({
@@ -46,10 +46,6 @@ export class AuthInterceptor implements HttpInterceptor {
         'Authorization': `Bearer ${this.token}`,
       },
     });
-
-    this.accountService.getIsLogged().subscribe(status => {
-
-    })
 
     return next.handle(req).pipe(
       catchError(err => {
@@ -63,8 +59,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         return throwError(err);
       }));
-
-    //return next.handle(req);
 
   }
 

@@ -4,6 +4,10 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css');
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+html, body {
+  overflow-x: hidden;
+}
+
 :root {
   --background-color: #f6f6f6;
   --background-Black: #1c181e;

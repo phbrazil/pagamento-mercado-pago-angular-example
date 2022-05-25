@@ -5,6 +5,8 @@ import { Settings } from '../_models/settings';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Constants } from '../components/shared/utils/Constants';
+import { WeekNumberContentArg } from '@fullcalendar/angular';
+import { User } from '../_models/user';
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
 
@@ -76,6 +78,21 @@ export class SettingsService {
     const url = `${this.baseUrl}/settings/editSettings`;
 
     return this.http.put<any>(url, settings, header)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  disableInitialSetup(idUser: number, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/account/api/auth/user/setup/${idUser}`;
+
+    return this.http.post<User>(url, {}, header)
       .pipe(map(res => {
         return res;
       }));

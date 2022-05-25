@@ -1,0 +1,62 @@
+<div class="col-md-12">
+  <div class="navbar-adjust">
+    <div id="carouselExampleIndicators" class="carousel slide" data-touch="true">
+
+      <div class="carousel-inner">
+        <div class="carousel-item active mt-4">
+          <div class="container">
+            <div class="col-10">
+              <h1 style="font-size: 50px;">Bem-vindo ao Opportunity!</h1>
+              <p class="mt-4">Para iniciar o uso da nossa ferramenta precisamos saber alguns detalhes sobre suas
+                atividades</p>
+            </div>
+            <div class="col-8" style="margin-top: 50px;" id="1">
+              <label class="font-home" style="font-size: 20px;">Qual o nome do projeto que está atuando no momento?</label>
+              <input maxlength="15" autofocus [(ngModel)]="name" type="text" style="font-size: 40px; height: 60px; margin-top: 10px;"
+                class="form-control" placeholder="Nome do projeto">
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item mt-4" id="3">
+          <div class="container">
+            <div class="col-10">
+              <h1 style="font-size: 50px;">Bem-vindo ao Opportunity!</h1>
+              <p class="mt-4">Para iniciar o uso da nossa ferramenta precisamos saber alguns detalhes sobre suas
+                atividades</p>
+            </div>
+            <div class="col-10" style="margin-top: 50px;">
+              <label class="font-home" style="font-size: 20px;">No Projeto {{name}}, qual sua principal atividade?</label>
+              <input autofocus [(ngModel)]="task" type="text" style="font-size: 40px; height: 60px; margin-top: 10px;"
+                class="form-control" placeholder="Exemplo: Ligações">
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item mt-4" id="2">
+          <div class="container">
+            <div class="col-10">
+              <h1 style="font-size: 50px;">Bem-vindo ao Opportunity!</h1>
+              <p class="mt-4">Para iniciar o uso da nossa ferramenta precisamos saber alguns detalhes sobre suas
+                atividades</p>
+            </div>
+            <div class="col-8" style="margin-top: 50px;">
+              <label class="font-home" style="font-size: 20px;">O Projeto <strong>{{name}}</strong> possui orçamento (budget)? Deixar 0,00 caso não possua</label>
+              <input autofocus [(ngModel)]="budget" currencyMask value="0,00"
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" type="text" style="font-size: 40px; height: 60px; width: 200px; margin-top: 10px;"
+                class="form-control" placeholder="Exemplo: Ligações">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ol class="carousel-indicators" style="position: fixed; margin-bottom: 200px;">
+      <input *ngIf="slide < 2" type="button" (click)="next()" class="btn-custom-confirm" value="Avançar"
+        [disabled]="name == '' || slide >2" data-target="#carouselExampleIndicators" data-slide-to="{slide}">
+
+      <button (click)="finish()" *ngIf="slide == 2" type="button" [disabled]="task == ''" class="btn-custom-confirm">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+        Finalizar</button><br>
+    </ol>
+
+  </div>
+
+</div>

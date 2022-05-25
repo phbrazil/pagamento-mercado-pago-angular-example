@@ -45,6 +45,7 @@ import { EnableMemberComponent } from './manage/my-team/enable-member/enable-mem
 import { AccountabilityComponent } from './advance/accountability/accountability.component';
 import { MoreInfoComponentAdvance } from './advance/more-info-advance/more-info-advance.component';
 import { ReceiptAdvanceComponent } from './advance/accountability/receipt-advance/receipt-advance.component';
+import { InitialSetupComponent } from './initial-setup/initial-setup.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ReceiptAdvanceComponent } from './advance/accountability/receipt-advanc
     EnableMemberComponent,
     AccountabilityComponent,
     MoreInfoComponentAdvance,
-    ReceiptAdvanceComponent
+    ReceiptAdvanceComponent,
+    InitialSetupComponent
   ],
   imports: [
     RouterModule,

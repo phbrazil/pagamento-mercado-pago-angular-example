@@ -55,7 +55,7 @@ export class MyTeamComponent implements OnInit {
     this.dtOptions = this.dataTableSettings.getSettings();
 
     this.accountService.getIsReloadMembers().subscribe(status => {
-      if (status != null && status) {
+      if (status != null && status && this.user) {
         this.loadMembers();
       }
     })
