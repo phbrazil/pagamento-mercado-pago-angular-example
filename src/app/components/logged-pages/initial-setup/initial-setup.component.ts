@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
@@ -31,6 +32,11 @@ export class InitialSetupComponent implements OnInit {
   newProjectForm: FormGroup;
 
   newTaskForm: FormGroup;
+
+  completed: boolean = false;
+
+  faCheck = faCheck;
+
 
   constructor(private fb: FormBuilder, private accountService: AccountService, private projectService: ProjectService,
     private taskService: TaskService, private settingsService: SettingsService, private router: Router, private alertService: AlertService) {
@@ -102,12 +108,7 @@ export class InitialSetupComponent implements OnInit {
           this.accountService.setUser(this.user);
           localStorage.setItem('user', JSON.stringify(this.user));
 
-
-          //alert
-          this.alertService.success('Tudo pronto!', 'Você pode alterar e dicionar novos Projetos/Atividades quando quiser no menu Gerenciar', { keepAfterRouteChange: true });
-
-          this.router.navigate(['/time']);
-
+          this.completed = true;
 
         }, _err => {
           this.alertService.error(Constants.errorTittle, Constants.errorTittle);
@@ -124,6 +125,10 @@ export class InitialSetupComponent implements OnInit {
       this.isLoading = false;
     })
 
+  }
+
+  start(){
+    this.router.navigate(['/time']);
   }
 
 }

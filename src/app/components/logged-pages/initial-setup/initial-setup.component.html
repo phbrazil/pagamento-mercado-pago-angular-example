@@ -23,10 +23,11 @@
                   <h2 class="u-custom-font u-font-playfair-display u-text u-text-2">Bem-vindo ao <span
                       style="font-weight: 700;">Opportunity!</span>
                   </h2>
-                  <p class="u-text u-text-3">Para iniciar o uso da nossa ferramenta precisamos saber alguns detalhes
+                  <p *ngIf="!completed" class="u-text u-text-3">Para iniciar o uso da nossa ferramenta precisamos saber alguns detalhes
                     sobre suas atividades</p>
+
                   <div id="carouselExampleIndicators" class="carousel slide" data-touch="true">
-                    <div class="carousel-inner">
+                    <div  *ngIf="!completed; else finished" class="carousel-inner">
                       <div class="carousel-item active">
                         <div class="col-12" id="1">
                           <label class="font-home" style="font-size: 20px;">Qual o nome do projeto que está atuando no
@@ -63,7 +64,7 @@
                       </div>
                     </div>
                   </div>
-                  <ol class="carousel-indicators" style="margin-top: 100px">
+                  <ol *ngIf="!completed" class="carousel-indicators" style="margin-top: 100px">
                     <input *ngIf="slide < 2" type="button" (click)="next()" class="btn-custom-confirm" value="Avançar"
                       [disabled]="name == '' || slide >2" data-target="#carouselExampleIndicators"
                       data-slide-to="{slide}">
@@ -73,6 +74,15 @@
                       <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                       Finalizar</button><br>
                   </ol>
+                  <ng-template #finished>
+                    <div class="col-12">
+                      <fa-icon style="color: green;" class="fa-4x" [icon]="faCheck"></fa-icon>
+                      <p class="u-text u-text-3">Tudo pronto! Você pode alterar/adicionar projetos e atividades a qualquer momento no menu Gerenciar.</p>
+                      <div class="mt-4">
+                        <input type="button" (click)="start()" class="btn-custom-confirm btn-block" value="Começar">
+                      </div>
+                    </div>
+                  </ng-template>
                 </div>
               </div>
             </div>
@@ -82,6 +92,9 @@
     </section>
   </div>
 </div>
+
+
+
 
 
 <!--div class="col-md-12">
