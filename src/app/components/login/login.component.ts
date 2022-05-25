@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
 
         this.accountService.setUser(res);
 
-        //this.userSubject.next(user);
         this.accountService.setIsLogged(true);
 
         this.router.navigate(['/time']);
@@ -82,7 +81,7 @@ export class LoginComponent implements OnInit {
       this.isLoading = false;
 
 
-    }, err => {
+    }, _err => {
 
       this.isLoading = false;
 

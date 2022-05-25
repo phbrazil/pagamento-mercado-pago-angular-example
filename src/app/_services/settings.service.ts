@@ -5,7 +5,6 @@ import { Settings } from '../_models/settings';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Constants } from '../components/shared/utils/Constants';
-import { WeekNumberContentArg } from '@fullcalendar/angular';
 import { User } from '../_models/user';
 @Injectable({ providedIn: 'root' })
 export class SettingsService {

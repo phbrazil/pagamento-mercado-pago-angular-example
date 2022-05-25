@@ -75,9 +75,7 @@ export class InitialSetupComponent implements OnInit {
   }
 
   finish() {
-    console.log(this.name);
-    console.log(this.task);
-    console.log(this.budget);
+
     this.isLoading = true;
 
     this.newProjectForm.patchValue({ budget: this.budget, name: this.name })
@@ -94,13 +92,13 @@ export class InitialSetupComponent implements OnInit {
         //disable initial setup
         this.settingsService.disableInitialSetup(this.user.idUser, this.accountService.getToken()).subscribe(res => {
 
-          console.log(res)
-
           this.isLoading = false;
 
           this.user.initialSetup = false;
 
+          //set new user locally
           this.accountService.setUser(this.user);
+          localStorage.setItem('user', JSON.stringify(this.user));
 
           this.router.navigate(['/time']);
 

@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Plan } from '../_models/plan';

@@ -48,7 +48,7 @@ export class ResetPasswordComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.accountService.resetPassword(body.value.emailReset).subscribe(res =>{
+    this.accountService.resetPassword(body.value.emailReset).subscribe(_res =>{
 
       this.isLoading = false;
 
@@ -58,7 +58,7 @@ export class ResetPasswordComponent implements OnInit {
 
       this.messageType = 'success';
 
-    }, err =>{
+    }, _err =>{
 
       this.isLoading = false;
 
