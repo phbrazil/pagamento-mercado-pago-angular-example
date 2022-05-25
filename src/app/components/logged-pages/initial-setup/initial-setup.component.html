@@ -1,7 +1,92 @@
 <div class="col-md-12">
   <div class="navbar-adjust">
-    <div id="carouselExampleIndicators" class="carousel slide" data-touch="true">
+    <section class="u-align-center u-clearfix u-palette-3-light-3 u-section-2" id="carousel_74ea">
+      <div
+        class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs u-sheet-1">
+        <div class="u-expanded-width-xs u-palette-2-base u-shape u-shape-rectangle u-shape-1"></div>
+        <div class="u-clearfix u-gutter-40 u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-image u-layout-cell u-size-30 u-image-1" data-image-width="1200"
+                data-image-height="1011">
+                <div
+                  class="u-container-layout u-valign-bottom-xs u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-valign-top-sm u-container-layout-1">
+                  <img
+                    class="u-expanded-width-lg u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-image u-image-2"
+                    src="assets/img/setup/initial_setup.jpeg" data-image-width="1200" data-image-height="1011"
+                    alt="setup">
+                </div>
+              </div>
+              <div class="u-align-center u-container-style u-layout-cell u-size-30 u-white u-layout-cell-2">
+                <div class="u-container-layout u-valign-middle u-container-layout-2">
+                  <h6 class="u-text u-text-1">Ajustes iniciais</h6>
+                  <h2 class="u-custom-font u-font-playfair-display u-text u-text-2">Bem-vindo ao <span
+                      style="font-weight: 700;">Opportunity!</span>
+                  </h2>
+                  <p class="u-text u-text-3">Para iniciar o uso da nossa ferramenta precisamos saber alguns detalhes
+                    sobre suas atividades</p>
+                  <div id="carouselExampleIndicators" class="carousel slide" data-touch="true">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <div class="col-12" id="1">
+                          <label class="font-home" style="font-size: 20px;">Qual o nome do projeto que está atuando no
+                            momento?</label>
+                        </div>
+                        <div class="col-10 center">
+                          <input maxlength="15" autofocus [(ngModel)]="name" type="text"
+                            style="font-size: 20px; height: 40px; margin-top: 10px;" class="form-control"
+                            placeholder="Nome do projeto">
+                        </div>
+                      </div>
+                      <div class="carousel-item" id="3">
+                        <div class="col-12">
+                          <label class="font-home" style="font-size: 20px;">No Projeto {{name}}, qual sua principal
+                            atividade?</label>
+                        </div>
+                        <div class="col-10 center">
+                          <input [(ngModel)]="task" type="text" style="font-size: 20px; height: 40px; margin-top: 10px;"
+                            class="form-control" placeholder="Exemplo: Ligações">
+                        </div>
+                      </div>
+                      <div class="carousel-item" id="2">
+                        <div class="col-12">
+                          <label class="font-home" style="font-size: 20px;">Qual o budget do projeto
+                            <strong>{{name}}?</strong><small> Deixar 0 caso não possua</small>
+                          </label>
+                        </div>
+                        <div class="col-3 center">
+                          <input [(ngModel)]="budget" currencyMask value="0,00"
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" type="text"
+                            style="font-size: 20px; height: 40px; margin-top: 10px;" class="form-control"
+                            placeholder="Exemplo: Ligações">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ol class="carousel-indicators" style="margin-top: 100px">
+                    <input *ngIf="slide < 2" type="button" (click)="next()" class="btn-custom-confirm" value="Avançar"
+                      [disabled]="name == '' || slide >2" data-target="#carouselExampleIndicators"
+                      data-slide-to="{slide}">
 
+                    <button (click)="finish()" *ngIf="slide == 2" type="button" [disabled]="task == ''"
+                      class="btn-custom-confirm">
+                      <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Finalizar</button><br>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<!--div class="col-md-12">
+  <div class="navbar-adjust">
+    <div id="carouselExampleIndicators" class="carousel slide" data-touch="true">
       <div class="carousel-inner">
         <div class="carousel-item active mt-4">
           <div class="container">
@@ -11,9 +96,11 @@
                 atividades</p>
             </div>
             <div class="col-8" style="margin-top: 50px;" id="1">
-              <label class="font-home" style="font-size: 20px;">Qual o nome do projeto que está atuando no momento?</label>
-              <input maxlength="15" autofocus [(ngModel)]="name" type="text" style="font-size: 40px; height: 60px; margin-top: 10px;"
-                class="form-control" placeholder="Nome do projeto">
+              <label class="font-home" style="font-size: 20px;">Qual o nome do projeto que está atuando no
+                momento?</label>
+              <input maxlength="15" autofocus [(ngModel)]="name" type="text"
+                style="font-size: 40px; height: 60px; margin-top: 10px;" class="form-control"
+                placeholder="Nome do projeto">
             </div>
           </div>
         </div>
@@ -25,7 +112,8 @@
                 atividades</p>
             </div>
             <div class="col-10" style="margin-top: 50px;">
-              <label class="font-home" style="font-size: 20px;">No Projeto {{name}}, qual sua principal atividade?</label>
+              <label class="font-home" style="font-size: 20px;">No Projeto {{name}}, qual sua principal
+                atividade?</label>
               <input autofocus [(ngModel)]="task" type="text" style="font-size: 40px; height: 60px; margin-top: 10px;"
                 class="form-control" placeholder="Exemplo: Ligações">
             </div>
@@ -39,10 +127,12 @@
                 atividades</p>
             </div>
             <div class="col-8" style="margin-top: 50px;">
-              <label class="font-home" style="font-size: 20px;">O Projeto <strong>{{name}}</strong> possui orçamento (budget)? Deixar 0,00 caso não possua</label>
+              <label class="font-home" style="font-size: 20px;">O Projeto <strong>{{name}}</strong> possui orçamento
+                (budget)? Deixar 0,00 caso não possua</label>
               <input autofocus [(ngModel)]="budget" currencyMask value="0,00"
-              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" type="text" style="font-size: 40px; height: 60px; width: 200px; margin-top: 10px;"
-                class="form-control" placeholder="Exemplo: Ligações">
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" type="text"
+                style="font-size: 40px; height: 60px; width: 200px; margin-top: 10px;" class="form-control"
+                placeholder="Exemplo: Ligações">
             </div>
           </div>
         </div>
@@ -59,4 +149,4 @@
 
   </div>
 
-</div>
+</div-->
