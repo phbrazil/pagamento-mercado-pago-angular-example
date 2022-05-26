@@ -91,11 +91,11 @@ export class InitialSetupComponent implements OnInit {
 
     //add project
 
-    this.projectService.newProject(this.newProjectForm.value, this.accountService.getToken()).subscribe(_res => {
+    this.projectService.newProject(this.newProjectForm.value, this.user.idUser, this.accountService.getToken()).subscribe(_res => {
 
       //add task
 
-      this.taskService.newTask(this.newTaskForm.value, this.accountService.getToken()).subscribe(_res => {
+      this.taskService.newTask(this.newTaskForm.value, this.user.idUser, this.accountService.getToken()).subscribe(_res => {
 
         //disable initial setup
         this.settingsService.disableInitialSetup(this.user.idUser, this.accountService.getToken()).subscribe(res => {

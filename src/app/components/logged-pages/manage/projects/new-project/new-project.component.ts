@@ -50,7 +50,7 @@ export class NewProjectComponent implements OnInit {
   submit() {
     this.isLoading = true;
 
-    this.projectService.newProject(this.newProjectForm.value, this.accountService.getToken()).subscribe(_res => {
+    this.projectService.newProject(this.newProjectForm.value, this.user.idUser, this.accountService.getToken()).subscribe(_res => {
 
       this.isLoading = false;
 

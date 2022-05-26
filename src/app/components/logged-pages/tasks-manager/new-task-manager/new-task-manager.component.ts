@@ -47,7 +47,7 @@ export class NewTaskManagerComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.taskService.newTask(this.newTaskForm.value, this.accountService.getToken()).subscribe(_res => {
+    this.taskService.newTask(this.newTaskForm.value, this.user.idUser, this.accountService.getToken()).subscribe(_res => {
 
       this.isLoading = false;
 

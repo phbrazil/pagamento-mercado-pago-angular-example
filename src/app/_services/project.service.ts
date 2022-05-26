@@ -28,14 +28,14 @@ export class ProjectService {
 
   }
 
-  newProject(project: Project, token: string) {
+  newProject(project: Project, idUser: number, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/project/newProject`;
+    const url = `${this.baseUrl}/project/newProject/${idUser}`;
 
     return this.http.post<any>(url,  project , header)
       .pipe(map(res => {

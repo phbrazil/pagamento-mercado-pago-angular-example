@@ -27,14 +27,14 @@ export class TaskService {
 
   }
 
-  newTask(task: Task, token: string) {
+  newTask(task: Task, idUser: number, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/task/newTask`;
+    const url = `${this.baseUrl}/task/newTask/${idUser}`;
 
     return this.http.post<any>(url,  task , header)
       .pipe(map(res => {
