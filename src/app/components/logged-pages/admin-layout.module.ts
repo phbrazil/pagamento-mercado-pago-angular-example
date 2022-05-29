@@ -45,6 +45,7 @@ import { AccountabilityComponent } from './advance/accountability/accountability
 import { MoreInfoComponentAdvance } from './advance/more-info-advance/more-info-advance.component';
 import { ReceiptAdvanceComponent } from './advance/accountability/receipt-advance/receipt-advance.component';
 import { InitialSetupComponent } from './initial-setup/initial-setup.component';
+import { ExpiredComponent } from './manage/plan-account/expired/expired.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { InitialSetupComponent } from './initial-setup/initial-setup.component';
     AccountabilityComponent,
     MoreInfoComponentAdvance,
     ReceiptAdvanceComponent,
-    InitialSetupComponent
+    InitialSetupComponent,
+    ExpiredComponent
   ],
   imports: [
     RouterModule,

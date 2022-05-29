@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { PlanService } from 'src/app/_services/plan.service';
 import { TimeService } from 'src/app/_services/time.service';
 
 @Component({
@@ -18,7 +19,10 @@ export class TrialBannerComponent implements OnInit {
   day: Date = new Date();
   today = moment(new Date(this.day)).format('MM/DD/YYYY');
 
-  constructor(private accountService: AccountService, private timeService: TimeService) {
+  expired: boolean = false;
+
+  constructor(private accountService: AccountService, private timeService: TimeService,
+    private planService: PlanService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -26,13 +30,22 @@ export class TrialBannerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var date1 = new Date(this.today);
-    var date2 = new Date(this.timeService.convertDDMMYYYToYYYYMMDD(this.user.trialDate));
+   this.daysLeft = this.planService.getDaysLeft(this.user.trialDate);
 
-    var Difference_In_Time = date2.getTime() - date1.getTime();
+   this.checkExpired(this.daysLeft);
 
-    this.daysLeft = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+   console.log(this.expired)
 
+   console.log(this.daysLeft)
+  }
+
+  checkExpired(daysLeft: number){
+
+    if(daysLeft <1 ){
+      this.expired = true;
+    }else{
+      this.expired = false;
+    }
   }
 
 }

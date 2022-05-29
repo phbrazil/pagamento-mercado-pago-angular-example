@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { AccountService } from './account.service';
+import { PlanService } from './plan.service';
 
 
 @Injectable()
@@ -13,7 +14,8 @@ export class AuthInterceptor implements HttpInterceptor {
   user: User;
   token: string;
 
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(private accountService: AccountService, private router: Router,
+    private planService: PlanService) {
 
     this.accountService.user.subscribe(x => {
 
@@ -29,9 +31,26 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     //SETUP INICIAL NO PRIMEIRO ACESSO
-    if(this.user?.initialSetup && this.user?.admin){
+    if (this.user?.initialSetup && this.user?.admin) {
       this.router.navigate(['/setup']);
     }
+
+    //SE PRAZO EXPIRADO DIRECIONA PARA PAGAMENTO
+
+
+    let daysLeft = 0;
+
+    if (this.user) {
+      daysLeft = this.planService.getDaysLeft(this.user?.trialDate);
+
+      if (this.user?.trial && this.user?.admin && daysLeft < 1) {
+        this.router.navigate(['/manage']);
+      } else if (this.user?.trial && !this.user?.admin && daysLeft < 1) {
+        this.router.navigate(['/expired']);
+      }
+    }
+
+
 
     if (!this.token) {
 

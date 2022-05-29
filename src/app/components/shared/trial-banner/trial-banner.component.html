@@ -1,15 +1,20 @@
-
-<div *ngIf="user.trial" class="col-md-12 trial-banner">
+<div *ngIf="user.trial && user.admin" class="col-md-12 trial-banner">
   <footer class="footer mt-auto py-3">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
-          <div class="container div-center">
-            <span class="font-style">Você ainda tem <strong>{{daysLeft}} dias</strong> de uso grátis.   <button routerLink="/manage" type="button" class="btn-custom-decline zoom">Assinar</button></span>
+          <div *ngIf="!expired; else isExpired" class="container div-center">
+            <span class="font-style">Você ainda tem <strong>{{daysLeft}} dias</strong> de uso grátis. <button
+                routerLink="/manage" type="button" class="btn-custom-decline zoom">Assinar</button></span>
           </div>
+          <ng-template #isExpired>
+            <div class="container div-center alert alert-warning" style="margin-top: 120px;">
+              <span>Seu uso grátis expirou, atualize sua forma de pagamento para continuar usando nossa ferramenta</span>
+            </div>
+          </ng-template>
+
         </div>
       </div>
     </div>
   </footer>
 </div>
-

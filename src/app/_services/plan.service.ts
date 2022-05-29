@@ -6,6 +6,8 @@ import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Plan } from '../_models/plan';
 import { Constants } from '../components/shared/utils/Constants';
+import moment from 'moment';
+import { TimeService } from './time.service';
 @Injectable({ providedIn: 'root' })
 export class PlanService {
   private planSubject: BehaviorSubject<Plan>;
@@ -20,7 +22,8 @@ export class PlanService {
     private router: Router,
     private http: HttpClient,
     private alertService: AlertService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private timeService: TimeService
   ) {
     this.planSubject = new BehaviorSubject<Plan>(JSON.parse(localStorage.getItem('plan')));
     this.plan = this.planSubject.asObservable();
@@ -80,6 +83,22 @@ export class PlanService {
     const url = `${this.baseUrl}/account/api/auth/plan/changePlan/${idPlan}`
 
     return this.http.post<Plan>(url, body, header);
+  }
+
+  getDaysLeft(trialDate: string): number{
+
+    let day: Date = new Date();
+
+    let today = moment(new Date(day)).format('MM/DD/YYYY');
+
+
+    var date1 = new Date(today);
+    var date2 = new Date(this.timeService.convertDDMMYYYToYYYYMMDD(trialDate));
+
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+
+    return Math.round(Difference_In_Time / (1000 * 3600 * 24));
+
   }
 
 }
