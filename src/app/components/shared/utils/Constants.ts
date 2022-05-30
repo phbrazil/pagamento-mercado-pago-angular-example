@@ -1,5 +1,8 @@
 export class Constants {
 
+  public static system_name = 'Opportunity Saas';
+
+
   //BASE URL
 
   public static baseUrl = 'https://opportunity-back-end.herokuapp.com';
@@ -21,6 +24,14 @@ export class Constants {
 
   public static multiplyCorp = 10;
   public static multiplyPro = 5;
+
+  //MERCADO PAGO
+  //public static public_key = 'APP_USR-63b1d06a-b9bb-4f81-bfe1-f44465f24a63';
+
+  //SANDBOX
+  public static public_key = 'TEST-1a14e509-e403-413e-87d5-f88271020e1d';
+
+
 
 
 

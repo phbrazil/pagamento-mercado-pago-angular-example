@@ -1,83 +1,69 @@
 <div class="modal-position col-md-12" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body default-font">
         <div class="card-header">
           <strong>Cartão de crédito</strong><br>
           <small>insira os dados do cartão</small>
         </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="name">Nome</label>
-                <input class="form-control" id="name" type="text" placeholder="Insira o nome igual no cartão">
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="ccnumber">Número do cartão</label>
-                <div class="input-group">
-                  <input class="form-control" type="text" placeholder="0000 0000 0000 0000" autocomplete="email">
-                  <!--div class="input-group-append">
-                    <span class="input-group-text">
-                      <em class="mdi mdi-credit-card"></em>
-                    </span>
-                  </div-->
+        <div class="col-md-12">
+          <form id="form-checkout" name="pay" (submit)="submit()">
+            <div class="row">
+              <div class="col-md-12 order-md-1">
+                <h4 class="mb-3 text-muted">Seu cartão de crédito</h4>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="cc-name">Nome</label>
+                    <input class='form-control' type="text" name="cardholderName" id="form-checkout__cardholderName" />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="cc-number">Número do cartão</label>
+                    <input class='form-control' type="text" name="cardNumber" id="form-checkout__cardNumber" />
+                  </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="cc-expiration">Vencimento</label>
+                    <input mask="00/0000" max="7" class='form-control' type="text" name="expirationDate"
+                      id="form-checkout__expirationDate" />
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="cc-cvv">CVV</label>
+                    <input mask="000" max="3" class='form-control' type="text" name="securityCode"
+                      id="form-checkout__securityCode" />
+
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="cc-cvv">Emissor</label>
+                    <select class='form-control' id="form-checkout__issuer" name='issuer'>
+                    </select>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="cc-ident">Identificação</label>
+                    <select class='form-control' name="identificationType"
+                      id="form-checkout__identificationType"></select>
+
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="cc-ident-num">Número</label>
+                    <input class='form-control' type="text" name="identificationNumber"
+                      id="form-checkout__identificationNumber" />
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="cc-cvv">Parcelas</label>
+                    <select class='form-control' name="installments" id="form-checkout__installments"></select>
+                  </div>
+                </div>
+                <hr class="mb-4">
+                <input type="hidden" id='form-checkout__cardholderEmail' name="emailPayment" value='{{emailTest}}' />
+                <button [disabled]="isLoading" id="form-checkout__submit"
+                  class="btn btn-primary btn-lg btn-block mb-4" type="submit">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Pagar</button>
+                <progress value="0" class="progress-bar">Carregando...</progress>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-4">
-              <label for="ccmonth">Mês</label>
-              <select class="form-control" id="ccmonth">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-              </select>
-            </div>
-            <div class="form-group col-sm-4">
-              <label for="ccyear">Ano</label>
-              <select class="form-control" id="ccyear">
-                <option>2022</option>
-                <option>2023</option>
-                <option>2024</option>
-                <option>2025</option>
-                <option>2026</option>
-                <option>2027</option>
-                <option>2028</option>
-                <option>2029</option>
-                <option>2030</option>
-              </select>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="cvv">CVV/CVC</label>
-                <input class="form-control" id="cvv" type="text" placeholder="123">
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="card-footer">
-          <button class="btn-custom-confirm float-right" type="submit">
-            <em class="mdi mdi-gamepad-circle"></em> Continuar</button>
-          <button class="btn-custom-reject" type="reset">
-            <em class="mdi mdi-lock-reset"></em> Redefinir</button>
+          </form>
         </div>
 
       </div>

@@ -2,6 +2,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "allowJs": true,
     "esModuleInterop": true,
     "strictNullChecks": false,
     "baseUrl": "./",

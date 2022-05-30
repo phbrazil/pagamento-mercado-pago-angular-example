@@ -34,9 +34,6 @@ export class TrialBannerComponent implements OnInit {
 
    this.checkExpired(this.daysLeft);
 
-   console.log(this.expired)
-
-   console.log(this.daysLeft)
   }
 
   checkExpired(daysLeft: number){

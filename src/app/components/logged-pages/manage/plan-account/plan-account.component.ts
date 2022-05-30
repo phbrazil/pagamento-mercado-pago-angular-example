@@ -19,7 +19,7 @@ export class PlanAccountComponent implements OnInit {
 
   user: User;
 
-  activeUsers: number = 0;
+  activeUsers: number = 1;
   currentPlanValue: number = 0;
   brand: string = 'visa'
   isLoading: boolean = false;
