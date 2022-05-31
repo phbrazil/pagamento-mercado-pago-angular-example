@@ -1,29 +1,21 @@
-{
-  "id": "2c9380848117bc5501811b2fb5970170",
-  "back_url": "https://www.getopportunity.com.br",
-  "collector_id": 1133478112,
-  "application_id": 4960455321104387,
+curl -X POST \
+    'https://api.mercadopago.com/preapproval' \
+    -H 'Authorization: Bearer APP_USR-4960455321104387-053021-97ea81d77d776b27c6dc0d82bfb63451-1133478112' \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "preapproval_plan_id": "2c9380848117bc5501811b89695501ac",
   "reason": "Teste caraio",
-  "status": "active",
-  "date_created": "2022-05-31T13:35:20.471-04:00",
-  "last_modified": "2022-05-31T13:35:20.471-04:00",
-  "init_point": "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848117bc5501811b2fb5970170",
+  "external_reference": "Teste referencia",
+  "payer_email": "test_user_89870946@testuser.com",
+  "card_token_id": "6cc2366486088e6e0b9391e64905dc93",
   "auto_recurring": {
     "frequency": 1,
     "frequency_type": "months",
-    "currency_id": "BRL",
-    "repetitions": 12,
-    "billing_day": 10,
-    "billing_day_proportional": true
+    "start_date": "2022-06-02T13:07:14.260Z",
+    "end_date": "2023-06-02T13:07:14.260Z",
+    "transaction_amount": 100.0,
+    "currency_id": "BRL"
   },
-  "payment_methods_allowed": {
-    "payment_methods": [
-      {
-        "id": "visa"
-      },
-      {
-        "id": "master"
-      }
-    ]
-  }
-}
+  "back_url": "https://www.getopportunity.com.br",
+  "status": "authorized"
+}'

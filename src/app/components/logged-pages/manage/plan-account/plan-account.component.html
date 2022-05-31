@@ -36,7 +36,7 @@
 </div>
 
 <ng-template #noCard>
-  <div *ngIf="!isPlanSelected" class="col-md-12">
+  <div *ngIf="!isPlanSelected && !isLoading" class="col-md-12">
     <div class="row">
       <div class="col-md-6 mt-2">
         <input type="button" class="btn-custom-confirm" (click)="changePlan()" value="Selecionar Plano">

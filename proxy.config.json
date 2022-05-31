@@ -1,6 +1,6 @@
 {
    "/process_payment": {
-    "target": "https://opportunity-back-end.herokuapp.com/opportunity/payment/process_payment",
+    "target": "http://localhost:8080/opportunity/payment/process_payment",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
