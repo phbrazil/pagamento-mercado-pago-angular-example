@@ -5,8 +5,8 @@ export class Constants {
 
   //BASE URL
 
-  //public static baseUrl = 'https://opportunity-back-end.herokuapp.com';
-  public static baseUrl = 'http://localhost:8080';
+  public static baseUrl = 'https://opportunity-back-end.herokuapp.com';
+  //public static baseUrl = 'http://localhost:8080';
 
   public static email = 'paulo.henriqueb@me.com';
   public static password = 'mortadela1';
@@ -32,10 +32,10 @@ export class Constants {
   //Configure a public key de produção do seu usuário de teste comprador no frontend da sua aplicação e o access token de produção do seu usuário de teste vendedor no seu backend.
   //COMPRADOR {"id":1132580773,"nickname":"TESTY13GLUS1","password":"qatest8433","site_status":"active","email":"test_user_89870946@testuser.com"}MacBook-Pro-de-Paulo:OpportunityApi Paulo$
 
-  public static public_key = 'APP_USR-f0f8d8e9-c959-48db-83ee-b9d5b776614a';
+  //public static public_key = 'APP_USR-f0f8d8e9-c959-48db-83ee-b9d5b776614a';
 
 
-  //public static public_key = 'TEST-1a14e509-e403-413e-87d5-f88271020e1d';
+  public static public_key = 'TEST-1a14e509-e403-413e-87d5-f88271020e1d';
 
 
 
