@@ -29,11 +29,22 @@ export class NewCardComponent implements OnInit {
 
   emailTest: string = 'test_user_89870946@testuser.com';
 
-  newCardForm: FormGroup;
+  newCardForm: FormGroup =
+    this.fb.group({
+      checkout__cardholderName: ['', Validators.required],
+      checkout__cardNumber: ['', Validators.required],
+      checkout__expirationDate: ['', Validators.required],
+      checkout__securityCode: ['', Validators.required],
+      checkout__issuer: ['', Validators.required],
+      checkout__identificationType: ['', Validators.required],
+      checkout__identificationNumber: ['', Validators.required],
+      checkout__installments: ['', Validators.required],
+      checkout__cardholderEmail: [this.emailTest, Validators.required],
+    });
 
-  installments: string;
-  identificationType: string;
-  issuer: string;
+  installments: string = '';
+  identificationType: string = '';
+  issuer: string = '';
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
     private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -49,18 +60,6 @@ export class NewCardComponent implements OnInit {
     this.amount = this.data.currentPlanValue;
     this.activeUsers = this.data.activeUsers;
 
-    this.newCardForm = this.fb.group({
-      checkout__cardholderName: ['', Validators.required],
-      checkout__cardNumber: ['', Validators.required],
-      checkout__expirationDate: ['', Validators.required],
-      checkout__securityCode: ['', Validators.required],
-      checkout__issuer: ['', Validators.required],
-      checkout__identificationType: ['', Validators.required],
-      checkout__identificationNumber: ['', Validators.required],
-      checkout__installments: ['', Validators.required],
-      checkout__cardholderEmail: [this.emailTest, Validators.required],
-    });
-
     this.loadForm();
 
   }
@@ -69,11 +68,12 @@ export class NewCardComponent implements OnInit {
 
     this.isLoading = true;
 
-
+    console.log(this.newCardForm.value)
+    console.log(this.newCardForm.valid)
 
   }
 
-  checkSelects(){
+  checkSelects() {
 
     this.installments = (<HTMLSelectElement>document.getElementById('form-checkout__installments')).value;
     this.identificationType = (<HTMLSelectElement>document.getElementById('form-checkout__identificationType')).value;
@@ -84,6 +84,8 @@ export class NewCardComponent implements OnInit {
       checkout__identificationType: this.identificationType,
       checkout__issuer: this.issuer,
     })
+
+    console.log(this.newCardForm.value)
 
   }
 
