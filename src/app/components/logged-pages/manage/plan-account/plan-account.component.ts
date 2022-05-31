@@ -9,7 +9,6 @@ import { PlanService } from 'src/app/_services/plan.service';
 import { TeamService } from 'src/app/_services/team.service';
 import { ChangePlanComponent } from './change-plan/change-plan.component';
 import { DeleteCardComponent } from './new-card/delete-card/delete-card.component';
-import { NewCardComponent } from './new-card/new-card.component';
 
 @Component({
   selector: 'app-plan-account',
@@ -26,6 +25,7 @@ export class PlanAccountComponent implements OnInit {
   isLoading: boolean = false;
   isLoadingCard: boolean = false;
   isLoadingPlan: boolean = false;
+  isPlanSelected: boolean = false;
   plan: Plan;
   card: Card;
 
@@ -91,10 +91,6 @@ export class PlanAccountComponent implements OnInit {
 
   }
 
-  newCard() {
-    this.dialog.open(NewCardComponent);
-
-  }
 
   loadCard(){
     this.isLoadingCard = true;

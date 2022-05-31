@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/components/shared/utils/Constants';
 import { User } from 'src/app/_models/user';
@@ -23,30 +23,17 @@ export class NewCardComponent implements OnInit {
 
   progress: number = 0;
 
-  amount: number = 100.5
+  amount: number = 0;
+
+  activeUsers: number = 0;
 
   emailTest: string = 'test_user_89870946@testuser.com';
 
-  formMounted: boolean = false;
-
-  mp: any = new MercadoPago(Constants.public_key);
-
-  newCardForm = this.fb.group({
-    checkout__cardholderName: ['', Validators.required],
-    checkout__cardNumber: ['', Validators.required],
-    checkout__expirationDate: ['', Validators.required],
-    checkout__securityCode: ['', Validators.required],
-    checkout__issuer: ['', Validators.required],
-    checkout__identificationType: ['', Validators.required],
-    checkout__identificationNumber: ['', Validators.required],
-    checkout__installments: ['', Validators.required],
-    checkout__cardholderEmail: [this.emailTest, Validators.required],
-
-  });
+  newCardForm: FormGroup;
 
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
-    private router: Router, private fb: FormBuilder) {
+    private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -56,7 +43,23 @@ export class NewCardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadForm(this.mp);
+    this.newCardForm = this.fb.group({
+      checkout__cardholderName: ['', Validators.required],
+      checkout__cardNumber: ['', Validators.required],
+      checkout__expirationDate: ['', Validators.required],
+      checkout__securityCode: ['', Validators.required],
+      checkout__issuer: ['', Validators.required],
+      checkout__identificationType: ['', Validators.required],
+      checkout__identificationNumber: ['', Validators.required],
+      checkout__installments: ['', Validators.required],
+      checkout__cardholderEmail: [this.emailTest, Validators.required],
+
+    });
+
+    this.loadForm();
+
+    this.amount = this.data.currentPlanValue;
+    this.activeUsers = this.data.activeUsers;
 
   }
 
@@ -69,14 +72,14 @@ export class NewCardComponent implements OnInit {
   ngOnDestroy() {
     console.log('fechei')
 
-    this.mp = null;
-
     this.router.navigate(['/manage']);
 
   }
 
 
-  loadForm(mp: any): any {
+  loadForm(): any {
+
+    const mp = new MercadoPago(Constants.public_key);
 
     const cardForm = mp.cardForm({
       amount: String(this.amount),
@@ -124,7 +127,6 @@ export class NewCardComponent implements OnInit {
         onFormMounted: (error: any) => {
           if (error) return console.warn("Form Mounted handling error: ", error);
           console.log("Form mounted");
-          this.formMounted = true;
         },
         onSubmit: (event: { preventDefault: () => void; }) => {
           event.preventDefault();
@@ -141,13 +143,13 @@ export class NewCardComponent implements OnInit {
           } = cardForm.getCardFormData();
 
           fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
-          //fetch("/process_payment", {
+            //fetch("/process_payment", {
             method: "POST",
             mode: 'cors',
             headers: {
               "Content-Type": "application/json; charset=utf-8",
               "Authorization": "Bearer " + this.accountService.getToken(),
-              "Accepts": "application/json",
+              "Accept": "application/json",
               "Access-Control-Allow-Origin": "https://www.getopportunity.com.br"
             },
             body: JSON.stringify({

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { faMinus , faPlus} from '@fortawesome/free-solid-svg-icons';
 import { Constants } from 'src/app/components/shared/utils/Constants';
 import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { PlanService } from 'src/app/_services/plan.service';
 import { TeamService } from 'src/app/_services/team.service';
+import { NewCardComponent } from '../new-card/new-card.component';
 
 @Component({
   selector: 'app-change-plan',
@@ -13,6 +15,10 @@ import { TeamService } from 'src/app/_services/team.service';
   styleUrls: ['./change-plan.component.scss']
 })
 export class ChangePlanComponent implements OnInit {
+
+
+  faMinus = faMinus;
+  faPlus = faPlus;
 
   plan: Plan;
   user: User;
@@ -57,31 +63,6 @@ export class ChangePlanComponent implements OnInit {
 
   close() {
     this.dialog.closeAll();
-  }
-
-  onSubmit() {
-
-    this.isLoading = true;
-
-    this.plan.idUser = this.user.idUser;
-
-    this.planService.changePlan(this.plan, this.plan.idPlan, this.accountService.getToken()).subscribe(res => {
-
-      this.isLoading = false;
-
-      this.planService.setIsReload(true);
-
-      this.planService.setPlan(res);
-
-
-      this.close();
-
-    }, _err => {
-
-      this.isLoading = false;
-
-    })
-
   }
 
   checkIsRefund() {
@@ -164,6 +145,77 @@ export class ChangePlanComponent implements OnInit {
     this.plan.plan = 'Corp';
 
     this.calcPricing(this.plan.plan);
+
+  }
+
+  decreaseUser() {
+
+    if (this.activeUsers > 0) {
+
+      this.activeUsers--;
+
+    }
+
+    this.calcPricing(this.plan.plan);
+
+
+  }
+
+  increaseUser() {
+
+    if (this.activeUsers < 20) {
+
+      this.activeUsers++;
+
+    }
+
+
+    this.calcPricing(this.plan.plan);
+
+  }
+
+  addUser(event: any) {
+
+    this.activeUsers = event.target.value;
+
+    this.calcPricing(this.plan.plan);
+
+  }
+
+  onSubmit() {
+
+    this.isLoading = true;
+
+    this.plan.idUser = this.user.idUser;
+
+    this.planService.changePlan(this.plan, this.plan.idPlan, this.accountService.getToken()).subscribe(res => {
+
+      this.isLoading = false;
+
+      this.planService.setIsReload(true);
+
+      this.planService.setPlan(res);
+
+      this.close();
+
+      this.newCard();
+
+    }, _err => {
+
+      this.isLoading = false;
+
+    })
+
+  }
+
+  newCard() {
+    this.dialog.open(NewCardComponent,
+      {
+        data: {
+          activeUsers: this.activeUsers,
+          currentPlanValue: this.currentPlanValue
+        }
+      });
 
   }
 
