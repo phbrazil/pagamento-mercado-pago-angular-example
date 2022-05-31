@@ -35,7 +35,4 @@ export class Constants {
   public static public_key = 'APP_USR-f0f8d8e9-c959-48db-83ee-b9d5b776614a';
 
 
-
-
-
 }

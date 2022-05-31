@@ -27,7 +27,7 @@ export class NewCardComponent implements OnInit {
 
   activeUsers: number = 0;
 
-  emailTest: string = 'test_user_89870946@testuser.com';
+  emailTest: string = 'test_user_898709461234@testuser.com';
 
   newCardForm: FormGroup =
     this.fb.group({
