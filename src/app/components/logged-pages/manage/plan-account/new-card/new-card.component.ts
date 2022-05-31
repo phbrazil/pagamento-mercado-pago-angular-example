@@ -30,6 +30,11 @@ export class NewCardComponent implements OnInit {
 
   formMounted: boolean = false;
 
+  mp: any = new MercadoPago(Constants.public_key);
+
+  cardForm: any;
+
+
   constructor(private accountService: AccountService, private matDialog: MatDialog,
     private router: Router) {
 
@@ -42,11 +47,8 @@ export class NewCardComponent implements OnInit {
   ngOnInit(): void {
 
 
-    if (!this.formMounted) {
-      const mp = new MercadoPago(Constants.public_key);
+    this.loadForm(this.mp);
 
-      this.loadForm(mp);
-    }
 
 
   }
@@ -60,15 +62,17 @@ export class NewCardComponent implements OnInit {
   ngOnDestroy() {
     console.log('fechei')
 
-    var dirtyFormID = 'form-checkout';
-    var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
-    resetForm.reset();
+    this.mp = null;
+    this.cardForm = null;
+
+    this.router.navigate(['/manage']);
+
   }
 
 
   loadForm(mp: any): any {
 
-    const cardForm = mp.cardForm({
+    this.cardForm = mp.cardForm({
       amount: String(this.amount),
       autoMount: true,
       form: {
@@ -128,14 +132,16 @@ export class NewCardComponent implements OnInit {
             installments,
             identificationNumber,
             identificationType,
-          } = cardForm.getCardFormData();
+          } = this.cardForm.getCardFormData();
 
-          fetch(Constants.baseUrl+"/opportunity/payment/process_payment", {
-          //fetch("/process_payment", {
+          fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
+            //fetch("/process_payment", {
             method: "POST",
+            mode: 'cors',
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json; charset=utf-8",
               "Authorization": "Bearer " + this.accountService.getToken(),
+              "Accepts": "application/json",
             },
             body: JSON.stringify({
               token,

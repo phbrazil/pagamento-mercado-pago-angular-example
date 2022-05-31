@@ -1,16 +1,16 @@
 {
   "reason": "Teste caraio",
   "external_reference": "Teste referencia",
-  "payer_email": "APP_USR-3920929724708463-052915-0a133976c23e1b10c47505d506ba2fb5-592485468",
-  "card_token_id": "d6e9d3c8d58ee9204fca88310cb9a134",
+  "payer_email": "test_user_89870946@testuser.com",
+  "card_token_id": "20050c7cca36b2fbb7001c49a0f5cbed",
   "auto_recurring": {
     "frequency": 1,
-    "frequency_type": "month",
+    "frequency_type": "months",
     "start_date": "2022-06-02T13:07:14.260Z",
     "end_date": "2023-06-02T13:07:14.260Z",
     "transaction_amount": 100.0,
-    "currency_id": "ARS"
+    "currency_id": "BRL"
   },
-  "back_url": "www.getopportunity.com.br",
+  "back_url": "https://www.getopportunity.com.br",
   "status": "authorized"
 }
