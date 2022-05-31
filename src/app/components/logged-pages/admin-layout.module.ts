@@ -46,6 +46,7 @@ import { MoreInfoComponentAdvance } from './advance/more-info-advance/more-info-
 import { ReceiptAdvanceComponent } from './advance/accountability/receipt-advance/receipt-advance.component';
 import { InitialSetupComponent } from './initial-setup/initial-setup.component';
 import { ExpiredComponent } from './manage/plan-account/expired/expired.component';
+import { DeleteCardComponent } from './manage/plan-account/new-card/delete-card/delete-card.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ExpiredComponent } from './manage/plan-account/expired/expired.componen
     MoreInfoComponentAdvance,
     ReceiptAdvanceComponent,
     InitialSetupComponent,
-    ExpiredComponent
+    ExpiredComponent,
+    DeleteCardComponent
   ],
   imports: [
     RouterModule,

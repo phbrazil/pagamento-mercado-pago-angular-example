@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Card } from 'src/app/_models/card';
+import { Card } from 'src/app/_models/payment/card';
 import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -8,6 +8,7 @@ import { CardService } from 'src/app/_services/card.service';
 import { PlanService } from 'src/app/_services/plan.service';
 import { TeamService } from 'src/app/_services/team.service';
 import { ChangePlanComponent } from './change-plan/change-plan.component';
+import { DeleteCardComponent } from './new-card/delete-card/delete-card.component';
 import { NewCardComponent } from './new-card/new-card.component';
 
 @Component({
@@ -39,6 +40,8 @@ export class PlanAccountComponent implements OnInit {
   ngOnInit(): void {
 
     this.planService.getIsReload().subscribe(status => {
+
+    console.log('to aqui ',status )
       if (status != null && status) {
         if (this.user.admin) {
           this.loadActiveMembers();
@@ -54,6 +57,7 @@ export class PlanAccountComponent implements OnInit {
 
     this.loadCard();
   }
+
 
   loadActiveMembers() {
 
@@ -103,5 +107,15 @@ export class PlanAccountComponent implements OnInit {
 
   }
 
+  confirmDelete() {
+
+    this.dialog.open(DeleteCardComponent,
+      {
+        data: {
+          idUser: this.user.idUser
+        }
+      })
+
+  }
 
 }

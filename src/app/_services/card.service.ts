@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AlertService } from './alert.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Card } from '../_models/card';
 import { Constants } from '../components/shared/utils/Constants';
+import { Card } from '../_models/payment/card';
 @Injectable({ providedIn: 'root' })
 export class CardService {
   private cardSubject: BehaviorSubject<Card>;
@@ -56,5 +56,17 @@ export class CardService {
     const url = `${this.baseUrl}/card/getCard/${idUser}`
 
     return this.http.get<Card>(url, header);
+  }
+
+  deleteCard(idUser: number, token: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization', `Bearer ${token}`)
+    }
+
+    const url = `${this.baseUrl}/opportunity/payment/delete_card/${idUser}`
+
+    return this.http.post<boolean>(url, {}, header);
   }
 }

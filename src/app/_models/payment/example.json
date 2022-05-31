@@ -1,0 +1,114 @@
+{
+  "metadata": {},
+  "corporation_id": null,
+  "operation_type": "regular_payment",
+  "point_of_interaction": {
+    "business_info": {
+      "unit": "online_payments",
+      "sub_unit": "default"
+    },
+    "type": "UNSPECIFIED"
+  },
+  "fee_details": [
+    {
+      "amount": 5.01,
+      "fee_payer": "collector",
+      "type": "mercadopago_fee"
+    }
+  ],
+  "notification_url": null,
+  "date_approved": "2022-05-30T18:04:51.168-04:00",
+  "money_release_schema": null,
+  "payer": {
+    "identification": {
+      "number": "32659430",
+      "type": "DNI"
+    },
+    "entity_type": null,
+    "phone": {
+      "number": null,
+      "extension": null,
+      "area_code": null
+    },
+    "last_name": null,
+    "id": "196631468",
+    "type": null,
+    "first_name": null,
+    "email": "test_user_80507629@testuser.com"
+  },
+  "transaction_details": {
+    "total_paid_amount": 100.5,
+    "acquirer_reference": null,
+    "installment_amount": 100.5,
+    "net_received_amount": 95.49,
+    "financial_institution": null,
+    "overpaid_amount": 0,
+    "external_resource_url": null,
+    "payment_method_reference_id": null,
+    "payable_deferral_period": null
+  },
+  "statement_descriptor": "BROCK",
+  "call_for_authorize_id": null,
+  "installments": 1,
+  "pos_id": null,
+  "external_reference": null,
+  "date_of_expiration": null,
+  "id": 1248310192,
+  "charges_details": [],
+  "payment_type_id": "credit_card",
+  "order": {},
+  "counter_currency": null,
+  "status_detail": "accredited",
+  "brand_id": null,
+  "differential_pricing_id": null,
+  "additional_info": {
+    "authentication_code": null,
+    "nsu_processadora": null,
+    "available_balance": null
+  },
+  "live_mode": false,
+  "marketplace_owner": null,
+  "card": {
+    "first_six_digits": "503175",
+    "expiration_year": 2025,
+    "date_created": "2022-05-30T18:04:51.000-04:00",
+    "expiration_month": 11,
+    "id": null,
+    "last_four_digits": "0604",
+    "cardholder": {
+      "identification": {
+        "number": "37519758885",
+        "type": "CPF"
+      },
+      "name": "APRO"
+    },
+    "date_last_updated": "2022-05-30T18:04:51.000-04:00"
+  },
+  "status": "approved",
+  "integrator_id": null,
+  "transaction_amount_refunded": 0,
+  "transaction_amount": 100.5,
+  "description": "Cliente Opportunity",
+  "money_release_date": "2022-05-30T18:04:51.168-04:00",
+  "merchant_number": null,
+  "refunds": [],
+  "authorization_code": null,
+  "collector_id": 592485468,
+  "captured": true,
+  "merchant_account_id": null,
+  "taxes_amount": 0,
+  "date_last_updated": "2022-05-30T18:04:51.168-04:00",
+  "store_id": null,
+  "coupon_amount": 0,
+  "date_created": "2022-05-30T18:04:51.089-04:00",
+  "acquirer_reconciliation": [],
+  "sponsor_id": null,
+  "shipping_amount": 0,
+  "issuer_id": "24",
+  "payment_method_id": "master",
+  "binary_mode": false,
+  "platform_id": null,
+  "deduction_schema": null,
+  "processing_mode": "aggregator",
+  "currency_id": "BRL"
+}

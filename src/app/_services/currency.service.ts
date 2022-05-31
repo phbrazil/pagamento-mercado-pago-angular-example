@@ -1,8 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { Card } from '../_models/card';
 @Injectable({ providedIn: 'root' })
 export class CurrencyService {
 

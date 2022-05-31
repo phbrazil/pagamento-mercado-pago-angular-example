@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Constants } from 'src/app/components/shared/utils/Constants';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -9,26 +11,65 @@ declare var MercadoPago: any;
   templateUrl: './new-card.component.html',
   styleUrls: ['./new-card.component.scss']
 })
+
+//https://www.mercadopago.com.br/developers/en/docs/checkout-api/payment-methods/receiving-payment-by-card#editor_7
+
 export class NewCardComponent implements OnInit {
 
   user: User;
 
   isLoading: boolean = false;
 
-  emailTest: string = 'test_user_898709461234@testuser.com';
+  ready: boolean = false;
 
-  constructor(private accountService: AccountService) {
+  progress: number = 0;
+
+  amount: number = 100.5
+
+  emailTest: string = 'test_user_89870946@testuser.com';
+
+  formMounted: boolean = false;
+
+  constructor(private accountService: AccountService, private matDialog: MatDialog,
+    private router: Router) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-   }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+  }
 
   ngOnInit(): void {
 
-    const mp = new MercadoPago(Constants.public_key);
+
+    if (!this.formMounted) {
+      const mp = new MercadoPago(Constants.public_key);
+
+      this.loadForm(mp);
+    }
+
+
+  }
+
+  submit() {
+
+    this.isLoading = true;
+
+  }
+
+  ngOnDestroy() {
+    console.log('fechei')
+
+    var dirtyFormID = 'form-checkout';
+    var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+    resetForm.reset();
+  }
+
+
+  loadForm(mp: any): any {
 
     const cardForm = mp.cardForm({
-      amount: "100.5",
+      amount: String(this.amount),
       autoMount: true,
       form: {
         id: "form-checkout",
@@ -73,6 +114,7 @@ export class NewCardComponent implements OnInit {
         onFormMounted: (error: any) => {
           if (error) return console.warn("Form Mounted handling error: ", error);
           console.log("Form mounted");
+          this.formMounted = true;
         },
         onSubmit: (event: { preventDefault: () => void; }) => {
           event.preventDefault();
@@ -88,11 +130,12 @@ export class NewCardComponent implements OnInit {
             identificationType,
           } = cardForm.getCardFormData();
 
-          fetch("/process_payment", {
+          fetch(Constants.baseUrl+"/opportunity/payment/process_payment", {
+          //fetch("/process_payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": "Bearer "+this.accountService.getToken(),
+              "Authorization": "Bearer " + this.accountService.getToken(),
             },
             body: JSON.stringify({
               token,
@@ -100,7 +143,8 @@ export class NewCardComponent implements OnInit {
               payment_method_id,
               transaction_amount: Number(amount),
               installments: Number(installments),
-              description: "Assinatura "+Constants.system_name,
+              description: "Assinatura " + Constants.system_name,
+              idUser: this.user.idUser,
               payer: {
                 email,
                 identification: {
@@ -109,28 +153,50 @@ export class NewCardComponent implements OnInit {
                 },
               },
             }),
-          });
+          }).then(response => response.json())
+            .then(data => {
+
+              console.log(data);
+
+              if (data.status == 'approved') {
+
+                //set new user locally
+                this.user.trial = false;
+                this.accountService.setUser(this.user);
+                localStorage.setItem('user', JSON.stringify(this.user));
+
+                console.log('reloading card')
+                this.matDialog.closeAll();
+                this.router.navigate(['/manage']);
+              }
+
+            });;
         },
         onFetching: (resource: any) => {
           console.log("Fetching resource: ", resource);
 
           // Animate progress bar
           const progressBar = document.querySelector(".progress-bar");
-          progressBar.removeAttribute("value");
+          // progressBar.removeAttribute("value");
+
+          this.progress = 100;
+
+          if (resource == 'installments') {
+            this.ready = true;
+          } else {
+            this.ready = false;
+
+          }
 
           return () => {
-            progressBar.setAttribute("value", "0");
+            //progressBar.setAttribute("value", "0");
+
+            this.progress = 0;
+
           };
         }
       },
     });
-
-  }
-
-  submit() {
-
-    this.isLoading = true;
-
 
   }
 

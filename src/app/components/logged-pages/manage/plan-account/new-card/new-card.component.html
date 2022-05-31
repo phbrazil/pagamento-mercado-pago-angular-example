@@ -14,39 +14,39 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="cc-name">Nome</label>
-                    <input class='form-control' type="text" name="cardholderName" id="form-checkout__cardholderName" />
+                    <input class='form-control' type="text" id="form-checkout__cardholderName" />
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="cc-number">Número do cartão</label>
-                    <input class='form-control' type="text" name="cardNumber" id="form-checkout__cardNumber" />
+                    <input class='form-control' type="text" id="form-checkout__cardNumber" />
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <label for="cc-expiration">Vencimento</label>
-                    <input mask="00/0000" max="7" class='form-control' type="text" name="expirationDate"
+                    <input mask="00/0000" max="7" class='form-control' type="text"
                       id="form-checkout__expirationDate" />
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-cvv">CVV</label>
-                    <input mask="000" max="3" class='form-control' type="text" name="securityCode"
+                    <input mask="000" max="3" class='form-control' type="text"
                       id="form-checkout__securityCode" />
 
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-cvv">Emissor</label>
-                    <select class='form-control' id="form-checkout__issuer" name='issuer'>
+                    <select class='form-control' id="form-checkout__issuer" >
                     </select>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-ident">Identificação</label>
-                    <select class='form-control' name="identificationType"
+                    <select class='form-control'
                       id="form-checkout__identificationType"></select>
 
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-ident-num">Número</label>
-                    <input class='form-control' type="text" name="identificationNumber"
+                    <input class='form-control' type="text"
                       id="form-checkout__identificationNumber" />
                   </div>
                   <div class="col-md-4 mb-3">
@@ -55,12 +55,15 @@
                   </div>
                 </div>
                 <hr class="mb-4">
-                <input type="hidden" id='form-checkout__cardholderEmail' name="emailPayment" value='{{emailTest}}' />
-                <button [disabled]="isLoading" id="form-checkout__submit"
+                <input type="hidden" id='form-checkout__cardholderEmail' value='{{emailTest}}' />
+                <button [disabled]="isLoading || !ready" id="form-checkout__submit"
                   class="btn btn-primary btn-lg btn-block mb-4" type="submit">
                   <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-                  Pagar</button>
-                <progress value="0" class="progress-bar">Carregando...</progress>
+                  Pagar {{amount | currency: 'BRL'}}</button>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': progress+'%'}" aria-valuenow="{progress}" aria-valuemin="0" aria-valuemax="100">Carregando...</div>
+                </div>
+
               </div>
             </div>
           </form>
