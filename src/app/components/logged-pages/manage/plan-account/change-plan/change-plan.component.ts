@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { faMinus , faPlus} from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Constants } from 'src/app/components/shared/utils/Constants';
 import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
@@ -211,6 +211,7 @@ export class ChangePlanComponent implements OnInit {
   newCard() {
     this.dialog.open(NewCardComponent,
       {
+        disableClose: true,
         data: {
           activeUsers: this.activeUsers,
           currentPlanValue: this.currentPlanValue

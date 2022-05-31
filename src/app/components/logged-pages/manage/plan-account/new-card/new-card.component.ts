@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/components/shared/utils/Constants';
@@ -31,6 +31,9 @@ export class NewCardComponent implements OnInit {
 
   newCardForm: FormGroup;
 
+  installments: string;
+  identificationType: string;
+  issuer: string;
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
     private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -43,6 +46,9 @@ export class NewCardComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.amount = this.data.currentPlanValue;
+    this.activeUsers = this.data.activeUsers;
+
     this.newCardForm = this.fb.group({
       checkout__cardholderName: ['', Validators.required],
       checkout__cardNumber: ['', Validators.required],
@@ -53,19 +59,31 @@ export class NewCardComponent implements OnInit {
       checkout__identificationNumber: ['', Validators.required],
       checkout__installments: ['', Validators.required],
       checkout__cardholderEmail: [this.emailTest, Validators.required],
-
     });
 
     this.loadForm();
-
-    this.amount = this.data.currentPlanValue;
-    this.activeUsers = this.data.activeUsers;
 
   }
 
   submit() {
 
     this.isLoading = true;
+
+
+
+  }
+
+  checkSelects(){
+
+    this.installments = (<HTMLSelectElement>document.getElementById('form-checkout__installments')).value;
+    this.identificationType = (<HTMLSelectElement>document.getElementById('form-checkout__identificationType')).value;
+    this.issuer = (<HTMLSelectElement>document.getElementById('form-checkout__issuer')).value;
+
+    this.newCardForm.patchValue({
+      checkout__installments: this.installments,
+      checkout__identificationType: this.identificationType,
+      checkout__issuer: this.issuer,
+    })
 
   }
 
@@ -77,7 +95,7 @@ export class NewCardComponent implements OnInit {
   }
 
 
-  loadForm(): any {
+  loadForm() {
 
     const mp = new MercadoPago(Constants.public_key);
 
@@ -141,6 +159,9 @@ export class NewCardComponent implements OnInit {
             identificationNumber,
             identificationType,
           } = cardForm.getCardFormData();
+
+          console.log(cardForm.getCardFormData());
+          console.log(cardForm);
 
           fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
             //fetch("/process_payment", {
