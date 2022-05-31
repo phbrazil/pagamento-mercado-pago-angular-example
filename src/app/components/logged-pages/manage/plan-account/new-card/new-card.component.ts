@@ -68,9 +68,6 @@ export class NewCardComponent implements OnInit {
 
     this.isLoading = true;
 
-    console.log(this.newCardForm.value)
-    console.log(this.newCardForm.valid)
-
   }
 
   checkSelects() {
@@ -85,7 +82,6 @@ export class NewCardComponent implements OnInit {
       checkout__issuer: this.issuer,
     })
 
-    console.log(this.newCardForm.value)
 
   }
 
@@ -104,6 +100,7 @@ export class NewCardComponent implements OnInit {
     const cardForm = mp.cardForm({
       amount: String(this.amount),
       autoMount: true,
+      debug: true,
       form: {
         id: "form-checkout",
         cardholderName: {
@@ -162,11 +159,8 @@ export class NewCardComponent implements OnInit {
             identificationType,
           } = cardForm.getCardFormData();
 
-          console.log(cardForm.getCardFormData());
-          console.log(cardForm);
-
-          //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
-            fetch("/process_payment", {
+          fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
+            //fetch("/process_payment", {
             method: "POST",
             mode: 'cors',
             headers: {
