@@ -159,15 +159,15 @@ export class NewCardComponent implements OnInit {
             identificationType,
           } = cardForm.getCardFormData();
 
-          fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
-            //fetch("/process_payment", {
+            //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
+            fetch("/process_payment", {
             method: "POST",
-            //mode: 'cors',
+            mode: 'cors',
             headers: {
               "Content-Type": "application/json; charset=utf-8",
               "Authorization": "Bearer " + this.accountService.getToken(),
               "Accept": "application/json",
-              //"Access-Control-Allow-Origin": "https://www.getopportunity.com.br"
+              "Access-Control-Allow-Origin": "https://www.getopportunity.com.br"
             },
             body: JSON.stringify({
               token,

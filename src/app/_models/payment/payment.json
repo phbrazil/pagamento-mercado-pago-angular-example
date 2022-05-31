@@ -1,29 +1,14 @@
 {
-  "id": "2c9380848117bc5501811b2fb5970170",
-  "back_url": "https://www.getopportunity.com.br",
-  "collector_id": 1133478112,
-  "application_id": 4960455321104387,
-  "reason": "Teste caraio",
-  "status": "active",
-  "date_created": "2022-05-31T13:35:20.471-04:00",
-  "last_modified": "2022-05-31T13:35:20.471-04:00",
-  "init_point": "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848117bc5501811b2fb5970170",
-  "auto_recurring": {
-    "frequency": 1,
-    "frequency_type": "months",
-    "currency_id": "BRL",
-    "repetitions": 12,
-    "billing_day": 10,
-    "billing_day_proportional": true
-  },
-  "payment_methods_allowed": {
-    "payment_methods": [
-      {
-        "id": "visa"
-      },
-      {
-        "id": "master"
-      }
-    ]
-  }
+  "token": "f9ffa2f584be8a10b49748aa2d63b3e3",
+  "idUser": 504,
+  "idCard": 544,
+  "first_six_digits": "503143",
+  "last_four_digits": "6351",
+  "date_created": "2022-05-31T19:05:24.680-04:00",
+  "date_last_updated": "2022-05-31T19:05:24.776-04:00",
+  "expiration_month": 11,
+  "expiration_year": 2025,
+  "name": "APRO",
+  "status": "approved",
+  "payment_method_id": "master"
 }
