@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/components/shared/utils/Constants';
@@ -20,8 +21,6 @@ export class NewCardComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  ready: boolean = false;
-
   progress: number = 0;
 
   amount: number = 100.5
@@ -32,11 +31,22 @@ export class NewCardComponent implements OnInit {
 
   mp: any = new MercadoPago(Constants.public_key);
 
-  cardForm: any;
+  newCardForm = this.fb.group({
+    checkout__cardholderName: ['', Validators.required],
+    checkout__cardNumber: ['', Validators.required],
+    checkout__expirationDate: ['', Validators.required],
+    checkout__securityCode: ['', Validators.required],
+    checkout__issuer: ['', Validators.required],
+    checkout__identificationType: ['', Validators.required],
+    checkout__identificationNumber: ['', Validators.required],
+    checkout__installments: ['', Validators.required],
+    checkout__cardholderEmail: [this.emailTest, Validators.required],
+
+  });
 
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
-    private router: Router) {
+    private router: Router, private fb: FormBuilder) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -46,10 +56,7 @@ export class NewCardComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.loadForm(this.mp);
-
-
 
   }
 
@@ -63,7 +70,6 @@ export class NewCardComponent implements OnInit {
     console.log('fechei')
 
     this.mp = null;
-    this.cardForm = null;
 
     this.router.navigate(['/manage']);
 
@@ -72,7 +78,7 @@ export class NewCardComponent implements OnInit {
 
   loadForm(mp: any): any {
 
-    this.cardForm = mp.cardForm({
+    const cardForm = mp.cardForm({
       amount: String(this.amount),
       autoMount: true,
       form: {
@@ -132,16 +138,17 @@ export class NewCardComponent implements OnInit {
             installments,
             identificationNumber,
             identificationType,
-          } = this.cardForm.getCardFormData();
+          } = cardForm.getCardFormData();
 
           fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
-            //fetch("/process_payment", {
+          //fetch("/process_payment", {
             method: "POST",
             mode: 'cors',
             headers: {
               "Content-Type": "application/json; charset=utf-8",
               "Authorization": "Bearer " + this.accountService.getToken(),
               "Accepts": "application/json",
+              "Access-Control-Allow-Origin": "https://www.getopportunity.com.br"
             },
             body: JSON.stringify({
               token,
@@ -186,13 +193,6 @@ export class NewCardComponent implements OnInit {
           // progressBar.removeAttribute("value");
 
           this.progress = 100;
-
-          if (resource == 'installments') {
-            this.ready = true;
-          } else {
-            this.ready = false;
-
-          }
 
           return () => {
             //progressBar.setAttribute("value", "0");

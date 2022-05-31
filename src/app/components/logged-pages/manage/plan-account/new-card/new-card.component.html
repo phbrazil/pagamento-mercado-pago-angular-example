@@ -7,56 +7,56 @@
           <small>insira os dados do cartão</small>
         </div>
         <div class="col-md-12">
-          <form id="form-checkout" name="pay" (submit)="submit()">
+          <form id="form-checkout" [formGroup]="newCardForm" name="pay" (submit)="submit()">
             <div class="row">
               <div class="col-md-12 order-md-1">
                 <h4 class="mb-3 text-muted">Seu cartão de crédito</h4>
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="cc-name">Nome</label>
-                    <input class='form-control' type="text" id="form-checkout__cardholderName" />
+                    <input formControlName="checkout__cardholderName" class='form-control' type="text" id="form-checkout__cardholderName" />
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="cc-number">Número do cartão</label>
-                    <input class='form-control' type="text" id="form-checkout__cardNumber" />
+                    <input formControlName="checkout__cardNumber" class='form-control' type="text" id="form-checkout__cardNumber" />
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <label for="cc-expiration">Vencimento</label>
-                    <input mask="00/0000" max="7" class='form-control' type="text"
+                    <input formControlName="checkout__expirationDate" mask="00/0000" max="7" class='form-control' type="text"
                       id="form-checkout__expirationDate" />
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-cvv">CVV</label>
-                    <input mask="000" max="3" class='form-control' type="text"
+                    <input formControlName="checkout__securityCode" mask="000" max="3" class='form-control' type="text"
                       id="form-checkout__securityCode" />
 
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-cvv">Emissor</label>
-                    <select class='form-control' id="form-checkout__issuer" >
+                    <select formControlName="checkout__issuer" class='form-control' id="form-checkout__issuer" >
                     </select>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-ident">Identificação</label>
-                    <select class='form-control'
+                    <select formControlName="checkout__identificationType" class='form-control'
                       id="form-checkout__identificationType"></select>
 
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-ident-num">Número</label>
-                    <input class='form-control' type="text"
+                    <input formControlName="checkout__identificationNumber" class='form-control' type="text"
                       id="form-checkout__identificationNumber" />
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="cc-cvv">Parcelas</label>
-                    <select class='form-control' name="installments" id="form-checkout__installments"></select>
+                    <select formControlName="checkout__installments" class='form-control' name="installments" id="form-checkout__installments"></select>
                   </div>
                 </div>
                 <hr class="mb-4">
-                <input type="hidden" id='form-checkout__cardholderEmail' value='{{emailTest}}' />
-                <button [disabled]="isLoading || !ready" id="form-checkout__submit"
+                <input formControlName="checkout__cardholderEmail" type="hidden" id='form-checkout__cardholderEmail' value='{{emailTest}}' />
+                <button [disabled]="isLoading || !newCardForm.valid" id="form-checkout__submit"
                   class="btn btn-primary btn-lg btn-block mb-4" type="submit">
                   <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                   Pagar {{amount | currency: 'BRL'}}</button>
