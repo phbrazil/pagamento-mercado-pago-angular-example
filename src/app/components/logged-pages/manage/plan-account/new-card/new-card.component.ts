@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Constants } from 'src/app/components/shared/utils/Constants';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { AlertService } from 'src/app/_services/alert.service';
 declare var MercadoPago: any;
 
 @Component({
@@ -47,7 +48,8 @@ export class NewCardComponent implements OnInit {
   issuer: string = '';
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
-    private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) {
+    private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
+    private alertService: AlertService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -146,6 +148,12 @@ export class NewCardComponent implements OnInit {
           console.log("Form mounted");
         },
         onSubmit: (event: { preventDefault: () => void; }) => {
+
+          //progress Bar
+
+          this.progressBar();
+
+
           event.preventDefault();
 
           const {
@@ -159,8 +167,10 @@ export class NewCardComponent implements OnInit {
             identificationType,
           } = cardForm.getCardFormData();
 
-            fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
-            //fetch("/process_payment", {
+          //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
+          //fetch("/process_payment", {
+          fetch(Constants.baseUrl + "/opportunity/payment/subscribe_plan", {
+          //fetch("/subscribe_plan", {
             method: "POST",
             mode: 'cors',
             headers: {
@@ -177,6 +187,7 @@ export class NewCardComponent implements OnInit {
               installments: Number(installments),
               description: "Assinatura " + Constants.system_name,
               idUser: this.user.idUser,
+              preapproval_plan_id: Constants.preapproval_plan_id,
               payer: {
                 email,
                 identification: {
@@ -200,6 +211,19 @@ export class NewCardComponent implements OnInit {
                 console.log('reloading card')
                 this.matDialog.closeAll();
                 this.router.navigate(['/manage']);
+
+                this.alertService.success('Pagamento aprovado', 'Aproveite nossa ferramenta', { autoClose: true, keepAfterRouteChange: true });
+
+              } else if (data.status == 'rejected') {
+                this.isLoading = false;
+                this.alertService.error('Pagamento rejeitado', 'Verifique os dados do cartão', { autoClose: true, keepAfterRouteChange: true });
+                this.progress = 0;
+
+              } else if (data.status == 500) {
+                this.isLoading = false;
+                this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão', { autoClose: true, keepAfterRouteChange: true });
+                this.progress = 0;
+
               }
 
             });;
@@ -223,6 +247,25 @@ export class NewCardComponent implements OnInit {
       },
     });
 
+  }
+
+  progressBar() {
+
+    if (this.progress == 0) {
+      this.progress = 1;
+      var elem = document.getElementById("progress");
+      var width = 1;
+      var id = setInterval(frame, 10);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+          //this.progress = 0;
+        } else {
+          width++;
+          elem.style.width = width + "%";
+        }
+      }
+    }
   }
 
 }

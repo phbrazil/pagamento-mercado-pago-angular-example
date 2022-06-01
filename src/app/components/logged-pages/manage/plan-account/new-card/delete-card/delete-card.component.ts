@@ -38,10 +38,11 @@ export class DeleteCardComponent implements OnInit {
     this.isLoading = true;
 
     this.cardService.deleteCard(this.data.idUser, this.accountService.getToken()).subscribe(res => {
+
+      this.alertService.success('Cartão removido', '', { autoClose: true, keepAfterRouteChange: true });
+
       this.isLoading = false;
       this.cardService.setIsReload(true);
-
-      this.alertService.success('Cartão removido com sucesso', '', { autoClose: true });
 
       this.close();
 

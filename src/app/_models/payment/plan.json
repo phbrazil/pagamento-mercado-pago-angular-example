@@ -1,13 +1,13 @@
 {
-  "id": "2c9380848117bc5501811b2fb5970170",
+  "id": "2c93808480fe342801811db6f8b30d6d",
   "back_url": "https://www.getopportunity.com.br",
-  "collector_id": 1133478112,
-  "application_id": 4960455321104387,
+  "collector_id": 592485468,
+  "application_id": 3920929724708463,
   "reason": "Teste caraio",
   "status": "active",
-  "date_created": "2022-05-31T13:35:20.471-04:00",
-  "last_modified": "2022-05-31T13:35:20.471-04:00",
-  "init_point": "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c9380848117bc5501811b2fb5970170",
+  "date_created": "2022-06-01T01:22:19.443-04:00",
+  "last_modified": "2022-06-01T01:22:19.443-04:00",
+  "init_point": "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808480fe342801811db6f8b30d6d",
   "auto_recurring": {
     "frequency": 1,
     "frequency_type": "months",
@@ -17,6 +17,11 @@
     "billing_day_proportional": true
   },
   "payment_methods_allowed": {
+    "payment_types": [
+      {
+        "id": "credit_card"
+      }
+    ],
     "payment_methods": [
       {
         "id": "visa"

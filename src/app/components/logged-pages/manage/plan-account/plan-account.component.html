@@ -4,9 +4,9 @@
       <div *ngIf="!isLoading && !isLoadingCard && !isLoadingPlan" class="row">
         <div class="col-md-5">
           <div class="card card--front">
-            <div class="card__number">4111 **** **** 1111</div>
-            <div class="card__expiry-date">10/17</div>
-            <div class="card__owner">{{user.name}}</div>
+            <div class="card__number">{{card.first_six_digits}} ** ** {{card.last_four_digits}}</div>
+            <div class="card__expiry-date">{{card.expiration_month}}/{{card.expiration_year}}</div>
+            <div class="card__owner">{{card.name}}</div>
             <img class="card__logo" src="assets/img/plan/{{brand == 'visa'? 'visa': 'master'}}.png" alt="visa" />
           </div>
         </div>

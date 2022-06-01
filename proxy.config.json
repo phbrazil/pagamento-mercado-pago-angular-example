@@ -7,5 +7,14 @@
     "pathRewrite": {
       "^/process_payment": ""
     }
+  },
+  "/subscribe_plan": {
+    "target": "http://localhost:8080/opportunity/payment/subscribe_plan",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/subscribe_plan": ""
+    }
   }
 }

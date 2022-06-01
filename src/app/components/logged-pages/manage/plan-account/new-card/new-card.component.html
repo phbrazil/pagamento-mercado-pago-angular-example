@@ -56,14 +56,14 @@
                   </div>
                 </div>
                 <hr class="mb-4">
-                <input formControlName="checkout__cardholderEmail" type="email" id='form-checkout__cardholderEmail'
+                <input formControlName="checkout__cardholderEmail" type="hidden" id='form-checkout__cardholderEmail'
                   value='{{emailTest}}' />
-                <button [disabled]="isLoading" id="form-checkout__submit"
+                <button [disabled]="isLoading || !newCardForm.valid" id="form-checkout__submit"
                   class="btn btn-primary btn-lg btn-block mb-4" type="submit">
                   <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                   Pagar {{amount | currency: 'BRL'}}</button>
                 <div class="progress">
-                  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': progress+'%'}"
+                  <div class="progress-bar" id="progress" role="progressbar" [ngStyle]="{'width': progress+'%'}"
                     aria-valuenow="{progress}" aria-valuemin="0" aria-valuemax="100">Carregando...</div>
                 </div>
               </div>

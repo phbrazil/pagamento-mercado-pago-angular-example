@@ -9,4 +9,5 @@ export class Card {
   expiration_year: number
   name: string
   token: string
+  payment_method_id: string
 }
