@@ -57,7 +57,7 @@
                 </div>
                 <hr class="mb-4">
                 <input formControlName="checkout__cardholderEmail" type="hidden" id='form-checkout__cardholderEmail'
-                  value='{{emailTest}}' />
+                  value='{{user.email}}' />
                 <button [disabled]="isLoading || !newCardForm.valid" id="form-checkout__submit"
                   class="btn btn-primary btn-lg btn-block mb-4" type="submit">
                   <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>

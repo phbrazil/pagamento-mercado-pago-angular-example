@@ -28,24 +28,13 @@ export class NewCardComponent implements OnInit {
 
   activeUsers: number = 0;
 
-  emailTest: string = 'test_user_898709461234@testuser.com';
-
-  newCardForm: FormGroup =
-    this.fb.group({
-      checkout__cardholderName: ['', Validators.required],
-      checkout__cardNumber: ['', Validators.required],
-      checkout__expirationDate: ['', Validators.required],
-      checkout__securityCode: ['', Validators.required],
-      checkout__issuer: ['', Validators.required],
-      checkout__identificationType: ['', Validators.required],
-      checkout__identificationNumber: ['', Validators.required],
-      checkout__installments: ['', Validators.required],
-      checkout__cardholderEmail: [this.emailTest, Validators.required],
-    });
+  //emailTest: string = 'test_user_898709461234@testuser.com';
 
   installments: string = '';
   identificationType: string = '';
   issuer: string = '';
+
+  newCardForm: FormGroup;
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
     private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -58,6 +47,19 @@ export class NewCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.newCardForm =
+    this.fb.group({
+      checkout__cardholderName: ['', Validators.required],
+      checkout__cardNumber: ['', Validators.required],
+      checkout__expirationDate: ['', Validators.required],
+      checkout__securityCode: ['', Validators.required],
+      checkout__issuer: ['', Validators.required],
+      checkout__identificationType: ['', Validators.required],
+      checkout__identificationNumber: ['', Validators.required],
+      checkout__installments: ['', Validators.required],
+      checkout__cardholderEmail: [this.user.email, Validators.required],
+    });
 
     this.amount = this.data.currentPlanValue;
     this.activeUsers = this.data.activeUsers;
@@ -201,7 +203,7 @@ export class NewCardComponent implements OnInit {
 
               console.log(data);
 
-              if (data.status == 'approved') {
+              if (data.status == 'authorized') {
 
                 //set new user locally
                 this.user.trial = false;
@@ -212,16 +214,16 @@ export class NewCardComponent implements OnInit {
                 this.matDialog.closeAll();
                 this.router.navigate(['/manage']);
 
-                this.alertService.success('Pagamento aprovado', 'Aproveite nossa ferramenta', { autoClose: true, keepAfterRouteChange: true });
+                this.alertService.success('Pagamento aprovado!', 'Aproveite nossa ferramenta', { autoClose: true, keepAfterRouteChange: true });
 
-              } else if (data.status == 'rejected') {
+              } else if (data.status == 'pending') {
                 this.isLoading = false;
-                this.alertService.error('Pagamento rejeitado', 'Verifique os dados do cartão', { autoClose: true, keepAfterRouteChange: true });
+                this.alertService.error('Pagamento rejeitado', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
                 this.progress = 0;
 
-              } else if (data.status == 500) {
+              } else {
                 this.isLoading = false;
-                this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão', { autoClose: true, keepAfterRouteChange: true });
+                this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
                 this.progress = 0;
 
               }

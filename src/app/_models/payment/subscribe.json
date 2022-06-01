@@ -1,21 +1,41 @@
-curl -X POST \
-    'https://api.mercadopago.com/preapproval' \
-    -H 'Authorization: Bearer APP_USR-4960455321104387-053021-97ea81d77d776b27c6dc0d82bfb63451-1133478112' \
-    -H 'Content-Type: application/json' \
-    -d '{
-  "preapproval_plan_id": "2c9380848117bc5501811b89695501ac",
-  "reason": "Teste caraio",
-  "external_reference": "Teste referencia",
-  "payer_email": "test_user_89870946@testuser.com",
-  "card_token_id": "6cc2366486088e6e0b9391e64905dc93",
-  "auto_recurring": {
-    "frequency": 1,
-    "frequency_type": "months",
-    "start_date": "2022-06-02T13:07:14.260Z",
-    "end_date": "2023-06-02T13:07:14.260Z",
-    "transaction_amount": 100.0,
-    "currency_id": "BRL"
-  },
+{
+  "id": "2c9380848117bc5501811e11f28402d5",
+  "payer_id": 39546728,
+  "payer_email": "",
   "back_url": "https://www.getopportunity.com.br",
-  "status": "authorized"
-}'
+  "collector_id": 592485468,
+  "application_id": 3920929724708463,
+  "status": "authorized",
+  "reason": "ASSINATURA TESTE PROD 1 REAL",
+  "external_reference": "YG-1234",
+  "date_created": "2022-06-01T03:01:41.634-04:00",
+  "last_modified": "2022-06-01T03:01:41.871-04:00",
+  "init_point": "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_id=2c9380848117bc5501811e11f28402d5",
+  "preapproval_plan_id": "2c93808480fe342801811df336480d74",
+  "auto_recurring": {
+      "frequency": 1,
+      "frequency_type": "months",
+      "transaction_amount": 10,
+      "currency_id": "BRL",
+      "start_date": "2022-06-01T03:01:41.635-04:00",
+      "end_date": "2023-06-01T03:01:41.635-04:00",
+      "billing_day": 10,
+      "billing_day_proportional": true,
+      "has_billing_day": true,
+      "free_trial": null
+  },
+  "summarized": {
+      "quotas": 12,
+      "charged_quantity": null,
+      "pending_charge_quantity": 12,
+      "charged_amount": null,
+      "pending_charge_amount": 120,
+      "semaphore": null,
+      "last_charged_date": null,
+      "last_charged_amount": null
+  },
+  "next_payment_date": "2022-06-01T03:01:41.000-04:00",
+  "payment_method_id": "master",
+  "card_id": "9007611698",
+  "first_invoice_offset": null
+}
