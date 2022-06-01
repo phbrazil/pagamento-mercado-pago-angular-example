@@ -34,7 +34,14 @@ export class Constants {
   //ESSE TOKEN FUNCIONA LOCALMENTE PAGAMENTO
   public static public_key = 'TEST-1a14e509-e403-413e-87d5-f88271020e1d';
 
-  //SUBSCRIBE
-  public static preapproval_plan_id = '2c93808480fe342801811ba10c340c37';
+
+  //SUBSCRIBE PROD TIMESHEET ATE 20 USUARIOS
+  //public static preapproval_plan_id = '2c9380848117bc5501811df17b0502d0';
+
+  //SUBSCRIBE TESTE PROD 1 REAL
+  public static preapproval_plan_id = '2c93808480fe342801811df336480d74';
+
+  //SUBSCRIBE TEST
+  //public static preapproval_plan_id = '2c93808480fe342801811ba10c340c37';
 
 }
