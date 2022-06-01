@@ -40,13 +40,13 @@ export class ChangePlanComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadRoles();
+    this.loadPLan();
 
     this.loadActiveMembers();
 
   }
 
-  loadRoles() {
+  loadPLan() {
     this.isLoading = true;
     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan => {
 
@@ -111,7 +111,7 @@ export class ChangePlanComponent implements OnInit {
       this.activeUsers = res.length;
       this.currentPlanValue = this.activeUsers * 12;
       this.isLoading = false;
-    }, err => {
+    }, _err => {
       this.isLoading = false;
     })
   }
@@ -184,6 +184,8 @@ export class ChangePlanComponent implements OnInit {
 
   onSubmit() {
 
+    console.log('verificar loop aqui')
+
     this.isLoading = true;
 
     this.plan.idUser = this.user.idUser;
@@ -192,7 +194,7 @@ export class ChangePlanComponent implements OnInit {
 
       this.isLoading = false;
 
-      this.planService.setIsReload(true);
+      //this.planService.setIsReload(true);
 
       this.planService.setPlan(res);
 

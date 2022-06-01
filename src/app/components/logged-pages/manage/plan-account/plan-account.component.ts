@@ -55,7 +55,7 @@ export class PlanAccountComponent implements OnInit {
       this.loadPlan();
     }
 
-    this.loadCard();
+    //this.loadCard();
   }
 
 
@@ -67,7 +67,7 @@ export class PlanAccountComponent implements OnInit {
       this.activeUsers = res.length;
       this.currentPlanValue = this.activeUsers * 12;
       this.isLoading = false;
-    }, err => {
+    }, _err => {
       this.isLoading = false;
     })
   }
