@@ -159,8 +159,8 @@ export class NewCardComponent implements OnInit {
             identificationType,
           } = cardForm.getCardFormData();
 
-            //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
-            fetch("/process_payment", {
+            fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
+            //fetch("/process_payment", {
             method: "POST",
             mode: 'cors',
             headers: {
