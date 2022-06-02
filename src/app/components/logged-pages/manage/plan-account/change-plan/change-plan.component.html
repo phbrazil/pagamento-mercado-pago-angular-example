@@ -1,40 +1,25 @@
-<div class="modal-position col-md-12" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="div-center" *ngIf="isLoading">
-      <app-spinner-loader></app-spinner-loader>
+<div *ngIf="!isLoading" class="col-md-10" tabindex="-1" role="dialog">
+  <div class="row" >
+    <div class="col-md-6">
+      <input type="button" (click)="selectPro()" [ngClass]="{'active' : plan?.plan =='Pro', '' : plan?.plan != 'Pro'}"
+        class="btn-block btn-lg btn-custom-success" value="Pro">
     </div>
-    <div *ngIf="!isLoading" class="modal-content">
-      <div class="modal-header" style="align-self: center;">
-        <h3 class="modal-title default-font modal-header-font text-muted">Atualização de Plano</h3>
-      </div>
-      <div class="modal-body default-font">
-        <!--Body-->
-        <div class="modal-body mb-0 text-muted">
-          <div class="col-md-12 mb-4">
-            <div class="row">
-              <div class="col-md-6">
-                <input type="button" (click)="selectPro()"
-                  [ngClass]="{'active' : plan?.plan =='Pro', '' : plan?.plan != 'Pro'}"
-                  class="btn-block btn-lg btn-custom-success" value="Pro">
-              </div>
-              <div class="col-md-6">
-                <input type="button" (click)="selectCorp()"
-                  [ngClass]="{'active' : plan?.plan == 'Corp', '' : plan?.plan != 'Corp'}"
-                  class="btn-block btn-lg btn-custom-success" value="Corp">
-              </div>
-            </div>
-          </div>
-          <h5 class="text-muted">Selecione os produtos para incluir no seu plano</h5>
-          <input type="button" [ngClass]="{'active' : isTime, '' : !isTime}" class="btn-block btn-lg btn-custom-success"
-            value="Timesheet">
-          <input type="button" (click)="checkIsAdvance()" [ngClass]="{'active' : isAdvance, '' : !isAdvance}"
-            class="btn-block btn-lg btn-custom-success" value="Adiantamentos e Prestação de Contas">
-          <input type="button" (click)="checkIsRefund()" [ngClass]="{'active' : isRefund, '' : !isRefund}"
-            class="btn-block btn-lg btn-custom-success" value="Reembolsos">
-        </div>
+    <div class="col-md-6">
+      <input type="button" (click)="selectCorp()"
+        [ngClass]="{'active' : plan?.plan == 'Corp', '' : plan?.plan != 'Corp'}"
+        class="btn-block btn-lg btn-custom-success" value="Corp">
+    </div>
+  </div>
+  <h5 class="text-muted">Selecione os produtos para incluir no seu plano</h5>
+  <input type="button" [ngClass]="{'active' : isTime, '' : !isTime}" class="btn-block btn-lg btn-custom-success"
+    value="Timesheet">
+  <input type="button" (click)="checkIsAdvance()" [ngClass]="{'active' : isAdvance, '' : !isAdvance}"
+    class="btn-block btn-lg btn-custom-success" value="Adiantamentos e Prestação de Contas">
+  <input type="button" (click)="checkIsRefund()" [ngClass]="{'active' : isRefund, '' : !isRefund}"
+    class="btn-block btn-lg btn-custom-success" value="Reembolsos">
 
-        <div class="col-md-10 mb-2 mt-2">
-          <!--div class="row_inline">
+  <div class="col-md-10 mb-2 mt-2">
+    <!--div class="row_inline">
             <div class="col-md-4">
               <button data-toggle="tooltip" id='previous' name='previous' value='previous' (click)="decreaseUser()"
                 class="btn btn-lg btn-outline-info shadow">
@@ -52,17 +37,13 @@
               </button>
             </div>
           </div-->
-          <small>Usuários ativos: <strong>{{activeUsers}}</strong></small><br>
-          <small>Valor mensal: <strong>{{currentPlanValue | currency: 'BRL'}}</strong></small>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn-custom-confirm" (click)="onSubmit()"
-          [disabled]="isLoading || !isTime && !isRefund && !isAdvance">
-          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-          Continuar Pagamento</button>
-        <button type="button" class="btn-custom-decline" data-dismiss="modal" (click)="close()">Fechar</button>
-      </div>
-    </div>
+    <small>Usuários ativos: <strong>{{activeUsers}}</strong></small><br>
+    <small>Valor mensal: <strong>{{currentPlanValue | currency: 'BRL'}}</strong></small>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn-custom-confirm" (click)="onSubmit()"
+      [disabled]="isLoading || !isTime && !isRefund && !isAdvance">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+      Continuar Pagamento</button>
   </div>
 </div>

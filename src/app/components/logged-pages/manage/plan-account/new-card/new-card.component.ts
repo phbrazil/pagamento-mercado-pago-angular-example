@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, Pipe, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -7,14 +7,20 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
 declare var MercadoPago: any;
+import { formatCurrency, getCurrencySymbol } from '@angular/common';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-new-card',
   templateUrl: './new-card.component.html',
-  styleUrls: ['./new-card.component.scss']
+  styleUrls: ['./new-card.component.scss'],
+  encapsulation: ViewEncapsulation.None // Here
+
 })
 
 //https://www.mercadopago.com.br/developers/en/docs/checkout-api/payment-methods/receiving-payment-by-card#editor_7
+
 
 export class NewCardComponent implements OnInit {
 
@@ -25,20 +31,26 @@ export class NewCardComponent implements OnInit {
   progress: number = 0;
 
   amount: number = 0;
+  amountPipeString: string;
 
   activeUsers: number = 0;
+
+  faAngleRight = faAngleRight;
+
 
   //emailTest: string = 'test_user_898709461234@testuser.com';
 
   installments: string = '';
   identificationType: string = '';
   issuer: string = '';
+  identificationMask: string = '';
 
   newCardForm: FormGroup;
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
     private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    @Inject(LOCALE_ID) private locale: string) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -46,23 +58,27 @@ export class NewCardComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
 
     this.newCardForm =
-    this.fb.group({
-      checkout__cardholderName: ['', Validators.required],
-      checkout__cardNumber: ['', Validators.required],
-      checkout__expirationDate: ['', Validators.required],
-      checkout__securityCode: ['', Validators.required],
-      checkout__issuer: ['', Validators.required],
-      checkout__identificationType: ['', Validators.required],
-      checkout__identificationNumber: ['', Validators.required],
-      checkout__installments: ['', Validators.required],
-      checkout__cardholderEmail: [this.user.email, Validators.required],
-    });
+      this.fb.group({
+        checkout__cardholderName: ['', Validators.required],
+        checkout__cardNumber: ['', Validators.required],
+        checkout__expirationDate: ['', Validators.required],
+        checkout__securityCode: ['', Validators.required],
+        checkout__issuer: ['', Validators.required],
+        checkout__identificationType: ['', Validators.required],
+        checkout__identificationNumber: ['', Validators.required],
+        checkout__installments: ['', Validators.required],
+        checkout__cardholderEmail: [this.user.email, Validators.required],
+      });
+
 
     this.amount = this.data.currentPlanValue;
     this.activeUsers = this.data.activeUsers;
+
+    this.amountPipeString = formatCurrency(this.amount, this.locale, getCurrencySymbol('BRL', 'wide'));
 
     this.loadForm();
 
@@ -121,11 +137,11 @@ export class NewCardComponent implements OnInit {
         },
         expirationDate: {
           id: "form-checkout__expirationDate",
-          placeholder: "Data de vencimento (MM/YYYY)",
+          placeholder: "MM/YYYY",
         },
         securityCode: {
           id: "form-checkout__securityCode",
-          placeholder: "Código de segurança",
+          placeholder: "000",
         },
         installments: {
           id: "form-checkout__installments",
@@ -172,7 +188,7 @@ export class NewCardComponent implements OnInit {
           //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
           //fetch("/process_payment", {
           fetch(Constants.baseUrl + "/opportunity/payment/subscribe_plan", {
-          //fetch("/subscribe_plan", {
+            //fetch("/subscribe_plan", {
             method: "POST",
             mode: 'cors',
             headers: {
@@ -228,7 +244,15 @@ export class NewCardComponent implements OnInit {
 
               }
 
-            });;
+            }).catch(error => {
+
+              console.log(error)
+
+              this.isLoading = false;
+              this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
+              this.progress = 0;
+
+            });
         },
         onFetching: (resource: any) => {
           console.log("Fetching resource: ", resource);
@@ -267,6 +291,31 @@ export class NewCardComponent implements OnInit {
           elem.style.width = width + "%";
         }
       }
+    }
+  }
+
+  getIdentificationMask(document: any) {
+
+    console.log(document.target.value.length)
+
+    if (document.target.value.length == 11) {
+      this.identificationMask = '000.000.000-00';
+
+      this.newCardForm.patchValue({
+        checkout__identificationType: 'CPF',
+      })
+
+    } else if(document.target.value.length == 14) {
+      this.identificationMask = '00.000.000/0001-00';
+
+      this.newCardForm.patchValue({
+        checkout__identificationType: 'CNPJ',
+      })
+
+    }else{
+
+      this.identificationMask = '';
+
     }
   }
 

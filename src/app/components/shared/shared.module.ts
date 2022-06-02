@@ -15,6 +15,7 @@ import { TrialBannerComponent } from './trial-banner/trial-banner.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { WorkingProgressComponent } from './working-progress/working-progress.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatProgressButtonsModule } from 'mat-progress-buttons';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -39,7 +40,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     NgxCurrencyModule,
     MatTooltipModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatProgressButtonsModule.forRoot()
   ],
 
   exports: [
@@ -54,7 +56,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatTooltipModule,
     WorkingProgressComponent,
     AngularMaterialModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatProgressButtonsModule
   ]
 })
 export class SharedModule {

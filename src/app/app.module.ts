@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
 import { InterceptorModule } from './_services/interceptor.module';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CurrencyPipe } from '@angular/common';
 
 registerLocaleData(localePT);
 
@@ -61,7 +62,8 @@ registerLocaleData(localePT);
     InterceptorModule
     ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    {  provide: LOCALE_ID, useValue: 'pt-BR' },
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

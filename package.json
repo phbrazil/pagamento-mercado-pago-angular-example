@@ -38,6 +38,7 @@
     "datatables.net-dt": "1.1.0",
     "html-to-image": "^1.9.0",
     "jquery": "^3.3.1",
+    "mat-progress-buttons": "^9.3.1",
     "moment": "^2.29.1",
     "ng2-datepicker": "^12.0.0",
     "ngx-bootstrap": "^7.0.0",

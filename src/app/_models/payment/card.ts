@@ -1,8 +1,8 @@
 export class Card {
   idCard: number
   idUser: number
-  first_six_digits: number
-  last_four_digits: number
+  first_six_digits: string
+  last_four_digits: string
   date_created: string
   date_last_updated: string
   expiration_month: number

@@ -1,50 +1,5 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css');
 
-.padding{
-  padding:5rem !important;
-  margin-left:300px;
-}
-.card {
-  margin-bottom: 1.5rem;
-}
-
-.card {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid #c8ced3;
-  border-radius: .25rem;
-}
-
-.card-header:first-child {
-  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
-}
-
-.card-header {
-  padding: .75rem 1.25rem;
-  margin-bottom: 0;
-  background-color: #f0f3f5;
-  border-bottom: 1px solid #c8ced3;
-}
-
-.card-body {
-  flex: 1 1 auto;
-  padding: 1.25rem;
-}
-
-.form-control:focus {
-  color: #5c6873;
-  background-color: #fff;
-  border-color: #c8ced3 !important;
-  outline: 0;
-  box-shadow: 0 0 0 #F44336;
-}
 
 .modal-position {
   position: fixed;
@@ -52,4 +7,169 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000!important;
+}
+
+
+//@use postcss-cssnext;
+
+:root {
+  --black: #525252;
+  --orange: #FFB000;
+  --white: #F7FBFC;
+  --grey: #C2C2C2;
+}
+
+#page {
+  width: 100%;
+  height: 50vh;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#main {
+  width: 60.875rem;
+  height: 27.4375rem;
+  background-color: var(--black);
+  font-family: 'Questrial', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+.product-container {
+  width: 27.25rem;
+  height: 23.1875rem;
+  background-color: var(--orange);
+  position: relative;
+  top: -2.7rem;
+  left: -4.4rem;
+  overflow: hidden;
+  & h2 {
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: .5rem;
+  }
+  & img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+.card {
+  width: 30.5rem;
+  height: 20rem;
+  background-color: var(--white);
+  border-radius: .7rem;
+  padding: 1.3rem 1.6rem;
+  position: absolute;
+  top: -2.75rem;
+  right: 4.4rem;
+  &:after {
+    content: '';
+    display: block;
+    width: 17.5rem;
+    height: 11rem;
+    background-color: #2A2A2A;
+    border-radius: .7rem;
+    position: absolute;
+    top: 2.7rem;
+    right: -1.5rem;
+    transform: rotate(8deg);
+    z-index: -1;
+  }
+}
+.chip {
+  width: 3rem;
+  height: 2.2rem;
+  margin-bottom: .7rem;
+}
+form {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  & label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    color: #C2C2C2;
+    margin-top: .35rem;
+  }
+  & label[for=name] {
+    width: 72%;
+  }
+  & label[for=date] {
+    width: 22%;
+    margin-left: 6%;
+  }
+  & label[for=cvc] {
+    width: 15%;
+    margin-left: 6%;
+  }
+  & label[for=identification] {
+    width: 75%;
+  }
+  & label[for=remember] {
+    width: auto;
+    height: 4.8rem;
+    font-size: 1.3rem;
+    position: absolute;
+    left: -3rem;
+    bottom: -10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    & input {
+      margin-right: .5rem;
+      filter: invert(100%) hue-rotate(30deg) brightness(1.7);
+      color: red;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  & input {
+    border: none;
+    border-bottom: 1px solid var(--grey);
+    outline: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    padding: .2rem  0;
+    &#cvc {
+      color: white;
+    }
+  }
+  & button {
+    height: 4.8rem;
+    width: 11.8rem;
+    font-size: 1.8rem;
+    position: absolute;
+    bottom: -7rem;
+    left: 27rem;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    & .fa-angle-right {
+      font-size: 2rem;
+      position: absolute;
+      left: 80%;
+    bottom: 25%;
+    }
+  }
+}
+.price-container {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 3.4rem;
+  display: inline-block;
+  & strong {
+    font-size: 2.2rem;
+    color: white;
+  }
+  & small {
+    font-size: 1.2rem;
+    color: var(--grey);
+  }
 }
