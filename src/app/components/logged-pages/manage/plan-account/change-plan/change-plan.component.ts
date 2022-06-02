@@ -121,9 +121,9 @@ export class ChangePlanComponent implements OnInit {
 
     let multiply = plan == 'Pro' ? Constants.multiplyPro : Constants.multiplyCorp;
 
-    this.isTime ? (multiply = multiply) + 5 : (multiply = multiply) - 0;
-    this.isAdvance ? (multiply = multiply) + 5 : (multiply = multiply) - 0;
-    this.isRefund ? (multiply = multiply) + 5 : (multiply = multiply) - 0;
+    this.isTime ? multiply = multiply + 5 : multiply = multiply - 0;
+    this.isAdvance ? multiply = multiply + 5 : multiply = multiply - 0;
+    this.isRefund ? multiply = multiply + 5 : multiply = multiply - 0;
 
     if (this.isAdvance || this.isRefund || this.isTime) {
       this.currentPlanValue = this.activeUsers * multiply;

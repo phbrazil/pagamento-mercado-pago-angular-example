@@ -41,7 +41,6 @@ export class PlanAccountComponent implements OnInit {
 
     /*this.planService.getIsReload().subscribe(status => {
 
-    console.log('to aqui ',status )
       if (status != null && status) {
         if (this.user.admin) {
           this.loadActiveMembers();
@@ -54,9 +53,10 @@ export class PlanAccountComponent implements OnInit {
     if (this.user.admin) {
       this.loadActiveMembers();
       this.loadPlan();
+      this.loadCard();
+
     }
 
-    //this.loadCard();
   }
 
 
@@ -93,12 +93,12 @@ export class PlanAccountComponent implements OnInit {
   }
 
 
-  loadCard(){
+  loadCard() {
     this.isLoadingCard = true;
-    this.cardService.getCard(this.user.idUser, this.accountService.getToken()).subscribe(res=>{
+    this.cardService.getCard(this.user.idUser, this.accountService.getToken()).subscribe(res => {
       this.card = res;
       this.isLoadingCard = false;
-    }, _err=>{
+    }, _err => {
       this.isLoadingCard = false;
     })
 

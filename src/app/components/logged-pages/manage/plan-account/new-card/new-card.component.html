@@ -48,7 +48,7 @@
                     type="text" id="form-checkout__expirationDate">
                 </label>
                 <label for="identification">CPF/CNPJ
-                  <input maxlength="18" value="{{identificationNumber}}" (keyup)="getIdentificationMask($event)"
+                  <input maxlength="18" (keyup)="getIdentificationMask($event)" mask="000.000.000-00||00.000.000/0000-00"
                     formControlName="checkout__identificationNumber" type="text"
                     id="form-checkout__identificationNumber">
                 </label>
@@ -70,7 +70,9 @@
                 <select hidden formControlName="checkout__identificationType"
                   id="form-checkout__identificationType" value="{{identificationType}}"></select>
 
-                <button [disabled]="isLoading || !newCardForm.valid || !allowSave" id="form-checkout__submit">Pagar
+                <button [disabled]="isLoading || !newCardForm.valid || !allowSave" id="form-checkout__submit">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Pagar
                   <fa-icon class="fa fa-angle-right" [icon]="faAngleRight"></fa-icon>
                 </button>
                 <label for="remember">Salvar minhas informações para uso posterior

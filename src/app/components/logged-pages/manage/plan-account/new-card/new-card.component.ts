@@ -48,11 +48,13 @@ export class NewCardComponent implements OnInit {
   installments: string = '';
   identificationType: string = '';
   issuer: string = '';
-  identificationMask: string = '';
   allowSave: boolean = false;
   identificationNumber: string = '';
 
   newCardForm: FormGroup;
+
+  mp: any = new MercadoPago(Constants.public_key);
+  cardForm: any;
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
     private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -96,8 +98,6 @@ export class NewCardComponent implements OnInit {
 
     this.isLoading = true;
 
-    console.log(this.newCardForm.value)
-
   }
 
   checkSelects() {
@@ -117,9 +117,7 @@ export class NewCardComponent implements OnInit {
 
   loadForm() {
 
-    const mp = new MercadoPago(Constants.public_key);
-
-    const cardForm = mp.cardForm({
+    this.cardForm = this.mp.cardForm({
       amount: String(this.amount),
       autoMount: true,
       debug: true,
@@ -180,7 +178,8 @@ export class NewCardComponent implements OnInit {
             installments,
             identificationNumber,
             identificationType,
-          } = cardForm.getCardFormData();
+          } = this.cardForm.getCardFormData();
+
 
           //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
           //fetch("/process_payment", {
@@ -214,8 +213,6 @@ export class NewCardComponent implements OnInit {
           }).then(response => response.json())
             .then(data => {
 
-              console.log(data);
-
               if (data.status == 'authorized') {
 
                 //set new user locally
@@ -223,18 +220,22 @@ export class NewCardComponent implements OnInit {
                 this.accountService.setUser(this.user);
                 localStorage.setItem('user', JSON.stringify(this.user));
 
-                console.log('reloading card')
-                this.matDialog.closeAll();
+                this.unmountForm();
+                this.close();
                 this.router.navigate(['/manage']);
 
                 this.alertService.success('Pagamento aprovado!', 'Aproveite nossa ferramenta', { autoClose: true, keepAfterRouteChange: true });
 
               } else if (data.status == 'pending') {
                 this.isLoading = false;
+                this.unmountForm();
+                this.clearForm();
                 this.alertService.error('Pagamento rejeitado', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
 
               } else {
                 this.isLoading = false;
+                this.unmountForm();
+                this.clearForm();
                 this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
 
               }
@@ -244,12 +245,15 @@ export class NewCardComponent implements OnInit {
               console.log(error)
 
               this.isLoading = false;
+              this.unmountForm();
+              this.clearForm();
               this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
 
             });
         },
         onFetching: (resource: any) => {
           console.log("Fetching resource: ", resource);
+
 
           // Animate progress bar
           const progressBar = document.querySelector(".progress-bar");
@@ -273,26 +277,18 @@ export class NewCardComponent implements OnInit {
     this.identificationNumber = value;
 
     if (value.length == 11) {
-      this.identificationMask = '000.000.000-00';
       this.identificationType = 'CPF';
 
       this.newCardForm.patchValue({
         checkout__identificationType: 'CPF',
-        checkout__identificationNumber: document.target.value,
       })
 
     } else if (value > 11) {
-      this.identificationMask = '00.000.000/0000-00';
       this.identificationType = 'CNPJ';
 
       this.newCardForm.patchValue({
         checkout__identificationType: 'CNPJ',
-        checkout__identificationNumber: document.target.value,
       })
-
-    } else {
-
-      this.identificationMask = '';
 
     }
   }
@@ -307,10 +303,22 @@ export class NewCardComponent implements OnInit {
 
   }
 
+  unmountForm(){
+
+    this.cardForm.unmount();
+
+  }
+
   close() {
+
+    this.unmountForm();
 
     this.matDialog.closeAll();
 
+  }
+
+  clearForm(){
+    this.newCardForm.reset();
   }
 
 }
