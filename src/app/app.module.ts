@@ -16,7 +16,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { AdminLayoutModule } from './components/logged-pages/admin-layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/logged-pages/home/home.component';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CurrencyPipe } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { faFilm, faFish } from '@fortawesome/free-solid-svg-icons';
@@ -28,7 +28,6 @@ import { RouterModule } from '@angular/router';
 import { InterceptorModule } from './_services/interceptor.module';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CurrencyPipe } from '@angular/common';
 
 registerLocaleData(localePT);
 

@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnInit, Pipe, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -8,7 +8,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
 declare var MercadoPago: any;
 import { formatCurrency, getCurrencySymbol } from '@angular/common';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
+import { Plan } from 'src/app/_models/plan';
 
 
 @Component({
@@ -37,6 +38,12 @@ export class NewCardComponent implements OnInit {
 
   faAngleRight = faAngleRight;
 
+  plan: Plan;
+
+  faCheck = faCheck;
+  faX = faX;
+
+
 
   //emailTest: string = 'test_user_898709461234@testuser.com';
 
@@ -44,6 +51,7 @@ export class NewCardComponent implements OnInit {
   identificationType: string = '';
   issuer: string = '';
   identificationMask: string = '';
+  allowSave: boolean = false;
 
   newCardForm: FormGroup;
 
@@ -77,6 +85,7 @@ export class NewCardComponent implements OnInit {
 
     this.amount = this.data.currentPlanValue;
     this.activeUsers = this.data.activeUsers;
+    this.plan = this.data.plan;
 
     this.amountPipeString = formatCurrency(this.amount, this.locale, getCurrencySymbol('BRL', 'wide'));
 
@@ -87,6 +96,8 @@ export class NewCardComponent implements OnInit {
   submit() {
 
     this.isLoading = true;
+
+    console.log(this.newCardForm.value)
 
   }
 
@@ -296,20 +307,26 @@ export class NewCardComponent implements OnInit {
 
   getIdentificationMask(document: any) {
 
-    console.log(document.target.value.length)
+    let value = document.target.value;
 
-    if (document.target.value.length == 11) {
+    value = value.replaceAll('.', '').replaceAll('-', '').replaceAll('/', '');
+
+    console.log(value)
+
+    if (value.length == 11) {
       this.identificationMask = '000.000.000-00';
 
       this.newCardForm.patchValue({
         checkout__identificationType: 'CPF',
+        checkout__identificationNumber: document.target.value,
       })
 
-    } else if(document.target.value.length == 14) {
-      this.identificationMask = '00.000.000/0001-00';
+    } else if(value > 11) {
+      this.identificationMask = '00.000.000/0000-00';
 
       this.newCardForm.patchValue({
         checkout__identificationType: 'CNPJ',
+        checkout__identificationNumber: document.target.value,
       })
 
     }else{
@@ -317,6 +334,22 @@ export class NewCardComponent implements OnInit {
       this.identificationMask = '';
 
     }
+  }
+
+  allowSaveCard(event: any){
+
+    if(event.target.checked){
+      this.allowSave = true;
+    }else{
+      this.allowSave = false;
+    }
+
+  }
+
+  close(){
+
+    this.matDialog.closeAll();
+
   }
 
 }

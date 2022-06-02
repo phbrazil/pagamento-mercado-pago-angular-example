@@ -83,13 +83,34 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body default-font">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <div id="page">
           <div id="main">
             <div class="product-container">
-              <h2>Beats<sup>x</sup></h2>
-              <img
+              <h2>Opportunity
+                <!--sup>x</sup-->
+              </h2>
+              <ul>
+                <li>Plano {{plan.plan}}</li>
+                <li>
+                  <fa-icon [ngClass]="{'check' : plan.enableTime, 'uncheck' : !plan.enableTime}" class="fa"
+                    [icon]="plan.enableTime ?  faCheck : faX"></fa-icon>Timesheet
+                </li>
+                <li>
+                  <fa-icon [ngClass]="{'check' : plan.enableAdvance, 'uncheck' : !plan.enableAdvance}" class="fa"
+                    [icon]="plan.enableAdvance ?  faCheck : faX"></fa-icon>Adiantamentos
+                </li>
+                <li>
+                  <fa-icon [ngClass]="{'check' : plan.enableRefund, 'uncheck' : !plan.enableRefund}" class="fa"
+                    [icon]="plan.enableRefund ?  faCheck : faX"></fa-icon>Reembolsos
+                </li>
+
+              </ul>
+              <!--img
                 src="https://www.beatsbydre.com/content/dam/beats/web/pdp/beats-x/color_selector/_0003_rgb_MLYE2-RGB-thrqtr-detail_V2.png"
-                alt="">
+                alt=""-->
             </div>
             <div class="card">
               <div class="chip">
@@ -115,8 +136,9 @@
                     type="text" id="form-checkout__expirationDate">
                 </label>
                 <label for="identification">CPF/CNPJ
-                  <input (keyup)="getIdentificationMask($event)" mask="{{identificationMask}}" formControlName="checkout__identificationNumber"
-                    type="text" id="form-checkout__identificationNumber">
+                  <input maxlength="18" (keyup)="getIdentificationMask($event)" mask="{{identificationMask}}"
+                    formControlName="checkout__identificationNumber" type="text"
+                    id="form-checkout__identificationNumber">
                 </label>
                 <label for="cvc">cvv
                   <input (keyup)="checkSelects()" formControlName="checkout__securityCode" mask="000" max="3"
@@ -125,8 +147,7 @@
                 <input formControlName="checkout__cardholderEmail" type="hidden" id='form-checkout__cardholderEmail'
                   value='{{user.email}}' />
 
-                <select hidden formControlName="checkout__installments"
-                  id="form-checkout__installments"></select>
+                <select hidden formControlName="checkout__installments" id="form-checkout__installments"></select>
 
                 <select hidden formControlName="checkout__issuer" id="form-checkout__issuer">
                 </select>
@@ -137,12 +158,11 @@
                 <select hidden formControlName="checkout__identificationType"
                   id="form-checkout__identificationType"></select>
 
-                <button [disabled]="isLoading || !newCardForm.valid" id="form-checkout__submit">Pagar
-                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                <button [disabled]="isLoading || !newCardForm.valid || !allowSave" id="form-checkout__submit">Pagar
                   <fa-icon class="fa fa-angle-right" [icon]="faAngleRight"></fa-icon>
                 </button>
-                <label for="remember">Estou ciente que este cartão será usado para futuros pagamentos
-                  <input type="checkbox" checked="checked" id="remember">
+                <label for="remember">Estou ciente que este cartão será usado para futuros pagamentos da assinatura
+                  <input type="checkbox" (click)="allowSaveCard($event)" id="remember">
                 </label>
               </form>
             </div>

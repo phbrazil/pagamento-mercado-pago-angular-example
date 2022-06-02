@@ -14,7 +14,7 @@
 
 :root {
   --black: #525252;
-  --orange: #FFB000;
+  --green: #357a38;
   --white: #F7FBFC;
   --grey: #C2C2C2;
 }
@@ -38,7 +38,7 @@
 .product-container {
   width: 27.25rem;
   height: 23.1875rem;
-  background-color: var(--orange);
+  background-color: var(--green);
   position: relative;
   top: -2.7rem;
   left: -4.4rem;
@@ -57,7 +57,7 @@
 }
 .card {
   width: 30.5rem;
-  height: 20rem;
+  height: 21rem;
   background-color: var(--white);
   border-radius: .7rem;
   padding: 1.3rem 1.6rem;
@@ -121,7 +121,7 @@ form {
     align-items: center;
     flex-direction: row-reverse;
     & input {
-      margin-right: .5rem;
+      margin-right: .9rem;
       filter: invert(100%) hue-rotate(30deg) brightness(1.7);
       color: red;
       height: 2rem;
@@ -144,7 +144,7 @@ form {
     width: 11.8rem;
     font-size: 1.8rem;
     position: absolute;
-    bottom: -7rem;
+    bottom: -8rem;
     left: 27rem;
     background-color: white;
     display: flex;
@@ -172,4 +172,12 @@ form {
     font-size: 1.2rem;
     color: var(--grey);
   }
+}
+
+.check{
+  color: green;
+}
+
+.uncheck{
+  color: red;
 }
