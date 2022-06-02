@@ -98,6 +98,8 @@ export class NewCardComponent implements OnInit {
 
     this.isLoading = true;
 
+    console.log(this.cardForm.getCardFormData());
+
   }
 
   checkSelects() {
@@ -167,6 +169,8 @@ export class NewCardComponent implements OnInit {
         },
         onSubmit: (event: { preventDefault: () => void; }) => {
 
+
+
           event.preventDefault();
 
           const {
@@ -179,7 +183,6 @@ export class NewCardComponent implements OnInit {
             identificationNumber,
             identificationType,
           } = this.cardForm.getCardFormData();
-
 
           //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
           //fetch("/process_payment", {
@@ -206,7 +209,7 @@ export class NewCardComponent implements OnInit {
                 email,
                 identification: {
                   type: identificationType,
-                  number: identificationNumber,
+                  number: identificationNumber.replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')
                 },
               },
             }),
