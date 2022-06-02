@@ -270,8 +270,6 @@ export class NewCardComponent implements OnInit {
 
     value = value.replaceAll('.', '').replaceAll('-', '').replaceAll('/', '');
 
-    console.log(value)
-
     this.identificationNumber = value;
 
     if (value.length == 11) {
