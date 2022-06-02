@@ -184,6 +184,11 @@ export class NewCardComponent implements OnInit {
             identificationType,
           } = this.cardForm.getCardFormData();
 
+          const identificationNumberFormat = identificationNumber.replaceAll('.', '').replaceAll('-', '').replaceAll('/', '');
+
+          console.log(identificationNumberFormat);
+
+
           //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
           //fetch("/process_payment", {
           fetch(Constants.baseUrl + "/opportunity/payment/subscribe_plan", {
@@ -209,7 +214,7 @@ export class NewCardComponent implements OnInit {
                 email,
                 identification: {
                   type: identificationType,
-                  number: identificationNumber.replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')
+                  number: identificationNumberFormat,
                 },
               },
             }),
