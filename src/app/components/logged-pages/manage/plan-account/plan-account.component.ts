@@ -39,7 +39,7 @@ export class PlanAccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.planService.getIsReload().subscribe(status => {
+    /*this.planService.getIsReload().subscribe(status => {
 
     console.log('to aqui ',status )
       if (status != null && status) {
@@ -48,7 +48,8 @@ export class PlanAccountComponent implements OnInit {
           this.loadPlan();
         }
       }
-    })
+    })*/
+
 
     if (this.user.admin) {
       this.loadActiveMembers();

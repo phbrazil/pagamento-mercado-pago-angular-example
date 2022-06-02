@@ -6,7 +6,7 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000!important;
+  z-index: 1000 !important;
 }
 
 
@@ -14,7 +14,7 @@
 
 :root {
   --black: #525252;
-  --green: #357a38;
+  --orange: #FFB000;
   --white: #F7FBFC;
   --grey: #C2C2C2;
 }
@@ -27,6 +27,7 @@
   justify-content: center;
   align-items: center;
 }
+
 #main {
   width: 60.875rem;
   height: 27.4375rem;
@@ -35,26 +36,30 @@
   position: relative;
   z-index: 1;
 }
+
 .product-container {
   width: 27.25rem;
   height: 23.1875rem;
-  background-color: var(--green);
+  background-color: var(--orange);
   position: relative;
   top: -2.7rem;
   left: -4.4rem;
   overflow: hidden;
+
   & h2 {
     color: white;
     font-size: 2.5rem;
     text-align: center;
-    margin-top: .5rem;
+    margin-top: .8rem;
   }
+
   & img {
     width: 100%;
     height: auto;
     object-fit: cover;
   }
 }
+
 .card {
   width: 30.5rem;
   height: 21rem;
@@ -64,6 +69,7 @@
   position: absolute;
   top: -2.75rem;
   right: 4.4rem;
+
   &:after {
     content: '';
     display: block;
@@ -78,15 +84,18 @@
     z-index: -1;
   }
 }
+
 .chip {
   width: 3rem;
   height: 2.2rem;
   margin-bottom: .7rem;
 }
+
 form {
   display: flex;
   flex-wrap: wrap;
   position: relative;
+
   & label {
     width: 100%;
     display: flex;
@@ -95,20 +104,25 @@ form {
     color: #C2C2C2;
     margin-top: .35rem;
   }
+
   & label[for=name] {
     width: 72%;
   }
+
   & label[for=date] {
     width: 22%;
     margin-left: 6%;
   }
+
   & label[for=cvc] {
     width: 15%;
     margin-left: 6%;
   }
+
   & label[for=identification] {
     width: 75%;
   }
+
   & label[for=remember] {
     width: auto;
     height: 4.8rem;
@@ -120,6 +134,7 @@ form {
     justify-content: center;
     align-items: center;
     flex-direction: row-reverse;
+
     & input {
       margin-right: .9rem;
       filter: invert(100%) hue-rotate(30deg) brightness(1.7);
@@ -128,17 +143,20 @@ form {
       width: 2rem;
     }
   }
+
   & input {
     border: none;
     border-bottom: 1px solid var(--grey);
     outline: none;
     background-color: transparent;
     font-size: 1.5rem;
-    padding: .2rem  0;
+    padding: .2rem 0;
+
     &#cvc {
       color: white;
     }
   }
+
   & button {
     height: 4.8rem;
     width: 11.8rem;
@@ -151,33 +169,53 @@ form {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
     & .fa-angle-right {
       font-size: 2rem;
       position: absolute;
       left: 80%;
-    bottom: 25%;
+      bottom: 25%;
     }
   }
 }
+
 .price-container {
   position: absolute;
   bottom: 1.6rem;
   left: 3.4rem;
   display: inline-block;
+
   & strong {
     font-size: 2.2rem;
     color: white;
   }
+
   & small {
     font-size: 1.2rem;
     color: var(--grey);
   }
 }
 
-.check{
+.check {
   color: green;
 }
 
-.uncheck{
+.uncheck {
   color: red;
+}
+
+.products {
+
+  font-family: 'Questrial', sans-serif;
+  font-size: 2.5rem;
+  width: 100%;
+  display: inline-block;
+  margin-left: 6%;
+  margin-bottom: 6%
+}
+
+.users {
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-left: 6%;
 }

@@ -18,32 +18,33 @@
   <input type="button" (click)="checkIsRefund()" [ngClass]="{'active' : isRefund, '' : !isRefund}"
     class="btn-block btn-lg btn-custom-success" value="Reembolsos">
 
-  <div class="col-md-10 mb-2 mt-2">
+  <div class="col-md-12 mb-2 mt-2">
     <div class="row_inline">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <button data-toggle="tooltip" id='previous' name='previous' value='previous' (click)="decreaseUser()"
           class="btn btn-lg btn-outline-info shadow">
           <fa-icon class="fa-2x" [icon]="faMinus"></fa-icon>
         </button>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <input type="number" min="0" max="20" (change)="addUser($event)" (keyup)="addUser($event)"
           class="form-control default-font pricing-font mt-2 mb-2" value="{{activeUsers}}">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <button data-toggle="tooltip" id='next' name='next' value='next' (click)="increaseUser()"
           class="btn btn-lg btn-outline-info shadow">
           <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
         </button>
       </div>
+      <div class="col-md-3 mt-4">
+        <button type="submit" class="btn-custom-confirm" (click)="onSubmit()"
+          [disabled]="isLoading || !isTime && !isRefund && !isAdvance">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+          Continuar</button>
+      </div>
     </div>
-    <h4>Usuários ativos: <strong>{{activeUsers}}</strong></h4><br>
-    <h4>Valor mensal: <strong>{{currentPlanValue | currency: 'BRL'}}</strong></h4>
+    <small>Usuários ativos: <strong>{{activeUsers}}</strong></small><br>
+    <small>Valor mensal: <strong>{{currentPlanValue | currency: 'BRL'}}</strong></small>
   </div>
-  <div class="modal-footer MT-4">
-    <button type="submit" class="btn-custom-confirm" (click)="onSubmit()"
-      [disabled]="isLoading || !isTime && !isRefund && !isAdvance">
-      <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-      Continuar</button>
-  </div>
+
 </div>

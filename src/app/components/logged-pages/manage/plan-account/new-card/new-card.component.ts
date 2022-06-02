@@ -29,8 +29,6 @@ export class NewCardComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  progress: number = 0;
-
   amount: number = 0;
   amountPipeString: string;
 
@@ -52,6 +50,7 @@ export class NewCardComponent implements OnInit {
   issuer: string = '';
   identificationMask: string = '';
   allowSave: boolean = false;
+  identificationNumber: string = '';
 
   newCardForm: FormGroup;
 
@@ -62,7 +61,7 @@ export class NewCardComponent implements OnInit {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
   }
 
@@ -115,14 +114,6 @@ export class NewCardComponent implements OnInit {
 
 
   }
-
-  ngOnDestroy() {
-    console.log('fechei')
-
-    this.router.navigate(['/manage']);
-
-  }
-
 
   loadForm() {
 
@@ -177,11 +168,6 @@ export class NewCardComponent implements OnInit {
           console.log("Form mounted");
         },
         onSubmit: (event: { preventDefault: () => void; }) => {
-
-          //progress Bar
-
-          this.progressBar();
-
 
           event.preventDefault();
 
@@ -246,12 +232,10 @@ export class NewCardComponent implements OnInit {
               } else if (data.status == 'pending') {
                 this.isLoading = false;
                 this.alertService.error('Pagamento rejeitado', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
-                this.progress = 0;
 
               } else {
                 this.isLoading = false;
                 this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
-                this.progress = 0;
 
               }
 
@@ -261,7 +245,6 @@ export class NewCardComponent implements OnInit {
 
               this.isLoading = false;
               this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
-              this.progress = 0;
 
             });
         },
@@ -270,39 +253,15 @@ export class NewCardComponent implements OnInit {
 
           // Animate progress bar
           const progressBar = document.querySelector(".progress-bar");
-          // progressBar.removeAttribute("value");
-
-          this.progress = 100;
 
           return () => {
-            //progressBar.setAttribute("value", "0");
 
-            this.progress = 0;
 
           };
         }
       },
     });
 
-  }
-
-  progressBar() {
-
-    if (this.progress == 0) {
-      this.progress = 1;
-      var elem = document.getElementById("progress");
-      var width = 1;
-      var id = setInterval(frame, 10);
-      function frame() {
-        if (width >= 100) {
-          clearInterval(id);
-          //this.progress = 0;
-        } else {
-          width++;
-          elem.style.width = width + "%";
-        }
-      }
-    }
   }
 
   getIdentificationMask(document: any) {
@@ -313,40 +272,44 @@ export class NewCardComponent implements OnInit {
 
     console.log(value)
 
+    this.identificationNumber = value;
+
     if (value.length == 11) {
       this.identificationMask = '000.000.000-00';
+      this.identificationType = 'CPF';
 
       this.newCardForm.patchValue({
         checkout__identificationType: 'CPF',
         checkout__identificationNumber: document.target.value,
       })
 
-    } else if(value > 11) {
+    } else if (value > 11) {
       this.identificationMask = '00.000.000/0000-00';
+      this.identificationType = 'CNPJ';
 
       this.newCardForm.patchValue({
         checkout__identificationType: 'CNPJ',
         checkout__identificationNumber: document.target.value,
       })
 
-    }else{
+    } else {
 
       this.identificationMask = '';
 
     }
   }
 
-  allowSaveCard(event: any){
+  allowSaveCard(event: any) {
 
-    if(event.target.checked){
+    if (event.target.checked) {
       this.allowSave = true;
-    }else{
+    } else {
       this.allowSave = false;
     }
 
   }
 
-  close(){
+  close() {
 
     this.matDialog.closeAll();
 
