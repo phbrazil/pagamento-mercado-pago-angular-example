@@ -16,7 +16,8 @@ import { Plan } from 'src/app/_models/plan';
   selector: 'app-new-card',
   templateUrl: './new-card.component.html',
   styleUrls: ['./new-card.component.scss'],
-  encapsulation: ViewEncapsulation.None // Here
+  encapsulation: ViewEncapsulation.None
+
 
 })
 
@@ -24,6 +25,7 @@ import { Plan } from 'src/app/_models/plan';
 
 
 export class NewCardComponent implements OnInit {
+
 
   user: User;
 
@@ -63,7 +65,7 @@ export class NewCardComponent implements OnInit {
 
     this.accountService.user.subscribe(x => this.user = x);
 
-    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
   }
 
@@ -151,9 +153,9 @@ export class NewCardComponent implements OnInit {
 
   }
 
-  unmountForm(){
+  unmountForm() {
 
-    if(this.cardForm != ''){
+    if (this.cardForm != '') {
       this.cardForm.unmount();
     }
 
@@ -166,13 +168,16 @@ export class NewCardComponent implements OnInit {
 
     this.matDialog.closeAll();
 
+    this.router.navigate(['/manage'])
+
+
   }
 
-  clearForm(){
+  clearForm() {
     this.newCardForm.reset();
   }
 
-  test(){
+  test() {
     console.log(this.cardForm.getCardFormData());
     console.log(this.newCardForm.value);
 

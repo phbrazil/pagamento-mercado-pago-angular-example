@@ -88,11 +88,13 @@
     <span style='float:left;'>
       <div class='thin dense'>Usuários</div>
       <div class='thin dense'>Valor por usuário</div>
+      <hr class="hr">
       TOTAL MENSAL
     </span>
     <span style='float:right; text-align:right;'>
       <div class='thin dense'>{{activeUsers}}</div>
       <div class='thin dense'>{{currentPlanValue /activeUsers | currency: 'BRL'}}</div>
+      <hr class="hr">
       {{currentPlanValue | currency: 'BRL'}}
     </span>
   </div>

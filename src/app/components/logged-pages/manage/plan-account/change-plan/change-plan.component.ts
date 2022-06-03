@@ -13,7 +13,7 @@ import { NewCardComponent } from '../new-card/new-card.component';
   selector: 'app-change-plan',
   templateUrl: './change-plan.component.html',
   styleUrls: ['./change-plan.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  //encapsulation: ViewEncapsulation.None
 })
 export class ChangePlanComponent implements OnInit {
 

@@ -24,7 +24,7 @@
               </span>
               <small class="users">{{activeUsers}} usuários ativos</small>
             </div>
-            <div class="card">
+            <div class="new-card">
               <div class="chip">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 230 384.4 300.4" width="38" height="70">
                   <path
@@ -35,7 +35,7 @@
                     data-original="#005F75" class="active-path" data-old_color="#005F75" fill="rgba(0,0,0,.4)" />
                 </svg>
               </div>
-              <form id="form-checkout" [formGroup]="newCardForm" name="pay" (submit)="submit()">
+              <form id="form-checkout" class="form-new-card" [formGroup]="newCardForm" name="pay" (submit)="submit()">
                 <label for="number">Número do cartão
                   <input (keyup)="checkSelects()" formControlName="checkout__cardNumber" mask="0000 0000 0000 0000"
                     maxlength="19" type="text" id="form-checkout__cardNumber">
