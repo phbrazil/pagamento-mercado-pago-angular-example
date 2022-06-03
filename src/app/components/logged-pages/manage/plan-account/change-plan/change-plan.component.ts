@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Constants } from 'src/app/components/shared/utils/Constants';
@@ -12,7 +12,8 @@ import { NewCardComponent } from '../new-card/new-card.component';
 @Component({
   selector: 'app-change-plan',
   templateUrl: './change-plan.component.html',
-  styleUrls: ['./change-plan.component.scss']
+  styleUrls: ['./change-plan.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChangePlanComponent implements OnInit {
 

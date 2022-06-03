@@ -48,9 +48,9 @@
                     type="text" id="form-checkout__expirationDate">
                 </label>
                 <label for="identification">CPF/CNPJ
-                  <input maxlength="18" (keyup)="getIdentificationMask($event)" mask="000.000.000-00||00.000.000/0000-00"
-                    formControlName="checkout__identificationNumber" type="text"
-                    id="form-checkout__identificationNumber">
+                  <input maxlength="18" (keyup)="setIdentificationNumber($event)"
+                    mask="000.000.000-00||00.000.000/0000-00" required
+                    type="text" id="form-checkout__identificationNumberFormatted">
                 </label>
                 <label for="cvc">cvv
                   <input (keyup)="checkSelects()" formControlName="checkout__securityCode" mask="000" max="3"
@@ -67,8 +67,11 @@
                 <select hidden formControlName="checkout__issuer" id="form-checkout__issuer">
                 </select>
 
-                <select hidden formControlName="checkout__identificationType"
-                  id="form-checkout__identificationType" value="{{identificationType}}"></select>
+                <select hidden formControlName="checkout__identificationType" id="form-checkout__identificationType"
+                  value="{{identificationType}}"></select>
+
+                <input value="{{identificationNumber}}"
+                  formControlName="checkout__identificationNumber" type="hidden" id="form-checkout__identificationNumber">
 
                 <button [disabled]="isLoading || !newCardForm.valid || !allowSave" id="form-checkout__submit">
                   <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>

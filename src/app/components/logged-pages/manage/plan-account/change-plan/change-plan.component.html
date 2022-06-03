@@ -19,9 +19,9 @@
           <div class="col-sm-12 col-md-12">
             <div class="row mt-2">
               <div class="col-md-4">
-                <div class="card shadow products mb-2 {{plan.enableTime ? 'bg-light logo' : 'bg-grey'}}">
+                <div class="card shadow products mb-2 {{plan.enableTime ? 'bg-light' : 'bg-grey'}}">
                   <img src="assets/img/plan/time.png" class="mt-2 center"
-                    style="max-height: 120px; max-width: 120px;" alt="Timesheet logo">
+                    style="max-height: 95px; max-width: 100px;" alt="Timesheet logo">
                   <div class="card-body center">
                     <h5 class="card-title">Timesheet</h5>
                   </div>
@@ -29,9 +29,9 @@
               </div>
               <div class="col-md-4">
                 <div (click)="checkIsAdvance()"
-                  class="card shadow products mb-2 {{plan.enableAdvance ? 'bg-light logo' : 'bg-grey'}}">
-                  <img src="assets/img/plan/advance.png" class="mt-2 center"
-                    style="max-height: 130px; max-width: 130px;" alt="Adiantamento logo">
+                  class="card shadow products mb-2 {{plan.enableAdvance ? 'bg-light' : 'bg-grey'}}">
+                  <img src="assets/img/plan/advance.png" class="mt-2 center {{!plan.enableAdvance ? 'logo' : ''}}"
+                    style="max-height: 130px; max-width: 130px;" alt="Adiantamento">
                   <div class="card-body center col-md-12">
                     <h5 class="card-title">Adiantamento</h5>
                   </div>
@@ -39,8 +39,8 @@
               </div>
               <div class="col-md-4">
                 <div (click)="checkIsRefund()"
-                  class="card shadow products mb-2 {{plan.enableRefund ? 'bg-light logo' : 'bg-grey'}}">
-                  <img src="assets/img/plan/refund.png" class="mt-2 center"
+                  class="card shadow products mb-2 {{plan.enableRefund ? 'bg-light' : 'bg-grey'}}">
+                  <img src="assets/img/plan/refund.png" class="mt-2 center {{!plan.enableRefund ? 'logo' : ''}}"
                     style="max-height: 160px; max-width: 160px;" alt="Reembolso logo">
                   <div class="card-body center">
                     <h5 class="card-title">Reembolso</h5>
@@ -53,13 +53,6 @@
       </div>
     </div>
   </div>
-  <!--h5 class="text-muted">Selecione os produtos para incluir no seu plano</h5>
-  <input type="button" [ngClass]="{'active' : isTime, '' : !isTime}" class="btn-block btn-lg btn-custom-success"
-    value="Timesheet">
-  <input type="button" (click)="checkIsAdvance()" [ngClass]="{'active' : isAdvance, '' : !isAdvance}"
-    class="btn-block btn-lg btn-custom-success" value="Adiantamentos e Prestação de Contas">
-  <input type="button" (click)="checkIsRefund()" [ngClass]="{'active' : isRefund, '' : !isRefund}"
-    class="btn-block btn-lg btn-custom-success" value="Reembolsos"-->
 
   <div class="col-md-12 mb-2 mt-2">
     <div class="row_inline">

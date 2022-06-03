@@ -49,8 +49,8 @@ export class NewCardComponent implements OnInit {
   identificationType: string = '';
   issuer: string = '';
   allowSave: boolean = false;
+  identificationNumberFormatted: string = '';
   identificationNumber: string = '';
-
   newCardForm: FormGroup;
 
   mp: any = new MercadoPago(Constants.public_key);
@@ -78,7 +78,7 @@ export class NewCardComponent implements OnInit {
         checkout__securityCode: ['', Validators.required],
         checkout__issuer: ['', Validators.required],
         checkout__identificationType: ['', Validators.required],
-        checkout__identificationNumber: ['', Validators.required],
+        checkout__identificationNumber: [this.identificationNumber, Validators.required],
         checkout__installments: ['', Validators.required],
         checkout__cardholderEmail: [this.user.email, Validators.required],
       });
@@ -112,6 +112,66 @@ export class NewCardComponent implements OnInit {
       checkout__issuer: this.issuer,
     })
 
+
+  }
+
+  setIdentificationNumber(document: any) {
+
+    let value = document.target.value;
+
+    value = value.replaceAll('.', '').replaceAll('-', '').replaceAll('/', '');
+
+    this.identificationNumber = value;
+
+    if (value.length == 11) {
+      this.identificationType = 'CPF';
+      this.newCardForm.patchValue({
+        checkout__identificationType: 'CPF',
+        checkout__identificationNumber: this.identificationNumber
+      })
+
+    } else if (value > 11) {
+      this.identificationType = 'CNPJ';
+
+      this.newCardForm.patchValue({
+        checkout__identificationType: 'CNPJ',
+        checkout__identificationNumber: this.identificationNumber
+      })
+
+    }
+  }
+
+  allowSaveCard(event: any) {
+
+    if (event.target.checked) {
+      this.allowSave = true;
+    } else {
+      this.allowSave = false;
+    }
+
+  }
+
+  unmountForm(){
+
+    this.cardForm.unmount();
+
+  }
+
+  close() {
+
+    this.unmountForm();
+
+    this.matDialog.closeAll();
+
+  }
+
+  clearForm(){
+    this.newCardForm.reset();
+  }
+
+  test(){
+    console.log(this.cardForm.getCardFormData());
+    console.log(this.newCardForm.value);
 
   }
 
@@ -274,59 +334,6 @@ export class NewCardComponent implements OnInit {
       },
     });
 
-  }
-
-  getIdentificationMask(document: any) {
-
-    let value = document.target.value;
-
-    value = value.replaceAll('.', '').replaceAll('-', '').replaceAll('/', '');
-
-    this.identificationNumber = value;
-
-    if (value.length == 11) {
-      this.identificationType = 'CPF';
-
-      this.newCardForm.patchValue({
-        checkout__identificationType: 'CPF',
-      })
-
-    } else if (value > 11) {
-      this.identificationType = 'CNPJ';
-
-      this.newCardForm.patchValue({
-        checkout__identificationType: 'CNPJ',
-      })
-
-    }
-  }
-
-  allowSaveCard(event: any) {
-
-    if (event.target.checked) {
-      this.allowSave = true;
-    } else {
-      this.allowSave = false;
-    }
-
-  }
-
-  unmountForm(){
-
-    this.cardForm.unmount();
-
-  }
-
-  close() {
-
-    this.unmountForm();
-
-    this.matDialog.closeAll();
-
-  }
-
-  clearForm(){
-    this.newCardForm.reset();
   }
 
 }
