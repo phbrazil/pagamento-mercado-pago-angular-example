@@ -79,20 +79,21 @@
           Continuar</button>
       </div>
     </div>
-    <h5 class="text-muted">Usuários ativos: <strong>{{activeUsers}}</strong></h5><br>
-    <h5 class="text-muted">Valor mensal: <strong>{{currentPlanValue | currency: 'BRL'}}</strong></h5>
 
-    <div class='total'>
-      <span style='float:left;'>
-        <div class='thin dense'>VAT 19%</div>
-        <div class='thin dense'>Delivery</div>
-        TOTAL
-      </span>
-      <span style='float:right; text-align:right;'>
-        <div class='thin dense'>$68.75</div>
-        <div class='thin dense'>$4.95</div>
-        $435.55
-      </span>
-    </div>
+
+  </div>
+  <div class='total'>
+    <span style='float:left;'>
+      <div class='thin dense'>Usuários</div>
+      <div class='thin dense'>Valor por usuário</div>
+      TOTAL MENSAL
+    </span>
+    <span style='float:right; text-align:right;'>
+      <div class='thin dense'>{{activeUsers}}</div>
+      <div class='thin dense'>{{currentPlanValue /activeUsers | currency: 'BRL'}}</div>
+      {{currentPlanValue | currency: 'BRL'}}
+    </span>
   </div>
 </div>
+
+
