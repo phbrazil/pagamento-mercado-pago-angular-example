@@ -1,31 +1,31 @@
-
 .modal-position {
   position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000!important;
+  z-index: 1000 !important;
 }
+
 .drop {
   display: block !important;
 }
 
-.custom-drop{
+.custom-drop {
   font-size: 20px;
   margin-bottom: 20px;
 }
 
-.time-font{
+.time-font {
   font-size: 43px;
   text-align: center;
   height: 110%;
 }
 
-.modal-header-font{
+.modal-header-font {
   font-size: 20px;
 }
 
-.active{
+.active {
   background-color: #d2f8d2;
   color: black;
 }
@@ -53,10 +53,10 @@
   border-radius: 4px;
 
 }
-
 .center {
   margin: auto;
-  padding: 10px;
+  width: 50%;
+  padding: 1px;
 }
 
 
@@ -82,3 +82,21 @@
   margin-left: -15px;
 }
 
+.products:hover {
+  position: relative;
+  transform: translateY(-5%);
+  transition: all 0.7s ease 0s;
+  box-shadow: 41px 41px 82px #bcbfc1,
+    -41px -41px 82px #ffffff;
+}
+
+.bg-grey {
+  color: #90949c !important;
+  background: #E9ECEF;
+}
+
+.logo{
+
+  filter: opacity(0.5) drop-shadow(0 0 0 #357a38);
+
+}

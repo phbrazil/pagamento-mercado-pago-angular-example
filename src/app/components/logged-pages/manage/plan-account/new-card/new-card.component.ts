@@ -98,8 +98,6 @@ export class NewCardComponent implements OnInit {
 
     this.isLoading = true;
 
-    console.log(this.cardForm.getCardFormData());
-
   }
 
   checkSelects() {
@@ -169,6 +167,8 @@ export class NewCardComponent implements OnInit {
         },
         onSubmit: (event: { preventDefault: () => void; }) => {
 
+          console.log(event);
+          console.log(this.cardForm.getCardFormData());
 
 
           event.preventDefault();
