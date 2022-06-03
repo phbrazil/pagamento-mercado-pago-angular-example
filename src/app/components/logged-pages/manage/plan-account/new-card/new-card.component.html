@@ -50,7 +50,7 @@
                 <label for="identification">CPF/CNPJ
                   <input maxlength="18" (keyup)="setIdentificationNumber($event)"
                     mask="000.000.000-00||00.000.000/0000-00" required
-                    type="text" id="form-checkout__identificationNumberFormatted">
+                    type="text" id="form-checkout__identificationNumberFormatted" placeholder="Documento do titular">
                 </label>
                 <label for="cvc">cvv
                   <input (keyup)="checkSelects()" formControlName="checkout__securityCode" mask="000" max="3"

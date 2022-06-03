@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading" class="col-md-12 mt-4" tabindex="-1" role="dialog">
+<div *ngIf="!isLoading" class="col-md-12 mt-4 mb-4" tabindex="-1" role="dialog">
   <div class="row">
     <div class="col-md-6">
       <input type="button" (click)="selectPro()" [ngClass]="{'active' : plan?.plan =='Pro', '' : plan?.plan != 'Pro'}"
@@ -19,7 +19,7 @@
           <div class="col-sm-12 col-md-12">
             <div class="row mt-2">
               <div class="col-md-4">
-                <div class="card shadow products mb-2 {{plan.enableTime ? 'bg-light' : 'bg-grey'}}">
+                <div class="card-glass shadow products mb-2 {{plan?.enableTime ? 'bg-light' : 'bg-grey'}}">
                   <img src="assets/img/plan/time.png" class="mt-2 center"
                     style="max-height: 95px; max-width: 100px;" alt="Timesheet logo">
                   <div class="card-body center">
@@ -29,17 +29,17 @@
               </div>
               <div class="col-md-4">
                 <div (click)="checkIsAdvance()"
-                  class="card shadow products mb-2 {{plan.enableAdvance ? 'bg-light' : 'bg-grey'}}">
+                  class="card-glass shadow products mb-2 {{plan?.enableAdvance ? 'bg-light' : 'bg-grey'}}">
                   <img src="assets/img/plan/advance.png" class="mt-2 center {{!plan.enableAdvance ? 'logo' : ''}}"
                     style="max-height: 130px; max-width: 130px;" alt="Adiantamento">
-                  <div class="card-body center col-md-12">
+                  <div class="card-body center">
                     <h5 class="card-title">Adiantamento</h5>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div (click)="checkIsRefund()"
-                  class="card shadow products mb-2 {{plan.enableRefund ? 'bg-light' : 'bg-grey'}}">
+                  class="card-glass shadow products mb-2 {{plan?.enableRefund ? 'bg-light' : 'bg-grey'}}">
                   <img src="assets/img/plan/refund.png" class="mt-2 center {{!plan.enableRefund ? 'logo' : ''}}"
                     style="max-height: 160px; max-width: 160px;" alt="Reembolso logo">
                   <div class="card-body center">
@@ -79,7 +79,20 @@
           Continuar</button>
       </div>
     </div>
-    <small>Usuários ativos: <strong>{{activeUsers}}</strong></small><br>
-    <small>Valor mensal: <strong>{{currentPlanValue | currency: 'BRL'}}</strong></small>
+    <h5 class="text-muted">Usuários ativos: <strong>{{activeUsers}}</strong></h5><br>
+    <h5 class="text-muted">Valor mensal: <strong>{{currentPlanValue | currency: 'BRL'}}</strong></h5>
+
+    <div class='total'>
+      <span style='float:left;'>
+        <div class='thin dense'>VAT 19%</div>
+        <div class='thin dense'>Delivery</div>
+        TOTAL
+      </span>
+      <span style='float:right; text-align:right;'>
+        <div class='thin dense'>$68.75</div>
+        <div class='thin dense'>$4.95</div>
+        $435.55
+      </span>
+    </div>
   </div>
 </div>

@@ -54,7 +54,7 @@ export class NewCardComponent implements OnInit {
   newCardForm: FormGroup;
 
   mp: any = new MercadoPago(Constants.public_key);
-  cardForm: any;
+  cardForm: any = '';
 
   constructor(private accountService: AccountService, private matDialog: MatDialog,
     private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -153,7 +153,10 @@ export class NewCardComponent implements OnInit {
 
   unmountForm(){
 
-    this.cardForm.unmount();
+    if(this.cardForm != ''){
+      this.cardForm.unmount();
+    }
+
 
   }
 
