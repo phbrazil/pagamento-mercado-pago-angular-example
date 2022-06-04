@@ -80,9 +80,9 @@ export class SettingsComponent implements OnInit {
 
     this.isChangeSettings = true;
 
-    this.settingsService.setColor(color);
-
     this.settings.defaultColor = color;
+
+    this.settingsService.setSettings(this.settings);
 
   }
 

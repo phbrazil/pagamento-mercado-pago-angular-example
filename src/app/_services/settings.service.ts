@@ -10,15 +10,19 @@ import { User } from '../_models/user';
 export class SettingsService {
 
   private isReloadSettings = new BehaviorSubject<boolean>(false);
-
-  private defaultColor = new BehaviorSubject<string>('nav-green');
   readonly baseUrl: string = Constants.baseUrl;
+
+  private settingsSubject: BehaviorSubject<Settings>;
+  public settings: Observable<Settings>;
 
 
   constructor(
     private http: HttpClient,
     public dialog: MatDialog
   ) {
+
+    this.settingsSubject = new BehaviorSubject<Settings>(JSON.parse(localStorage.getItem('settings')));
+    this.settings = this.settingsSubject.asObservable();
 
   }
 
@@ -31,12 +35,13 @@ export class SettingsService {
 
   }
 
-  public setColor(color: string): void {
-    this.defaultColor.next(color);
+  public get settingsValue(): Settings {
+    return this.settingsSubject.value;
   }
 
-  public getColor(): Observable<string> {
-    return this.defaultColor.asObservable();
+  public setSettings(settings: Settings) {
+
+    this.settingsSubject.next(settings);
 
   }
 
@@ -49,7 +54,11 @@ export class SettingsService {
 
     const url = `${this.baseUrl}/settings/getSettings/${idUser}`
 
-    return this.http.get<Settings>(url, header);
+    return this.http.get<Settings>(url, header).pipe(map(settings => {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('settings', JSON.stringify(settings));
+      return settings;
+    }));
   }
 
   newSettings(settings: Settings, token: string) {

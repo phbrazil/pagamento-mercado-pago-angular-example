@@ -127,7 +127,7 @@ export class LoginComponent implements OnInit {
           if (this.settings == null) {
             this.newSettings(x);
           } else {
-            this.settingsService.setColor(this.settings.defaultColor);
+            this.settingsService.setSettings(this.settings);
           }
         }, _err => {
           this.isLoading = false;

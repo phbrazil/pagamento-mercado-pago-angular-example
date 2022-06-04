@@ -5,6 +5,7 @@ import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Plan } from 'src/app/_models/plan';
 import { PlanService } from 'src/app/_services/plan.service';
 import { SettingsService } from 'src/app/_services/settings.service';
+import { Settings } from 'src/app/_models/settings';
 
 @Component({
   selector: 'app-navbar',
@@ -26,12 +27,16 @@ export class NavbarComponent implements OnInit {
 
   name: string = '';
 
+  settings: Settings;
+
 
   constructor(private accountService: AccountService,
     private planService: PlanService,
     private settingsService: SettingsService) {
 
     this.accountService.user.subscribe(x => this.user = x);
+
+    this.settingsService.settings.subscribe(x => this.settings = x);
 
   }
 
@@ -55,7 +60,10 @@ export class NavbarComponent implements OnInit {
       this.name = this.name + this.user.name.charAt(i);
     }
 
-    this.loadColor();
+    this.settingsService.settings.subscribe(settings =>{
+      this.settings = settings;
+    })
+
   }
 
   logout() {
@@ -74,16 +82,6 @@ export class NavbarComponent implements OnInit {
     }, _err => {
       this.accountService.logout();
     });
-  }
-
-  loadColor() {
-
-   this.settingsService.getColor().subscribe(res =>{
-
-    this.navColor = res;
-
-   })
-
   }
 
 }
