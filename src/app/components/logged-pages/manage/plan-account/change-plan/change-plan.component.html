@@ -1,12 +1,12 @@
-<div *ngIf="!isLoading" class="col-md-12 mt-4 mb-4" tabindex="-1" role="dialog">
+<!--div *ngIf="!isLoading" class="col-md-10 mb-4" tabindex="-1" role="dialog">
   <div class="row">
     <div class="col-md-6">
-      <input type="button" (click)="selectPro()" [ngClass]="{'active' : plan?.plan =='Pro', '' : plan?.plan != 'Pro'}"
+      <input type="button" (click)="selectPro()" [ngClass]="{'bg-light' : plan?.plan =='Pro', 'bg-grey' : plan?.plan != 'Pro'}"
         class="btn-block btn-lg btn-custom-success" value="Pro">
     </div>
     <div class="col-md-6">
       <input type="button" (click)="selectCorp()"
-        [ngClass]="{'active' : plan?.plan == 'Corp', '' : plan?.plan != 'Corp'}"
+        [ngClass]="{'bg-light' : plan?.plan == 'Corp', 'bg-grey' : plan?.plan != 'Corp'}"
         class="btn-block btn-lg btn-custom-success" value="Corp">
     </div>
   </div>
@@ -16,32 +16,32 @@
       <div class="col-lg-12">
         <div class="form-group mt-4">
           <label for="platform">Selecione os produtos para incluir no seu plano</label>
-          <div class="col-sm-12 col-md-12">
+          <div class="col-sm-10 col-md-10">
             <div class="row mt-2">
               <div class="col-md-4">
-                <div class="card-glass shadow products mb-2 {{plan?.enableTime ? 'bg-light' : 'bg-grey'}}">
+                <div [ngClass]="{'bg-light' : plan?.enableTime, 'bg-grey' : !plan?.enableTime }" class="card-glass shadow products mb-2">
                   <img src="assets/img/plan/time.png" class="mt-2 center"
-                    style="max-height: 95px; max-width: 100px;" alt="Timesheet logo">
+                    style="max-height: 50px; max-width: 50px;" alt="Timesheet logo">
                   <div class="card-body center">
                     <h5 class="card-title">Timesheet</h5>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
-                <div (click)="checkIsAdvance()"
-                  class="card-glass shadow products mb-2 {{plan?.enableAdvance ? 'bg-light' : 'bg-grey'}}">
+                <div [ngClass]="{'bg-light' : plan?.enableAdvance, 'bg-grey' : !plan?.enableAdvance }" (click)="checkIsAdvance()"
+                  class="card-glass shadow products mb-2">
                   <img src="assets/img/plan/advance.png" class="mt-2 center {{!plan.enableAdvance ? 'logo' : ''}}"
-                    style="max-height: 130px; max-width: 130px;" alt="Adiantamento">
+                    style="max-height: 50px; max-width: 50px;" alt="Adiantamento">
                   <div class="card-body center">
                     <h5 class="card-title">Adiantamento</h5>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
-                <div (click)="checkIsRefund()"
-                  class="card-glass shadow products mb-2 {{plan?.enableRefund ? 'bg-light' : 'bg-grey'}}">
+                <div [ngClass]="{'bg-light' : plan?.enableRefund, 'bg-grey' : !plan?.enableRefund }" (click)="checkIsRefund()"
+                  class="card-glass shadow products mb-2">
                   <img src="assets/img/plan/refund.png" class="mt-2 center {{!plan.enableRefund ? 'logo' : ''}}"
-                    style="max-height: 160px; max-width: 160px;" alt="Reembolso logo">
+                    style="max-height: 50px; max-width: 50px;" alt="Reembolso logo">
                   <div class="card-body center">
                     <h5 class="card-title">Reembolso</h5>
                   </div>
@@ -54,11 +54,11 @@
     </div>
   </div>
 
-  <div class="col-md-12 mb-2 mt-2">
+  <div class="col-md-12 mb-2 mt-2 center">
     <label for="platform">Usuários</label>
 
     <div class="row_inline">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <button data-toggle="tooltip" id='previous' name='previous' value='previous' (click)="decreaseUser()"
           class="btn btn-lg btn-outline-info shadow">
           <fa-icon class="fa-2x" [icon]="faMinus"></fa-icon>
@@ -68,36 +68,165 @@
         <input type="number" min="0" max="20" (change)="addUser($event)" (keyup)="addUser($event)"
           class="default-font pricing-font mt-2 mb-2" value="{{activeUsers}}">
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <button data-toggle="tooltip" id='next' name='next' value='next' (click)="increaseUser()"
           class="btn btn-lg btn-outline-info shadow">
           <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
         </button>
       </div>
-      <div class="col-md-3 mt-4">
-        <button type="submit" class="btn-custom-confirm" (click)="onSubmit()"
-          [disabled]="isLoading || !isTime && !isRefund && !isAdvance">
-          <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-          Continuar</button>
-      </div>
     </div>
 
-
   </div>
-  <div class='total'>
+
+  <div class='total mt-2 mt-4'>
     <span style='float:left;'>
+      <div class='thin dense'>Plano</div>
       <div class='thin dense'>Usuários</div>
-      <div class='thin dense'>Valor por usuário</div>
-      <hr class="hr">
+      <div class='thin dense mb-2'>Valor por usuário</div>
       TOTAL MENSAL
     </span>
     <span style='float:right; text-align:right;'>
+      <div class='thin dense'>{{plan.plan}}</div>
       <div class='thin dense'>{{activeUsers}}</div>
-      <div class='thin dense'>{{currentPlanValue /activeUsers | currency: 'BRL'}}</div>
-      <hr class="hr">
+      <div class='thin dense mb-2'>{{currentPlanValue /activeUsers | currency: 'BRL'}}</div>
       {{currentPlanValue | currency: 'BRL'}}
     </span>
   </div>
-</div>
 
+  <div class="col-md-4 mt-4">
+    <button type="submit" class="btn-custom-confirm btn-block" (click)="onSubmit()"
+      [disabled]="isLoading || activeUsers == 0 || !isTime && !isRefund && !isAdvance">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+      Continuar</button>
+  </div>
 
+</div-->
+
+<div *ngIf="!isLoading" class='window col-md-12 glass'>
+  <div class='order-info'>
+    <div class='order-info-content'>
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <input type="button" (click)="selectPro()"
+            [ngClass]="{'bg-light' : plan?.plan =='Pro', 'bg-grey' : plan?.plan != 'Pro'}"
+            class="btn-block btn-sm btn-custom-success" value="Plano Pro">
+        </div>
+        <div class="col-md-6">
+          <input type="button" (click)="selectCorp()"
+            [ngClass]="{'bg-light' : plan?.plan == 'Corp', 'bg-grey' : plan?.plan != 'Corp'}"
+            class="btn-block btn-sm btn-custom-success" value="Plano Corp">
+        </div>
+      </div>
+      <div class='line'></div>
+      <table class='order-table'>
+        <tbody>
+          <tr>
+            <td><img [ngClass]="{'bg-light' : plan?.enableTime, 'bg-grey' : !plan?.enableTime }" alt="timesheet"
+                src='assets/img/plan/time.png' class='full-width'>
+            </td>
+            <td>
+              <br> <span class='thin'>Timesheet</span>
+              <br> <span class='thin small'> Tenha em mãos as atividades do seu time<br><br></span>
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <div class='price'>Produto padrão</div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <div class='line'></div>
+      <table class='order-table' [ngClass]="{'bg-light' : plan?.enableAdvance, 'bg-grey' : !plan?.enableAdvance }"
+        (click)="checkIsAdvance()">
+        <tbody>
+          <tr>
+            <td><img alt="adiantamento" src='assets/img/plan/advance.png' class='full-width'>
+            </td>
+            <td>
+              <br> <span class='thin'>Adiantamento</span>
+              <br> <span class='thin small'> Chega de solicitar adiantamentos por email</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='price'>Clique para {{!plan.enableAdvance? 'Adicionar': 'Remover'}}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class='line'></div>
+      <table class='order-table' [ngClass]="{'bg-light' : plan?.enableRefund, 'bg-grey' : !plan?.enableRefund }"
+        (click)="checkIsRefund()">
+        <tbody>
+          <tr>
+            <td><img alt="refund" src='assets/img/plan/refund.png' class='full-width'>
+            </td>
+            <td>
+              <br> <span class='thin'>Reembolso</span><br>
+              <span class='thin small'> Não fique preocupado se vai receber aquele valor gasto</span>
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <div class='price'>Clique para {{!plan.enableRefund? 'Adicionar': 'Remover'}}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class='line'></div>
+
+      <div class="col-md-12 margin-top">
+        <div class="row">
+          <div class="col-md-7">
+            <div class="col-md-4">
+              <button data-toggle="tooltip" id='previous' name='previous' value='previous' (click)="decreaseUser()"
+                class="btn btn-lg btn-outline-info shadow">
+                <fa-icon class="fa-2x" [icon]="faMinus"></fa-icon>
+              </button>
+            </div>
+            <div class="col-md-4">
+              <input type="number" min="0" max="20" (change)="addUser($event)" (keyup)="addUser($event)"
+                class="default-font pricing-font mt-2 mb-2" value="{{activeUsers}}">
+            </div>
+            <div class="col-md-4">
+              <button data-toggle="tooltip" id='next' name='next' value='next' (click)="increaseUser()"
+                class="btn btn-lg btn-outline-info shadow">
+                <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class='total'>
+              <span style='float:left;'>
+                <div class='thin dense'>Plano</div>
+                <div class='thin dense'>Usuários</div>
+                <div class='thin dense mb-2'>Valor por usuário</div>
+                TOTAL MENSAL
+              </span>
+              <span style='float:right; text-align:right;'>
+                <div class='thin dense'>{{plan.plan}}</div>
+                <div class='thin dense'>{{activeUsers}}</div>
+                <div class='thin dense mb-2'>{{currentPlanValue /activeUsers | currency: 'BRL'}}</div>
+                {{currentPlanValue | currency: 'BRL'}}
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-12 mt-2">
+
+            <button type="submit" class="btn-custom-confirm btn-block" (click)="onSubmit()"
+              [disabled]="isLoading || activeUsers == 0 || !isTime && !isRefund && !isAdvance">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
+              Continuar</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>

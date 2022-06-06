@@ -3,7 +3,7 @@
     <div class="div-center" *ngIf="isLoading || isLoadingProject || isLoadingTask">
       <app-spinner-loader></app-spinner-loader>
     </div>
-    <div *ngIf="!isLoading && !isLoadingProject && !isLoadingTask" class="modal-content">
+    <div *ngIf="!isLoading && !isLoadingProject && !isLoadingTask" class="modal-content glass">
       <div class="modal-header" style="align-self: center;">
         <h3 class="modal-title default-font modal-header-font">
           <fa-icon class="fa-1x" [icon]="faPencil"></fa-icon>

@@ -23,7 +23,7 @@ export class ChangePlanComponent implements OnInit {
 
   plan: Plan;
   user: User;
-  activeUsers: number;
+  activeUsers: number = 1;
   currentPlanValue: number
   currentPlanName: string
 
@@ -42,13 +42,11 @@ export class ChangePlanComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadPLan();
-
     this.loadActiveMembers();
 
   }
 
-  loadPLan() {
+  loadPlan() {
     this.isLoading = true;
     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(plan => {
 
@@ -57,6 +55,8 @@ export class ChangePlanComponent implements OnInit {
       this.isLoading = false;
 
       this.checkCurrentPlan(plan);
+
+      this.calcPricing(this.plan.plan)
 
     }, _err => {
       this.isLoading = false;
@@ -113,6 +113,9 @@ export class ChangePlanComponent implements OnInit {
       this.activeUsers = res.length;
       this.currentPlanValue = this.activeUsers * 12;
       this.isLoading = false;
+
+      this.loadPlan();
+
     }, _err => {
       this.isLoading = false;
     })
