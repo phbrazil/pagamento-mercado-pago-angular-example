@@ -119,17 +119,11 @@ export class LoginComponent implements OnInit {
     this.accountService.user.subscribe(x => {
 
       if (x) {
-
         this.settingsService.getSettings(x.idUser, this.accountService.getToken()).subscribe(res => {
           this.settings = res;
           this.isLoading = false;
-
-          if (this.settings == null) {
-            this.newSettings(x);
-          } else {
-            this.settingsService.setSettings(this.settings);
-          }
         }, _err => {
+
           this.isLoading = false;
         })
 
@@ -137,39 +131,6 @@ export class LoginComponent implements OnInit {
 
     });
 
-  }
-
-  newSettings(user: User) {
-
-    this.isLoading = true;
-
-    let settings = {
-
-      idUser: user.idUser,
-
-      advanceAlertDays: 30,
-      advanceRequestApproval: false,
-      emailsAdvanceNotify: [user.email],
-      maxOpenAdvance: 2,
-
-      maxOpenRefund: 2,
-      refundRequestApproval: false,
-      emailsRefundNotify: [user.email],
-
-      timeAlertDays: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'],
-      timeRequestApproval: false,
-
-      defaultColor: 'nav-green'
-
-    } as Settings;
-
-
-
-    this.settingsService.newSettings(settings, this.accountService.getToken()).subscribe(_res => {
-      this.isLoading = false;
-    }, _err => {
-      this.isLoading = false;
-    })
   }
 
 }

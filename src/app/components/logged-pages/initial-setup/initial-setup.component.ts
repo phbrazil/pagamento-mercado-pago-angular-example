@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { Settings } from 'src/app/_models/settings';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
@@ -108,7 +109,7 @@ export class InitialSetupComponent implements OnInit {
           this.accountService.setUser(this.user);
           localStorage.setItem('user', JSON.stringify(this.user));
 
-          this.completed = true;
+          this.newSettings();
 
         }, _err => {
           this.alertService.error(Constants.errorTittle, Constants.errorTittle);
@@ -127,8 +128,47 @@ export class InitialSetupComponent implements OnInit {
 
   }
 
+  newSettings() {
+
+    this.isLoading = true;
+
+    let settings = {
+
+      idUser: this.user.idUser,
+
+      advanceAlertDays: 30,
+      advanceRequestApproval: false,
+      emailsAdvanceNotify: [this.user.email],
+      maxOpenAdvance: 2,
+
+      maxOpenRefund: 2,
+      refundRequestApproval: false,
+      emailsRefundNotify: [this.user.email],
+
+      timeAlertDays: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'],
+      timeRequestApproval: false,
+
+      defaultColor: 'nav-green'
+
+    } as Settings;
+
+    this.settingsService.newSettings(settings, this.accountService.getToken()).subscribe(_res => {
+      this.isLoading = false;
+      this.completed = true;
+      this.router.navigate(['/time']);
+
+    }, _err => {
+
+      this.alertService.error('Ocorreu um erro', 'Tente novamente mais tarde');
+      this.isLoading = false;
+    })
+
+  }
+
   start(){
+
     this.router.navigate(['/time']);
+
   }
 
 }

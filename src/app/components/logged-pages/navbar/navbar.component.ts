@@ -23,8 +23,6 @@ export class NavbarComponent implements OnInit {
   faUser = faUser;
   faBars = faBars;
 
-  navColor: string = 'nav-green';
-
   name: string = '';
 
   settings: Settings;
@@ -62,6 +60,12 @@ export class NavbarComponent implements OnInit {
 
     this.settingsService.settings.subscribe(settings =>{
       this.settings = settings;
+      if(this.settings == null){
+        this.settings = {defaultColor: 'nav-green'} as Settings;
+      }
+    }, _err =>{
+     this.settings = {defaultColor: 'nav-green'} as Settings;
+      console.log(_err);
     })
 
   }
