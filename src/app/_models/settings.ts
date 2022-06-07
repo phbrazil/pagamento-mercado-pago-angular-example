@@ -14,4 +14,5 @@ export class Settings {
   timeAlertDays: string[]
   user: User
   defaultColor: string;
+  profileImage: string;
 }

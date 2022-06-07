@@ -16,6 +16,10 @@ export class ProfileComponent implements OnInit {
   isLoading: boolean = false;
   user: User;
   userForm: FormGroup;
+  profileImage: string;
+  fileType: string = 'png';
+  base64: string = "data:image/"+this.fileType+";base64,";
+
 
   constructor(private accountService: AccountService, private fb: FormBuilder, private alertService: AlertService) {
 
@@ -94,6 +98,25 @@ export class ProfileComponent implements OnInit {
         this.alertService.error(Constants.errorTittle, Constants.errorMessage, { autoClose: true });
       });
     }
+  }
+
+  handleUpload(event: any) {
+    const file = event.target.files[0];
+    console.log(file)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+
+      this.profileImage = String(reader.result);
+      console.log(reader.result);
+    };
+  }
+
+  savePhoto(){
+
+    this.profileImage = this.profileImage.replace("data:image/png;base64,", "");
+
+    console.log(this.profileImage)
   }
 
 }

@@ -44,4 +44,12 @@ export class Constants {
   //SUBSCRIBE TEST
   //public static preapproval_plan_id = '2c93808480fe342801811ba10c340c37';
 
+  //PAYMENT
+  public static payment_approved = 'Pagamento aprovado!';
+  public static enjoy = 'Aproveite nossa ferramenta';
+
+  public static payment_rejected = 'Pagamento rejeitado';
+  public static check_card  = 'Verifique os dados do cartão e tente novamente';
+
+
 }

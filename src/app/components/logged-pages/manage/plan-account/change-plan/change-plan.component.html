@@ -118,11 +118,10 @@
         </div>
       </div>
       <div class='line'></div>
-      <table class='order-table'>
+      <table class='order-table' [ngClass]="{'bg-light' : plan?.enableTime, 'bg-grey' : !plan?.enableTime }">
         <tbody>
           <tr>
-            <td><img [ngClass]="{'bg-light' : plan?.enableTime, 'bg-grey' : !plan?.enableTime }" alt="timesheet"
-                src='assets/img/plan/time.png' class='full-width'>
+            <td><img alt="timesheet" alt="timesheet" src='assets/img/plan/time.png' class='full-width'>
             </td>
             <td>
               <br> <span class='thin'>Timesheet</span>

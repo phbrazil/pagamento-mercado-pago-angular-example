@@ -4,7 +4,7 @@
       <button title="{{tooltipMessage}}" #tooltip="matTooltip" matTooltip="Info about the action" [matTooltipPosition]="position.value"
         matTooltipHideDelay="100000"
         aria-label="Button that displays a tooltip that hides when scrolled out of the container"
-        [disabled]="user.trial && members.length == 10 || plan.plan == 'Pro' && members.length == 20" type="button"
+        [disabled]="user?.trial && members?.length == 10 || plan?.plan == 'Pro' && members?.length == 20" type="button"
         class="btn-sm btn-custom-confirm zoom" (click)="newMember()">
         <fa-icon class="fa" [icon]="faPlus"></fa-icon> Novo Membro
       </button>

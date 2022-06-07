@@ -155,6 +155,8 @@ export class NewCardComponent implements OnInit {
 
   unmountForm() {
 
+    console.log(this.cardForm)
+
     if (this.cardForm != '') {
       this.cardForm.unmount();
     }
@@ -267,7 +269,7 @@ export class NewCardComponent implements OnInit {
               "Content-Type": "application/json; charset=utf-8",
               "Authorization": "Bearer " + this.accountService.getToken(),
               "Accept": "application/json",
-              "Access-Control-Allow-Origin": "https://www.getopportunity.com.br"
+              "Access-Control-Allow-Origin": "https://www.getopportunity.com.br/*"
             },
             body: JSON.stringify({
               token,
@@ -300,19 +302,19 @@ export class NewCardComponent implements OnInit {
                 this.close();
                 this.router.navigate(['/manage']);
 
-                this.alertService.success('Pagamento aprovado!', 'Aproveite nossa ferramenta', { autoClose: true, keepAfterRouteChange: true });
+                this.alertService.success(Constants.payment_approved, Constants.enjoy, { autoClose: true, keepAfterRouteChange: true });
 
               } else if (data.status == 'pending') {
                 this.isLoading = false;
                 this.unmountForm();
                 this.clearForm();
-                this.alertService.error('Pagamento rejeitado', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
+                this.alertService.error(Constants.payment_rejected, Constants.check_card, { autoClose: true, keepAfterRouteChange: true });
 
               } else {
                 this.isLoading = false;
                 this.unmountForm();
                 this.clearForm();
-                this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
+                this.alertService.error(Constants.errorTittle, Constants.check_card, { autoClose: true, keepAfterRouteChange: true });
 
               }
 
@@ -323,7 +325,7 @@ export class NewCardComponent implements OnInit {
               this.isLoading = false;
               this.unmountForm();
               this.clearForm();
-              this.alertService.error('Ocorreu um erro', 'Verifique os dados do cartão e tente novamente', { autoClose: true, keepAfterRouteChange: true });
+              this.alertService.error(Constants.errorTittle, Constants.check_card, { autoClose: true, keepAfterRouteChange: true });
 
             });
         },
