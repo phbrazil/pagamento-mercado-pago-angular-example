@@ -5,7 +5,12 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 html, body {
-  overflow-x: hidden;
+  overflow-x: scroll;
+  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 115px;
+  clear: both;
 }
 
 :root {

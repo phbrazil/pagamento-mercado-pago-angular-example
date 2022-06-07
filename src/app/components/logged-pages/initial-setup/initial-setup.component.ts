@@ -155,7 +155,6 @@ export class InitialSetupComponent implements OnInit {
     this.settingsService.newSettings(settings, this.accountService.getToken()).subscribe(_res => {
       this.isLoading = false;
       this.completed = true;
-      this.router.navigate(['/time']);
 
     }, _err => {
 
