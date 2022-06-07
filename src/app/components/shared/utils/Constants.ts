@@ -5,7 +5,8 @@ export class Constants {
 
   //BASE URL
 
-  public static baseUrl = 'https://opportunity-back-end.herokuapp.com';
+  //public static baseUrl = 'https://opportunity-back-end.herokuapp.com';
+  public static baseUrl = 'https://opportunity-back-end-gcp.herokuapp.com';
   //public static baseUrl = 'http://localhost:8080';
 
   public static email = 'paulo.henriqueb@me.com';
