@@ -28,6 +28,7 @@ export class ChangePlanComponent implements OnInit {
   currentPlanName: string
 
   isLoading: boolean = false;
+  isModalCard: boolean = false;
 
   isRefund: boolean = false;
   isAdvance: boolean = false;
@@ -52,11 +53,11 @@ export class ChangePlanComponent implements OnInit {
 
       this.plan = plan;
 
-      this.isLoading = false;
-
       this.checkCurrentPlan(plan);
 
       this.calcPricing(this.plan.plan)
+
+      this.isLoading = false;
 
     }, _err => {
       this.isLoading = false;
@@ -112,9 +113,10 @@ export class ChangePlanComponent implements OnInit {
     this.teamService.getTeamMembers(this.user.idUser, this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.activeUsers = res.length;
       this.currentPlanValue = this.activeUsers * 12;
-      this.isLoading = false;
 
       this.loadPlan();
+
+      this.isLoading = false;
 
     }, _err => {
       this.isLoading = false;
@@ -189,8 +191,6 @@ export class ChangePlanComponent implements OnInit {
 
   onSubmit() {
 
-    console.log('verificar loop aqui')
-
     this.isLoading = true;
 
     this.plan.idUser = this.user.idUser;
@@ -216,6 +216,9 @@ export class ChangePlanComponent implements OnInit {
   }
 
   newCard() {
+
+    this.isModalCard = true;
+
     this.dialog.open(NewCardComponent,
       {
         disableClose: true,

@@ -102,10 +102,10 @@
 
 </div-->
 
-<div *ngIf="!isLoading" class='window col-md-12 glass'>
+<div *ngIf="!isLoading && !isModalCard" class='window col-md-12 glass'>
   <div class='order-info'>
     <div class='order-info-content'>
-      <div class="row mt-4">
+      <!--div class="row mt-4">
         <div class="col-md-6">
           <input type="button" (click)="selectPro()"
             [ngClass]="{'bg-light' : plan?.plan =='Pro', 'bg-grey' : plan?.plan != 'Pro'}"
@@ -116,69 +116,97 @@
             [ngClass]="{'bg-light' : plan?.plan == 'Corp', 'bg-grey' : plan?.plan != 'Corp'}"
             class="btn-block btn-sm btn-custom-success" value="Plano Corp">
         </div>
+      </div-->
+      <div class="payment__types mt-4 mb-2">
+        <table class="payment__type payment__type--paypal"
+          [ngClass]="{'active' : plan?.plan =='Pro', '' : plan?.plan != 'Pro'}" (click)="selectPro()">
+          <tbody>
+            <tr>
+              <td>
+                <br> <span class='thin'>Plano Pro</span>
+                <br> <span class='thin small'> Até 20 usuários<br><br></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="payment__type payment__type--paypal"
+          [ngClass]="{'active' : plan?.plan =='Corp', '' : plan?.plan != 'Corp'}" (click)="selectCorp()">
+          <tbody>
+            <tr>
+              <td>
+                <br> <span class='thin'>Plano Corp</span>
+                <br> <span class='thin small'> Usuários ilimitados<br><br></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--div class="payment__type payment__type--paypal">
+          <i class="icon icon-wallet"></i>SEPA</div>
+        <div class="payment__type payment__type--paypal">
+          <i class="icon icon-note"></i>Invoice</div-->
       </div>
-      <div class='line'></div>
-      <table class='order-table' [ngClass]="{'bg-light' : plan?.enableTime, 'bg-grey' : !plan?.enableTime }">
-        <tbody>
-          <tr>
-            <td><img alt="timesheet" alt="timesheet" src='assets/img/plan/time.png' class='full-width'>
-            </td>
-            <td>
-              <br> <span class='thin'>Timesheet</span>
-              <br> <span class='thin small'> Tenha em mãos as atividades do seu time<br><br></span>
-            </td>
-
-          </tr>
-          <tr>
-            <td>
-              <div class='price'>Produto padrão</div>
-            </td>
-          </tr>
-        </tbody>
-
-      </table>
-      <div class='line'></div>
-      <table class='order-table' [ngClass]="{'bg-light' : plan?.enableAdvance, 'bg-grey' : !plan?.enableAdvance }"
-        (click)="checkIsAdvance()">
-        <tbody>
-          <tr>
-            <td><img alt="adiantamento" src='assets/img/plan/advance.png' class='full-width'>
-            </td>
-            <td>
-              <br> <span class='thin'>Adiantamento</span>
-              <br> <span class='thin small'> Chega de solicitar adiantamentos por email</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class='price'>Clique para {{!plan.enableAdvance? 'Adicionar': 'Remover'}}</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class='line'></div>
-      <table class='order-table' [ngClass]="{'bg-light' : plan?.enableRefund, 'bg-grey' : !plan?.enableRefund }"
-        (click)="checkIsRefund()">
-        <tbody>
-          <tr>
-            <td><img alt="refund" src='assets/img/plan/refund.png' class='full-width'>
-            </td>
-            <td>
-              <br> <span class='thin'>Reembolso</span><br>
-              <span class='thin small'> Não fique preocupado se vai receber aquele valor gasto</span>
-            </td>
-
-          </tr>
-          <tr>
-            <td>
-              <div class='price'>Clique para {{!plan.enableRefund? 'Adicionar': 'Remover'}}</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class='line'></div>
-
+      <div class='payment__types mt-2'>
+        <table class='payment__type payment__type--paypal table'
+          [ngClass]="{'active' : plan?.enableTime, '' : !plan?.enableTime }">
+          <tbody>
+            <tr>
+              <th><img alt="timesheet" alt="timesheet" src='assets/img/plan/time.png' class='full-width'>
+              </th>
+              <td>
+                <h4 class='thin'>Timesheet</h4>
+              </td>
+              <td>
+                <span class='thin small'>Tenha em mãos as atividades do seu time</span>
+              </td>
+              <td>
+                <span class='thin small text-primary'><strong>Produto padrão</strong></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class='payment__types'>
+        <table class='payment__type payment__type--paypal table'
+          [ngClass]="{'active' : plan?.enableAdvance, '' : !plan?.enableAdvance }" (click)="checkIsAdvance()">
+          <tbody>
+            <tr>
+              <th><img alt="adiantamento" src='assets/img/plan/advance.png' class='full-width'>
+              </th>
+              <td>
+                <h4 class='thin'>Adiantamento</h4>
+              </td>
+              <td>
+                <span class='thin small'>Chega de solicitar adiantamentos por email</span>
+              </td>
+              <td>
+                <span class='thin small text-primary'><strong>Clique para {{!plan.enableAdvance? 'adicionar':
+                    'remover'}}</strong></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class='payment__types'>
+        <table class='payment__type payment__type--paypal table' s
+          [ngClass]="{'active' : plan?.enableRefund, '' : !plan?.enableRefund }" (click)="checkIsRefund()">
+          <tbody>
+            <tr>
+              <th><img alt="refund" src='assets/img/plan/refund.png' class='full-width'>
+              </th>
+              <td>
+                <h4 class='thin'>Reembolso</h4>
+              </td>
+              <td>
+                <span class='thin small'>Não fique preocupado se vai receber aquele valor gasto</span>
+              </td>
+              <td>
+                <span class='thin small text-primary'><strong>Clique para {{!plan.enableRefund? 'adicionar':
+                    'remover'}}</strong></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="col-md-12 margin-top">
         <div class="row">
           <div class="col-md-7">
