@@ -10,4 +10,5 @@ export class Card {
   name: string
   token: string
   payment_method_id: string
+  idSub: string
 }

@@ -115,4 +115,19 @@ export class PlanAccountComponent implements OnInit {
 
   }
 
+  cancelSubscribe(){
+
+    this.isLoading = true;
+
+    this.cardService.cancelSubscribe(this.user.idUser, this.card.idSub, this.accountService.getToken()).subscribe(res=>{
+
+      console.log(res);
+
+      this.isLoading = false;
+    }, _err=>{
+      console.log(_err);
+      this.isLoading = false;
+    })
+  }
+
 }
