@@ -42,17 +42,17 @@ export class DeleteCardComponent implements OnInit {
       this.alertService.success('Cartão removido', '', { autoClose: true, keepAfterRouteChange: true });
 
       this.isLoading = false;
-      this.cardService.setIsReload(true);
+      //this.cardService.setIsReload(true);
 
       this.close();
-
-      this.router.navigate(['/manage']);
 
       //set trial locally
       this.user.trial = true;
 
       this.accountService.setUser(this.user);
       localStorage.setItem('user', JSON.stringify(this.user));
+
+      this.router.navigate(['/manage']);
 
     }, _err => {
       this.isLoading = false;
