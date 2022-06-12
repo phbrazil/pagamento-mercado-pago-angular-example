@@ -116,7 +116,7 @@ export class ChangePlanComponent implements OnInit {
 
       this.loadPlan();
 
-      this.isLoading = false;
+      //this.isLoading = false;
 
     }, _err => {
       this.isLoading = false;

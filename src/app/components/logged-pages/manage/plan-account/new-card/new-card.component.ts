@@ -298,7 +298,6 @@ export class NewCardComponent implements OnInit {
                 this.accountService.setUser(this.user);
                 localStorage.setItem('user', JSON.stringify(this.user));
 
-                this.unmountForm();
                 this.close();
                 this.router.navigate(['/manage']);
 
