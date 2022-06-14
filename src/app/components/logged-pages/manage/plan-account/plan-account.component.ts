@@ -24,8 +24,6 @@ export class PlanAccountComponent implements OnInit {
   currentPlanValue: number = 0;
   brand: string = 'visa'
   isLoading: boolean = false;
-  isLoadingCard: boolean = false;
-  isLoadingPlan: boolean = false;
   isPlanSelected: boolean = false;
   plan: Plan;
   card: Card;
@@ -44,15 +42,15 @@ export class PlanAccountComponent implements OnInit {
       console.log(res);
       if(res){
         this.loadActiveMembers();
-        this.loadPlan();
-        this.loadCard();
+        //this.loadPlan();
+        //this.loadCard();
       }
     })
 
     if (this.user.admin) {
       this.loadActiveMembers();
-      this.loadPlan();
-      this.loadCard();
+      //this.loadPlan();
+      //this.loadCard();
 
     }
 
@@ -65,8 +63,7 @@ export class PlanAccountComponent implements OnInit {
 
     this.teamService.getTeamMembers(this.user.idUser, this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.activeUsers = res.length;
-      this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
-      this.isLoading = false;
+      this.loadPlan();
     }, _err => {
       this.isLoading = false;
     })
@@ -80,25 +77,23 @@ export class PlanAccountComponent implements OnInit {
 
   loadPlan() {
 
-    this.isLoadingPlan = true;
-
     this.planService.getPlan(this.user.idUser, this.accountService.getToken()).subscribe(res => {
       this.plan = res;
-      this.isLoadingPlan = false;
+      this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
+      this.loadCard();
     }, _err => {
-      this.isLoadingPlan = false;
+      this.isLoading = false;
     })
 
   }
 
 
   loadCard() {
-    this.isLoadingCard = true;
     this.cardService.getCard(this.user.idUser, this.accountService.getToken()).subscribe(res => {
       this.card = res;
-      this.isLoadingCard = false;
+      this.isLoading = false;
     }, _err => {
-      this.isLoadingCard = false;
+      this.isLoading = false;
     })
 
   }
@@ -123,6 +118,16 @@ export class PlanAccountComponent implements OnInit {
         }
       })
 
+  }
+
+  reactiveSubscribe(){
+
+    this.isLoading = true;
+
+  }
+
+  choosePlan(){
+    this.dialog.open(ChangePlanComponent);
   }
 
 }

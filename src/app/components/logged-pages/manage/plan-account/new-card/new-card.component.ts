@@ -170,7 +170,7 @@ export class NewCardComponent implements OnInit {
 
     this.matDialog.closeAll();
 
-    this.router.navigate(['/'])
+    this.router.navigate(['/manage'])
 
 
   }

@@ -45,12 +45,9 @@ export class ChangePlanComponent implements OnInit {
     private dialog: MatDialog, private teamService: TeamService,
     private cardService: CardService,
     @Inject(LOCALE_ID) private locale: string,
-    private alertService: AlertService,
-    private router: Router) {
+    private alertService: AlertService) {
 
     this.accountService.user.subscribe(x => this.user = x);
-
-    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
   }
 
@@ -144,8 +141,6 @@ export class ChangePlanComponent implements OnInit {
 
       this.loadPlan();
 
-      //this.isLoading = false;
-
     }, _err => {
       this.isLoading = false;
     })
@@ -235,9 +230,6 @@ export class ChangePlanComponent implements OnInit {
 
     this.planService.changePlan(this.plan, this.plan.idPlan, this.accountService.getToken()).subscribe(res => {
 
-      this.planService.setPlan(res);
-      this.planService.setIsReload(true);
-
       this.isLoading = false;
 
       this.close();
@@ -246,7 +238,8 @@ export class ChangePlanComponent implements OnInit {
 
       this.alertService.success('Assinatura Atualizada', 'O valor de sua mensalidade será de ' + newPrice,  { autoClose: true, keepAfterRouteChange: true });
 
-      //this.router.navigate(['/manage'])
+      this.planService.setPlan(res);
+      this.planService.setIsReload(true);
 
     }, err => {
 

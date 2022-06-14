@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Constants } from 'src/app/components/shared/utils/Constants';
+import { Settings } from 'src/app/_models/settings';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertService } from 'src/app/_services/alert.service';
+import { SettingsService } from 'src/app/_services/settings.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,10 +20,13 @@ export class ProfileComponent implements OnInit {
   userForm: FormGroup;
   profileImage: string;
   fileType: string = 'png';
-  base64: string = "data:image/"+this.fileType+";base64,";
+  base64: string = "data:image/" + this.fileType + ";base64,";
+
+  settings: Settings;
 
 
-  constructor(private accountService: AccountService, private fb: FormBuilder, private alertService: AlertService) {
+  constructor(private accountService: AccountService, private fb: FormBuilder, private alertService: AlertService,
+    private settingsService: SettingsService) {
 
     this.accountService.user.subscribe(x => this.user = x);
 
@@ -36,6 +41,19 @@ export class ProfileComponent implements OnInit {
     else {
       this.formUser(this.formUserEmpty());
     }
+
+    this.loadSettings();
+
+  }
+
+  loadSettings() {
+    this.isLoading = true;
+    this.settingsService.getSettings(this.user.idUser, this.accountService.getToken()).subscribe(res => {
+      this.settings = res;
+      this.isLoading = false;
+    }, _err => {
+      this.isLoading = false;
+    })
   }
 
   formUser(user: User): void {
@@ -108,15 +126,28 @@ export class ProfileComponent implements OnInit {
     reader.onload = () => {
 
       this.profileImage = String(reader.result);
+      this.profileImage = this.profileImage.replace("data:image/png;base64,", "");
+      this.settings.profileImage = this.profileImage;
+
       console.log(reader.result);
     };
   }
 
-  savePhoto(){
 
-    this.profileImage = this.profileImage.replace("data:image/png;base64,", "");
+  savePhoto() {
 
-    console.log(this.profileImage)
+    this.isLoading = true;
+
+
+    this.settingsService.editSettings(this.settings, this.accountService.getToken()).subscribe(res => {
+
+      this.isLoading = false;
+
+      this.alertService.success('Configurações alteradas', 'Suas configurações foram alteradas com sucesso');
+
+    }, _err => {
+      this.isLoading = false;
+    })
   }
 
 }

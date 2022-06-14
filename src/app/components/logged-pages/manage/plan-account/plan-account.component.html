@@ -1,7 +1,7 @@
 <div *ngIf="card; else noCard" class="col-md-12 mt-4">
   <div class="row">
     <div class="col-md-12">
-      <div *ngIf="!isLoading && !isLoadingCard && !isLoadingPlan" class="row">
+      <div *ngIf="!isLoading" class="row">
         <div class="col-md-5">
           <div class="card card--front">
             <div class="card__number">{{card.first_six_digits}} ** ** {{card.last_four_digits}}</div>
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!isLoading && !isLoadingCard && !isLoadingPlan" class="col-md-12 mt-4">
+    <div *ngIf="!isLoading" class="col-md-12 mt-4">
       <div class="col-md-4 mt-4">
         <input type="button" (click)="changePlan()" class="btn-custom-confirm" value="Alterar Plano" />
       </div>
@@ -25,17 +25,24 @@
         <input type="button" (click)="confirmDelete()" class="btn-custom-decline" value="Remover Cartão" />
       </div>
       <div class="col-md-4 mt-4">
-        <input type="button" (click)="confirmCancelSubscribe()" class="btn-custom-reject" value="Cancelar Assinatura" />
+        <button type="button" (click)="card.subId ? confirmCancelSubscribe() : reactiveSubscribe()" class="btn-custom-reject" >{{card.subId ? 'Cancelar Assinatura' : 'Reativar Assinatura'}}</button>
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="isLoading || isLoadingCard || isLoadingPlan">
+<div *ngIf="isLoading">
   <app-spinner-loader></app-spinner-loader>
 </div>
 
 <ng-template #noCard>
-  <app-change-plan></app-change-plan>
+
+  <div *ngIf="!isLoading" class="middle">
+
+    <input type="button" class="btn-custom-confirm zoom" value="Assine já" (click)="choosePlan()">
+
+  </div>
+
+  <!--app-change-plan></app-change-plan-->
 
 </ng-template>
