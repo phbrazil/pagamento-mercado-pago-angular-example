@@ -70,14 +70,14 @@ export class CardService {
     return this.http.post<boolean>(url, {}, header);
   }
 
-  cancelSubscribe(idUser: number, idSub: string, token: string) {
+  cancelSubscribe(idUser: number, subId: string, token: string) {
 
     var header = {
       headers: new HttpHeaders()
         .set('Authorization', `Bearer ${token}`)
     }
 
-    const url = `${this.baseUrl}/opportunity/payment/cancel_subscribe/${idSub}/${idUser}`
+    const url = `${this.baseUrl}/opportunity/payment/cancel_subscribe/${subId}/${idUser}`
 
     return this.http.post<any>(url, {}, header);
   }

@@ -2,19 +2,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Remover Cartão</h5>
+        <h5 class="modal-title">Cancelar Assinatura</h5>
         <button type="button" class="close" data-dismiss="modal" (click)="close()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Deseja realmente remover esse cartão?</p>
-        <small>Issó irá afetar o pagamento das próximas mensalidades</small>
+        <p>Deseja realmente cancelar sua assinatura?</p>
+        <small>Issó irá afetar o uso da ferramenta de todo seu time</small>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-custom-reject" [disabled]="isLoading" (click)="deleteCard()">
+        <button type="button" class="btn-custom-reject" [disabled]="isLoading" (click)="cancelSubscribe()">
           <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-          Remover</button>
+          Cancelar</button>
         <button type="button" class="btn-custom-decline" data-dismiss="modal" (click)="close()">Fechar</button>
       </div>
     </div>

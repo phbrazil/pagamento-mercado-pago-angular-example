@@ -1,13 +1,18 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Constants } from 'src/app/components/shared/utils/Constants';
+import { Card } from 'src/app/_models/payment/card';
 import { Plan } from 'src/app/_models/plan';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { CardService } from 'src/app/_services/card.service';
 import { PlanService } from 'src/app/_services/plan.service';
 import { TeamService } from 'src/app/_services/team.service';
 import { NewCardComponent } from '../new-card/new-card.component';
+import { formatCurrency, getCurrencySymbol } from '@angular/common';
+import { AlertService } from 'src/app/_services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-plan',
@@ -34,10 +39,18 @@ export class ChangePlanComponent implements OnInit {
   isAdvance: boolean = false;
   isTime: boolean = true;
 
+  card: Card;
+
   constructor(private planService: PlanService, private accountService: AccountService,
-    private dialog: MatDialog, private teamService: TeamService) {
+    private dialog: MatDialog, private teamService: TeamService,
+    private cardService: CardService,
+    @Inject(LOCALE_ID) private locale: string,
+    private alertService: AlertService,
+    private router: Router) {
 
     this.accountService.user.subscribe(x => this.user = x);
+
+    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
   }
 
@@ -55,13 +68,28 @@ export class ChangePlanComponent implements OnInit {
 
       this.checkCurrentPlan(plan);
 
-      this.calcPricing(this.plan.plan)
+      this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
+      this.loadCard();
+
+    }, _err => {
+      this.isLoading = false;
+    })
+  }
+
+  loadCard() {
+
+    this.isLoading = true;
+
+    this.cardService.getCard(this.user.idUser, this.accountService.getToken()).subscribe(res => {
+      this.card = res;
       this.isLoading = false;
 
     }, _err => {
       this.isLoading = false;
     })
+
+
   }
 
   close() {
@@ -74,7 +102,7 @@ export class ChangePlanComponent implements OnInit {
 
     this.plan.enableRefund = this.isRefund;
 
-    this.calcPricing(this.plan.plan);
+    this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
   }
 
   checkIsTime() {
@@ -84,7 +112,7 @@ export class ChangePlanComponent implements OnInit {
     this.plan.enableTime = this.isTime;
 
 
-    this.calcPricing(this.plan.plan);
+    this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
   }
 
@@ -94,7 +122,7 @@ export class ChangePlanComponent implements OnInit {
 
     this.plan.enableAdvance = this.isAdvance;
 
-    this.calcPricing(this.plan.plan);
+    this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
   }
 
@@ -123,27 +151,12 @@ export class ChangePlanComponent implements OnInit {
     })
   }
 
-  calcPricing(plan: string) {
-
-    let multiply = plan == 'Pro' ? Constants.multiplyPro : Constants.multiplyCorp;
-
-    this.isTime ? multiply = multiply + 5 : multiply = multiply - 0;
-    this.isAdvance ? multiply = multiply + 5 : multiply = multiply - 0;
-    this.isRefund ? multiply = multiply + 5 : multiply = multiply - 0;
-
-    if (this.isAdvance || this.isRefund || this.isTime) {
-      this.currentPlanValue = this.activeUsers * multiply;
-    } else {
-      this.currentPlanValue = 0;
-    }
-
-  }
 
   selectPro() {
 
     this.plan.plan = 'Pro';
 
-    this.calcPricing(this.plan.plan);
+   this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
   }
 
@@ -151,7 +164,7 @@ export class ChangePlanComponent implements OnInit {
 
     this.plan.plan = 'Corp';
 
-    this.calcPricing(this.plan.plan);
+    this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
   }
 
@@ -163,8 +176,7 @@ export class ChangePlanComponent implements OnInit {
 
     }
 
-    this.calcPricing(this.plan.plan);
-
+    this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
   }
 
@@ -176,8 +188,7 @@ export class ChangePlanComponent implements OnInit {
 
     }
 
-
-    this.calcPricing(this.plan.plan);
+    this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
   }
 
@@ -185,11 +196,13 @@ export class ChangePlanComponent implements OnInit {
 
     this.activeUsers = event.target.value;
 
-    this.calcPricing(this.plan.plan);
+    this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
 
   }
 
+  //adicionar novo plano
   onSubmit() {
+
 
     this.isLoading = true;
 
@@ -199,8 +212,6 @@ export class ChangePlanComponent implements OnInit {
 
       this.isLoading = false;
 
-      //this.planService.setIsReload(true);
-
       this.planService.setPlan(res);
 
       this.close();
@@ -208,6 +219,36 @@ export class ChangePlanComponent implements OnInit {
       this.newCard();
 
     }, _err => {
+
+      this.isLoading = false;
+
+    })
+
+  }
+
+  //atualizar valor da assinatura mensal
+  updateSubscribe() {
+
+    this.isLoading = true;
+
+    this.plan.idUser = this.user.idUser;
+
+    this.planService.changePlan(this.plan, this.plan.idPlan, this.accountService.getToken()).subscribe(res => {
+
+      this.planService.setPlan(res);
+      this.planService.setIsReload(true);
+
+      this.isLoading = false;
+
+      this.close();
+
+      let newPrice = formatCurrency(this.currentPlanValue, this.locale, getCurrencySymbol('BRL', 'wide'));
+
+      this.alertService.success('Assinatura Atualizada', 'O valor de sua mensalidade será de ' + newPrice,  { autoClose: true, keepAfterRouteChange: true });
+
+      //this.router.navigate(['/manage'])
+
+    }, err => {
 
       this.isLoading = false;
 

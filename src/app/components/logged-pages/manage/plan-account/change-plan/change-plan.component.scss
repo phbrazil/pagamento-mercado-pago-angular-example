@@ -1,4 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+.modal-position {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000!important;
+}
+
 body,html {
   height:100%;
   margin:0;

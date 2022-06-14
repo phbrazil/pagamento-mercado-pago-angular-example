@@ -170,19 +170,13 @@ export class NewCardComponent implements OnInit {
 
     this.matDialog.closeAll();
 
-    this.router.navigate(['/manage'])
+    this.router.navigate(['/'])
 
 
   }
 
   clearForm() {
     this.newCardForm.reset();
-  }
-
-  test() {
-    console.log(this.cardForm.getCardFormData());
-    console.log(this.newCardForm.value);
-
   }
 
   loadForm() {

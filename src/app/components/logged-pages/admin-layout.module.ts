@@ -47,6 +47,7 @@ import { ReceiptAdvanceComponent } from './advance/accountability/receipt-advanc
 import { InitialSetupComponent } from './initial-setup/initial-setup.component';
 import { ExpiredComponent } from './manage/plan-account/expired/expired.component';
 import { DeleteCardComponent } from './manage/plan-account/new-card/delete-card/delete-card.component';
+import { ConfirmCancelSubscribeComponent } from './manage/plan-account/confirm-cancel-subscribe/confirm-cancel-subscribe.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { DeleteCardComponent } from './manage/plan-account/new-card/delete-card/
     ReceiptAdvanceComponent,
     InitialSetupComponent,
     ExpiredComponent,
-    DeleteCardComponent
+    DeleteCardComponent,
+    ConfirmCancelSubscribeComponent
   ],
   imports: [
     RouterModule,

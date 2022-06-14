@@ -101,4 +101,24 @@ export class PlanService {
 
   }
 
+  calcPricing(plan: Plan, activeUsers: number): number {
+
+    let currentPlanValue = 0;
+
+    let multiply = plan.plan == 'Pro' ? Constants.multiplyPro : Constants.multiplyCorp;
+
+    plan.enableTime ? multiply = multiply + 5 : multiply = multiply - 0;
+    plan.enableAdvance ? multiply = multiply + 5 : multiply = multiply - 0;
+    plan.enableRefund ? multiply = multiply + 5 : multiply = multiply - 0;
+
+    if (plan.enableTime || plan.enableRefund || plan.enableAdvance) {
+      currentPlanValue = activeUsers * multiply;
+    } else {
+      currentPlanValue = 0;
+    }
+
+    return currentPlanValue;
+
+  }
+
 }

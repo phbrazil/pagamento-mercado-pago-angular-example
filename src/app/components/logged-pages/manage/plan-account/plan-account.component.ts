@@ -8,6 +8,7 @@ import { CardService } from 'src/app/_services/card.service';
 import { PlanService } from 'src/app/_services/plan.service';
 import { TeamService } from 'src/app/_services/team.service';
 import { ChangePlanComponent } from './change-plan/change-plan.component';
+import { ConfirmCancelSubscribeComponent } from './confirm-cancel-subscribe/confirm-cancel-subscribe.component';
 import { DeleteCardComponent } from './new-card/delete-card/delete-card.component';
 
 @Component({
@@ -39,16 +40,14 @@ export class PlanAccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /*this.planService.getIsReload().subscribe(status => {
-
-      if (status != null && status) {
-        if (this.user.admin) {
-          this.loadActiveMembers();
-          this.loadPlan();
-        }
+    this.planService.getIsReload().subscribe(res =>{
+      console.log(res);
+      if(res){
+        this.loadActiveMembers();
+        this.loadPlan();
+        this.loadCard();
       }
-    })*/
-
+    })
 
     if (this.user.admin) {
       this.loadActiveMembers();
@@ -66,7 +65,7 @@ export class PlanAccountComponent implements OnInit {
 
     this.teamService.getTeamMembers(this.user.idUser, this.user.idGroup, this.accountService.getToken()).subscribe(res => {
       this.activeUsers = res.length;
-      this.currentPlanValue = this.activeUsers * 12;
+      this.currentPlanValue = this.planService.calcPricing(this.plan, this.activeUsers);
       this.isLoading = false;
     }, _err => {
       this.isLoading = false;
@@ -115,19 +114,15 @@ export class PlanAccountComponent implements OnInit {
 
   }
 
-  cancelSubscribe(){
+  confirmCancelSubscribe() {
 
-    this.isLoading = true;
+    this.dialog.open(ConfirmCancelSubscribeComponent,
+      {
+        data: {
+          subId: this.card.subId
+        }
+      })
 
-    this.cardService.cancelSubscribe(this.user.idUser, this.card.subId, this.accountService.getToken()).subscribe(res=>{
-
-      console.log(res);
-
-      this.isLoading = false;
-    }, _err=>{
-      console.log(_err);
-      this.isLoading = false;
-    })
   }
 
 }

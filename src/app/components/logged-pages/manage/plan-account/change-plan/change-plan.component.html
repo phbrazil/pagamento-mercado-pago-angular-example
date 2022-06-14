@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading && !isModalCard" class='window col-md-12 glass'>
+<div *ngIf="!isLoading && !isModalCard" class='window col-md-12 glass modal-position'>
   <div class='order-info'>
     <div class='order-info-content'>
       <div class="payment__types mt-4 mb-2">
@@ -126,10 +126,10 @@
 
           <div class="col-md-12 mt-2">
 
-            <button type="submit" class="btn-custom-confirm btn-block" (click)="onSubmit()"
+            <button type="submit" class="btn-custom-confirm btn-block" (click)="!card ? onSubmit() : updateSubscribe()"
               [disabled]="isLoading || activeUsers == 0 || !isTime && !isRefund && !isAdvance">
               <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
-              Continuar</button>
+              {{!card ? 'Continuar': 'Atualizar Assinatura' }}</button>
           </div>
         </div>
 
