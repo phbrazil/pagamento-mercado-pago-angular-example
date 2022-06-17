@@ -1,9 +1,8 @@
-import { Component, Inject, LOCALE_ID, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 declare var MercadoPago: any;
-import { faAngleRight, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -25,13 +24,7 @@ export class NewCardComponent implements OnInit {
   amount: number = 0;
   amountPipeString: string;
 
-  activeUsers: number = 0;
-
   emailCliente: string = 'jose@gmail.com';
-
-
-
-  //emailTest: string = 'test_user_898709461234@testuser.com';
 
   installments: string = '';
   identificationType: string = '';
@@ -47,9 +40,7 @@ export class NewCardComponent implements OnInit {
   baseUrl: string = 'www.base.com';
 
   constructor(private matDialog: MatDialog,
-    private router: Router, private fb: FormBuilder,
-
-    @Inject(LOCALE_ID) private locale: string) {
+    private router: Router, private fb: FormBuilder) {
 
   }
 
