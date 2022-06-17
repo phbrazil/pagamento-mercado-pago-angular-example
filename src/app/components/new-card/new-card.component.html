@@ -8,21 +8,18 @@
         <div id="page">
           <div id="main">
             <div class="product-container">
-              <h2>Plano {{plan.plan}}
+              <h2>Carrinho
               </h2>
               <span class="products">
-                <fa-icon [ngClass]="{'check' : plan.enableTime, 'uncheck' : !plan.enableTime}" class="fa"
-                  [icon]="plan.enableTime ?  faCheck : faX"></fa-icon> Timesheet
+                Produto 1
               </span>
               <span class="products">
-                <fa-icon [ngClass]="{'check' : plan.enableAdvance, 'uncheck' : !plan.enableAdvance}" class="fa"
-                  [icon]="plan.enableAdvance ?  faCheck : faX"></fa-icon> Adiantamentos
+                Produto 2
               </span>
               <span class="products">
-                <fa-icon [ngClass]="{'check' : plan.enableRefund, 'uncheck' : !plan.enableRefund}" class="fa"
-                  [icon]="plan.enableRefund ?  faCheck : faX"></fa-icon> Reembolsos
+                Produto 3
               </span>
-              <small class="users">{{activeUsers}} usuários ativos</small>
+              <small class="users">mais detalhes</small>
             </div>
             <div class="new-card">
               <div class="chip">
@@ -37,14 +34,14 @@
               </div>
               <form id="form-checkout" class="form-new-card" [formGroup]="newCardForm" name="pay" (submit)="submit()">
                 <label for="number">Número do cartão
-                  <input (keyup)="checkSelects()" formControlName="checkout__cardNumber" mask="0000 0000 0000 0000"
+                  <input  formControlName="checkout__cardNumber" mask="0000 0000 0000 0000"
                     maxlength="19" type="text" id="form-checkout__cardNumber">
                 </label>
                 <label for="name">Nome
                   <input formControlName="checkout__cardholderName" type="text" id="form-checkout__cardholderName">
                 </label>
                 <label for="date">Válido até
-                  <input (keyup)="checkSelects()" formControlName="checkout__expirationDate" mask="00/0000" max="7"
+                  <input  formControlName="checkout__expirationDate" mask="00/0000" max="7"
                     type="text" id="form-checkout__expirationDate">
                 </label>
                 <label for="identification">CPF/CNPJ
@@ -53,11 +50,11 @@
                     type="text" id="form-checkout__identificationNumberFormatted" placeholder="Documento do titular">
                 </label>
                 <label for="cvc">cvv
-                  <input (keyup)="checkSelects()" formControlName="checkout__securityCode" mask="000" max="3"
+                  <input formControlName="checkout__securityCode" mask="000" max="3"
                     id="form-checkout__securityCode" type="text">
                 </label>
                 <input formControlName="checkout__cardholderEmail" type="hidden" id='form-checkout__cardholderEmail'
-                  value='{{user.email}}' />
+                  value='emailCliente' />
 
                 <select hidden formControlName="checkout__installments" id="form-checkout__installments"></select>
 
@@ -76,7 +73,6 @@
                 <button [disabled]="isLoading || !newCardForm.valid || !allowSave" id="form-checkout__submit">
                   <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-1"></span>
                   Pagar
-                  <fa-icon class="fa fa-angle-right" [icon]="faAngleRight"></fa-icon>
                 </button>
                 <label for="remember">Salvar minhas informações para uso posterior
                   <input type="checkbox" (click)="allowSaveCard($event)" id="remember">

@@ -2,14 +2,8 @@ import { Component, Inject, LOCALE_ID, OnInit, ViewEncapsulation } from '@angula
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Constants } from 'src/app/components/shared/utils/Constants';
-import { User } from 'src/app/_models/user';
-import { AccountService } from 'src/app/_services/account.service';
-import { AlertService } from 'src/app/_services/alert.service';
 declare var MercadoPago: any;
-import { formatCurrency, getCurrencySymbol } from '@angular/common';
 import { faAngleRight, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
-import { Plan } from 'src/app/_models/plan';
 
 
 @Component({
@@ -26,9 +20,6 @@ import { Plan } from 'src/app/_models/plan';
 
 export class NewCardComponent implements OnInit {
 
-
-  user: User;
-
   isLoading: boolean = false;
 
   amount: number = 0;
@@ -36,12 +27,7 @@ export class NewCardComponent implements OnInit {
 
   activeUsers: number = 0;
 
-  faAngleRight = faAngleRight;
-
-  plan: Plan;
-
-  faCheck = faCheck;
-  faX = faX;
+  emailCliente: string = 'jose@gmail.com';
 
 
 
@@ -55,17 +41,15 @@ export class NewCardComponent implements OnInit {
   identificationNumber: string = '';
   newCardForm: FormGroup;
 
-  mp: any = new MercadoPago(Constants.public_key);
+  mp: any = new MercadoPago('PUBLIC_KEY');
   cardForm: any = '';
 
-  constructor(private accountService: AccountService, private matDialog: MatDialog,
-    private router: Router, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
-    private alertService: AlertService,
+  baseUrl: string = 'www.base.com';
+
+  constructor(private matDialog: MatDialog,
+    private router: Router, private fb: FormBuilder,
+
     @Inject(LOCALE_ID) private locale: string) {
-
-    this.accountService.user.subscribe(x => this.user = x);
-
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
   }
 
@@ -82,15 +66,8 @@ export class NewCardComponent implements OnInit {
         checkout__identificationType: ['', Validators.required],
         checkout__identificationNumber: [this.identificationNumber, Validators.required],
         checkout__installments: ['', Validators.required],
-        checkout__cardholderEmail: [this.user.email, Validators.required],
+        checkout__cardholderEmail: ['', Validators.required],
       });
-
-
-    this.amount = this.data.currentPlanValue;
-    this.activeUsers = this.data.activeUsers;
-    this.plan = this.data.plan;
-
-    this.amountPipeString = formatCurrency(this.amount, this.locale, getCurrencySymbol('BRL', 'wide'));
 
     this.loadForm();
 
@@ -102,20 +79,6 @@ export class NewCardComponent implements OnInit {
 
   }
 
-  checkSelects() {
-
-    this.installments = (<HTMLSelectElement>document.getElementById('form-checkout__installments')).value;
-    this.identificationType = (<HTMLSelectElement>document.getElementById('form-checkout__identificationType')).value;
-    this.issuer = (<HTMLSelectElement>document.getElementById('form-checkout__issuer')).value;
-
-    this.newCardForm.patchValue({
-      checkout__installments: this.installments,
-      checkout__identificationType: this.identificationType,
-      checkout__issuer: this.issuer,
-    })
-
-
-  }
 
   setIdentificationNumber(document: any) {
 
@@ -155,8 +118,6 @@ export class NewCardComponent implements OnInit {
 
   unmountForm() {
 
-    console.log(this.cardForm)
-
     if (this.cardForm != '') {
       this.cardForm.unmount();
     }
@@ -170,7 +131,7 @@ export class NewCardComponent implements OnInit {
 
     this.matDialog.closeAll();
 
-    this.router.navigate(['/manage'])
+    this.router.navigate(['/home'])
 
 
   }
@@ -253,17 +214,14 @@ export class NewCardComponent implements OnInit {
           console.log(identificationNumberFormat);
 
 
-          //fetch(Constants.baseUrl + "/opportunity/payment/process_payment", {
-          //fetch("/process_payment", {
-          fetch(Constants.baseUrl + "/opportunity/payment/subscribe_plan", {
-            //fetch("/subscribe_plan", {
+          fetch(this.baseUrl + "/payment", {
             method: "POST",
             mode: 'cors',
             headers: {
               "Content-Type": "application/json; charset=utf-8",
-              "Authorization": "Bearer " + this.accountService.getToken(),
+              "Authorization": "Bearer " + 'TOKEN BACKEND',
               "Accept": "application/json",
-              "Access-Control-Allow-Origin": "https://www.getopportunity.com.br/*"
+              "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify({
               token,
@@ -271,9 +229,8 @@ export class NewCardComponent implements OnInit {
               payment_method_id,
               transaction_amount: Number(amount),
               installments: Number(installments),
-              description: "Assinatura " + Constants.system_name,
-              idUser: this.user.idUser,
-              preapproval_plan_id: Constants.preapproval_plan_id,
+              description: "Nome Pagamento",
+              preapproval_plan_id: 'CODIGO DO PLANO CASO EXISTA',
               payer: {
                 email,
                 identification: {
@@ -288,26 +245,19 @@ export class NewCardComponent implements OnInit {
               if (data.status == 'authorized') {
 
                 //set new user locally
-                this.user.trial = false;
-                this.accountService.setUser(this.user);
-                localStorage.setItem('user', JSON.stringify(this.user));
 
                 this.close();
-                this.router.navigate(['/manage']);
-
-                this.alertService.success(Constants.payment_approved, Constants.enjoy, { autoClose: true, keepAfterRouteChange: true });
+                this.router.navigate(['/pagamento_efetuado']);
 
               } else if (data.status == 'pending') {
                 this.isLoading = false;
                 this.unmountForm();
                 this.clearForm();
-                this.alertService.error(Constants.payment_rejected, Constants.check_card, { autoClose: true, keepAfterRouteChange: true });
 
               } else {
                 this.isLoading = false;
                 this.unmountForm();
                 this.clearForm();
-                this.alertService.error(Constants.errorTittle, Constants.check_card, { autoClose: true, keepAfterRouteChange: true });
 
               }
 
@@ -318,19 +268,15 @@ export class NewCardComponent implements OnInit {
               this.isLoading = false;
               this.unmountForm();
               this.clearForm();
-              this.alertService.error(Constants.errorTittle, Constants.check_card, { autoClose: true, keepAfterRouteChange: true });
 
             });
         },
         onFetching: (resource: any) => {
           console.log("Fetching resource: ", resource);
-
-
           // Animate progress bar
           const progressBar = document.querySelector(".progress-bar");
 
           return () => {
-
 
           };
         }
